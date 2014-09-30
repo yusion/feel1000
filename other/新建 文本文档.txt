@@ -19,3 +19,7 @@ WPD800-56438-82132-82503
 Tumblr(界面参考)
 
 <input id="name" style="background-image:url(icon.gif);background-repeat:no-repeat;padding-left:30px" />
+
+
+多说评论系统
+

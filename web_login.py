@@ -9,5 +9,5 @@ from bottle import route, template,install,view,request,get,post,SimpleTemplate
 @route('/login')	
 @view('login')	
 def url_show_login():
-	return session.global_info.get_dist()
+	return utility.get_dist()
 

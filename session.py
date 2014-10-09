@@ -2,25 +2,7 @@
 # ycat			 2014/09/28      create
 import sqlite3
 import os,time,datetime
-	
-class global_info:
-	@staticmethod
-	def get_dist():
-		with open("views/head.tpl","r") as f:
-			return {"web_head":f.read()}
-	
-	s_db = None
-	
-	@staticmethod
-	def get_db():
-		if global_info.s_db == None:
-			global_info.s_db = sqlite3.connect("user.db")
-			global_info.s_db.text_factory=lambda x: x.decode("utf-8", "ignore")
-		return global_info.s_db
-	
-	@staticmethod
-	def get_cursor():
-		return global_info.get_db().cursor()
+import utility
 		
 class session_data:
 	def __init__(self):
@@ -42,7 +24,7 @@ class session:
 	
 	@staticmethod
 	def login(loginName,password):
-		c = global_info.get_cursor()
+		c = utility.get_cursor()
 		c.execute("SELECT ID,NickName,Sex FROM u_user WHERE password=? AND (nickname=? OR phone=?)",(password,loginName,loginName))
 		rows = c.fetchall()
 		if len(rows) == 0:
@@ -64,7 +46,5 @@ class session:
 	
 		
 if __name__ == '__main__':
-	if sys.platform == "win32":
-		os.chdir(os.path.dirname(__file__))
-	pytest.main("-v -x " + os.path.basename(__file__))				
+	run_tests(__file__)		
 			

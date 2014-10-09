@@ -3,7 +3,7 @@
 import pytest
 import platform  
 import sys,os,bottle
-import session
+import session,utility
 import hashlib
 from web_profile import url_show_profile
 from web_login import url_show_login
@@ -29,8 +29,8 @@ def get_file(path):
 @view('index')
 def url_index():
 	# response.add_header('Set-Cookie', 'name2=value2')
-	d = session.global_info.get_dist()
-	user = session.session.login("ycat",hashlib.md5(u"123456").hexdigest())
+	d = utility.get_dist()
+	user = session.session.login("ycat",hashlib.md5("123456").hexdigest())
 	bottle.response.set_header('Set-Cookie', 'session=%d'%user.session_id)
 	d["session"] = user.session_id
 	return d

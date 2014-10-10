@@ -30,7 +30,7 @@ def get_file(path):
 def url_index():
 	# response.add_header('Set-Cookie', 'name2=value2')
 	d = utility.get_dist()
-	user = session.session.login("ycat",hashlib.md5("123456").hexdigest())
+	user = session.login("ycat",hashlib.md5("123456".encode("utf-8")).hexdigest())
 	bottle.response.set_header('Set-Cookie', 'session=%d'%user.session_id)
 	d["session"] = user.session_id
 	return d

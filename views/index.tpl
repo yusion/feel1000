@@ -4,10 +4,7 @@
 	{{!web_head}}
 </head>
 <body>
-<a href="profile?session={{session}}">test</a>
-
- 
-
+<a href="profile">test</a>
 </body>
 </html>
 

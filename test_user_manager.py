@@ -12,6 +12,14 @@ def clear_test_user():
 	db = utility.get_db()
 	c = db.cursor()
 	c.execute("DELETE FROM u_user WHERE Password like '%test%'")
+	c.execute("""DELETE FROM u_profile WHERE ID IN
+		(
+		SELECT u_profile.ID FROM u_profile LEFT JOIN u_user ON u_user.ID=u_profile.ID WHERE u_user.nickname is NULL
+		)""")
+	c.execute("""DELETE FROM u_profile2 WHERE ID IN
+		(
+		SELECT u_profile2.ID FROM u_profile2 LEFT JOIN u_user ON u_user.ID=u_profile2.ID WHERE u_user.nickname is NULL
+		)""")
 	db.commit()
 	
 def test_register():
@@ -52,32 +60,32 @@ def test_register():
 def test_login():	
 	ctrl_user_manager.register("ycat","13956464001","passwtest",sex_type.Male)
 	ctrl_user_manager.register("ycat2","17056464001","passwtest",sex_type.Female)
-	assert not session.session.login("noexit","passwtest")
-	user = session.session.login("ycat","passwtest")
+	assert not session.login("noexit","passwtest")
+	user = session.login("ycat","passwtest")
 	assert user
-	assert user == session.session.get(user.session_id)
+	assert user == session.get(user.session_id)
 	assert user.sex == 1
 	assert user.nickname == "ycat"
 	assert user.user_id != 0
-	session.session.data.clear();
+	session.data.clear();
 	
-	user = session.session.login("13956464001","passwtest")
+	user = session.login("13956464001","passwtest")
 	assert user
 	assert user.sex == 1
 	assert user.nickname == "ycat"
 	assert user.user_id != 0
-	assert user == session.session.get(user.session_id)
-	session.session.data.clear();
+	assert user == session.get(user.session_id)
+	session.data.clear();
 	
-	user = session.session.login("ycat2","passwtest")
+	user = session.login("ycat2","passwtest")
 	assert user
 	assert user.sex == 0
 	assert user.nickname == "ycat2"
 	assert user.user_id != 0
-	assert user == session.session.get(user.session_id)
-	session.session.data.clear();
+	assert user == session.get(user.session_id)
+	session.data.clear();
 	
-	assert session.session.login("17056464001","passwtest")
+	assert session.login("17056464001","passwtest")
 	clear_test_user()
 		
 if __name__ == '__main__':

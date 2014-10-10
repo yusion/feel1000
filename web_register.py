@@ -22,7 +22,7 @@ class ctrl_user_manager:
 			c.execute("INSERT INTO u_user (NickName,Sex,Phone,Password,CreateDate)VALUES(?,?,?,?,?)", 
 				(nick,int(sex),phone,pwd,now))			
 			db.commit()
-			user = session.session.login(nick,pwd)
+			user = session.login(nick,pwd)
 			
 			c.execute("INSERT INTO u_profile(ID,EditDate)VALUES(?,?)",(user.user_id,now))
 			c.execute("INSERT INTO u_profile2(ID,EditDate)VALUES(?,?)",(user.user_id,now))
@@ -37,8 +37,7 @@ class ctrl_user_manager:
 		sql = "SELECT COUNT(*) FROM u_user WHERE " + keyname+"=?"
 		r = utility.get_cursor().execute(sql,(nick,))
 		return r.fetchone()[0] > 0
-			
-			
+		
 @route('/register')	
 @view('register')	
 def url_show_register():

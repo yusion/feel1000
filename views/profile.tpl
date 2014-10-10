@@ -33,7 +33,7 @@
                 'multi': false,
 		'onUploadSuccess': function (file, data, response) {
                     $('#' + file.id).find('.data').html(' 上传完成');
-		    $("#img_profile").attr("src","user_images/test.jpg");
+				$("#img_profile").attr("src","{{normal_photo_url}}");
 		    }
             });
         });
@@ -55,7 +55,7 @@
 	
 	<div id="header">
 		<div id="base_profile">
-		<img id="img_profile" src="res/man_unknown.gif"></img>
+		<img id="img_profile" src="{{photo_url}}"></img>
 		<h2>ycat</h2>
 		<span id="desc">让所有爱电影的人，都能有一个舒适的座位</span>
 		</div>	

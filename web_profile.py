@@ -25,11 +25,11 @@ class user_profile:
 	
 	@property
 	def small_photo_url(self):
-		return "user_images/" + str(self.id) + "_small.jpg"
+		return "user_images/" + utility.scramble(self.id) + "_small.jpg"
 	
 	@property
 	def normal_photo_url(self):
-		return "user_images/" + str(self.id) + ".jpg"
+		return "user_images/" + utility.scramble(self.id) + ".jpg"
 		
 	@property
 	def photo_url(self):
@@ -38,9 +38,6 @@ class user_profile:
 		else:
 			return "res/man_unknown.gif"
 		
-need to scramble image id
-login user_id 
-
 		
 class ctrl_profile:
 	@staticmethod
@@ -89,6 +86,13 @@ def url_show_profile():
 @bottle.route('/user_images/<path:path>')	
 def get_file(path):
 	return bottle.static_file(path,"./user_images")
+
+@bottle.route('/my_images/<path:path>')
+def get_profile_file(path):
+	print("0"*100)
+	u = user_profile()
+	u.id = session.get().user_id
+	return bottle.static_file(u.normal_photo_url,"")
 
 @bottle.post('/action/upload_profile_photo')
 def url_upload():

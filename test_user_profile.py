@@ -43,38 +43,38 @@ def test_handle_profile_img():
 	ctrl_profile.handle_profile_img(mem,user)
 	mem.close()
 	#高图片效果 
-	img = Image.open("user_images/978897112_small.jpg")
+	img = Image.open(user.small_photo_url)
 	assert img
 	assert img.size[0] == 100 or img.size[1] == 100
 	
-	img2 = Image.open("user_images/978897112.jpg")
+	img2 = Image.open(user.normal_photo_url)
 	assert img2
 	assert img2.size[0] == 400 or img2.size[1] == 300
 	
 	#平图片效果
 	ctrl_profile.handle_profile_img("user_images/unittest2.jpg",user)
-	img = Image.open("user_images/978897112_small.jpg")
+	img = Image.open(user.small_photo_url)
 	assert img
 	assert img.size[0] == 100 or img.size[1] == 100
 	
-	img2 = Image.open("user_images/978897112.jpg")
+	img2 = Image.open(user.normal_photo_url)
 	assert img2
 	assert img2.size[0] == 400 or img2.size[1] == 300
 	
 	#小图效果
 	ctrl_profile.handle_profile_img("user_images/unittest3.jpg",user)
-	img = Image.open("user_images/978897112_small.jpg")
+	img = Image.open(user.small_photo_url)
 	assert img
 	assert img.size[0] <= 50 or img.size[1] <= 50
 	
-	img2 = Image.open("user_images/978897112.jpg")
+	img2 = Image.open(user.normal_photo_url)
 	assert img2
 	assert img2.size[0] <= 50 or img2.size[1] <= 50
 	
 	img.close()
 	img2.close()
-	os.remove("user_images/978897112_small.jpg")
-	os.remove("user_images/978897112.jpg")
+	os.remove(user.small_photo_url)
+	os.remove(user.normal_photo_url)
 
 if __name__ == '__main__':
 	utility.run_tests(__file__)

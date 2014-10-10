@@ -10,7 +10,7 @@ class session_data:
 		self.sex = -1
 		self.ip = ""
 		self.nickname = ""
-		self.session_id = 0
+		self.session_id = ""
 		self.login_date = datetime.datetime.now()
 
 g_session_data = {} 
@@ -19,7 +19,7 @@ _last_session_id = int(time.time())
 def make_session_id():
 	global _last_session_id
 	_last_session_id += 1
-	return _last_session_id
+	return utility.scramble(_last_session_id)
 
 def login(loginName,password):
 	c = utility.get_cursor()
@@ -48,7 +48,7 @@ def set(session_id,data):
 	g_session_data[session_id] = data
 		
 #############################	unit test	###########################		
-	
+
 		
 if __name__ == '__main__':
 	run_tests(__file__)		

@@ -4,7 +4,6 @@ import pytest
 import platform  
 import sys,os,bottle
 import session,utility
-import hashlib
 from web_profile import url_show_profile
 from web_login import url_show_login
 from bottle import route, template,install,view,request,get,post,SimpleTemplate
@@ -30,8 +29,8 @@ def get_file(path):
 def url_index():
 	# response.add_header('Set-Cookie', 'name2=value2')
 	d = utility.get_dist()
-	user = session.login("ycat",hashlib.md5("123456".encode("utf-8")).hexdigest())
-	bottle.response.set_header('Set-Cookie', 'session=%d'%user.session_id)
+	user = session.login("ycat",utility.md5("123456"))
+	bottle.response.set_header('Set-Cookie', 'session=%s'%user.session_id)
 	d["session"] = user.session_id
 	return d
 
@@ -43,7 +42,8 @@ if __name__ == '__main__':
 	#		if name[-3:] == ".py":				
 	#			pytest.main(r"-v -x " + name)
 	
-	
+	user = session.login("ycat",utility.md5("123456"))
+	bottle.response.set_header('Set-Cookie', 'session=%s'%user.session_id)
 	bottle.run(host='', port=80,reloader=True,debug=True)
 
 	

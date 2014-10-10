@@ -3,7 +3,7 @@
 <head>
 	{{!web_head}}
 	<link href="css/uploadify.css" rel="stylesheet" type="text/css" />
-    <script src="js/jquery.uploadify.min.js" type="text/javascript"></script>
+	<script src="js/jquery.uploadify.min.js" type="text/javascript"></script>
 </head>
 <body>
 <script type="text/javascript">
@@ -32,8 +32,8 @@
                 //设置为true将允许多文件上传
                 'multi': false,
 		'onUploadSuccess': function (file, data, response) {
-                    $('#' + file.id).find('.data').html(' 上传完成');
-				$("#img_profile").attr("src","{{normal_photo_url}}");
+                    //$('#' + file.id).find('.data').html(' 上传完成');
+			$("#img_profile").attr("src","my_images/" + Math.random() + Math.random());
 		    }
             });
         });

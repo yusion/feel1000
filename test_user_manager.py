@@ -23,6 +23,7 @@ def clear_test_user():
 	db.commit()
 	
 def test_register():
+	clear_test_user()
 	db = utility.get_db()
 	c = db.cursor()
 	c.execute("SELECT MAX(ID) FROM u_user")
@@ -57,33 +58,37 @@ def test_register():
 	
 	clear_test_user()
 	
-def test_login():	
+def test_login():
+	clear_test_user()
 	ctrl_user_manager.register("ycat","13956464001","passwtest",sex_type.Male)
 	ctrl_user_manager.register("ycat2","17056464001","passwtest",sex_type.Female)
 	assert not session.login("noexit","passwtest")
 	user = session.login("ycat","passwtest")
+	utility.set_session_id(user.session_id)
 	assert user
-	assert user == session.get(user.session_id)
+	assert user == session.get()
 	assert user.sex == 1
 	assert user.nickname == "ycat"
 	assert user.user_id != 0
-	session.data.clear();
+	session.g_session_data.clear();
 	
 	user = session.login("13956464001","passwtest")
+	utility.set_session_id(user.session_id)
 	assert user
 	assert user.sex == 1
 	assert user.nickname == "ycat"
 	assert user.user_id != 0
-	assert user == session.get(user.session_id)
-	session.data.clear();
+	assert user == session.get()
+	session.g_session_data.clear();
 	
 	user = session.login("ycat2","passwtest")
+	utility.set_session_id(user.session_id)
 	assert user
 	assert user.sex == 0
 	assert user.nickname == "ycat2"
 	assert user.user_id != 0
-	assert user == session.get(user.session_id)
-	session.data.clear();
+	assert user == session.get()
+	session.g_session_data.clear();
 	
 	assert session.login("17056464001","passwtest")
 	clear_test_user()

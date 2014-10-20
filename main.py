@@ -29,10 +29,12 @@ def get_file(path):
 def url_index():
 	# response.add_header('Set-Cookie', 'name2=value2')
 	d = utility.get_dist()
-	user = session.login("ycat",utility.md5("123456"))
+	user = session.login("ycat2","123456")
 	bottle.response.set_header('Set-Cookie', 'session=%s'%user.session_id)
 	d["session"] = user.session_id
 	return d
+
+#import web_register
 
 if __name__ == '__main__':	
 	print("python " + platform.python_version())
@@ -42,8 +44,6 @@ if __name__ == '__main__':
 	#		if name[-3:] == ".py":				
 	#			pytest.main(r"-v -x " + name)
 	
-	user = session.login("ycat",utility.md5("123456"))
-	bottle.response.set_header('Set-Cookie', 'session=%s'%user.session_id)
 	bottle.run(host='', port=80,reloader=True,debug=True)
 
 	

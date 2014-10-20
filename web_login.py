@@ -2,7 +2,7 @@
 # ycat			 2014/09/28      create
 import pytest
 import sys,os,bottle
-import session
+import session,utility
 from web_register import url_show_register
 from bottle import route, template,install,view,request,get,post,SimpleTemplate
 

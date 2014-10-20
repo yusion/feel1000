@@ -16,10 +16,6 @@ def clear_test_user():
 		(
 		SELECT u_profile.ID FROM u_profile LEFT JOIN u_user ON u_user.ID=u_profile.ID WHERE u_user.nickname is NULL
 		)""")
-	c.execute("""DELETE FROM u_profile2 WHERE ID IN
-		(
-		SELECT u_profile2.ID FROM u_profile2 LEFT JOIN u_user ON u_user.ID=u_profile2.ID WHERE u_user.nickname is NULL
-		)""")
 	db.commit()
 	
 def test_register():

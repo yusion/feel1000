@@ -25,7 +25,6 @@ class ctrl_user_manager:
 			user = session.login(nick,pwd)
 			
 			c.execute("INSERT INTO u_profile(ID,EditDate)VALUES(?,?)",(user.user_id,now))
-			c.execute("INSERT INTO u_profile2(ID,EditDate)VALUES(?,?)",(user.user_id,now))
 			db.commit()
 			return user
 			

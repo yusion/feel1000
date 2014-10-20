@@ -2,26 +2,14 @@
 # ycat			 2014/09/28      create
 import pytest
 import sqlite3
-import sys,os,io
-import utility
+import sys,os,io,datetime
+import utility,json
 import bottle,session
 from PIL import Image
 
 class user_profile:
 	def __init__(self):
-		self.id = -1
-		self.nickname = ""
-		self.has_photo = 0
-		self.sex = 0
-		
-	def update_photo_state(self):
-		if self.has_photo:
-			return
-		db = utility.get_db()
-		c = db.cursor()
-		c.execute("UPDATE u_profile SET HasPhoto=1 WHERE ID=%d"%self.id)
-		db.commit()
-		self.has_photo=1
+		pass
 	
 	@property
 	def small_photo_url(self):
@@ -33,36 +21,64 @@ class user_profile:
 		
 	@property
 	def photo_url(self):
-		if self.has_photo:
+		if self.hasphoto:
 			return self.normal_photo_url
 		else:
 			return "res/man_unknown.gif"
+	
+	def update(self,key,value):
+		if not hasattr(self,key):
+			return False
+		if getattr(self,key) == value:
+			return True
+		if key == "id" or key== "user_id":
+			return False
 		
+		if isinstance(self.__dict__[key],int):
+			if value == "":
+				value = -1
+			setattr(self,key,int(value))
+		else:
+			setattr(self,key,str(value))
+		
+		db = utility.get_db()
+		c = db.cursor()
+		now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+		c.execute("UPDATE u_profile SET %s=?,EditDate=? WHERE ID=?"%key,(value,now,self.user_id))
+		db.commit()
+		return True
+	
+	def get_dict(self):
+		d = {}
+		for k in self.__dict__:
+			v = self.__dict__[k]
+			if v == None or v == -1:
+				d[k] = ""
+			else:
+				d[k] = v
+		return d
 		
 class ctrl_profile:
 	@staticmethod
 	def get():
 		s = session.get()
+		return ctrl_profile.get_by_userid(s.user_id)
+		
+	@staticmethod
+	def get_by_userid(user_id):
 		user = user_profile()
-		sql = """SELECT u.ID,u.NickName,u.Sex,
-			u1.HasPhoto
-			FROM u_user as u LEFT JOIN u_profile as u1 ON u.ID=u1.ID  
-			LEFT JOIN u_profile2 AS u2 ON u2.ID=u.ID WHERE u.ID=""" + str(s.user_id)
-		r = utility.get_cursor().execute(sql).fetchone()
+		sql = """SELECT * FROM u_user as u LEFT JOIN u_profile as u1 ON u.ID=u1.ID WHERE u.ID=""" + str(user_id)
+		c = utility.get_cursor()
+		r = c.execute(sql).fetchone()
 		if r == None:
 			return None
-		
+		user.user_id = user_id
 		i = 0
-		user.id = r[i]
-		i+=1
-		user.nickname = r[i]
-		i+=1
-		user.sex = r[i]
-		i+=1
-		user.has_photo = r[i]
-		i+=1
+		for col in c.description:
+			setattr(user,col[0].lower(),r[i])
+			i+=1			
 		return user
-	
+
 	@staticmethod
 	def handle_profile_img(fp,user):
 		assert isinstance(user,user_profile)
@@ -73,6 +89,9 @@ class ctrl_profile:
 		img.thumbnail( (100,100) )
 		img.save(user.small_photo_url)
 		img.close()
+	
+	
+
 
 @bottle.route('/profile')	
 @bottle.view('profile')	
@@ -81,7 +100,22 @@ def url_show_profile():
 	u = ctrl_profile.get()
 	d["photo_url"] = u.photo_url
 	d["normal_photo_url"] = u.normal_photo_url
+	d.update(u.get_dict())
+	utility.update_c_table(d,"c_income",u.income)
+	utility.update_c_table(d,"c_star",u.star)
+	utility.update_c_table(d,"c_degree",u.degree)
 	return d
+
+@bottle.route('/action/update_profile')	
+def url_update_profile():
+	u = ctrl_profile.get()
+	id = bottle.request.params.key
+	v = bottle.request.params.value
+	ret = u.update(id,v)
+	if ret:
+		return json.dumps({"result":"success","id":id})	
+	else:
+		return json.dumps({"result":"failed","id":id})	
 
 @bottle.route('/user_images/<path:path>')	
 def get_file(path):
@@ -89,7 +123,6 @@ def get_file(path):
 
 @bottle.route('/my_images/<path:path>')
 def get_profile_file(path):
-	print("0"*100)
 	u = user_profile()
 	u.id = session.get().user_id
 	return bottle.static_file(u.normal_photo_url,"")
@@ -97,12 +130,11 @@ def get_profile_file(path):
 @bottle.post('/action/upload_profile_photo')
 def url_upload():
 	user = ctrl_profile.get()
-	
 	upload = bottle.request.files.get('Filedata')
 	mem = io.BytesIO()
 	upload.save(mem)
 	mem.seek(0)
-	user.update_photo_state()
+	user.update("hasphoto",1)
 	ctrl_profile.handle_profile_img(mem,user)
 	mem.close()
 	return 0

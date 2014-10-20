@@ -4,6 +4,7 @@ import sqlite3
 import os,time,datetime
 import utility
 		
+#TODO过期和删除session  		
 class session_data:
 	def __init__(self):
 		self.user_id = 0

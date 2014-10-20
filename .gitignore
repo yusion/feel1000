@@ -1,5 +1,4 @@
-\__pycache__\
+/__pycache__/
 *.pyc
-\other\*
 /other/*
-\user_images\*.jpg
+/user_images/*.jpg

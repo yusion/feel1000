@@ -2,4 +2,4 @@
 *.pyc
 /other/*
 /user_images/*.jpg
-Thumbs.db
+res/Thumbs.db

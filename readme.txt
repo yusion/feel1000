@@ -62,3 +62,11 @@ http://www.th7.cn/web/ajax/201303/10620.shtml
 云适配js
 http://www2.yunshipei.com/price.html
 
+【今日推荐】10大流行的 Metro UI 风格的 Bootstrap 主题和模板
+http://www.cnblogs.com/lhb25/archive/2013/04/11/10-metro-bootstraps-ui-templates.html
+
+Web开发人员推荐12款优秀的 Twitter Bootstrap 组件和工具
+http://www.cnblogs.com/lhb25/archive/2012/09/11/resources-that-complement-twitter-bootstrap.html
+
+
+

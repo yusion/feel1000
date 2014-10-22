@@ -27,8 +27,14 @@ def get_session_id():
 	    
 def get_dist():
 	session_id = get_session_id()
+	d = {}
 	with open("views/head.tpl","r") as f:
-		return {"web_head":f.read().replace("#session#",str(session_id))}
+	    d["web_head"] = f.read()
+	with open("views/pagehead.tpl","r") as f:
+	    d["page_head"] = f.read().replace("#session#",str(session_id))
+	with open("views/pagefoot.tpl","r") as f:
+	    d["page_foot"] = f.read()
+	return d
 
 def get_db():
 	global g_db

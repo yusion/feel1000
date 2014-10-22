@@ -1,16 +1,23 @@
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=10;IE=9;IE=8;IE=7;IE=EDGE">
-<meta content="" name="description">
-<meta content="" name="keywords">
-<meta name="baidu-site-verification" content="">
-
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<!-- link rel="stylesheet" type="text/css" href="css/style.css" -->
 <title>FEEL千千</title>
-<link rel="stylesheet" type="text/css" href="./jquery-easyui-1.3.2/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="./jquery-easyui-1.3.2/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="./jquery-easyui-1.3.2/demo/demo.css">
-<script type="text/javascript" src="./jquery-easyui-1.3.2/jquery-1.8.0.min.js" ></script >
-<script type="text/javascript" src="./jquery-easyui-1.3.2/jquery.easyui.min.js"></script>
-<input type="hidden" id="session" value=#session# />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link href="css/bootstrap.min.css" rel="stylesheet"/>
+
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://apps.bdimg.com/libs/html5shiv/r29/html5.min.js"></script>
+<script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+<script src="http://apps.bdimg.com/libs/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
+<script type="text/javascript" src="./js/common.js" ></script >
+
+ <!-- for unit test -->
+<link rel="stylesheet" href="//code.jquery.com/qunit/qunit-1.15.0.css">
+  
+
+    
+
 
 

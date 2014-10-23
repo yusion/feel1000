@@ -88,6 +88,7 @@ def test_login():
 	
 	assert session.login("17056464001","passwtest")
 	clear_test_user()
+		 
 		
 if __name__ == '__main__':
 	utility.run_tests(__file__)

@@ -53,7 +53,14 @@ def url_register():
 		return json.dumps({"result":"success"})	
 	else:
 		return json.dumps({"result":"failed"})	
- 
+
+@route('/action/is_repeat_phone')	
+def url_is_repeat_phone():
+	return str(not ctrl_user_manager.is_repeat("phone",bottle.request.params["phone"])).lower()
+
+@route('/action/is_repeat_nickname')	
+def url_is_repeat_nickname():
+	return str(not ctrl_user_manager.is_repeat("nickName",bottle.request.params["nickname"])).lower()	
 		
 if __name__ == '__main__':
 	utility.run_tests("test_user_manager.py")

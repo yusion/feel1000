@@ -36,13 +36,14 @@ def url_index():
 
 #import web_register
 
-if __name__ == '__main__':	
+if __name__ == '__main__':
 	print("python " + platform.python_version())
+	utility.set_is_test(False);
+	
 	os.chdir(os.path.dirname(__file__))
-	#for root, dirs, files in os.walk(os.getcwd()):
-	#	for name in files:
-	#		if name[-3:] == ".py":				
-	#			pytest.main(r"-v -x " + name)
+	
+	if utility.is_test():
+		utility.run_all_tests()
 	
 	bottle.run(host='', port=80,reloader=True,debug=True)
 

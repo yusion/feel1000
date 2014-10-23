@@ -11,8 +11,9 @@
 <script type="text/javascript" src="./js/for_ie_support_placehold.js" ></script >
 
 <script src="http://apps.bdimg.com/libs/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    
-<script type="text/javascript" src="./js/common.js" ></script >
+
+<script type="text/javascript" src="./js/jquery.validate.min.js" ></script >
+<script type="text/javascript" src="./js/common.js" ></script>
 
  <!-- for unit test -->
 <link rel="stylesheet" href="css/qunit-1.15.0.css">

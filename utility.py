@@ -8,7 +8,7 @@ def enum(**enums):
     return type('Enum', (), enums)
  
 g_db = None
-
+_is_test = False;
 g_test_id = None
 def set_session_id(id):
 	''' for test only '''
@@ -24,16 +24,28 @@ def get_session_id():
 		#TODO unknown man and female has different id
 		return "-1"
 	return session_id
-	    
+
+def is_test():
+    global _is_test
+    return _is_test
+
+def set_is_test(value):
+    global _is_test
+    _is_test = value
+
+def _get_file(filename,keyword):
+     with open(filename,"r") as f:
+        tpl = bottle.SimpleTemplate(f.read())
+        return tpl.render(keyword)
+
 def get_dist():
 	session_id = get_session_id()
 	d = {}
-	with open("views/head.tpl","r") as f:
-	    d["web_head"] = f.read()
-	with open("views/pagehead.tpl","r") as f:
-	    d["page_head"] = f.read().replace("#session#",str(session_id))
-	with open("views/pagefoot.tpl","r") as f:
-	    d["page_foot"] = f.read()
+	d["is_test"] = _is_test
+	d["session"] = str(session_id)
+	d["web_head"] = _get_file("views/head.tpl",d)
+	d["page_head"] = _get_file("views/pagehead.tpl",d)
+	d["page_foot"] = _get_file("views/pagefoot.tpl",d)
 	return d
 
 def get_db():
@@ -66,7 +78,23 @@ def update_c_table(dict1,name,value=None):
         dict1[name + "_value"] = value
     return dict1
 
-#############################	unit test	###########################		
+#############################	unit test	###########################
+def test_get_dict():
+    global _is_test
+    set_session_id(3300)
+    assert _get_file("views/pagehead.tpl",{"session":1000}).find('value="1000"') != -1
+    set_is_test(True)
+    assert _is_test
+    assert is_test()
+    print(get_dist()["page_foot"])
+    assert get_dist()["page_foot"].find('qunit-fixture') != -1
+    assert get_dist()["page_head"].find('value="3300"') != -1
+    set_is_test(False)
+    assert not _is_test
+    assert not is_test()
+    assert get_dist()["page_foot"].find('qunit-fixture') == -1
+    assert get_dist()["page_head"].find('value="3300"') != -1
+    
 def test_md5():
     assert md5("abcd") == "e2fc714c4727ee9395f324cd2e7f331f"
     assert md5("123456") == "e10adc3949ba59abbe56e057f20f883e"
@@ -116,7 +144,15 @@ def run_tests(file):
 	else:
 	    pytest.main("-v -x " + os.path.basename(file))
 	
-	
+def run_all_tests():
+    if not utility.is_test():
+       return
+    
+    for root, dirs, files in os.walk(os.getcwd()):
+        for name in files:
+            if name[-3:] == ".py":				
+                pytest.main(r"-v -x " + name)
+
 if __name__ == '__main__':
 	run_tests(__file__)
 	

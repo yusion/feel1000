@@ -90,30 +90,6 @@ $(this).keypress(function (event) {
 	});
 };
 
-var validate_rex = [{class:"onlyNum",rex:/^\d+$/,msg:"只能输入数字"},
-                    {class:"onlyAlpha",rex:/^[a-zA-Z]+$/,msg:"只能输入英文字母"},
-                    {class:"onlyNumAlpha",rex:/^(\d|[a-zA-Z])+$/,msg:"只能输入数字和英文字母"},
-                    {class:"onlyEmail",rex: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/,msg:"只能输入正确的Email格式"},
-                    {class:"onlyPhone",rex: /^(1[3|5|7|8])[\d]{9}$/,msg:"只能输入正确的手机格式"}
-                   ];
-
-$.fn.my_validate = function(){
-  for(x in validate_rex)
-  {
-    x = validate_rex[x]
-    if(this.hasClass(x.class))
-    {
-      if(!x.rex.test(this.val()))
-      {
-        return x.msg;
-      }
-    }
-  } 
-  return "";
-};
-
-
-
 $.fn.check = function(){
   $("#div_validate_error").remove();
   
@@ -142,14 +118,7 @@ function check_browser_version()
 	$.browser.ie7 = $.browser.msie && /msie 7\.0/i.test(userAgent);
 	$.browser.ie6 = !$.browser.msie8 && !$.browser.msie7 && $.browser.msie && /msie 6\.0/i.test(userAgent);
 }
-
-function my_init()
-{
-    $(".onlyNum").onlyNum();
-    $(".onlyAlpha").onlyAlpha();
-    $(".onlyNumAlpha").onlyNumAlpha();
-}
-	
+ 	
 jQuery.extend(jQuery.validator.messages, {
         required: "请填写该信息",
         remote: "请修正该字段",
@@ -180,3 +149,8 @@ $.validator.setDefaults({
         onFocusOut:true,
 });
 
+$(document).ready(function(e){
+   $(".onlyNum").onlyNum();
+    $(".onlyAlpha").onlyAlpha();
+    $(".onlyNumAlpha").onlyNumAlpha();
+});

@@ -109,8 +109,6 @@
 		$(".txt_input").blur(function(){
 			save_item();
 		});
-		
-		my_init();
         });
 	
 	window.onbeforeunload=leave_func;

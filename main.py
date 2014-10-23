@@ -38,12 +38,12 @@ def url_index():
 
 if __name__ == '__main__':
 	print("python " + platform.python_version())
-	utility.set_is_test(False);
+	utility.set_is_test(True);
 	
 	os.chdir(os.path.dirname(__file__))
 	
-	if utility.is_test():
-		utility.run_all_tests()
+	#if utility.is_test():
+	#	utility.run_all_tests()
 	
 	bottle.run(host='', port=80,reloader=True,debug=True)
 

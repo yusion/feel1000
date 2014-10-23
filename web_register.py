@@ -14,7 +14,7 @@ sex_type = utility.enum(Male=1,Female=0)
 class ctrl_user_manager:
 	@staticmethod
 	def register(nick,phone,pwd,sex):
-		assert sex <= 1
+		assert int(sex) <= 1
 		try:
 			now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 			db = utility.get_db()
@@ -47,12 +47,12 @@ def url_register():
 	ret = ctrl_user_manager.register(bottle.request.params["nick"],
 		bottle.request.params["phone"],
 		bottle.request.params["pass"],
-		sex_type(bottle.request.params["sex"]))
+		bottle.request.params["sex"])
 		
 	if ret:
-		return json.dumps({"result":"success"})	
+		return json.dumps({"result":"true"})	
 	else:
-		return json.dumps({"result":"failed"})	
+		return json.dumps({"result":"false"})	
 
 @route('/action/is_repeat_phone')	
 def url_is_repeat_phone():
@@ -61,7 +61,32 @@ def url_is_repeat_phone():
 @route('/action/is_repeat_nickname')	
 def url_is_repeat_nickname():
 	return str(not ctrl_user_manager.is_repeat("nickName",bottle.request.params["nickname"])).lower()	
-		
+
+
+#############################	web unit test	###########################
+
+@route('/test/check_user')	
+def url_test_check_user():
+	sql = "SELECT COUNT(*) FROM u_user WHERE nickname='%s' and password='%s' and phone='%s' and sex=%d" %	(bottle.request.params["nick"],
+		utility.md5("pwd"+bottle.request.params["pass"]),bottle.request.params["phone"],int(bottle.request.params["sex"]))	
+	
+	r = utility.get_cursor().execute(sql)
+	return str(r.fetchone()[0]) 
+
+def clear_test_user2():
+	db = utility.get_db()
+	c = db.cursor()
+	c.execute("DELETE FROM u_user WHERE (Password like '%test%') OR  (nickname like 'test_%')")
+	c.execute("""DELETE FROM u_profile WHERE ID IN
+		(
+		SELECT u_profile.ID FROM u_profile LEFT JOIN u_user ON u_user.ID=u_profile.ID WHERE u_user.nickname is NULL
+		)""")
+	db.commit()
+	
+@route('/test/del_user')	
+def url_test_del_user():
+	clear_test_user2()
+
 if __name__ == '__main__':
 	utility.run_tests("test_user_manager.py")
 	

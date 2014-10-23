@@ -9,14 +9,7 @@ import sys,os,bottle,datetime
 from web_register import *
 
 def clear_test_user():
-	db = utility.get_db()
-	c = db.cursor()
-	c.execute("DELETE FROM u_user WHERE Password like '%test%'")
-	c.execute("""DELETE FROM u_profile WHERE ID IN
-		(
-		SELECT u_profile.ID FROM u_profile LEFT JOIN u_user ON u_user.ID=u_profile.ID WHERE u_user.nickname is NULL
-		)""")
-	db.commit()
+	clear_test_user2()
 	
 def test_register():
 	clear_test_user()

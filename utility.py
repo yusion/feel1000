@@ -145,7 +145,7 @@ def run_tests(file):
 	    pytest.main("-v -x " + os.path.basename(file))
 	
 def run_all_tests():
-    if not utility.is_test():
+    if not is_test():
        return
     
     for root, dirs, files in os.walk(os.getcwd()):

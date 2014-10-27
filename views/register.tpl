@@ -103,7 +103,6 @@
 			}}};	
 
 		$("#reg_form").validate({
-			debug:true,
 			rules: {
 			   nickname: {required:true,minlength:2,maxlength:20,remote:nick_remote},
 			   phone: {required: true,isPhone:true,remote:phone_remote},

@@ -34,11 +34,18 @@ def url_index():
 	d["session"] = user.session_id
 	return d
 
+@route('/masonry')	
+@view('masonry') #TODO:for test only 
+def url_index():
+	d = utility.get_dist()
+	d["session"] = ""
+	return d
+
 #import web_register
 
 if __name__ == '__main__':
 	print("python " + platform.python_version())
-	utility.set_is_test(True);
+	utility.set_is_test(False);
 	
 	os.chdir(os.path.dirname(__file__))
 	

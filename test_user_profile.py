@@ -40,7 +40,7 @@ def test_update():
 	set_attri(u,"campany","13597556","company 在英文单词中一般的意思是：")
 	set_attri(u,"income",1,22200)
 		
-	set_attri(u,"degree","1","")
+	set_attri(u,"degree",1,2)
 	set_attri(u,"school","company 在英文单词中一般的意思是","company 在ssss英文单词中一般的sss意思是")
 	assert u.update("income","")
 	u2 = ctrl_profile.get_by_userid(u.id)
@@ -75,34 +75,37 @@ def test_handle_profile_img():
 	user.id = 978897112
 	user.hasphoto = True
 	mem = io.BytesIO()
-	fp = open("user_images/unittest1.jpg","rb")
+	fp = open("test/unittest1.jpg","rb")
 	mem.write(fp.read())
 	mem.seek(0)
 	fp.close()
 		
 	ctrl_profile.handle_profile_img(mem,user)
 	mem.close()
+	l1,l2 = 1024,768
+	s1,s2 = 400,300
+	
 	#高图片效果 
 	img = Image.open(user.small_photo_url)
 	assert img
-	assert img.size[0] == 100 or img.size[1] == 100
+	assert img.size[0] == s1 or img.size[1] == s2
 	
 	img2 = Image.open(user.normal_photo_url)
 	assert img2
-	assert img2.size[0] == 400 or img2.size[1] == 300
+	assert img2.size[0] == l1 or img2.size[1] == l2
 	
 	#平图片效果
-	ctrl_profile.handle_profile_img("user_images/unittest2.jpg",user)
+	ctrl_profile.handle_profile_img("test/unittest2.jpg",user)
 	img = Image.open(user.small_photo_url)
 	assert img
-	assert img.size[0] == 100 or img.size[1] == 100
+	assert img.size[0] == s1 or img.size[1] == s2
 	
 	img2 = Image.open(user.normal_photo_url)
 	assert img2
-	assert img2.size[0] == 400 or img2.size[1] == 300
+	assert img2.size[0] == l1 or img2.size[1] == l2
 	
 	#小图效果
-	ctrl_profile.handle_profile_img("user_images/unittest3.jpg",user)
+	ctrl_profile.handle_profile_img("test/unittest3.jpg",user)
 	img = Image.open(user.small_photo_url)
 	assert img
 	assert img.size[0] <= 50 or img.size[1] <= 50
@@ -115,6 +118,26 @@ def test_handle_profile_img():
 	img2.close()
 	os.remove(user.small_photo_url)
 	os.remove(user.normal_photo_url)
+
+def check_img(p,name,result):
+	temp_name = p+"tmp_"+name
+	img = Image.open(p+name)
+	img = ctrl_profile._rotate_img(img)
+	img.save(temp_name)
+	img.close()
+	b1 = Image.open(p+result).tobytes()
+	b2 = Image.open(temp_name).tobytes()
+	assert len(b1) == len(b2)
+	for b,d in zip(b1,b2):
+		assert b == d
+	os.remove(temp_name)
+	print(name,result)
+	
+def test_auto_rotate():	
+	check_img("test/","2.gif","2.gif")
+	check_img("test/","0.jpg","0result.jpg")
+	check_img("test/","6.jpg","6result.jpg")
+	check_img("test/","8.jpg","8result.jpg")
 
 if __name__ == '__main__':
 	utility.run_tests(__file__)

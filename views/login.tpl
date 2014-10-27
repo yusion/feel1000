@@ -19,12 +19,12 @@
 				<form class="form-horizontal" role="form" style="background-color: yellow">
 					<div class="form-group">
 						<div class="col-xs-8 col-xs-offset-2">
-						   <input type="text" class="form-control" id="nickname" placeholder="昵称/手机号">
+						   <input type="text" name="nickname" class="form-control" id="nickname" placeholder="昵称/手机号">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-xs-8 col-xs-offset-2">
-						   <input type="password" class="form-control" id="password" placeholder="密码">
+						   <input type="password" name="password" class="form-control" id="password" placeholder="密码">
 						</div>
 					</div>  
 					<div class="form-group">
@@ -41,7 +41,7 @@
 					     </div>
 					<div class="form-group">
 						<div class="col-xs-12 col-xs-offset-2 ">
-						   <button type="submit" class="btn btn-primary">登&nbsp; 录</button>
+						   <button id="btn_login" type="submit" class="btn btn-primary">登&nbsp; 录</button>
 						</div>
 						
 					     </div>
@@ -76,6 +76,32 @@
 		</div>
 	</div>
     </div>
+<script type="text/javascript">
+	function submit()
+	{
+	}
+	
+	$(document).ready(function(e){
+		$("#btn_login").click(function(e){		
+			if(!$("form").valid()) return;
+			submit();
+		});
+		
+		$("form").validate({
+			rules: {
+			   nickname: {required:true,minlength:2,maxlength:20},
+			   password:{required: true,minlength:6,maxlength:20}
+			   }
+			});
+	});
+    </script>
+
+ %if is_test:
+     <script type="text/javascript">
+     QUnit.module("login");
+     </script>
+%end     
+     
 {{!page_foot}}	    
 </body>
 </html>

@@ -82,6 +82,7 @@ class ctrl_profile:
 	@staticmethod
 	def handle_profile_img(fp,user):
 		assert isinstance(user,user_profile)
+		user.update("hasphoto",1)
 		img = Image.open(fp)
 		img = ctrl_profile._rotate_img(img)
 		img.thumbnail((1024,768))
@@ -166,7 +167,6 @@ def url_upload():
 	mem = io.BytesIO()
 	upload.save(mem)
 	mem.seek(0)
-	user.update("hasphoto",1)
 	ctrl_profile.handle_profile_img(mem,user)
 	mem.close()
 	return 0

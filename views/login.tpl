@@ -1,17 +1,11 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
-
 <html>
 <head>
-	<title></title>
+	{{!web_head}}
 </head>
+<body>
+{{!page_head}}
 
-<body>
-</body>
-</html>
-{{!web_head}}
-</head>
-<body>
-{{!page_head}}		
 	<div class="container">
 		<div class="row" style="height: 200px"></div>
 		<div class="row">
@@ -19,12 +13,12 @@
 				<form class="form-horizontal" role="form" style="background-color: yellow">
 					<div class="form-group">
 						<div class="col-xs-8 col-xs-offset-2">
-						   <input type="text" name="nickname" class="form-control" id="nickname" placeholder="昵称/手机号">
+						   <input type="text" name="nickname" class="form-control limit_m" id="nickname" maxLen="20" placeholder="昵称/手机号">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-xs-8 col-xs-offset-2">
-						   <input type="password" name="password" class="form-control" id="password" placeholder="密码">
+						   <input type="password" name="password" class="form-control limit_m" id="password" placeholder="密码">
 						</div>
 					</div>  
 					<div class="form-group">
@@ -76,7 +70,7 @@
 		</div>
 	</div>
     </div>
-<script type="text/javascript">
+<script type="text/javascript">	
 	function submit()
 	{
 	}
@@ -93,6 +87,8 @@
 			   password:{required: true,minlength:6,maxlength:20}
 			   }
 			});
+		
+		set_backgroup_img("res/login_bg.jpg")
 	});
     </script>
 

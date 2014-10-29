@@ -3,14 +3,34 @@
 // 限制只能输入数字 http://www.cnblogs.com/xdp-gacl/p/3467245.html
 // </summary>
 // ----------------------------------------------------------------------
+
+function limit_max_input(item,event,maxLen) {
+  //有三种限制长度 limit_s = 6, limit_m = 20, limit_l = 100
+  if (event.altKey) return true;
+  if (event.ctrlKey) return true;
+  if (event.keyCode == 67) return true; //del
+  if (event.keyCode == 112) return true; //forward del
+  
+  parseInt(item.attr("maxLen"));
+  if (item.val().length + 1 > maxLen) {
+      return false;
+    }
+    return true;
+}
+
+$.fn.limitLength = function(len){
+  $(this).keypress(function (event) {
+    return limit_max_input($(this),event,len);
+  });
+}
+
 $.fn.onlyNum = function () {
 	$(this).keypress(function (event) {
 	    var eventObj = event || e;
 	    var keyCode = eventObj.keyCode || eventObj.which;
 	    if ((keyCode >= 48 && keyCode <= 57))
-		return true;
-	    else
-		return false;
+		return limit_max_input($(this));
+	    else return false;
 	}).focus(function () {
 	//禁用输入法
 	this.style.imeMode = 'disabled';
@@ -149,8 +169,28 @@ $.validator.setDefaults({
         onFocusOut:true,
 });
 
+function set_backgroup_img(url)
+{
+    function cover(){
+      var win_width = $(window).width();
+      var win_height = $(window).height();
+      $("#bigpic").attr({width:win_width,height:win_height});
+    }	
+            
+    $("body").append("<div id='main_bg' style='position: absolute; top: 0; left: 0; z-index: -1'/>");
+    $("#main_bg").append("<img src='" + url + "' id='bigpic'>");
+    cover();
+    
+    $(window).resize(function(){ //浏览器窗口变化
+      cover();
+    });
+}
+
 $(document).ready(function(e){
    $(".onlyNum").onlyNum();
     $(".onlyAlpha").onlyAlpha();
     $(".onlyNumAlpha").onlyNumAlpha();
+    $(".limit_s").limitLength(6);
+    $(".limit_m").limitLength(20);
+    $(".limit_l").limitLength(100);
 });

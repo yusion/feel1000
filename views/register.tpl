@@ -23,13 +23,13 @@
 				</label>
 			</div>
 			<div class="form-group">
-				<input type="text" id="nickname" name="nickname" class="form-control required:true" placeholder="昵称">
+				<input type="text" id="nickname" name="nickname" class="form-control limit_m" placeholder="昵称">
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control onlyNum" id="phone" name="phone" placeholder="手机号码">
+				<input type="text" class="form-control onlyNum limit_m" id="phone" name="phone" placeholder="手机号码">
 			</div>
 			<div class="form-group">
-				<input type="password" class="form-control" id="password" name="password" placeholder="密码">
+				<input type="password" class="form-control limit_m" id="password" name="password" placeholder="密码">
 			</div>
 			<div class="form-group">
 				<small>

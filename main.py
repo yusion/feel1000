@@ -6,26 +6,26 @@ import sys,os,bottle
 import session,utility
 from web_profile import url_show_profile
 from web_login import url_show_login
-from bottle import route, template,install,view,request,get,post,SimpleTemplate
+from web_search import *
 
-@route('/res/<path:path>')	
+@bottle.route('/res/<path:path>')	
 def get_res_file(path):
 	return bottle.static_file(path,"./res")
 
-@route('/css/<path:path>')	
+@bottle.route('/css/<path:path>')	
 def get_res_file(path):
 	return bottle.static_file(path,"./css")
 	
-@route('/js/<path:path>')	
+@bottle.route('/js/<path:path>')	
 def get_js_file(path):
 	return bottle.static_file(path,"./js")
 	 
-@route('/jquery-easyui-1.3.2/<path:path>')	
+@bottle.route('/jquery-easyui-1.3.2/<path:path>')	
 def get_file(path):
 	return bottle.static_file(path,"./jquery-easyui-1.3.2")
 
-@route('/')	
-@view('index')
+@bottle.route('/')	
+@bottle.view('index')
 def url_index():
 	# response.add_header('Set-Cookie', 'name2=value2')
 	d = utility.get_dist()
@@ -34,8 +34,8 @@ def url_index():
 	d["session"] = user.session_id
 	return d
 
-@route('/masonry')	
-@view('masonry') #TODO:for test only 
+@bottle.route('/masonry')	
+@bottle.view('masonry') #TODO:for test only 
 def url_index():
 	d = utility.get_dist()
 	d["session"] = ""

@@ -8,8 +8,11 @@
 <a href="register">register</a><BR>
 <a href="login">login</a><BR>
 <a href="profile">profile</a><BR>
-
-
+<a href="masonry">masonry</a><BR>
+<a href="search?page=0&page_size=3">search</a><BR>
+<a href="search?page=1&page_size=3">search</a><BR>
+<a href="search?page=2&page_size=3">search</a><BR>
+<a href="search?page=3&page_size=3">search</a><BR>
 <HR>
 <BR>
 <BR>

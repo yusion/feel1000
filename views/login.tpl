@@ -5,7 +5,6 @@
 </head>
 <body>
 {{!page_head}}
-
 	<div class="container">
 		<div class="row" style="height: 200px"></div>
 		<div class="row">
@@ -88,7 +87,7 @@
 			   }
 			});
 		
-		set_backgroup_img("res/login_bg.jpg")
+		set_background_img("res/login_bg.jpg")
 	});
     </script>
 

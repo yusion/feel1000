@@ -12,6 +12,10 @@ from web_search import *
 def get_res_file(path):
 	return bottle.static_file(path,"./res")
 
+@bottle.route('/fonts/<path:path>')	
+def get_res_file(path):
+	return bottle.static_file(path,"./fonts")
+
 @bottle.route('/css/<path:path>')	
 def get_res_file(path):
 	return bottle.static_file(path,"./css")

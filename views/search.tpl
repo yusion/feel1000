@@ -11,7 +11,8 @@
 <div id="masonry_container" style="width:80%;height:70%;background-color: black">
 	%for r in result:
 	<div class="item" >
-		<img alt="" src="{{r.photo_url}}" style="width:{{r.photo_width}};heigth:{{r.photo_height}}"/>	
+		<img alt="" src="{{r.photo_url}}" style="width:{{r.photo_width}};heigth:{{r.photo_height}}"/>
+		<div style="background: repeat-x url('res/stampframe.gif');height: 9px;width:100%"></div>
 	</div>
 	
 	%end

@@ -222,9 +222,9 @@ function set_pop_div(img,pop_div) {
               "position":"absolute",
               "z-index":"1000",
               "top":"" + $(this).height() - pop_div.height() + "px",
-              "left":"0px",
+              "left":"" + $(this).position().left + "px",
               "width":""+img.width()+"px",
-              "cursor":img.css("cursor"),
+              //"cursor":img.css("cursor"),
               "display":"none"});
       pop_div.addClass("is_pop_div");
       
@@ -248,6 +248,24 @@ function set_pop_div(img,pop_div) {
     img.mouseleave(function(){
       startHide($(this));
       });
+}
+
+function keep_over(over_elem,under_elem)
+{//keep over_elem always on under_elem
+  function reset()
+  {
+    over_elem.css({"position":"absolute",
+              "z-index":"900",// + under_elem.css("z-index"),
+              "top":"" + under_elem.position().top + "px",
+              "left":"" + under_elem.position().left +"px",
+              "width":""+under_elem.width()+"px",
+              "height":""+under_elem.height()+"px"
+              });
+  }
+   reset();
+  $(window).resize(function(){
+			reset();
+		});
 }
 
 $(document).ready(function(e){

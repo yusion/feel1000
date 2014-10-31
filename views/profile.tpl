@@ -12,7 +12,7 @@
 	<link href="css/uploadify.css" rel="stylesheet" type="text/css" />
 	<script src="js/jquery.uploadify.min.js" type="text/javascript"></script>
 </head>
-<body>
+<body >
 {{!page_head}}		
 <script type="text/javascript">
 	function uploadfile()
@@ -23,10 +23,10 @@
 			    //后台处理的页面
 			    'uploader': 'action/upload_profile_photo',
 			    //按钮显示的文字
-			    'buttonText': '上传图片',
+			    'buttonText': '上传相片',
 			    //显示的高度和宽度，默认 height 30；width 120
-			    //'height': 15,
-			    //'width': 80,
+			    'height': '100%',
+			    'width': '100%',
 			    //上传文件的类型  默认为所有文件    'All Files'  ;  '*.*'
 			    //在浏览窗口底部的文件类型下拉菜单中显示的文本
 			    'fileTypeDesc': 'Image Files',
@@ -41,7 +41,7 @@
 			    //设置为true将允许多文件上传
 			    'multi': false,
 			    'onUploadSuccess': function (file, data, response) {
-				//$('#' + file.id).find('.data').html(' 上传完成');
+				$('#' + file.id).find('.data').html(' 上传完成');
 				    $("#img_profile").attr("src","my_images/" + Math.random() + Math.random());
 				}
 			});
@@ -92,9 +92,25 @@
 		{
 			return "FEEL千千：正在保存修改信息";
 		}
-	} 
+	}
+	
         $(function () {
+		
 		uploadfile();
+		keep_over($("#uploadify"),$("#img_profile"));
+		$("#uploadify").css("opacity","0");
+		$("#uploadify").css("z-index","1001");
+		$("#uploadify").css("cursor","pointer");
+		set_pop_div($("#uploadify"),$("#div_pop"));
+
+		/*$("#uploadify").mouseover(function(){
+			$(this).css("cursor",'pointer');
+			$(this).find().css("cursor",'pointer');
+			$("#uploadify").css("cursor","pointer");
+			});
+		$("#uploadify").mouseout (function(){
+			//$("body").css("cursor",'default');
+			});*/
 		
 		//set old value 
 		$("input").focus(function(){
@@ -110,7 +126,8 @@
 			save_item();
 		});
 		
-		set_pop_div($("#img_profile"),$("#div_pop"),function(){alert("hi");});
+		
+		
 	});
 	window.onbeforeunload=leave_func;
 	</script>
@@ -279,13 +296,12 @@
 			</form>
 		</div>
 		<div class="col-md-6">
-			<div class="row">
-				<img id="img_profile" class="img-responsive img-rounded" style="cursor:hand" src="{{photo_url}}" alt="头像"></img>
+				<img id="img_profile" style="width:100%;height: auto;z-index: -1" class="img-rounded" src="{{photo_url}}" alt="头像"></img>
 				<div style="background: repeat-x url('res/stampframe.gif');height: 9px;width:100%"></div>
-				<input type="file" name="uploadify" id="uploadify" />
-				<div id="fileQueue">
+				<input type="file" name="uploadify" id="uploadify" style="width:100%"/>
+				<div id="fileQueue" >
 				</div>	
-			</div>		
+				
 			<div class="panel panel-success">
 				<div class="panel-heading">
 					<h3 class="panel-title">

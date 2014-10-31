@@ -49,6 +49,11 @@ label.checked {
 </div>
 
 <script type="text/javascript">
+	function reset_banner() {
+		//set banner overlay navigator tabs
+		$("#div_banner").height($("#img_banner").height() - $("ul.nav-tabs").height());
+	}
+	
 	$(document).ready(function(e){
 		$(".nav-tabs a").each(function(){
 			//set active tab 
@@ -64,8 +69,13 @@ label.checked {
 				$(this).parent().removeClass("active");
 			}
 		});
-		//set banner overlay navigator tabs
-		$("#div_banner").height($("#img_banner").height() - $("ul.nav-tabs").height());
+		
+		reset_banner();
+		
+		$(window).resize(function(){
+			reset_banner();
+		});
+		
 	});
 
 </script>

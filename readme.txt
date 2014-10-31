@@ -152,3 +152,7 @@ QUnit.test( "a basic test example 4", function( assert ) {
 
 free website builder
 http://www.wix.com/
+
+
+Ö÷Ò³Ä£°ågood
+http://www.wix.com/website-template/view/html/794?originUrl=http%3A%2F%2Fwww.wix.com%2Fwebsite%2Ftemplates%3Fcriteria%3Dfriend&bookName=create-master-new&galleryDocIndex=1&viewMode=desktop

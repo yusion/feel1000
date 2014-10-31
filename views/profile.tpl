@@ -10,12 +10,12 @@
 </html>
 {{!web_head}}
 	<link href="css/uploadify.css" rel="stylesheet" type="text/css" />
-	<script src="js/jquery.uploadify.min.js" type="text/javascript"></script>
+	<script src="js/jquery.uploadify.js" type="text/javascript"></script>
 </head>
 <body >
 {{!page_head}}		
 <script type="text/javascript">
-	function uploadfile()
+	function init_uploadfile()
 	{
 		$("#uploadify").uploadify({
 			    //指定swf文件
@@ -24,9 +24,11 @@
 			    'uploader': 'action/upload_profile_photo',
 			    //按钮显示的文字
 			    'buttonText': '上传相片',
-			    //显示的高度和宽度，默认 height 30；width 120
+			    'buttonCursor' : 'hand',
+			    
 			    'height': '100%',
-			    'width': '100%',
+			    'width': '100%', //flash不支持'%'后缀，导致光标显示不正常  
+			    
 			    //上传文件的类型  默认为所有文件    'All Files'  ;  '*.*'
 			    //在浏览窗口底部的文件类型下拉菜单中显示的文本
 			    'fileTypeDesc': 'Image Files',
@@ -38,6 +40,7 @@
 			    //'queueID': 'fileQueue',
 			    //选择文件后自动上传
 			    'auto': true,
+			    
 			    //设置为true将允许多文件上传
 			    'multi': false,
 			    'onUploadSuccess': function (file, data, response) {
@@ -96,22 +99,12 @@
 	
         $(function () {
 		
-		uploadfile();
+		init_uploadfile(); 
 		keep_over($("#uploadify"),$("#img_profile"));
 		$("#uploadify").css("opacity","0");
 		$("#uploadify").css("z-index","1001");
-		$("#uploadify").css("cursor","pointer");
 		set_pop_div($("#uploadify"),$("#div_pop"));
-
-		/*$("#uploadify").mouseover(function(){
-			$(this).css("cursor",'pointer');
-			$(this).find().css("cursor",'pointer');
-			$("#uploadify").css("cursor","pointer");
-			});
-		$("#uploadify").mouseout (function(){
-			//$("body").css("cursor",'default');
-			});*/
-		
+ 		
 		//set old value 
 		$("input").focus(function(){
 			set_old_value($(this));
@@ -298,8 +291,8 @@
 		<div class="col-md-6">
 				<img id="img_profile" style="width:100%;height: auto;z-index: -1" class="img-rounded" src="{{photo_url}}" alt="头像"></img>
 				<div style="background: repeat-x url('res/stampframe.gif');height: 9px;width:100%"></div>
-				<input type="file" name="uploadify" id="uploadify" style="width:100%"/>
-				<div id="fileQueue" >
+				<input type="button" id="uploadify" name="uploadify"/>
+				<div id="fileQueue" style="height: auto;width:100%">
 				</div>	
 				
 			<div class="panel panel-success">

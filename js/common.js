@@ -3,14 +3,34 @@
 // 限制只能输入数字 http://www.cnblogs.com/xdp-gacl/p/3467245.html
 // </summary>
 // ----------------------------------------------------------------------
+
+function limit_max_input(item,event,maxLen) {
+  //有三种限制长度 limit_s = 6, limit_m = 20, limit_l = 100
+  if (event.altKey) return true;
+  if (event.ctrlKey) return true;
+  if (event.keyCode == 67) return true; //del
+  if (event.keyCode == 112) return true; //forward del
+  
+  parseInt(item.attr("maxLen"));
+  if (item.val().length + 1 > maxLen) {
+      return false;
+    }
+    return true;
+}
+
+$.fn.limitLength = function(len){
+  $(this).keypress(function (event) {
+    return limit_max_input($(this),event,len);
+  });
+}
+
 $.fn.onlyNum = function () {
 	$(this).keypress(function (event) {
 	    var eventObj = event || e;
 	    var keyCode = eventObj.keyCode || eventObj.which;
 	    if ((keyCode >= 48 && keyCode <= 57))
-		return true;
-	    else
-		return false;
+		return limit_max_input($(this));
+	    else return false;
 	}).focus(function () {
 	//禁用输入法
 	this.style.imeMode = 'disabled';
@@ -96,7 +116,7 @@ $.fn.check = function(){
   var msg = this.validate();
   if (msg == "") return true;
   
-  console.log(this.html());
+  //console.log(this.html());
   e = '<div id="div_validate_error" style="color:red"';
   e += ' ctrl_id = "' + this.attr("id")+'" ';
   e += '>';
@@ -144,13 +164,97 @@ jQuery.validator.addMethod("isPhone", function(value, element) {
   return this.optional(element) || (tel.test(value));
   }, "请填写正确的手机号码");
 
+/**/
 $.validator.setDefaults({
   	focusCleanup:false,
-        onFocusOut:true,
+        onFocusOut:true
 });
+
+
+function set_background_img(url)
+{
+  //set web background image
+    function cover(){
+      var win_width = $(window).width();
+      var win_height = $(window).height();
+      $("#bigpic").attr({width:win_width,height:win_height});
+    }	
+            
+    $("body").append("<div id='main_bg' style='position: absolute; top: 0; left: 0; z-index: -1000'/>");
+    $("#main_bg").append("<img src='" + url + "' id='bigpic'>");
+    cover();
+    
+    $(window).resize(function(){ //浏览器窗口变化
+        cover();
+    });
+}
+
+//set a auto popup div(#pop_div) on img element
+function set_pop_div(img,pop_div) {
+  pop_div.hide();
+  
+  function get_pop_div() {
+     return img.parent().children(".is_pop_div");
+  }
+  
+  function clearHide() {
+    clearTimeout(parseInt(img.attr("timeout")));
+    img.removeAttr("timeout");
+    var div = get_pop_div();
+    if (div) {
+      clearTimeout(parseInt(div.attr("timeout")));
+      div.removeAttr("timeout");
+    }
+  }
+  
+  function startHide(item){
+    clearHide();
+     var timeoutID = setTimeout(function(){
+        get_pop_div().remove();
+        },100);
+      item.attr("timeout",timeoutID);
+  }
+     
+  img.mouseenter(function(){
+      clearHide();
+          
+      pop_div.css({"opacity":"0.5",
+              "position":"absolute",
+              "z-index":"1000",
+              "top":"" + $(this).height() - pop_div.height() + "px",
+              "left":"0px",
+              "width":""+img.width()+"px",
+              "cursor":img.css("cursor"),
+              "display":"none"});
+      pop_div.addClass("is_pop_div");
+      
+      $(this).after(pop_div);
+      
+      pop_div.show();
+      
+      pop_div.click(function(){
+        img.click();
+        });
+      
+      pop_div.mouseenter(function(){
+          clearHide();
+        });
+      
+      pop_div.mouseleave(function(){
+        startHide($(this));
+        });
+    });
+  
+    img.mouseleave(function(){
+      startHide($(this));
+      });
+}
 
 $(document).ready(function(e){
    $(".onlyNum").onlyNum();
     $(".onlyAlpha").onlyAlpha();
     $(".onlyNumAlpha").onlyNumAlpha();
+    $(".limit_s").limitLength(6);
+    $(".limit_m").limitLength(20);
+    $(".limit_l").limitLength(100);
 });

@@ -82,16 +82,49 @@ class ctrl_profile:
 	@staticmethod
 	def handle_profile_img(fp,user):
 		assert isinstance(user,user_profile)
-		img = Image.open(fp)		
-		img.thumbnail((400,300))
+		user.update("hasphoto",1)
+		img = Image.open(fp)
+		img = ctrl_profile._rotate_img(img)
+		img.thumbnail((1024,768))
 		img.save(user.photo_url)
 		
-		img.thumbnail( (100,100) )
+		img.thumbnail( (400,300) )
 		img.save(user.small_photo_url)
 		img.close()
 	
+	@staticmethod	
+	def _get_rotate(image):
+		if not hasattr(image,"_getexif"):
+			return -1
+		
+		r = image._getexif()
+		if not r:
+			return -1
+		
+		orientation = 0x112
+		if orientation not in r:
+			return -1
+		v = r[orientation]
+		if v == 6:
+			return Image.ROTATE_270
+		elif v == 8:
+			return Image.ROTATE_90
+		elif v == 3:
+			return Image.ROTATE_180
+		else:
+			return -1
 	
-
+	@staticmethod	
+	def _rotate_img(image):
+		#http://blog.csdn.net/daisyhd/article/details/6000962
+		r = ctrl_profile._get_rotate(image)
+		if r == -1:	
+			return image 
+		img = image.transpose(r)
+		image.close()
+		return img
+		
+	
 
 @bottle.route('/profile')	
 @bottle.view('profile')	
@@ -134,7 +167,6 @@ def url_upload():
 	mem = io.BytesIO()
 	upload.save(mem)
 	mem.seek(0)
-	user.update("hasphoto",1)
 	ctrl_profile.handle_profile_img(mem,user)
 	mem.close()
 	return 0

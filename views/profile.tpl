@@ -109,17 +109,15 @@
 		$(".txt_input").blur(function(){
 			save_item();
 		});
-        });
-	
+		
+		set_pop_div($("#img_profile"),$("#div_pop"),function(){alert("hi");});
+	});
 	window.onbeforeunload=leave_func;
 	</script>
-
-	<style type="text/css">
-	#img_profile{
-		cursor:pointer
-	}
-	</style>
-    
+	 
+<div id="div_pop" style="height:50px;line-height:50px;width:100%;display:none;background-color: black;">
+	<H3 style="color: white;text-align:center;">点击上传相片</H3>
+</div>
 <div class="container">
 	<div class="row">
 		<div class="col-md-5">
@@ -127,9 +125,6 @@
 			<div class="panel panel-primary">
 			<div class="panel-heading">
 			   <h3 class="panel-title">
-						<span class="glyphicon glyphicon-heart-empty"></span>
-						<span class="glyphicon glyphicon-heart-empty"></span>
-						<span class="glyphicon glyphicon-heart-empty"></span>
 						信息
 				</h3>
 			</div>
@@ -182,8 +177,6 @@
 			<div class="panel panel-info">
 				<div class="panel-heading ">
 					<h3 class="panel-title">
-						<span class="glyphicon glyphicon-heart-empty"></span>
-						<span class="glyphicon glyphicon-heart-empty"></span>
 						信息
 					</h3>
 				</div>
@@ -239,7 +232,6 @@
 			<div class="panel panel-success">
 				 <div class="panel-heading">
 					<h3 class="panel-title">
-						<span class="glyphicon glyphicon-heart-empty"></span>
 						信息
 					</h3>
 				</div>
@@ -288,7 +280,8 @@
 		</div>
 		<div class="col-md-6">
 			<div class="row">
-				<img id="img_profile" class="img-responsive img-rounded" src="{{photo_url}}" alt="头像"></img>
+				<img id="img_profile" class="img-responsive img-rounded" style="cursor:hand" src="{{photo_url}}" alt="头像"></img>
+				<div style="background: repeat-x url('res/stampframe.gif');height: 9px;width:100%"></div>
 				<input type="file" name="uploadify" id="uploadify" />
 				<div id="fileQueue">
 				</div>	
@@ -296,7 +289,6 @@
 			<div class="panel panel-success">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<span class="glyphicon glyphicon-heart-empty"></span>
 						信息
 					</h3>
 				</div>

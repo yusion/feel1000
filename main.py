@@ -28,7 +28,8 @@ def get_js_file(path):
 def get_file(path):
 	return bottle.static_file(path,"./jquery-easyui-1.3.2")
 
-@bottle.route('/')	
+@bottle.route('/')
+@bottle.route('/index')	
 @bottle.view('index')
 def url_index():
 	# response.add_header('Set-Cookie', 'name2=value2')

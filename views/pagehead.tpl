@@ -1,4 +1,4 @@
-<!-- this is page head -->
+<!-- this is page head begin -->
 <input type="hidden" id="session" value="{{session}}" />
 <style type="text/css">
 input.error { border: 1px solid red; }
@@ -27,25 +27,26 @@ label.checked {
 }
 
 </style>
-
-<div class="container">
-   <div class="row">
-      <div class="col-xs-12">
-      <div id="div_banner" style="height: 100px;width: 100%"></div>
-      <img id="img_banner" src="res/banner.jpg" alt="banner"></img>
-      </div>
-   </div>
-   <div class="row">
-      <div class="col-xs-12">
-	<ul class="nav nav-tabs">
-		<li><a href="#">Home</a></li>
-		<li><a href="register">register</a></li>
-		<li><a href="search?page=0&page_size=3">search</a></li>
-		<li><a href="login">login</a></li>
-		<li><a href="profile">profile</a></li>
-	</ul>
-      </div>
-   </div>
+<div class="container"  style="background-color:blue;width:100%">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2" >
+      <div class="row">
+	<div class="col-md-2 ">
+	  <img src="res/logo.gif" class="img-responsive"> 
+	</div>
+	<div class="col-md-10"> 
+	   <nav class="navbar navbar-default" role="navigation">
+	    <ul class="nav nav-tabs">
+		    <li><a href="index">广场</a></li>
+		    <li><a href="message">动态</a></li>
+		    <li><a href="pkstage">PK舞台</a></li>
+		    <li><a href="profile">个人主页</a></li>
+	    </ul>
+	  </nav>
+	</div>
+      </div> 
+    </div>
+  </div>
 </div>
 
 <script type="text/javascript">
@@ -64,9 +65,11 @@ label.checked {
 				$(this).parent().removeClass("active");
 			}
 		});
-		//set banner overlay navigator tabs
-		$("#div_banner").height($("#img_banner").height() - $("ul.nav-tabs").height());
 	});
 
 </script>
 
+<div class="container"  style="width:100%">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2" >
+<!-- this is page head end -->

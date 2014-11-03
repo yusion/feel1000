@@ -159,3 +159,7 @@ http://www.wix.com/website-template/view/html/794?originUrl=http%3A%2F%2Fwww.wix
 
 
 TODO: upload的光标效果不佳，而且有时候定位会有问题
+
+
+http://www.bootcss.com/p/unslider/
+Unslider — 一个超小的 jQuery 轮播（slider） 插件。支持主流浏览器、键盘导航、自动调整高度和响应式布局。

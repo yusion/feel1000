@@ -19,6 +19,9 @@ def test_get_log_desc():
 	c = profile_columns.get("HasPhoto")
 	assert "修改了头像信息" == user_profile.get_log_desc(c,0,1)
 	assert "修改了头像信息" == user_profile.get_log_desc(c,1,1)
+	
+	c = profile_columns.get("city")
+	assert "修改城市信息，从<span class='strong'>太原</span>改为<span class='strong'>常州</span>" == user_profile.get_log_desc(c,601,1104)
 
 def test_profile_columns():
 	assert None == profile_columns.get("citywrong")
@@ -27,6 +30,8 @@ def test_profile_columns():
 	assert c.column == "City"
 	assert c.columnName == "城市"
 	assert profile_column_type.Changable == c.type
+	assert c.get_value_desc(601) == "太原"
+	assert c.get_value_desc(1104) == "常州"
 	
 	c = profile_columns.get("Email")
 	assert c.column == "Email"

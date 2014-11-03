@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-4 col-md-offset-4" >
     ..公司版权所有<BR>
-    @1997-2014
+    Copyright 360.CN  京ICP备08010314号-19  京公网安备110000000006号
     </div>
   </div>
 </div>

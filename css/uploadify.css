@@ -48,6 +48,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 		color-stop(0, #606060),
 		color-stop(1, #808080)
 	);
+	cursor : pointer;
 	background-position: center bottom;
 }
 .uploadify-button.disabled {
@@ -64,14 +65,14 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 	border-radius: 3px;
 	font: 11px Verdana, Geneva, sans-serif;
 	margin-top: 5px;
-	max-width: 200px;
+	max-width: 350px;
 	padding: 10px;
 }
 .uploadify-error {
 	background-color: #FDE5DD !important;
 }
 .uploadify-queue-item .cancel a {
-	background: url('../res/uploadify-cancel.png') 0 0 no-repeat;
+	background: url('../img/uploadify-cancel.png') 0 0 no-repeat;
 	float: right;
 	height:	16px;
 	text-indent: -9999px;

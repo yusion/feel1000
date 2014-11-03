@@ -222,9 +222,9 @@ function set_pop_div(img,pop_div) {
               "position":"absolute",
               "z-index":"1000",
               "top":"" + $(this).height() - pop_div.height() + "px",
-              "left":"0px",
+              "left":"" + $(this).position().left + "px",
               "width":""+img.width()+"px",
-              "cursor":img.css("cursor"),
+              //"cursor":img.css("cursor"),
               "display":"none"});
       pop_div.addClass("is_pop_div");
       
@@ -250,6 +250,28 @@ function set_pop_div(img,pop_div) {
       });
 }
 
+function keep_over(over_elem,under_elem)
+{//keep over_elem always on under_elem
+  function reset()
+  {
+    over_elem.css({"position":"absolute",
+              "z-index":"900",// + under_elem.css("z-index"),
+              "top":"" + under_elem.position().top + "px",
+              "left":"" + under_elem.position().left +"px",
+              "width":""+under_elem.width()+"px",
+              "height":""+under_elem.height()+"px"
+              });
+  }
+   reset();
+  $(window).resize(function(){
+			reset();
+		});
+}
+
+function set_imgtag(items,imgSrc) {
+    items.after("<img style='position:absolute;top:-3;left:-3' src='"+ imgSrc +"'>");
+}
+
 $(document).ready(function(e){
    $(".onlyNum").onlyNum();
     $(".onlyAlpha").onlyAlpha();
@@ -257,4 +279,7 @@ $(document).ready(function(e){
     $(".limit_s").limitLength(6);
     $(".limit_m").limitLength(20);
     $(".limit_l").limitLength(100);
+    
+    set_imgtag($(".hot_tag"),"res/hot.gif");
+    set_imgtag($(".new_tag"),"res/new.gif");
 });

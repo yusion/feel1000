@@ -76,6 +76,11 @@ def url_test_check_user():
 def clear_test_user2():
 	db = utility.get_db()
 	c = db.cursor()
+	c.execute("""DELETE FROM r_log WHERE userID IN
+		(
+		SELECT u_user.ID FROM u_user WHERE (Password like '%test%') OR  (nickname like 'test_%')
+		)""")
+
 	c.execute("DELETE FROM u_user WHERE (Password like '%test%') OR  (nickname like 'test_%')")
 	c.execute("""DELETE FROM u_profile WHERE ID IN
 		(
@@ -90,4 +95,4 @@ def url_test_del_user():
 if __name__ == '__main__':
 	utility.run_tests("test_user_manager.py")
 	
-	
+#TODO:忘记密码要在登陆失败时，才弹出来。。。	

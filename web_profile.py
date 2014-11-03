@@ -7,9 +7,56 @@ import utility,json
 import bottle,session
 from PIL import Image
 
+profile_column_type = utility.enum(Readonly=0,ChangeOnce=1,Changable=2)
+
+class profile_column_info:
+	def __init__(self):
+		self.column = ""
+		self.columnName = ""
+		self.type = profile_column_type.Readonly
+		self.unit = ""
+		self.descTable = ""
+	
+	def get_value_desc(self,value):
+		if value == -1:
+			return ""
+		if self.descTable == "":
+			return value
+		rr = utility.get_c_table(self.descTable)
+		for r in rr:
+			if r[0] == value:
+				return r[1]
+		return "未知"
+	
+class profile_columns:
+	columns = {}
+	
+	@staticmethod
+	def get(key):
+		if len(profile_columns.columns) == 0:
+			c = utility.get_cursor()
+			rs = c.execute("SELECT profileColumn,profileColumnName,profileColumnType,Unit,descTable"
+				       +" FROM c_profile_column").fetchall()
+			for r in rs:
+				info = profile_column_info()
+				info.column = r[0]
+				info.columnName = r[1]
+				info.type = r[2]
+				info.unit = ""
+				if r[3] != None:
+					info.unit = r[3]
+				info.descTable = ""
+				if r[4] != None:
+					info.descTable = r[4]
+				profile_columns.columns[info.column.lower()] = info
+		lowKey = key.lower()
+		if lowKey in profile_columns.columns:
+			return profile_columns.columns[lowKey]
+		return None
+
 class user_profile:
 	def __init__(self):
-		pass
+		self.ip = "127.0.0.8"
 	
 	@property
 	def small_photo_url(self):
@@ -27,14 +74,19 @@ class user_profile:
 			return "res/man_unknown.gif"
 	
 	def update(self,key,value):
-		if not hasattr(self,key):
+		lowKey = key.lower()
+		column = profile_columns.get(lowKey)
+		if column == None:
 			return False
+		assert hasattr(self,key)
 		if getattr(self,key) == value:
 			return True
-		if key == "id" or key== "user_id":
-			return False
 		
-		if isinstance(self.__dict__[key],int):
+		#TODO未完成 
+		if column.type == profile_column_type.Readonly:
+			return False
+		oldValue = self.__dict__[key]
+		if isinstance(oldValue,int):
 			if value == "":
 				value = -1
 			setattr(self,key,int(value))
@@ -43,11 +95,32 @@ class user_profile:
 		
 		db = utility.get_db()
 		c = db.cursor()
-		now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-		c.execute("UPDATE u_profile SET %s=?,EditDate=? WHERE ID=?"%key,(value,now,self.user_id))
+		now = utility.now_str()
+		if lowKey == "age":
+			y = utility.now().year
+			c.execute("UPDATE u_profile SET %s=?,EditDate=?,AgeBegin=? WHERE ID=?"%key,
+				  (value,now,y,self.user_id))
+			setattr(self,"agebegin",y)
+		else:
+			c.execute("UPDATE u_profile SET %s=?,EditDate=? WHERE ID=?"%key,(value,now,self.user_id))
+		utility.write_log(self.user_id,user_profile.get_log_desc(column,oldValue,value),1,self.ip,False)
 		db.commit()
 		return True
 	
+	@staticmethod	
+	def __get_value_desc(column,value):
+		return "<span class='strong'>" + str(column.get_value_desc(value)) + column.unit + "</span>"
+	
+	@staticmethod	
+	def get_log_desc(column,oldValue,newValue):
+		if column.column == "HasPhoto":
+			return "修改了" + column.columnName + "信息"
+		
+		if oldValue == "" or oldValue == -1 or oldValue == None:
+			return "设置" + column.columnName + "信息为" + user_profile.__get_value_desc(column,newValue)
+		else:
+			return "修改" + column.columnName + "信息，从" + user_profile.__get_value_desc(column,oldValue) + "改为" + user_profile.__get_value_desc(column,newValue)
+
 	def get_dict(self):
 		d = {}
 		for k in self.__dict__:
@@ -76,7 +149,13 @@ class ctrl_profile:
 		i = 0
 		for col in c.description:
 			setattr(user,col[0].lower(),r[i])
-			i+=1			
+			i+=1
+			
+		if user.age != -1 and user.agebegin != None:
+			#increase user age every year 
+			diff = utility.now().year - user.agebegin
+			if diff > 0:
+				user.age += diff
 		return user
 
 	@staticmethod
@@ -124,8 +203,6 @@ class ctrl_profile:
 		image.close()
 		return img
 		
-	
-
 @bottle.route('/profile')	
 @bottle.view('profile')	
 def url_show_profile():

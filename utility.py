@@ -2,7 +2,7 @@
 # ycat			 2014/09/28      create
 import sqlite3,bottle
 import sys,pytest,os
-import hashlib
+import hashlib,datetime
 
 def enum(**enums):
     return type('Enum', (), enums)
@@ -31,7 +31,10 @@ def is_test():
 
 def set_is_test(value):
     global _is_test
+    global __test_now
     _is_test = value
+    if not value:
+        __test_now = None
 
 def _get_file(filename,keyword):
      with open(filename,"r") as f:
@@ -65,11 +68,17 @@ def md5(value):
 def scramble(value):
     return md5(str(value) + "ycat")
 
+__c_table = {}
 def get_c_table(name):
+    global __c_table
+    if name in __c_table:
+        return __c_table[name]
+    
     ret = []
     rr = get_cursor().execute("SELECT * FROM " + name)
     for r in rr.fetchall():
-        ret.append(r)			
+        ret.append(r)
+    __c_table[name] = ret
     return ret
 
 def update_c_table(dict1,name,value=None):
@@ -78,7 +87,74 @@ def update_c_table(dict1,name,value=None):
         dict1[name + "_value"] = value
     return dict1
 
+__test_now = None
+
+def now():
+    global __test_now
+    if __test_now:
+        return __test_now
+    return datetime.datetime.now()
+
+def now_str():
+    return now().strftime("%Y-%m-%d %H:%M:%S")
+
+def set_now(dateTime):
+    global __test_now
+    __test_now = dateTime
+
+def write_log(user_id,desc,logType,ip="",autoCommit = True):
+    db = get_db()
+    db.execute("INSERT INTO r_log(LogTypeID,LogDesc,LogDate,UserID,IP)VALUES(?,?,?,?,?)",
+        (logType,desc,now_str(),user_id,ip))
+    if autoCommit:
+        db.commit()
+
+def check_log(user_id,desc,logType):
+    #for unit test to check user log
+    c = get_cursor()
+    r = c.execute("select UserID,LogDesc,logTypeID from r_log WHERE logTypeID=? ORDER BY LogDate Desc",(logType,)).fetchone()
+    assert r[0] == user_id
+    assert r[1] == desc
+    assert r[2] == logType
+    
+
 #############################	unit test	###########################
+def test_write_log():
+    set_now(datetime.datetime(2014,5,27,12,50,43))
+    now1 = now()
+    
+    db = get_db()
+    db.execute("DELETE FROM r_log WHERE LogDesc like 'test_%'")
+    db.commit()
+    msg = "test_系统创建啦<啦啦>'\"dfdfd"
+    msg2 = "test_系统创建啦<啦啦>'\"dfdfddsfdfsfdsf"
+    write_log(-1,msg,0,"127.0.0.1")
+    check_log(-1,msg,0)
+    
+    set_now(datetime.datetime(2014,1,27,12,50,43))
+    now2 = now()
+    write_log(1001,msg2,1,"127.0.0.2")
+    check_log(1001,msg2,1)
+    
+    c = get_cursor()
+    r = c.execute("SELECT LogTypeID,LogDesc,LogDate,UserID,IP FROM r_log WHERE LogDesc like 'test_%'").fetchall()
+    assert len(r) == 2
+    assert r[0][0] == 0
+    assert r[0][1] == msg
+    assert r[0][2] == now1.strftime("%Y-%m-%d %H:%M:%S")
+    assert r[0][3] == -1
+    assert r[0][4] == "127.0.0.1"
+    assert r[1][0] == 1
+    assert r[1][1] == msg2
+    assert r[1][2] == now2.strftime("%Y-%m-%d %H:%M:%S")
+    assert r[1][3] == 1001
+    assert r[1][4] == "127.0.0.2"
+    
+    db.execute("DELETE FROM r_log WHERE LogDesc like 'test_%'")
+    db.commit()
+    
+    set_now(None)
+
 def test_get_dict():
     global _is_test
     set_session_id(3300)

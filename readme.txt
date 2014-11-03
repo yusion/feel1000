@@ -156,3 +156,6 @@ http://www.wix.com/
 
 主页模板good
 http://www.wix.com/website-template/view/html/794?originUrl=http%3A%2F%2Fwww.wix.com%2Fwebsite%2Ftemplates%3Fcriteria%3Dfriend&bookName=create-master-new&galleryDocIndex=1&viewMode=desktop
+
+
+TODO: upload的光标效果不佳，而且有时候定位会有问题

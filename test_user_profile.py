@@ -6,6 +6,87 @@ import test_user_manager
 from web_profile import *
 from PIL import Image
 
+def test_get_log_desc():
+	c = profile_columns.get("height")
+	assert "修改身高信息，从<span class='strong'>168厘米</span>改为<span class='strong'>180厘米</span>" == user_profile.get_log_desc(c,168,180)
+	c = profile_columns.get("weight")
+	assert "设置体重信息为<span class='strong'>50公斤</span>" == user_profile.get_log_desc(c,-1,50)
+	
+	c = profile_columns.get("degree")
+	assert "设置学历信息为<span class='strong'>本科</span>" == user_profile.get_log_desc(c,-1,2)
+	assert "修改学历信息，从<span class='strong'>硕士</span>改为<span class='strong'>本科</span>" == user_profile.get_log_desc(c,3,2)
+	
+	c = profile_columns.get("HasPhoto")
+	assert "修改了头像信息" == user_profile.get_log_desc(c,0,1)
+	assert "修改了头像信息" == user_profile.get_log_desc(c,1,1)
+
+def test_profile_columns():
+	assert None == profile_columns.get("citywrong")
+	
+	c = profile_columns.get("city")
+	assert c.column == "City"
+	assert c.columnName == "城市"
+	assert profile_column_type.Changable == c.type
+	
+	c = profile_columns.get("Email")
+	assert c.column == "Email"
+	assert c.columnName == "电子邮箱"
+	assert profile_column_type.Changable == c.type
+	assert c.get_value_desc("113595@qq.com") == "113595@qq.com"
+	
+	c = profile_columns.get("AgeBegin")
+	assert c.column == "AgeBegin"
+	assert c.columnName == "年龄开始年份"
+	assert profile_column_type.Readonly == c.type
+	assert c.get_value_desc(2014) == 2014
+	
+	c = profile_columns.get("Realname")
+	assert c.column == "RealName"
+	assert c.columnName == "真实姓名"
+	assert profile_column_type.ChangeOnce == c.type
+	
+	c = profile_columns.get("Star")
+	assert c.get_value_desc(1) == "白羊座 03.21─04.20"
+	assert c.get_value_desc(5) == "狮子座 07.23─08.22"
+	assert c.get_value_desc(-1) == ""
+	
+	c = profile_columns.get("income")
+	assert c.get_value_desc(2) == "2k-5k"
+	assert c.get_value_desc(5) == "5k-10k"
+	assert c.get_value_desc(-1) == ""
+	
+	c = profile_columns.get("degree")
+	assert c.get_value_desc(2) == "本科"
+	assert c.get_value_desc(-1) == ""
+	
+def test_user_age():
+	test_user_manager.clear_test_user()
+	s = web_register.ctrl_user_manager.register("ycattest","13912546654","123test",web_register.sex_type.Male)
+	utility.set_session_id(s.session_id)
+	now = datetime.datetime(2010,5,27,12,50,43)
+	utility.set_now(now)
+	assert utility.now() == now
+	
+	u = ctrl_profile.get()
+	assert not u.update("none",1)
+	assert not u.update("none","abc")
+	
+	set_attri(u,"age",29,50)
+	assert 50 == u.age
+	assert 2010 == u.agebegin
+	
+	utility.set_now(datetime.datetime(2014,5,27,12,50,43))
+	u2 = ctrl_profile.get_by_userid(u.id)
+	assert 54 == u2.age
+	assert 2010 == u2.agebegin
+	
+	utility.set_now(datetime.datetime(2024,5,27,12,50,43))
+	u2 = ctrl_profile.get_by_userid(u.id)
+	assert 64 == u2.age
+	assert 2010 == u2.agebegin
+	test_user_manager.clear_test_user()
+	utility.set_now(None)
+
 def set_attri(u,key,value1,value2):
 	assert u.update(key,str(value1))
 	u2 = ctrl_profile.get_by_userid(u.id)
@@ -18,6 +99,8 @@ def set_attri(u,key,value1,value2):
 	assert getattr(u2,key) == value2
 	assert getattr(u2,key) == getattr(u,key)
 	assert u.get_dict()[key] == value2
+	if key == "age":
+		assert u.agebegin == utility.now().year
 
 def test_update():
 	test_user_manager.clear_test_user()

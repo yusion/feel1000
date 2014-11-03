@@ -289,7 +289,7 @@
 			</form>
 		</div>
 		<div class="col-md-6">
-				<img id="img_profile" style="width:100%;height: auto;z-index: -1" class="img-rounded" src="{{photo_url}}" alt="头像"></img>
+				<img id="img_profile" style="width:100%;height: auto;z-index: -1" class="img-rounded  new_tag" src="{{photo_url}}" alt="头像"></img>
 				<div style="background: repeat-x url('res/stampframe.gif');height: 9px;width:100%"></div>
 				<input type="button" id="uploadify" name="uploadify"/>
 				<div id="fileQueue" style="height: auto;width:100%">

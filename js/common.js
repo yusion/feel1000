@@ -268,6 +268,10 @@ function keep_over(over_elem,under_elem)
 		});
 }
 
+function set_imgtag(items,imgSrc) {
+    items.after("<img style='position:absolute;top:-3;left:-3' src='"+ imgSrc +"'>");
+}
+
 $(document).ready(function(e){
    $(".onlyNum").onlyNum();
     $(".onlyAlpha").onlyAlpha();
@@ -275,4 +279,7 @@ $(document).ready(function(e){
     $(".limit_s").limitLength(6);
     $(".limit_m").limitLength(20);
     $(".limit_l").limitLength(100);
+    
+    set_imgtag($(".hot_tag"),"res/hot.gif");
+    set_imgtag($(".new_tag"),"res/new.gif");
 });

@@ -95,4 +95,4 @@ def url_test_del_user():
 if __name__ == '__main__':
 	utility.run_tests("test_user_manager.py")
 	
-	
+#TODO:忘记密码要在登陆失败时，才弹出来。。。	

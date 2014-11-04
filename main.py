@@ -37,6 +37,12 @@ def url_index():
 	user = session.login("ycat2","123456")
 	bottle.response.set_header('Set-Cookie', 'session=%s'%user.session_id)
 	d["session"] = user.session_id
+	
+	page = 0
+	page_size = 10
+	d["search_result"] = get_search_result(None,page,page_size)
+	d["page_size"] = page_size
+	d["current_page"] = page
 	return d
 
 @bottle.route('/masonry')	

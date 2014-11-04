@@ -2,7 +2,10 @@
 <html>  
 <head>
 	{{!web_head}}
-	<script src="js/jquery.jcarousellite.js"></script>   
+	<script src="js/jquery.jcarousellite.js"></script> <!-- ycat modify -->
+	<script src="js/jquery.masonry.min.js"></script>
+	<script src="js/jquery.infinitescroll.dev.js"></script>
+	<script src="js/imagesloaded.pkgd.min.js"></script>
 </head>
 <body>
 {{!page_head}}
@@ -59,7 +62,7 @@
 			auto: 2000,
 			speed: 1500,
 			scroll: 3,
-			mouseWheel: true,
+			mouseWheel: false,
 			circular:true,
 			visible:10
 		});
@@ -78,6 +81,50 @@
 			$(this).children(".prev").hide();
 			$(this).children(".next").hide();
 			$("#div_new_member .carousel").AutoCarouselLite("true");
+		});
+		
+		///////////for search result////////////
+		$('#div_search_result').masonry({  
+			// options 设置选项  
+			itemSelector : '.search_item',//class 选择器  
+			columnWidth : 30 ,//一列的宽度 Integer
+			gutterWidth:10,//列的间隙 Integer  
+			singleMode:true,
+			isAnimated:true,//使用jquery的布局变化  Boolean  
+			animationOptions:{  
+			    //jquery animate属性 渐变效果  Object { queue: false, duration: 500 }  
+			  },  
+			isFitWidth:true,// 适应宽度   Boolean  
+			isResizableL:true,// 是否可调整大小 Boolean  
+			isRTL:false//使用从右到左的布局 Boolean
+		});
+			 
+		$('#infinitescroll').infinitescroll({
+			navSelector  : "#pagination",           
+			nextSelector : ".next_page", // 需要点击的下一页链接
+			itemSelector : ".search_item" ,  // 你要检索的所有项目的选择器
+			 animate : true
+			},
+			function(arrayOfNewElems){ //成功后执行的自定义的函数，如页面javascript的重载,这个自定义
+				for (var i=0;i<arrayOfNewElems.length; i++)
+				{
+					var img = $(arrayOfNewElems[i]);
+					//img.children("img").css({ opacity: 1 });
+					
+					var newElement = $('<div class="item"></div>');
+					newElement.append(img);
+						
+					$('#div_search_result').append(newElement);
+					$('#div_search_result').masonry("appended",newElement);
+						
+					img.children("img").imagesLoaded(function(){
+						//console.log($(this).attr("style"));
+					});
+				}
+		});
+		
+		$('#div_search_result').imagesLoaded(function(){
+			$('#div_search_result').masonry();
 		});
 	});
 </script>		
@@ -102,7 +149,7 @@
        </div>
 </div>
 
-<div class="col-md-4 col-md-push-8"  style="background-color: yellow">
+<div class="col-md-3 col-md-push-9"  style="background-color: orange">
 	<div class="row">
 		<div class="col-md-2" >
 			<img src="res/test/a (9).jpg" style="width:100px;height:100px" >
@@ -140,7 +187,7 @@
 	</div>
 	
 </div>
-<div class="col-md-8 col-md-pull-4" >
+<div class="col-md-9 col-md-pull-3" >
 	<div class="row">
 		<img src="res/test/a (9).jpg" style="width:200px;height:200px;display: inline-block;" >今日明星
 		<img src="res/test/a (1).jpg" style="width:200px;height:200px;display: inline-block;" >今日明星
@@ -149,13 +196,16 @@
 		<input type="input" style="width:80%"><button>查询</button>
 	</div>
 	<div class="row">
-		<img src="res/test/a (1).jpg" style="width:100px;height:100px;display: inline-block;" >
-		<img src="res/test/a (9).jpg" style="width:100px;height:100px;display: inline-block;" >
-		<img src="res/test/a (6).jpg" style="width:100px;height:100px;display: inline-block;" >
-		<img src="res/test/a (3).jpg" style="width:100px;height:100px;display: inline-block;" >
-		<img src="res/test/a (7).jpg" style="width:100px;height:100px;display: inline-block;" >
-		<img src="res/test/a (9).jpg" style="width:100px;height:100px;display: inline-block;" >
+		<div id="div_search_result" style="width:80%;height:70%;background-color: black">
+			{{!search_result}}
+		</div>
 	</div>
+	<div class="row">
+		<div id="pagination">
+			<a href="search?page_size={{page_size}}&page={{int(current_page)+1}}" class="next_page">加载更多</a>		
+		</div>
+		<div id="infinitescroll" style="margin: 0;width: auto;height: 200px"></div>
+	</div>	
 </div>
 </div>
 

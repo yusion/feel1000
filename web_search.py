@@ -28,56 +28,36 @@ class ctrl_search:
 	@staticmethod
 	def search(condition,page_size,current_page):
 		result = []
-		for root, dirs, files in os.walk("./test"):
-			#TODO for test only 
-			for name in files:
-				if name == "Thumbs.db":
-					continue
-				item = search_item()
-				item.photo_url = "test/"+name
-				img = Image.open(item.photo_url)
-				if not img:
-					continue
-				item.photo_width = img.size[0]
-				item.photo_height = img.size[1]
-				img.close()
-				result.append(item)
+		while len(result) < 33:
+			for root, dirs, files in os.walk("./res/test"):
+				#TODO for test only 
+				for name in files:
+					if name == "Thumbs.db":
+						continue
+					item = search_item()
+					item.photo_url = "res/test/"+name
+					img = Image.open(item.photo_url)
+					if not img:
+						continue
+					item.photo_width = img.size[0]
+					item.photo_height = img.size[1]
+					img.close()
+					result.append(item)
+
 		rr = ctrl_search._handle_page(page_size,current_page,result)
 		return {"result":rr[0],
 			"page_size":page_size,
 			"current_page":current_page,
 			"total_page":rr[1]}
 
-#TODO test 
-@bottle.route('/test/<path:path>')	
-def get_test_file(path):
-	time.sleep(1)
-	return bottle.static_file(path,"./test")
- 
+def get_search_result(condition,page,page_size):
+	return utility.get_template_file("views/search.tpl",ctrl_search.search(condition,page_size,page))
 
 @bottle.route('/search')
-@bottle.view('search')
 def url_search():
 	page = int(bottle.request.params.page)
 	page_size = int(bottle.request.params.page_size)
-	d = utility.get_dist()
-	d.update(ctrl_search.search(None,page_size,page))
-	if page == 4:
-		bottle.abort(404, "No such database.")
-	#time.sleep(0.8)
-	return d
-
-@bottle.route('/search2')
-@bottle.view('search2')
-def url_search():
-	page = int(bottle.request.params.page)
-	page_size = int(bottle.request.params.page_size)
-	d = utility.get_dist()
-	d.update(ctrl_search.search(None,page_size,page))
-	if page == 4:
-		bottle.abort(404, "No such database.")
-	#time.sleep(0.8)
-	return d
+	return get_search_result(None,page,page_size)
 
 def test_handle_page():
 	r = range(0,1000)

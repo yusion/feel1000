@@ -36,7 +36,7 @@ def set_is_test(value):
     if not value:
         __test_now = None
 
-def _get_file(filename,keyword):
+def get_template_file(filename,keyword):
      with open(filename,"r") as f:
         tpl = bottle.SimpleTemplate(f.read())
         return tpl.render(keyword)
@@ -46,9 +46,9 @@ def get_dist():
 	d = {}
 	d["is_test"] = _is_test
 	d["session"] = str(session_id)
-	d["web_head"] = _get_file("views/head.tpl",d)
-	d["page_head"] = _get_file("views/pagehead.tpl",d)
-	d["page_foot"] = _get_file("views/pagefoot.tpl",d)
+	d["web_head"] = get_template_file("views/head.tpl",d)
+	d["page_head"] = get_template_file("views/pagehead.tpl",d)
+	d["page_foot"] = get_template_file("views/pagefoot.tpl",d)
 	return d
 
 def get_db():
@@ -158,7 +158,7 @@ def test_write_log():
 def test_get_dict():
     global _is_test
     set_session_id(3300)
-    assert _get_file("views/pagehead.tpl",{"session":1000}).find('value="1000"') != -1
+    assert get_template_file("views/pagehead.tpl",{"session":1000}).find('value="1000"') != -1
     set_is_test(True)
     assert _is_test
     assert is_test()

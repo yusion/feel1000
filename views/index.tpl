@@ -3,9 +3,10 @@
 <head>
 	{{!web_head}}
 	<script src="js/jquery.jcarousellite.js"></script> <!-- ycat modify -->
-	<script src="js/jquery.masonry.min.js"></script>
+	<script src="js/masonry.pkgd.min.js"></script>
 	<script src="js/jquery.infinitescroll.dev.js"></script>
 	<script src="js/imagesloaded.pkgd.min.js"></script>
+	<script src="js/jquery-scrolltofixed-min.js"></script>
 </head>
 <body>
 {{!page_head}}
@@ -96,7 +97,8 @@
 			  },  
 			isFitWidth:true,// 适应宽度   Boolean  
 			isResizableL:true,// 是否可调整大小 Boolean  
-			isRTL:false//使用从右到左的布局 Boolean
+			isRTL:false,//使用从右到左的布局 Boolean
+			layoutComplete:function(){alert("ddd");}
 		});
 			 
 		$('#infinitescroll').infinitescroll({
@@ -126,6 +128,11 @@
 		$('#div_search_result').imagesLoaded(function(){
 			$('#div_search_result').masonry();
 		});
+		
+		$(".fixDiv").scrollToFixed();
+		
+		//$('#div_search_result').masonry( 'on', 'layoutComplete', function(){
+		//});
 	});
 </script>		
 
@@ -149,43 +156,44 @@
        </div>
 </div>
 
-<div class="col-md-3 col-md-push-9"  style="background-color: orange">
-	<div class="row">
-		<div class="col-md-2" >
-			<img src="res/test/a (9).jpg" style="width:100px;height:100px" >
+<div class="col-md-3 col-md-push-9">
+	<div class="fixDiv"   style="background-color: orange">
+		<div class="row">
+			<div class="col-md-2" >
+				<img src="res/test/a (9).jpg" style="width:100px;height:100px" >
+			</div>
+			<div class="col-md-8" >
+				ycat（身份认证）<BR>
+				<button>写心情日记</button>
+			</div>
 		</div>
-		<div class="col-md-8" >
-			ycat（身份认证）<BR>
-			<button>写心情日记</button>
+		<div class="row">
+			<div class="col-md-12" >
+				***好友  5/29<BR>
+				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
+				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
+				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
+			</div>
+			<div class="col-md-12" >
+				**好友  5/29<BR>
+				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
+				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
+				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
+			</div>
+			<div class="col-md-12" >
+				*好友  5/29<BR>
+				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
+				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
+				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
+			</div>
+			<div class="col-md-12" >
+				留言箱<BR>
+				某某人向你发了一封信<BR>
+				某好友修改了相片<BR>
+				某好友发表了一篇文章<BR>
+			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-12" >
-			***好友  5/29<BR>
-			<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-			<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-			<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-		</div>
-		<div class="col-md-12" >
-			**好友  5/29<BR>
-			<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-			<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-			<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-		</div>
-		<div class="col-md-12" >
-			*好友  5/29<BR>
-			<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-			<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-			<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-		</div>
-		<div class="col-md-12" >
-			留言箱<BR>
-			某某人向你发了一封信<BR>
-			某好友修改了相片<BR>
-			某好友发表了一篇文章<BR>
-		</div>
-	</div>
-	
 </div>
 <div class="col-md-9 col-md-pull-3" >
 	<div class="row">

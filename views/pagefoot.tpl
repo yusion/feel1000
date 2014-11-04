@@ -1,5 +1,7 @@
 <!-- this is page foot begin-->
-</div>
+		</div>
+	</div>
+</div> 
 
 <div class="container"  style="background-color:gray;width:100%">
   <div class="row">

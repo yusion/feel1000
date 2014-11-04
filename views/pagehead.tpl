@@ -69,7 +69,7 @@ label.checked {
 
 </script>
 
-<div class="container"  style="width:100%">
+<div class="container"  style="width:100%;">
   <div class="row">
-    <div class="col-md-8 col-md-offset-2" >
+    <div class="col-md-8 col-md-offset-2" style="border-style: solid;border-color: black">
 <!-- this is page head end -->

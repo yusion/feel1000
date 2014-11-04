@@ -17,7 +17,7 @@
     padding-left: 0px;
 }
 
-#div_new_member .carousel>ul>li>img {
+.img_new_member{
         width: 150px;
         height: 118px;
         vertical-align:middle;
@@ -27,20 +27,26 @@
 
 #div_new_member .prev, #div_new_member .next {
     position:absolute;
-    top: 0px;
-    width:50px;
-    padding-top:40px; 
+    top: 50px; 
     opacity: 0.8;
     z-index: 1000;
     cursor: pointer;
+    border-radius: 12px;
+}
+
+#div_new_member .prev:hover,#div_new_member .next:hover{
+	opacity: 1;
+	/*border-width: 1px;
+	border-style: solid;
+	border-color: grey*/
 }
 
 #div_new_member .prev {
-    left: 0px;
+    left: 5px;
 }
 
 #div_new_member .next {
-    right: 0px;
+    right: 5px;
 }
 </style>
 
@@ -48,15 +54,16 @@
 	$(document).ready(function(e){
 		//http://www.gmarwaha.com/jquery/jcarousellite/demo.php
 		$("#div_new_member .carousel").jCarouselLite({
-			btnNext: "#div_new_member .next",
-			btnPrev: "#div_new_member .prev",
+			btnNext: "#div_new_member .prev",
+			btnPrev: "#div_new_member .next",
 			auto: 2000,
 			speed: 1500,
 			scroll: 3,
 			mouseWheel: true,
-			//visible: 4.5,
-			circular:true
+			circular:true,
+			visible:10
 		});
+		$("#div_new_member .carousel").AutoCarouselLite("true");
 		
 		$("#div_new_member").children(".prev").hide();
 		$("#div_new_member").children(".next").hide();
@@ -64,28 +71,30 @@
 		$("#div_new_member").mouseenter(function(){
 			$(this).children(".prev").show();
 			$(this).children(".next").show();
+			$("#div_new_member .carousel").AutoCarouselLite("false");
 		});
 		
 		$("#div_new_member").mouseleave(function(){
 			$(this).children(".prev").hide();
 			$(this).children(".next").hide();
+			$("#div_new_member .carousel").AutoCarouselLite("true");
 		});
 	});
 </script>		
 
 <div class="col-md-12">
 	<div id="div_new_member">
-	   <img src="res/arrowleft.gif" class="prev">
+	   <img src="res/arrowleft.gif" class="prev" >
 	   <div class="carousel">
 	       <ul>
-		   <li><img src="res/test/a (1).jpg"></li>
-		   <li><img src="res/test/a (2).jpg"></li>
-		   <li><img src="res/test/a (3).jpg"></li>
-		   <li><img src="res/test/a (4).jpg"></li>
-		   <li><img src="res/test/a (5).jpg"></li>
-		   <li><img src="res/test/a (6).jpg"></li>
-		   <li><img src="res/test/a (7).jpg"></li>
-		   <li><img src="res/test/a (8).jpg"></li>
+		   <li><img src="res/test/a (1).jpg" class="img_new_member hot_tag"></li>
+		   <li><img src="res/test/a (2).jpg" class="img_new_member hot_tag"></li>
+		   <li><img src="res/test/a (3).jpg" class="img_new_member new_tag"></li>
+		   <li><img src="res/test/a (4).jpg" class="img_new_member" ></li>
+		   <li><img src="res/test/a (5).jpg" class="img_new_member"></li>
+		   <li><img src="res/test/a (6).jpg" class="img_new_member"></li>
+		   <li><img src="res/test/a (7).jpg" class="img_new_member"></li>
+		   <li><img src="res/test/a (8).jpg" class="img_new_member"></li>
 	       </ul>
 	   </div>
 	   <img src="res/arrowright.gif" class="next">

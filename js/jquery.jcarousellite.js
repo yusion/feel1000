@@ -9,11 +9,14 @@
     $.jCarouselLite = {
         version: '1.1'
     };
-
+    
+    $.fn.AutoCarouselLite = function(value){
+        $(this).attr("autoscroll",value);
+    };
+    
     $.fn.jCarouselLite = function(options) {
-
+        myParent = $(this);
         options = $.extend({}, $.fn.jCarouselLite.options, options || {});
-
         return this.each(function() {   // Returns the element collection. Chainable.
 
             var running,
@@ -184,7 +187,14 @@
 
             function setupAutoScroll() {
                 autoTimeout = setTimeout(function() {
-                    go(calculatedTo + options.scroll);
+                    var ret = myParent.attr("autoscroll");
+                    if(ret == "true") {
+                        go(calculatedTo + options.scroll);
+                    }
+                    else
+                    {
+                        setupAutoScroll();
+                    }
                 }, options.auto);
             }
 

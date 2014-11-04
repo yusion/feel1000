@@ -256,10 +256,10 @@ function keep_over(over_elem,under_elem)
   {
     over_elem.css({"position":"absolute",
               "z-index":"900",// + under_elem.css("z-index"),
-              "top":"" + under_elem.position().top + "px",
-              "left":"" + under_elem.position().left +"px",
-              "width":""+under_elem.width()+"px",
-              "height":""+under_elem.height()+"px"
+              "top":"" + (under_elem.position().top) + "px",
+              "left":"" + (under_elem.position().left) +"px",
+           //   "width":"20px",
+           //   "height":"20px"
               });
   }
    reset();

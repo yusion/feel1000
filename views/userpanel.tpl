@@ -12,6 +12,7 @@
 		<ul class="list-inline">
 			<li><i class="icon-heart-empty"></i>Ï²»¶<span class="badge">50</span></li>
 			<li><i class="icon-heart"></i>±»Ï²»¶<span class="badge">20</span></li>
+			<li><i class="icon-eye-open"></i>²é¿´<span class="badge">20</span></li>
 		</ul>
 	</div>
 	<div class="row">

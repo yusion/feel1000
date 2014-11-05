@@ -31,18 +31,15 @@
 
 #div_new_member .prev, #div_new_member .next {
     position:absolute;
-    top: 50px; 
+    top: 40px; 
     opacity: 0.8;
     z-index: 1000;
+    color: blue; 
     cursor: pointer;
-    border-radius: 12px;
 }
 
 #div_new_member .prev:hover,#div_new_member .next:hover{
 	opacity: 1;
-	/*border-width: 1px;
-	border-style: solid;
-	border-color: grey*/
 }
 
 #div_new_member .prev {
@@ -52,6 +49,18 @@
 #div_new_member .next {
     right: 5px;
 }
+
+.search_item{
+	cursor: pointer	
+}
+
+#img_popup{
+	display: none;
+	background-color: white;
+	border-bottom-width: 4px;
+	margin: 10,10,10,10;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -115,30 +124,48 @@
 					
 					var newElement = $('<div class="item"></div>');
 					newElement.append(img);
-						
 					$('#div_search_result').append(newElement);
 					$('#div_search_result').masonry("appended",newElement);
-						
+		 
+					
 					img.children("img").imagesLoaded(function(){
 						//console.log($(this).attr("style"));
 					});
 				}
+				$(arrayOfNewElems).inline_popup({
+					popup_ctrl:"#img_popup"
+				});
 		});
 		
-		$('#div_search_result').imagesLoaded(function(){
-			$('#div_search_result').masonry();
+		$('.search_item').inline_popup({
+			popup_ctrl:"#img_popup"
 		});
 		
 		$(".fixDiv").scrollToFixed();
+		
+		/*$('#div_search_result').imagesLoaded(function(){
+			$('#div_search_result').masonry();
+		});*/
 		
 		//$('#div_search_result').masonry( 'on', 'layoutComplete', function(){
 		//});
 	});
 </script>		
 
+<div id="img_popup">
+	<small>北京 | 21岁 | 178厘米 | 50公斤 | 2000~3000</small>
+	<div>
+		<i class="icon-eye-open"></i> (1000) | <i class="icon-heart-empty"></i> (111) | <i class="icon-camera"></i> (11)
+	</div>
+	<div>
+		<button>收藏</button>
+		<button>不喜欢</button>
+	</div>
+</div>
+
 <div class="col-md-12">
 	<div id="div_new_member">
-	   <img src="res/arrowleft.gif" class="prev" >
+	   <H1 class="prev"><i class="icon-circle-arrow-left"></i></H1>
 	   <div class="carousel">
 	       <ul>
 		   <li><img src="res/test/a (1).jpg" class="img_new_member hot_tag"></li>
@@ -151,8 +178,7 @@
 		   <li><img src="res/test/a (8).jpg" class="img_new_member"></li>
 	       </ul>
 	   </div>
-	   <img src="res/arrowright.gif" class="next">
-	   <div class="clear"></div>
+	   <H1 class="next"><i class="icon-circle-arrow-right"></i></H1>
        </div>
 </div>
 
@@ -161,7 +187,7 @@
 </div>
 <div class="col-md-9 col-md-pull-3" >
 	<div class="row">
-		<img src="res/test/a (9).jpg" style="width:200px;height:200px;display: inline-block;" >今日明星
+		<img id="testimg" src="res/test/a (9).jpg" style="width:200px;height:200px;display: inline-block;" >今日明星
 		<img src="res/test/a (1).jpg" style="width:200px;height:200px;display: inline-block;" >今日明星
 	</div>
 	<div class="row">
@@ -180,13 +206,7 @@
 	</div>	
 </div>
 </div>
-				<ul class="list-inline">
-				<li><small>21岁</small></li>
-				<li><small>178厘米</small></li>
-				<li><small>50公斤</small></li>
-				<li><small>2000~3000</small></li>
-				<li><small>北京</small></li>
-				</ul>
+				
 {{!page_foot}}	
 </body>
 </html>

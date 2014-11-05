@@ -189,6 +189,50 @@ function set_background_img(url)
     });
 }
 
+(function ($) {
+    $.fn.inline_popup = function (options) {
+        var options = options || {};
+        var popup_ctrl = $(options.popup_ctrl);
+        $(this).css("cusor","pointer");
+        
+        popup_ctrl.css({"opacity":"0.8",
+                "position":"absolute",
+                "bottom":"0px",
+                "left": "0px",
+                "z-index":"1000",
+                "cursor":"pointer",
+                "display":"none"});
+        
+        $(this).each(function(){
+          var this_ctrl = $(this);
+          var new_popup_ctrl = null;
+          function hideCtr()
+          {
+            new_popup_ctrl.hide();
+            new_popup_ctrl.remove();
+          }
+          
+          function showCtr()
+          {
+            new_popup_ctrl = popup_ctrl.clone();
+            new_popup_ctrl.css({
+                "width":""+this_ctrl.width()+"px"});
+              this_ctrl.append(new_popup_ctrl);
+              new_popup_ctrl.show();
+          }
+
+          this_ctrl.mouseenter(function(){
+              showCtr();
+            });
+          
+          this_ctrl.mouseleave(function(){
+            hideCtr();
+           });
+        });
+        return $(this);
+    }
+})(jQuery);
+
 //set a auto popup div(#pop_div) on img element
 function set_pop_div(img,pop_div) {
   pop_div.hide();

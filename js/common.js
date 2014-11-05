@@ -189,6 +189,11 @@ function set_background_img(url)
     });
 }
 
+function click_animate(button)
+{
+  var ss = $("<span>" +  button.text() + "<span>");
+}
+
 (function ($) {
     $.fn.inline_popup = function (options) {
         var options = options || {};
@@ -201,7 +206,7 @@ function set_background_img(url)
                 "left": "0px",
                 "z-index":"1000",
                 "cursor":"pointer",
-                "display":"none"});
+                "display":"none"}); 
         
         $(this).each(function(){
           var this_ctrl = $(this);

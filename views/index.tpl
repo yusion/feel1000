@@ -42,7 +42,7 @@
 	opacity: 1;
 }
 
-#div_new_member .prev {
+#div_new_member.prev {
     left: 5px;
 }
 
@@ -54,11 +54,26 @@
 	cursor: pointer	
 }
 
+/* setup for inner popup layer */
 #img_popup{
 	display: none;
 	background-color: white;
+	border-color: orange;
+	border-bottom-style: solid;
 	border-bottom-width: 4px;
-	margin: 10,10,10,10;
+	padding: 2px 10px 10px 10px
+}
+
+#img_popup_dislike:hover,#img_popup_like:hover{
+	color: orange
+}
+
+#img_popup_like{
+}
+
+#img_popup_dislike{
+	position: relative;
+	left: 20px
 }
 
 </style>
@@ -143,23 +158,36 @@
 		
 		$(".fixDiv").scrollToFixed();
 		
-		/*$('#div_search_result').imagesLoaded(function(){
+		$('#div_search_result').imagesLoaded(function(){
 			$('#div_search_result').masonry();
-		});*/
+		});
 		
+		//$("#img_popup_dislike").
 		//$('#div_search_result').masonry( 'on', 'layoutComplete', function(){
 		//});
 	});
 </script>		
 
 <div id="img_popup">
-	<small>北京 | 21岁 | 178厘米 | 50公斤 | 2000~3000</small>
+	<small>北京 | 21岁 | 178厘米 | 50公斤</small>
 	<div>
-		<i class="icon-eye-open"></i> (1000) | <i class="icon-heart-empty"></i> (111) | <i class="icon-camera"></i> (11)
+		<small>
+		<i class="icon-eye-open"></i>1000次 | <i class="icon-heart"></i>111人 | <i class="icon-camera"></i>11张
+		</small>
 	</div>
 	<div>
-		<button>收藏</button>
-		<button>不喜欢</button>
+		<button id="img_popup_like" class="btn btn-default"><i class="icon-heart-empty"></i>喜欢</button>
+		
+		<div id="img_popup_dislike" class="btn-group">
+			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+			   不喜欢 <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+			   <li><a href="#">外表不喜欢</a></li>
+			   <li><a href="#">PS痕迹严重</a></li>
+			   <li><a href="#">感觉不好</a></li>
+			</ul>
+		</div>
 	</div>
 </div>
 

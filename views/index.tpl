@@ -73,7 +73,7 @@
 
 #img_popup_dislike{
 	position: relative;
-	left: 16px
+	left: 20px
 }
 
 </style>
@@ -172,7 +172,7 @@
 	<small>广东 广州 | 21岁 | 178厘米 | 50公斤</small>
 	<div>
 		<small>
-		<i class="icon-eye-open"></i>1000次 | <i class="icon-heart"></i>22人 | <i class="icon-camera"></i>11张
+		<i class="icon-eye-open"></i>1000次 | <i class="icon-heart"></i>21人 | <i class="icon-camera"></i>11张
 		</small>
 	</div>
 	<div>
@@ -218,9 +218,8 @@
 		<img id="testimg" src="res/test/a (9).jpg" style="width:200px;height:200px;display: inline-block;" >今日明星
 		<img src="res/test/a (1).jpg" style="width:200px;height:200px;display: inline-block;" >今日明星
 	</div>
-	<div class="row">
-		<input type="input" style="width:80%"><button>查询</button>
-	</div>
+	{{!search_form}}
+	
 	<div class="row">
 		<div id="div_search_result" style="width:80%;height:70%;background-color: black">
 			{{!search_result}}

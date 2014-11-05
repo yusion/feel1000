@@ -1,4 +1,4 @@
-<div class="fixDiv"   style="background-color: orange;width:100%">
+<div class="fixDiv visible-md visible-lg"   style="background-color: orange;width:100%" >
 	<div class="row">
 		<a href="myspace" class="thumbnail" style="float: left">
 		<img src="res/test/a (10).jpg" alt="ÎÒµÄÍ·Ïñ" style="width:100px;height: auto">

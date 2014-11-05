@@ -51,7 +51,7 @@ class ctrl_search:
 			"total_page":rr[1]}
 
 def get_search_result(condition,page,page_size):
-	return utility.get_template_file("views/search.tpl",ctrl_search.search(condition,page_size,page))
+	return utility.get_template_file("views/search_result.tpl",ctrl_search.search(condition,page_size,page))
 
 @bottle.route('/search')
 def url_search():

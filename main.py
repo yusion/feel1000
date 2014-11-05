@@ -43,6 +43,8 @@ def url_index():
 	d["search_result"] = get_search_result(None,page,page_size)
 	d["page_size"] = page_size
 	d["current_page"] = page
+	
+	d["userpanel"] = utility.get_template_file("views/userpanel.tpl",{})
 	return d
 
 @bottle.route('/masonry')	

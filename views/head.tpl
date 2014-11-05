@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <link href="css/bootstrap.min.css" rel="stylesheet"/>
-
+<link href="css/glyphicons.css" rel="stylesheet">
 
 <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
 

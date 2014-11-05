@@ -157,43 +157,7 @@
 </div>
 
 <div class="col-md-3 col-md-push-9">
-	<div class="fixDiv"   style="background-color: orange">
-		<div class="row">
-			<div class="col-md-2" >
-				<img src="res/test/a (9).jpg" style="width:100px;height:100px" >
-			</div>
-			<div class="col-md-8" >
-				ycat（身份认证）<BR>
-				<button>写心情日记</button>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12" >
-				***好友  5/29<BR>
-				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-			</div>
-			<div class="col-md-12" >
-				**好友  5/29<BR>
-				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-			</div>
-			<div class="col-md-12" >
-				*好友  5/29<BR>
-				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-				<img src="res/test/a (4).jpg" style="width:50px;height:50px" >
-			</div>
-			<div class="col-md-12" >
-				留言箱<BR>
-				某某人向你发了一封信<BR>
-				某好友修改了相片<BR>
-				某好友发表了一篇文章<BR>
-			</div>
-		</div>
-	</div>
+	{{!userpanel}}
 </div>
 <div class="col-md-9 col-md-pull-3" >
 	<div class="row">
@@ -216,7 +180,13 @@
 	</div>	
 </div>
 </div>
-
+				<ul class="list-inline">
+				<li><small>21岁</small></li>
+				<li><small>178厘米</small></li>
+				<li><small>50公斤</small></li>
+				<li><small>2000~3000</small></li>
+				<li><small>北京</small></li>
+				</ul>
 {{!page_foot}}	
 </body>
 </html>

@@ -223,7 +223,7 @@ function click_animate(button)
             new_popup_ctrl.css({
                 "width":""+this_ctrl.width()+"px"});
               this_ctrl.append(new_popup_ctrl);
-              new_popup_ctrl.show();
+              new_popup_ctrl.fadeIn(600);
           }
 
           this_ctrl.mouseenter(function(){

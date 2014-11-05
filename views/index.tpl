@@ -73,7 +73,7 @@
 
 #img_popup_dislike{
 	position: relative;
-	left: 20px
+	left: 16px
 }
 
 </style>
@@ -169,17 +169,17 @@
 </script>		
 
 <div id="img_popup">
-	<small>北京 | 21岁 | 178厘米 | 50公斤</small>
+	<small>广东 广州 | 21岁 | 178厘米 | 50公斤</small>
 	<div>
 		<small>
-		<i class="icon-eye-open"></i>1000次 | <i class="icon-heart"></i>111人 | <i class="icon-camera"></i>11张
+		<i class="icon-eye-open"></i>1000次 | <i class="icon-heart"></i>22人 | <i class="icon-camera"></i>11张
 		</small>
 	</div>
 	<div>
-		<button id="img_popup_like" class="btn btn-default"><i class="icon-heart-empty"></i>喜欢</button>
+		<button id="img_popup_like" class="btn btn-default btn-sm"><i class="icon-heart-empty"></i>喜欢</button>
 		
 		<div id="img_popup_dislike" class="btn-group">
-			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+			<button type="button" class="btn btn-primary dropdown-toggle btn-sm"  data-toggle="dropdown">
 			   不喜欢 <span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu" role="menu">

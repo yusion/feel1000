@@ -69,7 +69,7 @@ label.checked {
 
 </script>
 
-<div class="container"  style="width:100%;background: url('res/background.jpg')">
+<div class="container"  style="width:100%">
   <div class="row">
     <div class="col-md-10 col-md-offset-1" style="border-style: solid;border-color: black">
 <!-- this is page head end -->

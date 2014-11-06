@@ -7,6 +7,7 @@
 	<script src="js/jquery.infinitescroll.dev.js"></script>
 	<script src="js/imagesloaded.pkgd.min.js"></script>
 	<script src="js/jquery-scrolltofixed-min.js"></script>
+	<script src="js/jquery.raty.min.js"></script>
 </head>
 <body>
 {{!page_head}}
@@ -63,18 +64,8 @@
 	border-bottom-width: 4px;
 	padding: 2px 10px 10px 10px
 }
+ 
 
-#img_popup_dislike:hover,#img_popup_like:hover{
-	color: orange
-}
-
-#img_popup_like{
-}
-
-#img_popup_dislike{
-	position: relative;
-	left: 20px
-}
 
 </style>
 
@@ -161,7 +152,13 @@
 		$('#div_search_result').imagesLoaded(function(){
 			$('#div_search_result').masonry();
 		});
-		
+ 
+
+		//setup star rating
+		$("#star_rating1").raty({ start:2,inline_width:68});
+		$("#star_rating2").raty({ start:3,inline_width:68});
+		$("#star_rating3").raty({ start:4,inline_width:68});
+		$("#star_rating4").raty({ start:2,inline_width:68});
 		//$("#img_popup_dislike").
 		//$('#div_search_result').masonry( 'on', 'layoutComplete', function(){
 		//});
@@ -214,11 +211,55 @@
 	{{!userpanel}}
 </div>
 <div class="col-md-9 col-md-pull-3" >
-	<div class="row">
-		<img id="testimg" src="res/test/a (9).jpg" style="width:200px;height:200px;display: inline-block;" >今日明星
-		<img src="res/test/a (1).jpg" style="width:200px;height:200px;display: inline-block;" >今日明星
-	</div>
 	{{!search_form}}
+	<div class="row">
+		<div class="col-md-6">
+			{{!search_item}}
+		</div>
+		<div class="col-md-6">
+			{{!search_item}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			{{!search_item}}
+		</div>
+		<div class="col-md-6">
+			{{!search_item}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			{{!search_item}}
+		</div>
+		<div class="col-md-6">
+			{{!search_item}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			{{!search_item}}
+		</div>
+		<div class="col-md-6">
+			{{!search_item}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			{{!search_item}}
+		</div>
+		<div class="col-md-6">
+			{{!search_item}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			{{!search_item}}
+		</div>
+		<div class="col-md-6">
+			{{!search_item}}
+		</div>
+	</div>
 	
 	<div class="row">
 		<div id="div_search_result" style="width:80%;height:70%;background-color: black">

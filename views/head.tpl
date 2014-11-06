@@ -15,6 +15,7 @@
 <script type="text/javascript" src="./js/jquery.validate.min.js" ></script >
 <script type="text/javascript" src="./js/common.js" ></script>
 <link href="css/glyphicons.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
  <!-- for unit test -->
 <link rel="stylesheet" href="css/qunit-1.15.0.css">
 <script src="js/qunit-1.15.0.js"></script>    

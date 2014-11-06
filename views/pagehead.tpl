@@ -29,13 +29,13 @@ label.checked {
 </style>
 <div class="container"  style="background-color:blue;width:100%">
   <div class="row">
-    <div class="col-md-8 col-md-offset-2" >
+    <div class="col-md-10 col-md-offset-1" >
       <div class="row">
-	<div class="col-md-2 ">
+	<div class="col-md-1 ">
 	  <img src="res/logo.gif" class="img-responsive"> 
 	</div>
-	<div class="col-md-10"> 
-	   <nav class="navbar navbar-default" role="navigation">
+	<div class="col-md-11"> 
+	   <nav class="navbar navbar-default" role="navigation" style="margin: 0px 0px 0px 0px">
 	    <ul class="nav nav-tabs">
 		    <li><a href="index">¹ã³¡</a></li>
 		    <li><a href="message">¶¯Ì¬</a></li>

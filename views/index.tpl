@@ -206,9 +206,8 @@
 	   <H1 class="next"><i class="icon-circle-arrow-right"></i></H1>
        </div>
 </div>
-
-<div class="col-md-3 col-md-push-9">
-	{{!userpanel}}
+<div class="fixDiv visible-md visible-lg col-md-3 col-md-push-9"   style="background-color: orange;" >
+	{{!user_panel}}
 </div>
 <div class="col-md-9 col-md-pull-3" >
 	{{!search_form}}

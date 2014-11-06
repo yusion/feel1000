@@ -1,4 +1,4 @@
-<div class="fixDiv visible-md visible-lg"   style="background-color: orange;width:100%" >
+
 	<div class="row">
 		<a href="myspace" class="thumbnail" style="float: left">
 		<img src="res/test/a (10).jpg" alt="ÎÒµÄÍ·Ïñ" style="width:100px;height: auto">
@@ -18,6 +18,7 @@
 	<div class="row">
 		<a href="#" ><H1><i class="icon-camera"></i></H1></a>
 	</div>
+	<div class="row">
 	<div class="panel-group" id="accordion">
 	  <div class="panel panel-default">
 	    <div class="panel-heading">
@@ -80,4 +81,5 @@
 	    </div>
 	  </div>
 	</div>
-</div>
+	</div>
+

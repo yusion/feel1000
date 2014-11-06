@@ -1,82 +1,86 @@
-<form class="form-inline" role="form" >
-		<div class="form-group">
-		   <label for="name">关键字</label>
-		   <input type="text" class="form-control" id="name">
-		</div>
-		<div class="form-group">
-			<label for="name">收入</label>
-			<select class="form-control">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
+<form id="search_form" class="green_div" role="form1">
+<div class="row">
+	<div class="col-md-10">	
+	<div class="score_css">
+		<div class="in_block">
+			<span class="in_block">外表</span> 
+			<select class="form-control input-sm in_block">
+				<option>英俊潇洒</option>
+				<option>英俊潇洒</option>
+				<option>英俊潇洒</option>
+				<option>英俊潇洒</option>
+				<option>英俊潇洒</option>
 			</select>
 		</div>
-		<div class="form-group">
-		<label for="name">学历</label>
-			<select class="form-control">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
+		<div class="in_block">
+			<span  class="in_block">身材</span>
+			<select class="form-control input-sm in_block">
+				<option>英俊潇洒</option>
+				<option>英俊潇洒</option>
+				<option>英俊潇洒</option>
+				<option>英俊潇洒</option>
+				<option>英俊潇洒</option>
 			</select>
 		</div>
-		<div class="form-group">
-			<label for="name">外表</label>
-			<select class="form-control">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
+		<div class="in_block">
+			<span>性格</span>
+			<select class="form-control input-sm">
+				<option>英俊潇洒</option>
+				<option>英俊潇洒</option>
+				<option>英俊潇洒</option>
+				<option>英俊潇洒</option>
+				<option>英俊潇洒</option>
 			</select>
 		</div>
-		<div class="form-group">
-			<label for="name">身材</label>
-			<select class="form-control">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
+		<div class="in_block">
+			<span>态度</span>
+			<select class="form-control input-sm">
+				<option>英俊潇洒</option>
+				<option>英俊潇洒</option>
+				<option>英俊潇洒</option>
+				<option>英俊潇洒</option>
+				<option>英俊潇洒</option>
 			</select>
 		</div>
-		<div class="form-group">
-			<label for="name">性格</label>
-			<select class="form-control">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
+	</div>
+	<div class="profile_css">
+		<div class="in_block">
+			<span>收入</span>
+			<select class="form-control input-sm">
+				<option>1000~2000</option>
+				<option>1000~2000</option>
+				<option>1000~2000</option>
+				<option>1000~2000</option>
+				<option>1000~2000</option>
 			</select>
 		</div>
-		<div class="form-group">
-			<label for="name">爱情观</label>
-			<select class="form-control">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
+		<div class="in_block">			
+			<span>学历</span>
+			<select class="form-control input-sm">
+				<option>本科</option>
+				<option>本科</option>
+				<option>本科</option>
+				<option>本科</option>
 			</select>
 		</div>
-		<div class="form-group">
-			<label for="name">地点</label>
-			<select class="form-control">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
+		<div class="in_block">	
+			<span>地点</span>
+			<select class="form-control input-sm">
+				<option>广州</option>
+				<option>广州</option>
+				<option>广州</option>
+				<option>广州</option>
+				<option>广州</option>
 			</select>
 		</div>
-		<div class="checkbox">
-		   <label>
-		   <input type="checkbox"> 请打勾
-		   </label>
-		</div>
-		<button type="submit" class="btn btn-default"><i class="icon-search"></i>查找</button>
+		<div class="in_block">	
+			<span>关键字</span>
+			<input type="text" class="form-control" id="name">
+		</div>	
+	</div>
+	</div>
+	<div style="vertical-align: middle" class="col-md-2">
+		<button type="submit" style="width:100%;height:100%"  class="btn btn-default"><i class="icon-search"></i>查找</button>
+	</div>
+</div>		
 </form>

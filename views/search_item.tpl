@@ -15,7 +15,7 @@
 		<div id="star_rating1">长相:</div>
 		<div id="star_rating2">身材:</div>
 		<div id="star_rating3">性格:</div>
-		<div id="star_rating4">爱情:</div>
+		<div id="star_rating4">态度:</div>
 		</small>
 	</div>
 </div>

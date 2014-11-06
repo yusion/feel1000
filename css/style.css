@@ -9,7 +9,7 @@
 }
 
 .green_div{
-	background-color: green
+	background-color: lightgreen
 }
 
 .yellow_div{
@@ -82,8 +82,37 @@
 	padding: 10px 3px 3px 20px;
 }
 
+/* search form css */
+#search_form{
+	padding: 10px 10px 10px 10px
+}
 
+#search_form.score_css{
+	display: inline-block;
+}
 
+#search_form span{
+	display: inline-block;
+	padding: 0px 0px 0px 0px;
+	width:50px;height: 20px;
+	text-align:right
+}
+
+#search_form select{
+	display: inline-block;
+	padding: 4px 4px 4px 4px;
+	margin: 0px 0px 0px 0px;
+	width: 80px;height: 25px
+}
+
+#search_form .profile_css{
+	display: inline-block;
+}
+
+#search_form .profile_css input{
+	display: inline-block;
+	width: 80px;height: 25px
+}
 
 
 

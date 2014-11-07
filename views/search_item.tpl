@@ -3,11 +3,11 @@
 	<img src="res/test/a (1).jpg">
 </div>		
 <div class="search_item_detail_css">
-	<h4>姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚</h4>
+	<h4 title="姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚">姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚</h4>
 	<div class="badge_css">
-		<i class="icon-iphone"></i>&nbsp;<i class="icon-nameplate"></i>&nbsp;
-		<i class="icon-car"></i>&nbsp;<i class="icon-camera"></i>&nbsp;
-		<i class="icon-charts"></i>
+		<i class="icon-iphone" title="手机认证"></i>&nbsp;<i class="icon-nameplate" title="身份认证"></i>&nbsp;
+		<i class="icon-camera" title="相片认证"></i>&nbsp;<i class="icon-car" title="有车认证"></i>&nbsp;
+		<i class="icon-charts" title="有房认证"></i>
 	</div>
 	<p class="detail_css"><small>
 		广东 广州 | 21岁 | 178厘米 | 50公斤

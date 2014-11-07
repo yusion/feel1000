@@ -3,6 +3,7 @@
 	</div>
 </div> 
 
+<small>
 <div class="container"  style="background-color:gray;width:100%">
   <div class="row">
     <div class="col-md-8 col-md-offset-2" >
@@ -14,7 +15,8 @@
     </div>
   </div>
 </div>
-        
+</small>
+
 %if is_test:
 <div id="qunit"></div>
 <div id="qunit-fixture"></div>

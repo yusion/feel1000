@@ -82,43 +82,44 @@
 	padding: 10px 3px 3px 20px;
 }
 
-/* search form css 
+/* search form css */
 #search_form{
+	padding: 20px 0px 10px 0px;
+}
+
+#search_form>div{
 	padding: 10px 5px 10px 5px
 }
 
-#search_form.score_css{
-	display: inline-block;
+#search_form label{
+	padding: 0px 0px 0px 0px
 }
 
-#search_form span{
-	display: inline-block;
+#search_form input,#search_form select{
+	padding: 0px 0px 0px 0px
+}
+
+#search_form .form-group{
 	padding: 0px 0px 0px 0px;
-	width:50px;height: 20px;
-	text-align:right
+	margin-bottom: 5px;
 }
 
-#search_form select{
-	display: inline-block;
-	padding: 4px 4px 4px 4px;
-	margin: 0px 0px 0px 0px;
-	width: 80px;height: 25px
+#search_form HR{
+	width:80%;
+	margin: 10px auto 10px auto
 }
 
-#search_form .profile_css{
-	display: inline-block;
+#search_form .save_search_link{
+	width:80%;
+	display: inline-block
 }
 
-#search_form .profile_css input{
+#search_form .del_search_link{
+	width:10%;
 	display: inline-block;
-	width: 80px;height: 25px
+	float: right;
+	padding: 0px 20px 0px 0px;
 }
-
-#search_form .profile_css input[type=checkbox]{
-	display: inline-block;
-	width: 20px;height: auto
-}
-*/
 
 
 

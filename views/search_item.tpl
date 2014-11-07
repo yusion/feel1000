@@ -31,8 +31,6 @@
 			<strong><i class="icon-remove-2" ></i></strong>
 		</a>
 		<ul class="dropdown-menu" role="menu">
-			<li>不喜欢原因</li>
-			<li class="divider"></li>
 			<li><a href="#">外表不喜欢</a></li>
 			<li><a href="#">外表不喜欢</a></li>
 			<li><a href="#">PS痕迹严重</a></li>

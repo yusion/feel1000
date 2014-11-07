@@ -5,6 +5,8 @@
 		$("#search_form .form-group>div").addClass("col-md-8");
 		
 		$("#search_form select,#search_form input").addClass("input-sm");
+		
+		$("#search_form .dropdown-toggle").height($("#save_result").height());
 		//$("#search_form button").addClass("btn-sm");
 		
 		$("#age").ionRangeSlider({
@@ -58,12 +60,12 @@
 <form id="search_form" class="form-horizontal fixDiv blue_div" role="form">
 	<div class="form-group">
 		<div class="col-md-6">
-			<button type="submit" class="btn btn-default btn-sm" style="width:100%"><i class="icon-search"></i>查找</button>
+			<button type="submit" class="btn btn-default" style="width:100%"><i class="icon-search"></i>查找</button>
 		</div>
 		<div class="col-md-4"> 
 			<div class="input-group-btn">
-				<button type="button" class="btn btn-default" style="font-size:small" ><i class="icon-bookmark">收藏</i></button>
-				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				<button id="save_result" type="button" class="btn btn-default"><i class="icon-bookmark">收藏</i></button>
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:30px">
 				   <span class="caret"></span>
 				   <span class="sr-only">切换下拉菜单</span>
 				</button>

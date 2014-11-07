@@ -26,8 +26,12 @@
 
 /* search item css */
 .search_item_css{
-	border-style: double;
-	padding:  10px 0px 0px 10px
+	border-style: solid;
+	border-width: 1px;
+	border-color: gray;
+	background-color : lightyellow;
+	padding:  10px 0px 0px 10px;
+	margin: 0px 0px 10px 0;
 }
 
 .search_item_img_css{

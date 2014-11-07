@@ -3,12 +3,17 @@
 	<img src="res/test/a (1).jpg">
 </div>		
 <div class="search_item_detail_css">
-	<h4>姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚</h4><div class="badge_css">aa|aaa|aa</div>
+	<h4>姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚</h4>
+	<div class="badge_css">
+		<i class="icon-iphone"></i>&nbsp;<i class="icon-nameplate"></i>&nbsp;
+		<i class="icon-car"></i>&nbsp;<i class="icon-camera"></i>&nbsp;
+		<i class="icon-charts"></i>
+	</div>
 	<p class="detail_css"><small>
 		广东 广州 | 21岁 | 178厘米 | 50公斤
 	</small></p>
 	<p class="detail_css"><small>
-		<i class="icon-eye-open"></i>1000次 | <i class="icon-heart"></i>21人 | <i class="icon-camera"></i>11张
+		<i class="icon-eye-open"></i>1000次 | <i class="icon-heart"></i>21人 | <i class="icon-picture"></i>11张
 	</small></p>
 	<div class="search_item_score_css">
 		<small>

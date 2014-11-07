@@ -82,9 +82,9 @@
 	padding: 10px 3px 3px 20px;
 }
 
-/* search form css */
+/* search form css 
 #search_form{
-	padding: 10px 10px 10px 10px
+	padding: 10px 5px 10px 5px
 }
 
 #search_form.score_css{
@@ -114,6 +114,11 @@
 	width: 80px;height: 25px
 }
 
+#search_form .profile_css input[type=checkbox]{
+	display: inline-block;
+	width: 20px;height: auto
+}
+*/
 
 
 

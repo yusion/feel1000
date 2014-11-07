@@ -37,10 +37,10 @@ label.checked {
 	<div class="col-md-11"> 
 	   <nav class="navbar navbar-default" role="navigation" style="margin: 0px 0px 0px 0px">
 	    <ul class="nav nav-tabs">
-		    <li><a href="index">广场</a></li>
-		    <li><a href="message">动态</a></li>
-		    <li><a href="pkstage">PK舞台</a></li>
-		    <li><a href="profile">个人主页</a></li>
+		    <li><a href="index"><i class="icon-home"></i>广场</a></li>
+		    <li><a href="message"><i class="icon-conversation"></i>动态</a></li>
+		    <li><a href="pkstage"><i class="icon-crown"></i>PK舞台</a></li>
+		    <li><a href="profile"><i class="icon-parents"></i>个人主页</a></li>
 	    </ul>
 	  </nav>
 	</div>

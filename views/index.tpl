@@ -8,6 +8,12 @@
 	<script src="js/imagesloaded.pkgd.min.js"></script>
 	<script src="js/jquery-scrolltofixed-min.js"></script>
 	<script src="js/jquery.raty.min.js"></script>
+
+	<!-- http://ionden.com/a/plugins/ion.rangeSlider/en.html -->
+	<link rel="stylesheet" href="css/rangeslider/ion.rangeSlider.css" />
+	<link rel="stylesheet" href="css/rangeslider/ion.rangeSlider.skinFlat.css"/>
+	<script src="js/ion.rangeSlider.js"></script>
+	
 </head>
 <body>
 {{!page_head}}
@@ -159,6 +165,11 @@
 		$("#star_rating2").raty({ start:3,inline_width:68});
 		$("#star_rating3").raty({ start:4,inline_width:68});
 		$("#star_rating4").raty({ start:2,inline_width:68});
+		
+		$("#stara_rating1").raty({ start:2,inline_width:68});
+		$("#stara_rating2").raty({ start:3,inline_width:68});
+		$("#stara_rating3").raty({ start:4,inline_width:68});
+		$("#stara_rating4").raty({ start:2,inline_width:68});
 		//$("#img_popup_dislike").
 		//$('#div_search_result').masonry( 'on', 'layoutComplete', function(){
 		//});
@@ -206,11 +217,12 @@
 	   <H1 class="next"><i class="icon-circle-arrow-right"></i></H1>
        </div>
 </div>
-<div class="fixDiv visible-md visible-lg col-md-3 col-md-push-9"   style="background-color: orange;" >
-	{{!user_panel}}
+<div >
+	<div class="col-md-3">
+		{{!search_form}}
+	</div>
 </div>
-<div class="col-md-9 col-md-pull-3" >
-	{{!search_form}}
+<div class="col-md-9" >
 	<div class="row">
 		<div class="col-md-6">
 			{{!search_item}}

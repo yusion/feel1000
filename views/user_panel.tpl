@@ -1,4 +1,4 @@
-
+<div class="fixDiv yellow_div" style="padding: 20px 20px 20px 20px">
 	<div class="row">
 		<a href="myspace" class="thumbnail" style="float: left">
 		<img src="res/test/a (10).jpg" alt="ÎÒµÄÍ·Ïñ" style="width:100px;height: auto">
@@ -82,4 +82,4 @@
 	  </div>
 	</div>
 	</div>
-
+</div>

@@ -17,10 +17,10 @@
 	</small></p>
 	<div class="search_item_score_css">
 		<small>
-		<div id="star_rating1">长相:</div>
-		<div id="star_rating2">身材:</div>
-		<div id="star_rating3">性格:</div>
-		<div id="star_rating4">态度:</div>
+		长相:<span class="star_readonly" star="2"></span><BR/>
+		身材:<span class="star_readonly" star="3"></span><BR/>
+		性格:<span class="star_readonly" star="1"></span><BR/>
+		态度:<span class="star_readonly" star="5"></span><BR/>
 		</small>
 	</div>
 </div>

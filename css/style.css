@@ -23,8 +23,34 @@
 .in_block{
 	display: inline-block
 }
+/* star rating css, usage <span class="star_readonly" star="2"></span>*/
+.star_readonly{
+	background-image: url('../res/star_readonly.png');
+	background-repeat: no-repeat;
+	height: 14px;
+	width: 80px; 
+	display:inline-block;
+}
+.star_readonly[star="0"]{
+	background-position: -200px -75px;
+}
+.star_readonly[star="1"]{
+	background-position: -200px -60px;
+}
+.star_readonly[star="2"]{
+	background-position: -200px -45px;
+}
+.star_readonly[star="3"]{
+	background-position: -200px -30px;
+}
+.star_readonly[star="4"]{
+	background-position: -200px -15px;
+}
+.star_readonly[star="5"]{
+	background-position: -200px 0px;
+}
 
-/* search item css */
+/* search item css*/
 .search_item_css{
 	border-style: solid;
 	border-width: 1px;
@@ -33,21 +59,17 @@
 	padding:  10px 0px 0px 10px;
 	margin: 0px 0px 10px 0;
 }
-
 .search_item_img_css{
 	display: inline-block
 }
-
 .search_item_img_css img{
 	width:112px;
 	height:138px;
 	vertical-align: inherit
 }
-
 .search_item_detail_css{
 	display: inline-block
 }
-
 .search_item_detail_css h4{
 	display: inline-block;
 	width:120px;

@@ -57,33 +57,8 @@
 	}); 
 </script>
 
-<form id="search_form" class="form-horizontal fixDiv blue_div" role="form">
-	<div class="form-group">
-		<div class="col-md-6">
-			<button type="submit" class="btn btn-default" style="width:100%"><i class="icon-search"></i>查找</button>
-		</div>
-		<div class="col-md-4"> 
-			<div class="input-group-btn">
-				<button id="save_result" type="button" class="btn btn-default"><i class="icon-bookmark">收藏</i></button>
-				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:30px">
-				   <span class="caret"></span>
-				   <span class="sr-only">切换下拉菜单</span>
-				</button>
-				<ul class="dropdown-menu">
-				    <li>
-					<a class="save_search_link" href="#">男一号</a><a class="del_search_link" href="#" title="删除"><i class="icon-remove-2"></i></a>
-				    </li>
-				    <li>
-					<a class="save_search_link" href="#">男二号</a><a class="del_search_link" href="#" title="删除"><i class="icon-remove-2"></i></a>
-				    </li>
-				    <li>
-					<a class="save_search_link" href="#" >男三号</a><a class="del_search_link" href="#" title="删除"><i class="icon-remove-2"></i></a>
-				    </li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<HR/>
+<form id="search_form" class="form-horizontal fixDiv panel_css" role="form">
+	
 	<div class="form-group">	
 		<label for="city" class="control-label">城市</label>
 		<div >
@@ -181,5 +156,32 @@
 		<div >
 			<input id="keyword" type="text" class="form-control" title="输入电话号码/昵称/学校/QQ/职业等等" placeholder="电话号码/昵称/学校...">
 		</div>		
-	</div>		
+	</div>		 
+	<BR/>
+	<div class="form-group">
+		<div class="col-md-6">
+			<button type="submit" class="btn btn-default button_css" style="width:100%"><i class="icon-search"></i>查找</button>
+		</div>
+		<div class="col-md-4"> 
+			<div class="input-group-btn">
+				<button id="save_result" type="button" class="btn btn-default button_css"><i class="icon-bookmark">收藏</i></button>
+				<button type="button" class="btn btn-default dropdown-toggle button_css" data-toggle="dropdown" style="width:30px">
+				   <span class="caret"></span>
+				   <span class="sr-only">切换下拉菜单</span>
+				</button>
+				<ul class="dropdown-menu">
+				    <li>
+					<a class="save_search_link" href="#">男一号</a><a class="del_search_link" href="#" title="删除"><i class="icon-remove-2"></i></a>
+				    </li>
+				    <li>
+					<a class="save_search_link" href="#">男二号</a><a class="del_search_link" href="#" title="删除"><i class="icon-remove-2"></i></a>
+				    </li>
+				    <li>
+					<a class="save_search_link" href="#" >男三号</a><a class="del_search_link" href="#" title="删除"><i class="icon-remove-2"></i></a>
+				    </li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
 </form>	

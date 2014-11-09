@@ -1,4 +1,4 @@
-<div class="search_item_css">
+<div class="search_item_css panel2_css">
 <div class="search_item_img_css">
 	<img src="res/test/a (1).jpg">
 </div>		

@@ -23,6 +23,50 @@
 .in_block{
 	display: inline-block
 }
+
+.panel_css{
+	border:1px solid #9966cc;
+	border-top-width: 30px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	background-color: white;
+	 
+  background: -webkit-linear-gradient(#9966cc, white, white, white, white, white, white); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#9966cc, white, white, white, white, white, white); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#9966cc, white, white, white, white, white, white); /* Firefox 3.6 - 15 */
+  background: linear-gradient(#9966cc, white, white, white, white, white, white); /* 标准的语法 */
+ 
+}
+
+.panel_css hr{
+	height:0px;
+	border-top:1px solid purple;
+}
+
+.panel2_css{
+	border:1px solid #ff6633;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	background-color: white; 
+	border-top-width: 4px;
+}
+
+.panel2_css:hover{ 
+	border-color:#ff3300; 
+}
+
+.button_css{
+	color:white;
+	background-color:#9966cc;
+}
+
+.button_css:hover{
+	color:white;
+	background-color: #b07ed3;
+}
+
+
+
 /* star rating css, usage <span class="star_readonly" star="2"></span>*/
 .star_readonly{
 	background-image: url('../res/star_readonly.png');
@@ -52,10 +96,6 @@
 
 /* search item css*/
 .search_item_css{
-	border-style: solid;
-	border-width: 1px;
-	border-color: gray;
-	background-color : lightyellow;
 	padding:  10px 0px 0px 10px;
 	margin: 0px 0px 10px 0;
 }

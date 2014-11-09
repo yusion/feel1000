@@ -27,7 +27,7 @@ label.checked {
 }
 
 </style>
-<div class="container"  style="background-color:blue;width:100%">
+<div class="container"  style="background-color:#99cc33;width:100%">
   <div class="row">
     <div class="col-md-10 col-md-offset-1" >
       <div class="row">
@@ -69,7 +69,7 @@ label.checked {
 
 </script>
 
-<div class="container"  style="width:100%">
+<div class="container"  style="width:100%;background-color:#aae8f3">
   <div class="row">
-    <div class="col-md-10 col-md-offset-1" style="border-style: solid;border-color: black">
+    <div class="col-md-10 col-md-offset-1" >
 <!-- this is page head end -->

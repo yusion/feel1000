@@ -115,21 +115,8 @@
 			 animate : true
 			},
 			function(arrayOfNewElems){ //成功后执行的自定义的函数，如页面javascript的重载,这个自定义
-				var rowDiv;
-				for (var i=0;i<arrayOfNewElems.length; i++)
-				{
-					/*var newElement = $(arrayOfNewElems[i]);
-					if ((i % 2) == 0) {
-						rowDiv = $("<div class='row'></div>");
-						$('#div_search_result').append(rowDiv);	
-					}*/
-					rowDiv.append(newElement);  
-				}
-				
-				//$(arrayOfNewElems).inline_popup({
-				//	popup_ctrl:"#img_popup"
-				//});
-		});
+				$('#div_search_foot').before(arrayOfNewElems);  
+			});
 		
 		//$('.search_item').inline_popup({
 		//	popup_ctrl:"#img_popup"
@@ -185,9 +172,9 @@
 		{{!search_form}}
 	</div>
 </div>
-<div id="div_search_result" class="col-md-9" >
+<div class="col-md-9" >
 	{{!search_result}}
-	<div class="row">
+	<div id="div_search_foot" class="row">
 		<div id="pagination">
 			<a href="search?page_size={{page_size}}&page={{int(current_page)+1}}" class="next_page">加载更多</a>		
 		</div>

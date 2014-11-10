@@ -147,7 +147,7 @@
 		</div>
 	</div>
 </div>
-
+<div class="row">
 <div class="col-md-12">
 	<div id="div_new_member">
 	   <H1 class="prev"><i class="icon-circle-arrow-left"></i></H1>
@@ -166,20 +166,22 @@
 	   <H1 class="next"><i class="icon-circle-arrow-right"></i></H1>
        </div>
 </div>
-<div >
+</div>
+<div class="row">
 	<div class="col-md-3">
 		{{!search_form}}
 	</div>
-</div>
-<div class="col-md-9" >
-	{{!search_result}}
-	<div id="div_search_foot" class="row">
-		<div id="pagination">
-			<a href="search?page_size={{page_size}}&page={{int(current_page)+1}}" class="next_page">加载更多</a>		
-		</div>
-		<div id="infinitescroll" style="margin: 0;width: auto;height: 200px"></div>
-	</div>	
-</div>
+
+	<div class="col-md-9" >
+		{{!search_result}}
+		<div id="div_search_foot" class="row">
+			<div id="pagination">
+				<a href="search?page_size={{page_size}}&page={{int(current_page)+1}}" class="next_page">加载更多</a>		
+			</div>
+			<div id="infinitescroll" style="margin: 0;width: auto;height: 200px"></div>
+		</div>	
+	</div>
+	
 </div>
 	<a class="visible-md visible-lg" id="returnTop" href="javascript:;">回到顶部</a> 
 {{!page_foot}}	

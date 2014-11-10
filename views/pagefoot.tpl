@@ -1,5 +1,4 @@
 <!-- this is page foot begin-->
-		</div>
 	</div>
 </div> 
 

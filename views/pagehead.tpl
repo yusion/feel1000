@@ -1,8 +1,8 @@
 <!-- this is page head begin -->
 <input type="hidden" id="session" value="{{session}}" />
 <div class="container"  style="width:100%;background-color:#aae8f3">
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1 background-color:#99cc33;" >
+  <div class="row" style="background-color:#99cc33;">
+    <div class="col-md-10 col-md-offset-1"  >
 	<nav class="navbar navbar-inverse" role="navigation">
  		<div class="navbar-header">
 		   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#my_navbar-collapse">
@@ -26,9 +26,7 @@
   </div>
   
   <div class="row">
-    <div class="col-md-10 col-md-offset-1 green_div" >
-	
-
+    <div class="col-md-10 col-md-offset-1" >
 <script type="text/javascript">
 	$(document).ready(function(e){
 		$(".nav-tabs a").each(function(){

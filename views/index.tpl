@@ -3,7 +3,6 @@
 <head>
 	{{!web_head}}
 	<script src="js/jquery.jcarousellite.js"></script> <!-- ycat modify -->
-	<script src="js/masonry.pkgd.min.js"></script>
 	<script src="js/jquery.infinitescroll.dev.js"></script>
 	<script src="js/imagesloaded.pkgd.min.js"></script>
 	<script src="js/jquery-scrolltofixed-min.js"></script>
@@ -108,23 +107,7 @@
 			$("#div_new_member .carousel").AutoCarouselLite("true");
 		});
 		
-		///////////for search result////////////
-		$('#div_search_result').masonry({  
-			// options 设置选项  
-			itemSelector : '.search_item',//class 选择器  
-			columnWidth : 30 ,//一列的宽度 Integer
-			gutterWidth:10,//列的间隙 Integer  
-			singleMode:true,
-			isAnimated:true,//使用jquery的布局变化  Boolean  
-			animationOptions:{  
-			    //jquery animate属性 渐变效果  Object { queue: false, duration: 500 }  
-			  },  
-			isFitWidth:true,// 适应宽度   Boolean  
-			isResizableL:true,// 是否可调整大小 Boolean  
-			isRTL:false,//使用从右到左的布局 Boolean
-			layoutComplete:function(){alert("ddd");}
-		});
-			 
+		///////////for search result////////////			 
 		$('#infinitescroll').infinitescroll({
 			navSelector  : "#pagination",           
 			nextSelector : ".next_page", // 需要点击的下一页链接
@@ -132,50 +115,27 @@
 			 animate : true
 			},
 			function(arrayOfNewElems){ //成功后执行的自定义的函数，如页面javascript的重载,这个自定义
+				var rowDiv;
 				for (var i=0;i<arrayOfNewElems.length; i++)
 				{
-					var img = $(arrayOfNewElems[i]);
-					//img.children("img").css({ opacity: 1 });
-					
-					var newElement = $('<div class="item"></div>');
-					newElement.append(img);
-					$('#div_search_result').append(newElement);
-					$('#div_search_result').masonry("appended",newElement);
-		 
-					
-					img.children("img").imagesLoaded(function(){
-						//console.log($(this).attr("style"));
-					});
+					/*var newElement = $(arrayOfNewElems[i]);
+					if ((i % 2) == 0) {
+						rowDiv = $("<div class='row'></div>");
+						$('#div_search_result').append(rowDiv);	
+					}*/
+					rowDiv.append(newElement);  
 				}
-				$(arrayOfNewElems).inline_popup({
-					popup_ctrl:"#img_popup"
-				});
+				
+				//$(arrayOfNewElems).inline_popup({
+				//	popup_ctrl:"#img_popup"
+				//});
 		});
 		
-		$('.search_item').inline_popup({
-			popup_ctrl:"#img_popup"
-		});
+		//$('.search_item').inline_popup({
+		//	popup_ctrl:"#img_popup"
+		//});
 		
 		$(".fixDiv").scrollToFixed();
-		
-		$('#div_search_result').imagesLoaded(function(){
-			$('#div_search_result').masonry();
-		});
- 
-
-		//setup star rating
-		$("#star_rating1").raty({ start:2,inline_width:68});
-		$("#star_rating2").raty({ start:3,inline_width:68});
-		$("#star_rating3").raty({ start:4,inline_width:68});
-		$("#star_rating4").raty({ start:2,inline_width:68});
-		
-		$("#stara_rating1").raty({ start:2,inline_width:68});
-		$("#stara_rating2").raty({ start:3,inline_width:68});
-		$("#stara_rating3").raty({ start:4,inline_width:68});
-		$("#stara_rating4").raty({ start:2,inline_width:68});
-		//$("#img_popup_dislike").
-		//$('#div_search_result').masonry( 'on', 'layoutComplete', function(){
-		//});
 	});
 </script>		
 
@@ -225,61 +185,8 @@
 		{{!search_form}}
 	</div>
 </div>
-<div class="col-md-9" >
-	<div class="row">
-		<div class="col-md-6 ">
-			{{!search_item}}
-		</div>
-		<div class="col-md-6">
-			{{!search_item}}
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6">
-			{{!search_item}}
-		</div>
-		<div class="col-md-6">
-			{{!search_item}}
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6">
-			{{!search_item}}
-		</div>
-		<div class="col-md-6">
-			{{!search_item}}
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6">
-			{{!search_item}}
-		</div>
-		<div class="col-md-6">
-			{{!search_item}}
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6">
-			{{!search_item}}
-		</div>
-		<div class="col-md-6">
-			{{!search_item}}
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6">
-			{{!search_item}}
-		</div>
-		<div class="col-md-6">
-			{{!search_item}}
-		</div>
-	</div>
-	
-	<div class="row">
-		<div id="div_search_result" style="width:80%;height:70%;background-color: black">
-			{{!search_result}}
-		</div>
-	</div>
+<div id="div_search_result" class="col-md-9" >
+	{{!search_result}}
 	<div class="row">
 		<div id="pagination">
 			<a href="search?page_size={{page_size}}&page={{int(current_page)+1}}" class="next_page">加载更多</a>		

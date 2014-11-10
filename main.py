@@ -48,8 +48,6 @@ def url_index():
 	d["user_panel"] = utility.get_template_file("views/user_panel.tpl",{})
 	return d
 
-@bottle.route('/masonry')	
-@bottle.view('masonry') #TODO:for test only 
 def url_index():
 	d = utility.get_dist()
 	d["session"] = ""

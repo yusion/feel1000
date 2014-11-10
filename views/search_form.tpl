@@ -55,6 +55,12 @@
 		});
 		
 		var c = new Vcity.CitySelector({input:'city'});
+		
+		//setup star rating 
+		$("#star_rating1").raty({ start:2,inline_width:68});
+		$("#star_rating2").raty({ start:3,inline_width:68});
+		$("#star_rating3").raty({ start:4,inline_width:68});
+		$("#star_rating4").raty({ start:2,inline_width:68});
 	}); 
 </script>
 
@@ -124,25 +130,25 @@
 	<div class="form-group">	
 		<label class="control-label">长相</label>
 		<div >
-			<div id="stara_rating1"></div>
+			<div id="star_rating1"></div>
 		</div>		
 	</div>
 	<div class="form-group">	
 		<label class="control-label">身材</label>
 		<div >
-			<div id="stara_rating2"></div>
+			<div id="star_rating2"></div>
 		</div>		
 	</div>
 	<div class="form-group">	
 		<label class="control-label">性格</label>
 		<div >
-			<div id="stara_rating3"></div>
+			<div id="star_rating3"></div>
 		</div>		
 	</div>
 	<div class="form-group">	
 		<label class="control-label">态度</label>
 		<div >
-			<div id="stara_rating4"></div>
+			<div id="star_rating4"></div>
 		</div>		
 	</div>
 	<HR/>

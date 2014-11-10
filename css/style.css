@@ -31,10 +31,10 @@
 	border-top-right-radius: 10px;
 	background-color: white;
 	 
-  background: -webkit-linear-gradient(#9966cc, white, white, white, white, white, white); /* Safari 5.1 - 6.0 */
-  background: -o-linear-gradient(#9966cc, white, white, white, white, white, white); /* Opera 11.1 - 12.0 */
-  background: -moz-linear-gradient(#9966cc, white, white, white, white, white, white); /* Firefox 3.6 - 15 */
-  background: linear-gradient(#9966cc, white, white, white, white, white, white); /* 标准的语法 */
+  background: -webkit-linear-gradient(#9966cc,white,  white, white, white, white, white, white); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#9966cc, white, white, white, white, white, white, white); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#9966cc, white, white, white, white, white, white, white); /* Firefox 3.6 - 15 */
+  background: linear-gradient(#9966cc, white, white, white, white, white, white, white); /* 标准的语法 */
  
 }
 

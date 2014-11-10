@@ -15,7 +15,8 @@
 	
 	<link rel="stylesheet" href="css/select_city.css" />
 	<script src="js/select_city.js"></script>
-	
+	<link href="css/return_top.css" rel="stylesheet"  type="text/css"/>
+	<script src="js/return_top.js" type="text/javascript"></script>
 </head>
 <body>
 {{!page_head}}
@@ -73,8 +74,6 @@
 	padding: 2px 10px 10px 10px
 }
  
-
-
 </style>
 
 <script type="text/javascript">
@@ -117,7 +116,7 @@
 			function(arrayOfNewElems){ //成功后执行的自定义的函数，如页面javascript的重载,这个自定义
 				$('#div_search_foot').before(arrayOfNewElems);  
 			});
-		
+		/**/
 		//$('.search_item').inline_popup({
 		//	popup_ctrl:"#img_popup"
 		//});
@@ -182,7 +181,7 @@
 	</div>	
 </div>
 </div>
-				
+	<a class="visible-md visible-lg" id="returnTop" href="javascript:;">回到顶部</a> 
 {{!page_foot}}	
 </body>
 </html>

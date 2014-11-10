@@ -7,7 +7,7 @@
 	<div class="badge_css">
 		<i class="icon-iphone" title="手机认证"></i>&nbsp;<i class="icon-nameplate" title="身份认证"></i>&nbsp;
 		<i class="icon-camera" title="相片认证"></i>&nbsp;<i class="icon-car" title="有车认证"></i>&nbsp;
-		<i class="icon-charts" title="有房认证"></i>
+		<i class="icon-home" title="有房认证"></i>
 	</div>
 	<p class="detail_css"><small>
 		广东 广州 | 21岁 | 178厘米 | 50公斤

@@ -36,6 +36,13 @@
   background: -moz-linear-gradient(#9966cc, white, white, white, white, white, white, white); /* Firefox 3.6 - 15 */
   background: linear-gradient(#9966cc, white, white, white, white, white, white, white); /* 标准的语法 */
  
+   -moz-box-shadow: 3px 3px 4px #000;
+    -webkit-box-shadow: 3px 3px 4px #000;
+    box-shadow: 3px 3px 4px #000;
+    /* For IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+    /* For IE 5.5 - 7 */
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
 }
 
 .panel_css hr{
@@ -44,15 +51,17 @@
 }
 
 .panel2_css{
-	border:1px solid #ff6633;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	background-color: white; 
-	border-top-width: 4px;
+	padding: 20px;
+	margin: 20px 0;
+	border: 1px solid #eee;
+	border-left-width: 5px;
+	border-left-color: #5bc0de;
+	border-radius: 5px;
+	background-color: white;
 }
 
 .panel2_css:hover{ 
-	border-color:#ff3300; 
+	border-left-color: #ff6633;
 }
 
 .button_css{
@@ -64,8 +73,6 @@
 	color:white;
 	background-color: #b07ed3;
 }
-
-
 
 /* star rating css, usage <span class="star_readonly" star="2"></span>*/
 .star_readonly{
@@ -187,13 +194,85 @@
 	padding: 0px 20px 0px 0px;
 }
 
+/* navigator ctrl */
+.navbar-inverse {
+    background:-moz-linear-gradient(0% 100% 90deg, #0436BF, #075DF2) repeat #03d178;
+    border-color: #518DF5;
+    background-color:#227ADB;   
+    background-image:-o-linear-gradient(-90deg,rgba(112,179,228,1),rgba(66,154,219,0));
+    background-image:-moz-linear-gradient(-90deg,rgba(112,179,228,1),rgba(66,154,219,0));
+    background-image:-webkit-gradient(linear,50% 0%,50% 100%,from(rgba(112,179,228,1)),to(rgba(66,154,219,0)));
+    background-image:-webkit-linear-gradient(-90deg,rgba(112,179,228,1),rgba(66,154,219,0));
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* navigator LOGO 部分背景色和字体颜色*/
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
+
+/* navigator LOGO 部分hover时背景色和字体颜色*/
+.navbar-inverse .navbar-brand:hover, 
+.navbar-inverse .navbar-brand:focus {
+    color: #eee;
+    background-color: transparent;
+}
+
+/* navigator 普通菜单项的颜色和背景  */
+.navbar-inverse .navbar-nav>li>a {
+    color: #fff;
+}
+
+/* navigator 普通菜单项hover时的字体颜色和背景  */
+.navbar-inverse .navbar-nav>li>a:hover, 
+.navbar-inverse .navbar-nav>li>a:focus {
+    color: #ddd;
+    background-color: transparent;
+}
+
+/* navigator 当前选中菜单项的字体颜色和背景  */
+.navbar-inverse .navbar-nav>.active>a, 
+.navbar-inverse .navbar-nav>.active>a:hover, 
+.navbar-inverse .navbar-nav>.active>a:focus {
+    color: #fff;
+    background:-moz-linear-gradient(0% 100% 90deg, #04BF36, #07F25D) repeat #0378d1;
+    border-color: #8ADF37;
+    background-color:#4ACF00;   
+    background-image:-o-linear-gradient(-90deg,rgba(255,255,255,0.38),rgba(85,170,0,0.7)); 
+    background-image:-moz-linear-gradient(-90deg,rgba(255,255,255,0.38),rgba(85,170,0,0.7));
+    background-image:-webkit-gradient(linear,50% 0%,50% 100%,from(rgba(255,255,255,0.38)),to(rgba(85,170,0,0.7)));  
+    background-image:-webkit-linear-gradient(-90deg,rgba(255,255,255,0.38),rgba(85,170,0,0.7));
+}
+
+/*修复bootstrap3.0的bug*/
+.nav > li.active{
+     font-weight:bold;
+}
+ 
 
 
+/*
+设计label check的方法
+ <style type="text/css">
+input.error { border: 1px solid red; }
+label.error {
+  background:url("res/unchecked.gif") no-repeat 0px 0px;
 
+  padding-left: 16px;
 
+  padding-bottom: 2px;
 
+  font-weight: bold;
 
+  color: #EA5200;
+}
 
+label.checked {
+  background:url("res/checked.gif") no-repeat 0px 0px;
+}
+ 
+</style>
+ */
 
 
 

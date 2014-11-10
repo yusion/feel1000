@@ -14,6 +14,9 @@
 	<link rel="stylesheet" href="css/rangeslider/ion.rangeSlider.skinFlat.css"/>
 	<script src="js/ion.rangeSlider.js"></script>
 	
+	<link rel="stylesheet" href="css/select_city.css" />
+	<script src="js/select_city.js"></script>
+	
 </head>
 <body>
 {{!page_head}}
@@ -224,10 +227,10 @@
 </div>
 <div class="col-md-9" >
 	<div class="row">
-		<div class="col-md-5 ">
+		<div class="col-md-6 ">
 			{{!search_item}}
 		</div>
-		<div class="col-md-5">
+		<div class="col-md-6">
 			{{!search_item}}
 		</div>
 	</div>

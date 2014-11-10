@@ -54,6 +54,7 @@
 			hideMinMax: true
 		});
 		
+		var c = new Vcity.CitySelector({input:'city'});
 	}); 
 </script>
 
@@ -62,13 +63,7 @@
 	<div class="form-group">	
 		<label for="city" class="control-label">城市</label>
 		<div >
-			<select id="city" class="form-control">
-				<option>广州</option>
-				<option>广州</option>
-				<option>广州</option>
-				<option>广州</option>
-				<option>广州</option>
-			</select>
+			<input type="text" class="cityinput form-control" id="city" value="城市名">
 		</div>
 	</div>
 	

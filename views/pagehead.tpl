@@ -15,10 +15,10 @@
 		</div>
 		<div class="collapse navbar-collapse" id="my_navbar-collapse">
 		   <ul class="nav navbar-nav">
-		       <li><a href="index"><i class="icon-home"></i>广场</a></li>
-			<li><a href="message"><i class="icon-conversation"></i>动态</a></li>
-			<li><a href="pkstage"><i class="icon-crown"></i>PK舞台</a></li>
-			<li class="active"><a href="profile"><i class="icon-parents"></i>个人主页</a></li>
+		       <li><a href="index"><i class="icon-temple-islam"></i> 广场</a></li>
+			<li><a href="message"><i class="icon-conversation"></i> 动态</a></li>
+			<li><a href="pkstage"><i class="icon-crown"></i> PK舞台</a></li>
+			<li class="active"><a href="profile"><i class="icon-parents"></i> 个人主页</a></li>
 		   </ul>
 		</div>
 	     </nav>

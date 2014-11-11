@@ -120,11 +120,11 @@
 	});
 </script>		
 
-<div id="img_popup" style="background-color:white;padding: 10px 10px 10px 10px">
-	<div style="width: 45%;display: inline-block">
+<div id="img_popup" style="background-color:white;padding: 10px 10px 10px 10px;margin 0px 3px 0px 3px">
+	<div style="width: 30%;display: inline-block">
 		<button id="img_popup_like" class="btn btn-success" style="width: 100%"><i class="icon-heart-empty"></i>喜欢</button>
 	</div>
-	<div class="btn-group" style="width: 45%;float: right">
+	<div class="btn-group" style="width: 30%;margin-left:20px">
 		<button type="button" class="btn btn-warning dropdown-toggle"  data-toggle="dropdown" style="width: 100%;height: 100%">
 		   <i class="icon-remove-2"></i>不喜欢 <span class="caret"></span>
 		</button>

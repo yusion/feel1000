@@ -64,16 +64,6 @@
 	cursor: pointer	
 }
 
-/* setup for inner popup layer */
-#img_popup{
-	display: none;
-	background-color: white;
-	border-color: orange;
-	border-bottom-style: solid;
-	border-bottom-width: 4px;
-	padding: 2px 10px 10px 10px
-}
- 
 </style>
 
 <script type="text/javascript">
@@ -114,39 +104,40 @@
 			 animate : true
 			},
 			function(arrayOfNewElems){ //成功后执行的自定义的函数，如页面javascript的重载,这个自定义
-				$('#div_search_foot').before(arrayOfNewElems);  
+				$('#div_search_foot').before(arrayOfNewElems);
+				$('.search_item_css').inline_popup({
+					popup_ctrl:"#img_popup",
+					opacity:0.95
+					
+				});
 			});
 		/**/
-		//$('.search_item').inline_popup({
-		//	popup_ctrl:"#img_popup"
-		//});
+		$('.search_item_css').inline_popup({
+			popup_ctrl:"#img_popup",
+			opacity:0.95
+			
+		});
 		
 		$(".fixDiv").scrollToFixed();
 	});
 </script>		
 
-<div id="img_popup">
-	<small>广东 广州 | 21岁 | 178厘米 | 50公斤</small>
-	<div>
-		<small>
-		<i class="icon-eye-open"></i>1000次 | <i class="icon-heart"></i>21人 | <i class="icon-camera"></i>11张
-		</small>
+<div id="img_popup" style="background-color:white;padding: 10px 10px 10px 10px">
+	<div style="width: 45%;display: inline-block">
+		<button id="img_popup_like" class="btn btn-success" style="width: 100%"><i class="icon-heart-empty"></i>喜欢</button>
 	</div>
-	<div>
-		<button id="img_popup_like" class="btn btn-default btn-sm"><i class="icon-heart-empty"></i>喜欢</button>
-		
-		<div id="img_popup_dislike" class="btn-group">
-			<button type="button" class="btn btn-primary dropdown-toggle btn-sm"  data-toggle="dropdown">
-			   不喜欢 <span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu" role="menu">
-			   <li><a href="#">外表不喜欢</a></li>
-			   <li><a href="#">PS痕迹严重</a></li>
-			   <li><a href="#">感觉不好</a></li>
-			</ul>
-		</div>
+	<div class="btn-group" style="width: 45%;float: right">
+		<button type="button" class="btn btn-warning dropdown-toggle"  data-toggle="dropdown" style="width: 100%;height: 100%">
+		   <i class="icon-remove-2"></i>不喜欢 <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+		   <li><a href="#">外表不喜欢</a></li>
+		   <li><a href="#">PS痕迹严重</a></li>
+		   <li><a href="#">感觉不好</a></li>
+		</ul>
 	</div>
 </div>
+
 <div class="row">
 <div class="col-md-12">
 	<div id="div_new_member">

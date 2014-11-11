@@ -44,7 +44,7 @@ def url_index():
 	d["page_size"] = page_size
 	d["current_page"] = page
 	d["search_form"] = utility.get_template_file("views/search_form.tpl",{})
-	d["search_item"] = utility.get_template_file("views/search_item.tpl",{})
+	#d["search_item"] = utility.get_template_file("views/search_item.tpl",{})
 	d["user_panel"] = utility.get_template_file("views/user_panel.tpl",{})
 	return d
 

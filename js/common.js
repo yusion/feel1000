@@ -196,14 +196,48 @@ function click_animate(button)
 
 (function ($) {
     $.fn.inline_popup = function (options) {
-        var options = options || {};
+        default_options = {
+          "opacity":"0.8",
+          };
+          
+        if (!options.opacity) {
+          options.opacity = default_options.opacity;
+        }
         var popup_ctrl = $(options.popup_ctrl);
         $(this).css("cusor","pointer");
         
-        popup_ctrl.css({"opacity":"0.8",
+        var leftX = 0;
+        if($(this).css("margin-left"))
+        {
+          leftX+=parseInt($(this).css("margin-left"));
+        }
+        if($(this).css("padding-left"))
+        {
+          leftX+=parseInt($(this).css("padding-left"));
+        }
+        if($(this).css("border-left-width"))
+        {
+          leftX+=parseInt($(this).css("border-left-width"));
+        }
+        
+        var bottomY = 0;
+        if($(this).css("margin-bottom"))
+        {
+          bottomY+=parseInt($(this).css("margin-bottom"));
+        }
+        if($(this).css("padding-bottom"))
+        {
+          bottomY+=parseInt($(this).css("padding-bottom"));
+        }
+        if($(this).css("border-bottom-width"))
+        {
+          bottomY+=parseInt($(this).css("border-bottom-width"));
+        }
+        
+        popup_ctrl.css({"opacity":options.opacity,
                 "position":"absolute",
-                "bottom":"0px",
-                "left": "0px",
+                "bottom":""+bottomY+"px",
+              //  "left": ""+leftX+"px",
                 "z-index":"1000",
                 "cursor":"pointer",
                 "display":"none"}); 
@@ -219,9 +253,10 @@ function click_animate(button)
           
           function showCtr()
           {
+            var w = this_ctrl.width(); 
             new_popup_ctrl = popup_ctrl.clone();
             new_popup_ctrl.css({
-                "width":""+this_ctrl.width()+"px"});
+                "width":""+w+"px"});
               this_ctrl.append(new_popup_ctrl);
               new_popup_ctrl.fadeIn(600);
           }

@@ -18,15 +18,13 @@
 		       <li><a href="index"><i class="icon-temple-islam"></i> 广场</a></li>
 			<li><a href="message"><i class="icon-conversation"></i> 动态</a></li>
 			<li><a href="pkstage"><i class="icon-crown"></i> PK舞台</a></li>
-			<li class="active"><a href="profile"><i class="icon-parents"></i> 个人主页</a></li>
+			<li class="active"><a href="my_space"><i class="icon-parents"></i> 个人主页</a></li>
 		   </ul>
 		</div>
 	     </nav>
      </div>
   </div>
-  
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1" >
+
 <script type="text/javascript">
 	$(document).ready(function(e){
 		$(".navbar a").each(function(){

@@ -12,9 +12,6 @@
 	<link rel="stylesheet" href="css/rangeslider/ion.rangeSlider.css" />
 	<link rel="stylesheet" href="css/rangeslider/ion.rangeSlider.skinFlat.css"/>
 	<script src="js/ion.rangeSlider.js"></script>
-	
-	<link rel="stylesheet" href="css/select_city.css" />
-	<script src="js/select_city.js"></script>
 	<link href="css/return_top.css" rel="stylesheet"  type="text/css"/>
 	<script src="js/return_top.js" type="text/javascript"></script>
 </head>
@@ -65,7 +62,6 @@
 }
 
 </style>
-
 <script type="text/javascript">
 	$(document).ready(function(e){
 		//http://www.gmarwaha.com/jquery/jcarousellite/demo.php
@@ -139,44 +135,47 @@
 		</ul>
 	</div>
 </div>
-
-<div class="row">
-<div class="col-md-12">
-	<div id="div_new_member">
-	   <H1 class="prev"><i class="icon-circle-arrow-left"></i></H1>
-	   <div class="carousel">
-	       <ul>
-		   <li><img src="res/test/a (1).jpg" class="img_new_member hot_tag"></li>
-		   <li><img src="res/test/a (2).jpg" class="img_new_member hot_tag"></li>
-		   <li><img src="res/test/a (3).jpg" class="img_new_member new_tag"></li>
-		   <li><img src="res/test/a (4).jpg" class="img_new_member" ></li>
-		   <li><img src="res/test/a (5).jpg" class="img_new_member"></li>
-		   <li><img src="res/test/a (6).jpg" class="img_new_member"></li>
-		   <li><img src="res/test/a (7).jpg" class="img_new_member"></li>
-		   <li><img src="res/test/a (8).jpg" class="img_new_member"></li>
-	       </ul>
-	   </div>
-	   <H1 class="next"><i class="icon-circle-arrow-right"></i></H1>
-       </div>
-</div>
-</div>
-<div class="row">
-	<div class="col-md-3">
-		{{!search_form}}
+ <div class="row">
+    <div class="col-md-10 col-md-offset-1" >
+	<div class="row">
+	<div class="col-md-12">
+		<div id="div_new_member">
+		   <H1 class="prev"><i class="icon-circle-arrow-left"></i></H1>
+		   <div class="carousel">
+		       <ul>
+			   <li><img src="res/test/a (1).jpg" class="img_new_member hot_tag"></li>
+			   <li><img src="res/test/a (2).jpg" class="img_new_member hot_tag"></li>
+			   <li><img src="res/test/a (3).jpg" class="img_new_member new_tag"></li>
+			   <li><img src="res/test/a (4).jpg" class="img_new_member" ></li>
+			   <li><img src="res/test/a (5).jpg" class="img_new_member"></li>
+			   <li><img src="res/test/a (6).jpg" class="img_new_member"></li>
+			   <li><img src="res/test/a (7).jpg" class="img_new_member"></li>
+			   <li><img src="res/test/a (8).jpg" class="img_new_member"></li>
+		       </ul>
+		   </div>
+		   <H1 class="next"><i class="icon-circle-arrow-right"></i></H1>
+	       </div>
 	</div>
-
-	<div class="col-md-9" >
-		{{!search_result}}
-		<div id="div_search_foot" class="row">
-			<div id="pagination">
-				<a href="search?page_size={{page_size}}&page={{int(current_page)+1}}" class="next_page">加载更多</a>		
-			</div>
-			<div id="infinitescroll" style="margin: 0;width: auto;height: 200px"></div>
-		</div>	
 	</div>
+	<div class="row">
+		<div class="col-md-3">
+			{{!search_form}}
+		</div>
 	
-</div>
-	<a class="visible-md visible-lg" id="returnTop" href="javascript:;">回到顶部</a> 
+		<div class="col-md-9" >
+			{{!search_result}}
+			<div id="div_search_foot" class="row">
+				<div id="pagination">
+					<a href="search?page_size={{page_size}}&page={{int(current_page)+1}}" class="next_page">加载更多</a>		
+				</div>
+				<div id="infinitescroll" style="margin: 0;width: auto;height: 200px"></div>
+			</div>	
+		</div>
+		
+	</div>
+	<a class="visible-md visible-lg" id="returnTop" href="javascript:;">回到顶部</a>
+    </div>
+ </div>    
 {{!page_foot}}	
 </body>
 </html>

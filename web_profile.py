@@ -203,6 +203,13 @@ class ctrl_profile:
 		image.close()
 		return img
 		
+
+@bottle.route('/my_space')	
+@bottle.view('my_space')	
+def url_show_space():
+	d = utility.get_dist()
+	return d
+		
 @bottle.route('/profile')	
 @bottle.view('profile')	
 def url_show_profile():

@@ -171,16 +171,20 @@ $.validator.setDefaults({
 });
 
 
-function set_background_img(url)
+function set_background_img(url,object)
 {
+    if (!object) {
+      object = $(window);
+    }
   //set web background image
     function cover(){
-      var win_width = $(window).width();
-      var win_height = $(window).height();
+      var win_width = object.width();
+      var win_height = object.height();
       $("#bigpic").attr({width:win_width,height:win_height});
     }	
             
-    $("body").append("<div id='main_bg' style='position: absolute; top: 0; left: 0; z-index: -1000'/>");
+    object.after("<div id='main_bg' style='position: absolute; top: " + object.offset().top
+                 + "px; left: " + object.offset().left +"px; z-index: -1000'/>");
     $("#main_bg").append("<img src='" + url + "' id='bigpic'>");
     cover();
     

@@ -8,7 +8,8 @@
 	<div class="search_item_css panel2_css" >
 		<div class="search_item_img_css">
 			<img src="{{r.photo_url}}" style="display: block">
-			<small><i class="icon-parents"></i> 在线
+			<small>&nbsp;&nbsp;<i class="icon-parents"></i> 在线
+			&nbsp;&nbsp;
 			<i class="icon-skitch"></i> 好友</small>
 		</div>		
 		<div class="search_item_detail_css">

@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="css/select_city.css" />
+<script src="js/select_city.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#search_form label").wrap("<small></small>");
@@ -181,7 +183,8 @@
 					<a class="save_search_link" href="#" >男三号</a><a class="del_search_link" href="#" title="删除"><i class="icon-remove-2"></i></a>
 				    </li>
 				    <li>
-					<a class="save_search_link" href="#">保存为男四号</a>
+					<input type="text" class="form-control" value="男四号"></input>
+					<button type="button" style="width: 100%" class="btn btn-default button_css">保存</button>
 				    </li>
 				</ul>
 			</div>

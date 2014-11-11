@@ -96,7 +96,15 @@
 			$("#div_new_member .carousel").AutoCarouselLite("true");
 		});
 		
-		///////////for search result////////////			 
+		///////////for search result////////////
+		function set_popup()
+		{
+			$('.search_item_css').inline_popup({
+				popup_ctrl:"#img_popup",
+				opacity:0.95
+			});
+		}
+		
 		$('#infinitescroll').infinitescroll({
 			navSelector  : "#pagination",           
 			nextSelector : ".next_page", // 需要点击的下一页链接
@@ -105,20 +113,14 @@
 			},
 			function(arrayOfNewElems){ //成功后执行的自定义的函数，如页面javascript的重载,这个自定义
 				$('#div_search_foot').before(arrayOfNewElems);
-				$('.search_item_css').inline_popup({
-					popup_ctrl:"#img_popup",
-					opacity:0.95
-					
-				});
-			});
-		/**/
-		$('.search_item_css').inline_popup({
-			popup_ctrl:"#img_popup",
-			opacity:0.95
-			
-		});
+				set_popup();
+			}); 
+		set_popup();
 		
-		$(".fixDiv").scrollToFixed();
+		//visit for more infor, https://github.com/bigspotteddog/ScrollToFixed
+		$(".fixDiv").scrollToFixed({
+			minWidth : 990
+			});
 	});
 </script>		
 

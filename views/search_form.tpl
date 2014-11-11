@@ -3,10 +3,8 @@
 		$("#search_form label").wrap("<small></small>");
 		$("#search_form label").addClass("col-md-3");
 		$("#search_form .form-group>div").addClass("col-md-8");
-		
 		$("#search_form select,#search_form input").addClass("input-sm");
 		
-		$("#search_form .dropdown-toggle").height($("#save_result").height());
 		//$("#search_form button").addClass("btn-sm");
 		
 		$("#age").ionRangeSlider({
@@ -161,12 +159,14 @@
 	<BR/>
 	<div class="form-group">
 		<div class="col-md-6">
-			<button type="submit" class="btn btn-default button_css" style="width:100%"><i class="icon-search"></i>查找</button>
+			<button type="submit" class="btn btn-default button_css" style="width: 100%">
+				<i class="icon-search"></i>查找
+			</button>
 		</div>
-		<div class="col-md-4"> 
+		<div class="col-md-6"> 
 			<div class="input-group-btn">
-				<button id="save_result" type="button" class="btn btn-default button_css"><i class="icon-bookmark">收藏</i></button>
-				<button type="button" class="btn btn-default dropdown-toggle button_css" data-toggle="dropdown" style="width:30px">
+				<button type="button" style="width: 100%;border-radius: 4px;" class="btn btn-default button_css" data-toggle="dropdown">
+			           <i class="icon-bookmark">收藏</i>
 				   <span class="caret"></span>
 				   <span class="sr-only">切换下拉菜单</span>
 				</button>
@@ -179,6 +179,9 @@
 				    </li>
 				    <li>
 					<a class="save_search_link" href="#" >男三号</a><a class="del_search_link" href="#" title="删除"><i class="icon-remove-2"></i></a>
+				    </li>
+				    <li>
+					<a class="save_search_link" href="#">保存为男四号</a>
 				    </li>
 				</ul>
 			</div>

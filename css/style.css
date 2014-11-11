@@ -164,16 +164,16 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 */
 
 /* search form css */
-#search_form{
+/*#search_form{
 	padding: 20px 0px 10px 0px;
 }
 
 #search_form>div{
 	padding: 10px 5px 10px 5px
 }
-
+*/
 #search_form label{
-	padding: 0px 0px 0px 0px
+	padding: 0px 0px 0px 20px
 }
 
 #search_form input,#search_form select{

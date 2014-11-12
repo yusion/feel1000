@@ -58,6 +58,7 @@
 	
 	function init_edit()
 	{
+		//setup readonly text 
 		function add_p(elem,val)
 		{
 			elem.parents(".form-group").children("div").append("<p id='p_"+$(this).attr("id")+"' class='form-control-static p_readonly'>"+val+"</p>");
@@ -79,6 +80,7 @@
 		
 		$("#form_profile .div_save_group").append($("#div_save_button"));
 		
+		//toggle edit mode and read mode
 		$("#form_profile H4").click(function(){
 			var p = $(this).parents(".div_save_group");
 			p.toggleClass("in_edit_mode");
@@ -102,10 +104,7 @@
 		//$("#form_profile label").wrap("<small></small>");
 		//$("#form_profile input").addClass("input-sm");
 		//$("#form_profile select").addClass("input-sm");
-		
-		
 		init_edit();
-		
 		var c = new Vcity.CitySelector({input:'city'});
 	});
 </script>
@@ -121,12 +120,6 @@
 		
 <form id="form_profile" class="form-horizontal" role="form">
 	<div class="div_save_group">
-		<div class="form-group">
-			<label class="control-label" for="phone">手机</label>
-			<div>
-				<p id="phone" class="form-control-static in_block">{{!phone}}</p>
-			</div>
-		</div>
 		<div class="row">
 			<div>
 				<H3>联系信息</H3>
@@ -134,38 +127,38 @@
 			</div>
 		</div>	
 		<div class="form-group">
-			<label class="control-label">姓名</label>
+			<label class="control-label" for="realname">姓名</label>
 			<div>
 				<input class="form-control txt_input " id="realname"  value="{{!realname}}" />
 			</div>
 			
 		</div>
 		<div class="form-group">
-			<label class="control-label">QQ</label>
+			<label class="control-label" for="qq">QQ</label>
 			<div>
 				<input class="txt_input onlyNum form-control" id="qq" value="{{!qq}}" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label">邮件</label>
+			<label class="control-label" for="email">邮件</label>
 			<div>
 				<input class="txt_input onlyEmail form-control" id="email" value="{{!email}}" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label">微博</label>
+			<label class="control-label" for="blogid">微博</label>
 			<div>
 				<input class="txt_input form-control" id="blogid" value="{{!blogid}}" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label">住址</label>
+			<label class="control-label" for="address">住址</label>
 			<div>
 				<input class="txt_input form-control" id="address" value="{{!address}}" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label">城市</label>
+			<label class="control-label" for="city">城市</label>
 			<div>
 				<input class="txt_input form-control" id="city" value="{{!city}}" />
 			</div>
@@ -180,13 +173,13 @@
 			</div>
 		</div>	
 		<div class="form-group">
-			<label class="control-label">职务</label>
+			<label class="control-label" for="career">职务</label>
 			<div>
 				<input class="txt_input form-control" id="career"  value="{{!career}}" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label">收入</label>
+			<label class="control-label" for="income">收入</label>
 			<div>
 				<select id="income" class="txt_input form-control">
 					%for x in c_income:
@@ -200,19 +193,19 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label">公司</label>
+			<label class="control-label" for="campany">公司</label>
 			<div>
 				<input class="txt_input form-control" id="campany"  value="{{!campany}}" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label">学校</label>
+			<label class="control-label" for="school">学校</label>
 			<div>
 				<input class="txt_input form-control" id="school"  value="{{!school}}" /> 
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label">学历</label>
+			<label class="control-label" for="degree">学历</label>
 			<div>
 				<select id="degree" class="txt_input  form-control">
 					%for x in c_degree:
@@ -235,13 +228,13 @@
 			</div>
 		</div>	
 		<div class="form-group">
-				<label class="control-label">年龄</label>
-				<div>
-					<input class="txt_input onlyNum  form-control" id="age"  value="{{!age}}" />
-				</div>
+			<label class="control-label" for="age">年龄</label>
+			<div>
+				<input class="txt_input onlyNum  form-control" id="age"  value="{{!age}}" />
+			</div>
 		</div>
 			<div class="form-group">
-				<label class="control-label">星座</label>
+				<label class="control-label" for="star">星座</label>
 				<div>
 					<select id="star" class="txt_input form-control">
 					%for x in c_star:
@@ -255,7 +248,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label">身高</label>
+				<label class="control-label" for="height">身高</label>
 				<div>
 					<div class="input-group">
 						<input class="txt_input onlyNum form-control" id="height"  value="{{!height}}" />
@@ -264,7 +257,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label">体重</label>
+				<label class="control-label" for="weight">体重</label>
 				<div>
 					<div class="input-group">
 						<input class="txt_input onlyNum form-control" id="weight"  value="{{!weight}}" />
@@ -273,15 +266,6 @@
 				</div>
 			</div>
 	</div>
-	
-	<HR>	
-	<div class="form-group">
-		<label class="control-label">描述</label>
-		<div>
-			<textarea class="form-control" rows="10" cols="10"></textarea>
-		</div>
-	</div>
-	
 </form>
 
 

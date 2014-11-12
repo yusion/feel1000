@@ -24,6 +24,37 @@
 	background-color: #f8f8f8;border:1px solid #e7e7e7
 }
 
+/*for tag selector */
+.tagItem{
+	min-width: 50px;
+	display: inline-block;
+	color: black;
+	background-color: white;
+	margin: 0px 10px 10px 0px;
+	padding: 2px 4px 2px 4px;
+}
+
+.linkTagNew{
+	cursor:pointer;
+}
+
+.divTagNew{
+	position: absolute;
+	color: black;
+	background-color: white;
+	padding: 10px 10px 10px 10px;
+	border: 1px solid black;
+	z-index: 500;
+}
+
+.divTagNew .tagItem{
+	cursor: pointer;
+}
+
+.divTagNew .tagItem:hover{
+	background-color:orange;
+}
+
 </style>
 <script type="text/javascript">
 	$(document).ready(function(e){
@@ -35,6 +66,8 @@
 		
 		//set_background_img("res/banner.jpg",$("#my_space_head"));
 		$("#div_profile").load("profile");
+		$("#tagSelector").tag_selector();
+		
 	});
 </script>	
 
@@ -43,33 +76,55 @@
      <div class="col-md-10 col-md-offset-1" >
 	<div class="row">
 		<div class="col-md-3">
-			<img src="res/test/a (11).jpg" style="width:224px;height:276px;"></img>
+			<img src="res/test/a (11).jpg" style="width:224px;height:276px;margin-top: 10px"></img>
+			<p class="detail_css">
+				<i class="icon-eye-open"></i>1000次 |
+				<i class="icon-heart"></i>21人 |
+				<i class="icon-picture"></i>11张
+			</p>
 		</div>
-		<div class="col-md-5">
-			<h4>姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚</h4>
-			<div class="badge_css">
-				<i class="icon-iphone" title="手机认证"></i>&nbsp;<i class="icon-nameplate" title="身份认证"></i>&nbsp;
+		<div class="col-md-6">
+			<h4 class="in_block">姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚</h4>
+			<h5 class="in_block" style="float: right;cursor:pointer">
+				<i class="icon-edit">编辑</i>
+			</h5><BR>
+			<div style="margin-bottom: 10px">
+				<i class="icon-iphone" title="手机认证******79001"></i>&nbsp;<i class="icon-nameplate" title="身份认证"></i>&nbsp;
 				<i class="icon-camera" title="相片认证"></i>&nbsp;<i class="icon-car" title="有车认证"></i>&nbsp;
 				<i class="icon-temple-christianity-church" title="有房认证"></i>
 			</div>
-			<p class="detail_css"><small>
-				广东 广州 | 21岁 | 178厘米 | 50公斤
-			</small></p>
-			<p class="detail_css"><small>
-				<i class="icon-eye-open"></i>1000次 | <i class="icon-heart"></i>21人 | <i class="icon-picture"></i>11张
-			</small></p>
-			
-			"选择标签"
-		</div>
-		<div class="col-md-3">
-			<div class="search_item_score_css in_block">
-				长相<div id="star_rating1"></div>	
-				身材<div id="star_rating2"></div>
-				性格<div id="star_rating3"></div>
-				态度<div id="star_rating4"></div>
+			<div style="margin-bottom: 15px">
+				<div style="margin-bottom: 5px">
+					<span>长相：</span><div id="star_rating1" class="in_block"></div>
+				</div>
+				<div style="margin-bottom: 5px">
+					<span>身材：</span><div id="star_rating2" class="in_block"></div>
+				</div>
+				<div style="margin-bottom: 5px">
+					<span>性格：</span><div id="star_rating3" class="in_block"></div>
+				</div>
+				<div style="margin-bottom: 5px">
+					<span>态度：</span><div id="star_rating4" class="in_block"></div>
+				</div>
 			</div>
-		</div>
-		<div class="col-md-3">
+			<div id="tagSelector" style="margin-bottom: 10px">
+				<ul>
+					<li>C</li>
+					<li>C++</li>
+					<li>JAVA</li>
+					<li>PHP</li>
+					<li>Python</li>
+					<li>C</li>
+					<li>C++</li>
+					<li>JAVA</li>
+					<li>PHP</li>
+					<li>Python</li>
+					<li>C</li> 
+				</ul>
+			</div>
+			<div>
+				<textarea id="desc" class="form-control" rows="3" cols="10" placeholder="自我独白"></textarea>
+			</div>
 		</div>
 	</div>
      </div>

@@ -198,6 +198,45 @@ function click_animate(button)
   var ss = $("<span>" +  button.text() + "<span>");
 }
 
+//jquery ctrl, tag selector
+(function ($) {
+    $.fn.tag_selector = function(options){
+      $(this).find("ul").hide();
+      $(this).css("display","inline-block");
+      
+      var parentDiv = $(this);
+      $(this).find("li").each(function(){
+            parentDiv.append("<div class='tagItem'>"+$(this).text()+"</div>");
+        });
+      
+      var link = $("<a class='linkTagNew'>添加标签</a>");
+      $(this).append(link);
+      
+      link.mouseenter(function(){
+          var newTag = $("<div class='divTagNew'></div>");
+          parentDiv.find("li").each(function(){
+            newTag.append("<div class='tagItem'>"+$(this).text()+"</div>");
+          });
+          newTag.css("top",$(this).position().top + $(this).height());
+          newTag.css("left",$(this).position().left);
+          
+          newTag.find(".tagItem").click(function(){
+              link.before("<div class='tagItem'>"+$(this).text()+"</div>");
+              parentDiv.find(".divTagNew").remove();
+          });
+          
+          $(this).after(newTag);
+      });
+      
+      link.mouseleave(function(){
+         // parentDiv.find(".divTagNew").remove();
+      });
+      
+      
+    }
+})(jQuery); 
+
+//jquery ctrl, auto popup a div 
 (function ($) {
     $.fn.inline_popup = function (options) {
         default_options = {

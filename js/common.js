@@ -200,39 +200,139 @@ function click_animate(button)
 
 //jquery ctrl, tag selector
 (function ($) {
+  /* example html
+  <div>
+    <input type="hidden" value="C++ PHP"></input>
+    <ul>
+      <li>C</li>
+          <li>C++</li>
+          <li>JAVA</li>
+          <li>PHP</li>
+          <li>Python</li>
+    </ul>
+  </div>*/
     $.fn.tag_selector = function(options){
-      $(this).find("ul").hide();
-      $(this).css("display","inline-block");
-      
-      var parentDiv = $(this);
-      $(this).find("li").each(function(){
-            parentDiv.append("<div class='tagItem'>"+$(this).text()+"</div>");
+        if (0 == $(this).find("ul").length) {
+          alert("tag_selector:wrong html,no ul");
+          return;
+        }
+        var input = $(this).find("input:hidden");
+        if (0 == input.length) {
+          alert("tag_selector:wrong html,no hidden input");
+          return;
+        }
+        $(this).find("ul").hide();
+        $(this).css("display","inline-block");
+        
+        var container = $(this);
+        var selTags = new Array();
+        var d = input.val().split(" ");
+        for(var i=0;i<d.length;i++)
+        {
+          var v = d[i].trim();
+          if (v.length) {
+            if (selTags.indexOf(v) == -1) {
+              selTags.push(v);
+            }
+          }
+        }
+        var allTags = new Array();
+        container.find("li").each(function(){
+          var v =$(this).text();
+          if (selTags.indexOf(v) == -1) {
+              if (allTags.indexOf(v) == -1) {
+                allTags.push(v);
+              }
+          }
         });
-      
-      var link = $("<a class='linkTagNew'>添加标签</a>");
-      $(this).append(link);
-      
-      link.mouseenter(function(){
-          var newTag = $("<div class='divTagNew'></div>");
-          parentDiv.find("li").each(function(){
-            newTag.append("<div class='tagItem'>"+$(this).text()+"</div>");
-          });
-          newTag.css("top",$(this).position().top + $(this).height());
-          newTag.css("left",$(this).position().left);
-          
-          newTag.find(".tagItem").click(function(){
-              link.before("<div class='tagItem'>"+$(this).text()+"</div>");
-              parentDiv.find(".divTagNew").remove();
-          });
-          
-          $(this).after(newTag);
-      });
-      
-      link.mouseleave(function(){
-         // parentDiv.find(".divTagNew").remove();
-      });
-      
-      
+        
+        for(var i=0;i<selTags.length;i++)
+        {
+          container.append("<div class='tagItem'>"+selTags[i]+"</div>");
+        }
+        
+        var link = $("<a class='linkTagNew'><i class='icon-tag'></i>添加标签</a>");
+        container.append(link);
+        
+        var editTag = $("<div class='divTagNew'></div>");
+        editTag.hide();
+        link.after(editTag);
+        
+        function addTags(text) {
+           link.before("<div class='tagItem'>"+text+"</div>");
+           selTags.push(text);
+           input.val(selTags.join(" "));
+           if (selTags.length == allTags.length) {
+              link.hide();
+           }
+            container.children(".tagItem").click(function(){
+              removeTags($(this));
+            });
+        }
+        
+        function removeTags(tagElem){
+            tagElem.remove();
+            var i = selTags.indexOf(tagElem.text());
+            if (i != -1) {
+              selTags.splice(i,1);
+              input.val(selTags.join(" "));
+              if (selTags.length != allTags.length) {
+                  link.show();
+              }
+            }
+        }
+        
+        container.children(".tagItem").click(function(){
+          removeTags($(this));
+        });
+        
+        function showEditDiv(){
+            editTag.empty();
+            for(var i=0;i<allTags.length;i++)
+            {
+              if (selTags.indexOf(allTags[i]) == -1) {
+                editTag.append("<div class='tagItem'>"+allTags[i]+"</div>");
+              }
+            } 
+            
+            editTag.css("top",link.position().top + link.height() +10);
+            editTag.css("left",link.position().left);
+            
+            editTag.find(".tagItem").click(function(){
+                addTags($(this).text());
+                hideEditDiv();
+            });
+            
+            editTag.show();
+        }
+        var timerID1,timerID2;
+        function hideEditDiv(){
+          editTag.hide();
+        }
+        
+        link.mouseenter(function(){
+          clearTimeout(timerID1);
+          clearTimeout(timerID2);
+          showEditDiv();
+        });
+        
+        link.mouseleave(function(){
+          timerID1 = setTimeout(hideEditDiv,300);
+        });
+        
+        editTag.mouseenter(function(){
+          clearTimeout(timerID1);
+          clearTimeout(timerID2);
+          showEditDiv();
+        });
+        
+        editTag.mouseleave(function(){
+            timerID2 = setTimeout(hideEditDiv,300);
+        });
+        
+        link.click(function(){
+          showEditDiv();
+        });
     }
 })(jQuery); 
 

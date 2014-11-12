@@ -30,21 +30,36 @@
 	display: inline-block;
 	color: black;
 	background-color: white;
-	margin: 0px 10px 10px 0px;
+	margin: 0px 10px 5px 0px;
 	padding: 2px 4px 2px 4px;
 }
 
 .linkTagNew{
 	cursor:pointer;
+	color:#faae7d;
+}
+
+.linkTagNew:hover{
+	cursor:pointer;
+	color:#f68e51;
+	text-decoration:none;
 }
 
 .divTagNew{
 	position: absolute;
 	color: black;
-	background-color: white;
+	background-color: #ffffe1;
 	padding: 10px 10px 10px 10px;
-	border: 1px solid black;
+	border: 1px solid dark;
 	z-index: 500;
+	border-radius: 2px;
+	-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	box-shadow: 3px 3px 4px #000;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
 }
 
 .divTagNew .tagItem{
@@ -108,6 +123,7 @@
 				</div>
 			</div>
 			<div id="tagSelector" style="margin-bottom: 10px">
+				<input id="input_tagSelector" type="hidden" ></input>
 				<ul>
 					<li>C</li>
 					<li>C++</li>
@@ -123,7 +139,7 @@
 				</ul>
 			</div>
 			<div>
-				<textarea id="desc" class="form-control" rows="3" cols="10" placeholder="自我独白"></textarea>
+				<textarea id="desc" class="form-control" rows="3" cols="10" placeholder="内心独白"></textarea>
 			</div>
 		</div>
 	</div>

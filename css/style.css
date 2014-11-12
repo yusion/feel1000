@@ -1,5 +1,10 @@
 ﻿@charset "utf-8";
 /* common css */
+.double_div{
+	border-style: double;
+	border-color: green;
+}
+
 .red_div{
 	background-color: pink
 }

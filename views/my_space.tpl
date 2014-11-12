@@ -20,7 +20,10 @@
 	border-bottom-width: 0px;
 }
 
-	
+#div_profile{
+	background-color: #f8f8f8;border:1px solid #e7e7e7
+}
+
 </style>
 <script type="text/javascript">
 	$(document).ready(function(e){
@@ -74,7 +77,7 @@
 
 <div class="row">
 <div class="col-md-10 col-md-offset-1" >
-	<div class="row" style="margin-bottom: 0px;">
+	<div class="row" style="margin-bottom: 0px;" >
 		<div class="col-md-12" >
 		<nav id="nav_my_space" class="navbar navbar-default" role="navigation">
 			<div class="navbar-header">
@@ -99,7 +102,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12" >
-			<div id="div_profile"  style="background-color: #f8f8f8;border:1px solid #e7e7e7"> 
+			<div id="div_profile"> 
 			</div>
 		</div>
 	</div>	

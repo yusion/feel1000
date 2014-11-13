@@ -1,3 +1,28 @@
+//ie8 doesn't support indexOf
+if(!Array.prototype.indexOf){  
+        Array.prototype.indexOf = function(elt /*, from*/){  
+        var len = this.length >>> 0;  
+        var from = Number(arguments[1]) || 0;  
+        from = (from < 0)  
+             ? Math.ceil(from)  
+             : Math.floor(from);  
+        if (from < 0)  
+          from += len;  
+        for (; from < len; from++)  
+        {  
+          if (from in this &&  
+              this[from] === elt)  
+            return from;  
+        }  
+        return -1;  
+      };  
+}
+
+//ie8 doesn't support trim
+if(!String.prototype.trim){
+  String.prototype.trim = $.trim; //using jquery trim
+}
+    
 // ----------------------------------------------------------------------
 // <summary>
 // 限制只能输入数字 http://www.cnblogs.com/xdp-gacl/p/3467245.html
@@ -210,7 +235,7 @@ function click_animate(button)
           <li>PHP</li>
           <li>Python</li>
     </ul>
-  </div>*/
+  </div>*/   
     $.fn.tag_selector = function(options){
         if (0 == $(this).find("ul").length) {
           alert("tag_selector:wrong html,no ul");
@@ -246,11 +271,16 @@ function click_animate(button)
           }
         });
         
+        container.find(".tagItem, .linkTagNew, .divTagNew").remove();
+        
         for(var i=0;i<selTags.length;i++)
         {
-          container.append("<div class='tagItem'>"+selTags[i]+"</div>");
+          container.append("<div class='tagItem tagItem_edit'>"+selTags[i]+"</div>");
         }
-        
+        if (!options.edit_mode) {
+            container.find(".tagItem_edit").removeClass("tagItem_edit");
+            return;
+        }
         var link = $("<a class='linkTagNew'><i class='icon-tag'></i>添加标签</a>");
         container.append(link);
         
@@ -259,7 +289,7 @@ function click_animate(button)
         link.after(editTag);
         
         function addTags(text) {
-           link.before("<div class='tagItem'>"+text+"</div>");
+           link.before("<div class='tagItem tagItem_edit'>"+text+"</div>");
            selTags.push(text);
            input.val(selTags.join(" "));
            if (selTags.length == allTags.length) {
@@ -291,7 +321,7 @@ function click_animate(button)
             for(var i=0;i<allTags.length;i++)
             {
               if (selTags.indexOf(allTags[i]) == -1) {
-                editTag.append("<div class='tagItem'>"+allTags[i]+"</div>");
+                editTag.append("<div class='tagItem tagItem_edit'>"+allTags[i]+"</div>");
               }
             } 
             

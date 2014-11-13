@@ -263,6 +263,55 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 }
 
 
+/*jquery ctrl: for tag selector */
+.tagItem{
+	min-width: 50px;
+	display: inline-block;
+	color: black;
+	margin: 0px 10px 5px 0px;
+	padding: 2px 10px 2px 15px;
+	background-image:url('../res/small_icon.png');
+	background-position: -0px -58px;
+	border-bottom: solid 2px transparent;
+}
+.tagItem_edit{
+	cursor: pointer;
+}
+
+.tagItem_edit:hover{
+	border-bottom: solid 2px orange;
+}
+
+.linkTagNew{
+	cursor:pointer;
+	color:#faae7d;
+}
+
+.linkTagNew:hover{
+	cursor:pointer;
+	color:#f68e51;
+	text-decoration:none;
+}
+
+.divTagNew{
+	position: absolute;
+	color: black;
+	background-color: #ffffe1;
+	padding: 10px 10px 10px 10px;
+	border: 1px solid dark;
+	z-index: 500;
+	border-radius: 2px;
+	-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	box-shadow: 3px 3px 4px #000;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+}
+
+
+
 
 /*
 设计label check的方法

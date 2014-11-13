@@ -45,14 +45,14 @@
 		p.find(".p_readonly").hide();
 		p.find(".form-control").show();
 		p.find(".input-group").show();
-		p.find(".edit_button").show();
+		p.find("#div_save_button").show();
 	}
 		
 	function hide_edit(p)
 	{
 		p.find(".form-control").hide();
 		p.find(".input-group").hide();
-		p.find(".edit_button").hide();
+		p.find("#div_save_button").hide();
 		p.find(".p_readonly").show();
 	}
 	
@@ -158,7 +158,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label" for="city">城市</label>
+			<label class="control-label">城市</label>
 			<div>
 				<input class="txt_input form-control" id="city" value="{{!city}}" />
 			</div>

@@ -24,51 +24,6 @@
 	background-color: #f8f8f8;border:1px solid #e7e7e7
 }
 
-/*for tag selector */
-.tagItem{
-	min-width: 50px;
-	display: inline-block;
-	color: black;
-	background-color: white;
-	margin: 0px 10px 5px 0px;
-	padding: 2px 4px 2px 4px;
-}
-
-.linkTagNew{
-	cursor:pointer;
-	color:#faae7d;
-}
-
-.linkTagNew:hover{
-	cursor:pointer;
-	color:#f68e51;
-	text-decoration:none;
-}
-
-.divTagNew{
-	position: absolute;
-	color: black;
-	background-color: #ffffe1;
-	padding: 10px 10px 10px 10px;
-	border: 1px solid dark;
-	z-index: 500;
-	border-radius: 2px;
-	-moz-box-shadow: 3px 3px 4px #000;
-	-webkit-box-shadow: 3px 3px 4px #000;
-	box-shadow: 3px 3px 4px #000;
-	/* For IE 8 */
-	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
-	/* For IE 5.5 - 7 */
-	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
-}
-
-.divTagNew .tagItem{
-	cursor: pointer;
-}
-
-.divTagNew .tagItem:hover{
-	background-color:orange;
-}
 
 </style>
 <script type="text/javascript">
@@ -81,11 +36,41 @@
 		
 		//set_background_img("res/banner.jpg",$("#my_space_head"));
 		$("#div_profile").load("profile");
-		$("#tagSelector").tag_selector();
-		
+		$("#tagSelector").tag_selector({edit_mode:false});
 	});
+	
+	function click_edit()
+	{
+		$("#star_rating1").empty();
+		$("#star_rating2").empty();
+		$("#star_rating3").empty();
+		$("#star_rating4").empty();
+		
+		if ("True" == $(this).attr("edit_mode")) {
+			$(this).attr("edit_mode","False");
+			$("#tagSelector").tag_selector({edit_mode:false});
+			$("#desc").hide();
+			$("#head_save_button").hide();
+			
+			$("#star_rating1").raty({ start:3,inline_width:38,readOnly:true});
+			$("#star_rating2").raty({ start:3,inline_width:68,readOnly:true});
+			$("#star_rating3").raty({ start:3,inline_width:68,readOnly:true});
+			$("#star_rating4").raty({ start:3,inline_width:68,readOnly:true});
+		}
+		else
+		{
+			$(this).attr("edit_mode","True");
+			$("#tagSelector").tag_selector({edit_mode:true});
+			$("#desc").show();
+			$("#head_save_button").show();
+		
+			$("#star_rating1").raty({ start:3,inline_width:38});
+			$("#star_rating2").raty({ start:3,inline_width:68}); 
+			$("#star_rating3").raty({ start:3,inline_width:68});
+			$("#star_rating4").raty({ start:3,inline_width:68});
+		}
+	}
 </script>	
-
 
 <div id="my_space_head" class="row">
      <div class="col-md-10 col-md-offset-1" >
@@ -100,15 +85,12 @@
 		</div>
 		<div class="col-md-6">
 			<h4 class="in_block">姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚</h4>
-			<h5 class="in_block" style="float: right;cursor:pointer">
-				<i class="icon-edit">编辑</i>
-			</h5><BR>
 			<div style="margin-bottom: 10px">
 				<i class="icon-iphone" title="手机认证******79001"></i>&nbsp;<i class="icon-nameplate" title="身份认证"></i>&nbsp;
 				<i class="icon-camera" title="相片认证"></i>&nbsp;<i class="icon-car" title="有车认证"></i>&nbsp;
 				<i class="icon-temple-christianity-church" title="有房认证"></i>
 			</div>
-			<div style="margin-bottom: 15px">
+			<div class="in_block" style="margin-bottom: 15px">
 				<div style="margin-bottom: 5px">
 					<span>长相：</span><div id="star_rating1" class="in_block"></div>
 				</div>
@@ -122,12 +104,15 @@
 					<span>态度：</span><div id="star_rating4" class="in_block"></div>
 				</div>
 			</div>
+			<h5 class="in_block" style="float: right;cursor:pointer" edit_mode="False" onclick="click_edit()">
+				<i class="icon-edit">编辑</i>
+			</h5><BR>
 			<div id="tagSelector" style="margin-bottom: 10px">
 				<input id="input_tagSelector" type="hidden" ></input>
 				<ul>
 					<li>C</li>
 					<li>C++</li>
-					<li>JAVA</li>
+					<li>天下无敌</li>
 					<li>PHP</li>
 					<li>Python</li>
 					<li>C</li>
@@ -141,8 +126,15 @@
 			<div>
 				<textarea id="desc" class="form-control" rows="3" cols="10" placeholder="内心独白"></textarea>
 			</div>
+			
+			<div id="head_save_button" style="margin-top: 10px">
+				<button class="btn btn-success" style="margin-right: 20px"><i class="icon-ok-2">保存</i></button>
+				<button class="btn btn-danger"><i class="icon-remove-2"> 取消</i></button>	
+			</div>
 		</div>
+
 	</div>
+
      </div>
 </div>
 

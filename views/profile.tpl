@@ -122,7 +122,7 @@
 	<div class="div_save_group">
 		<div class="row">
 			<div>
-				<H3>联系信息</H3>
+				<H3>联系信息    <small><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></small></H3>
 				<H4><i class="icon-edit">编辑</i></H4>
 			</div>
 		</div>	
@@ -168,7 +168,7 @@
 	<div class="div_save_group">
 		<div class="row">
 			<div>
-				<H3>生活信息</H3>
+				<H3>生活信息    <small><i class="icon-star"></i><i class="icon-star"></i></small></H3>
 				<H4><i class="icon-edit">编辑</i></H4>	
 			</div>
 		</div>	
@@ -223,7 +223,7 @@
 	<div class="div_save_group">
 		<div class="row">
 			<div>
-				<H3>体特信息</H3>
+				<H3>特征信息</H3>
 				<H4><i class="icon-edit">编辑</i></H4>
 			</div>
 		</div>	

@@ -6,6 +6,7 @@ import sys,os,bottle
 import session,utility
 from web_profile import url_show_profile
 from web_login import url_show_login
+from web_album import url_show_album
 from web_search import *
 
 @bottle.route('/res/<path:path>')	

@@ -230,11 +230,13 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 .navbar-inverse .navbar-brand:focus {
     color: white;
     background-color: transparent;
+    border-bottom: 4px solid transparent;
 }
 
 /* navigator 普通菜单项的颜色和背景  */
 .navbar-inverse .navbar-nav>li>a {
     color: white;
+    border-bottom: 4px solid transparent;
 }
 
 /* navigator 普通菜单项hover时的字体颜色和背景  */
@@ -242,6 +244,7 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 .navbar-inverse .navbar-nav>li>a:focus {
     color: white;
     background-color: #99cccc;
+    border-bottom: 4px solid orange;
 }
 
 /* navigator 当前选中菜单项的字体颜色和背景  */
@@ -250,6 +253,7 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 .navbar-inverse .navbar-nav>.active>a:focus {
     color: white;
     background-color:#99cccc;
+    border-bottom: 4px solid orange;
 }
 
 /*修复bootstrap3.0的bug*/

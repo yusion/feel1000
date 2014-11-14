@@ -2,9 +2,10 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(e){
-		$("#form_certif label").addClass("col-md-2 col-md-offset-1");
+		$("#form_certif label").parent().addClass("col-md-2 col-md-offset-1");
 		$("#form_certif .form-group>div").addClass("col-md-4");
 		$("#form_certif H3").parent().addClass("col-md-6 col-md-offset-1");
+		$("#form_certif label").css("float","right");
 	});
 </script>
 <form id="form_certif" class="form-horizontal" role="form">
@@ -15,7 +16,9 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="id_photo_fontside">身份证正面相片</label>
+			<div>
+				<label for="id_photo_fontside">身份证正面相片</label>
+			</div>	
 			<div>
 				<div id="id_photo_fontside"  class="input-group">
 					<input type="text" class="form-control" placeholder="选择相片文件">
@@ -26,7 +29,9 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="id_photo_backside">身份证反面相片</label>
+			<div>
+				<label for="id_photo_backside">身份证反面相片</label>
+			</div>	
 			<div>	
 				<div id="id_photo_backside"  class="input-group">
 					<input type="text" class="form-control" placeholder="选择相片文件">
@@ -55,7 +60,9 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="photo">相片</label>
+			<div>
+				<label for="photo">相片</label>
+			</div>	
 			<div>
 				<div id="photo"  class="input-group">
 					<input type="text" class="form-control" placeholder="选择相片文件">
@@ -84,7 +91,9 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="photo">房产证相片</label>
+			<div>
+				<label for="photo">房产证相片</label>
+			</div>	
 			<div>
 				<div id="photo"  class="input-group">
 					<input type="text" class="form-control" placeholder="选择相片文件">
@@ -114,7 +123,9 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="photo">相片</label>
+			<div>
+				<label for="photo">相片</label>
+			</div>	
 			<div>
 				<div id="photo"  class="input-group">
 					<input type="text" class="form-control" placeholder="选择相片文件">

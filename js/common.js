@@ -223,6 +223,17 @@ function click_animate(button)
   var ss = $("<span>" +  button.text() + "<span>");
 }
 
+function create_img_div(left,top,width,height)
+{
+      var i = $("<div style='z-index:900'></div>");
+      i.css("background-image","url('res/small_icon.png')");
+      i.width(width);
+      i.height(height);
+      i.css("background-position",""+ left + "px " + top + "px");
+      i.css("background-repeat","no-repeat");
+      return i;
+}
+
 //jquery ctrl, tag selector
 (function ($) {
   /* example html
@@ -531,28 +542,26 @@ function set_online_tag(elems,type,title) {
   }
   elems.each(function(){
       //mark the person is cellphone online
-      var i = $("<div style='position:absolute;background-repeat:no-repeat;z-index:100;"
-                +"left:"+ $(this).position().left + "px' title='" + title + "'></div>");
-      i.css("background-image","url('res/small_icon.png')");
+      var i;
       if (type) {
         //phone
-        i.width(14);
-        i.height(20);
-        i.css("background-position","-154px 0px");
+       i = create_img_div(-154,0,14,20);
       }
       else
       {
-        i.width(17);
-        i.height(17);
-        i.css("background-position","-154px -20px");
+	i = create_img_div(-154,-20,17,17); 
       }
-      $(this).after(i);
+      i.css("position","absolute");
+      i.css("left","" + $(this).position().left + "px");
       i.css("top","" + $(this).position().top+$(this).height()-i.height() +"px");
+      i.attr("title",title);
+      $(this).after(i);
    });
 }
 
-function set_imgtag(items,imgSrc) {
-    items.after("<img style='position:absolute;top:-3;left:-3' src='"+ imgSrc +"'>");
+function set_imgtag(items,elem) {
+    elem.css({"position":"absolute","top":"0px","left":"0px"});
+    items.after(elem);
 }
 
 function init_common()
@@ -564,8 +573,8 @@ function init_common()
     $(".limit_m").limitLength(20);
     $(".limit_l").limitLength(100);
     
-    set_imgtag($(".hot_tag"),"res/hot.gif");
-    set_imgtag($(".new_tag"),"res/new.gif");
+    set_imgtag($(".hot_tag"),create_img_div(-158,-41,38,21));
+    set_imgtag($(".new_tag"),create_img_div(-158,-76,38,19));
     
     set_online_tag($(".phone_online"),true,"手机在线");
     set_online_tag($(".online"),false,"在线");

@@ -7,7 +7,7 @@
 <div class="col-md-6">
 	<div class="search_item_css panel2_css" >
 		<div class="search_item_img_css">
-			<img src="{{r.photo_url}}" style="display: block">
+			<img src="{{r.photo_url}}" class="hot_tag" style="display: block">
 			<small>&nbsp;&nbsp;<i class="icon-parents"></i> ‘⁄œﬂ
 			&nbsp;&nbsp;
 			<i class="icon-skitch"></i> ∫√”—</small>

@@ -26,7 +26,7 @@
   </div>
   <div class="row">
 	<div class="col-md-11 col-md-offset-1">
-		个人主页->广州交友->我的认证
+		我的位置：主页 > 我的主页 > 我的认证
 	</div>
   </div>
 

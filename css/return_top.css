@@ -7,7 +7,7 @@
 	height:65px;
 	text-indent:-999px;
 	overflow:hidden;
-	background-image:url('../res/small_icon.png');
+	background-image:url('/res/small_icon.png');
 	background-repeat:no-repeat;
 	background-position:-122px 0px;
 	transition:bottom 0.9s;

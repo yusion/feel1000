@@ -151,10 +151,10 @@
 				</div>
 				<div class="collapse navbar-collapse" id="example-navbar-collapse">
 				   <ul class="nav navbar-nav">
-				      <li id="first_nav_tag"><a href="#" data="album">我的动态</a></li>
+				      <li ><a href="#" data="album">我的动态</a></li>
 				      <li><a href="#" data="profile">我的资料</a></li>
-				      <li><a href="#">我的认证</a></li>
-				      <li><a href="#">我的好友</a></li>
+				      <li id="first_nav_tag"><a href="#" data="certif">我的认证</a></li>
+				      <li ><a href="#">我的好友</a></li>
 				   </ul>
 				</div>
 			</nav>

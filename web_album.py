@@ -12,3 +12,7 @@ from bottle import route, template,install,view,request,get,post,SimpleTemplate
 def url_show_album():
 	return utility.get_dist()
 
+@route('/certif')	
+@view('certif')	
+def url_show_certif():
+	return utility.get_dist()

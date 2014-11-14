@@ -31,7 +31,7 @@
 
 .div_album_like_list img{
 	width: 40px;
-	height: 40px;
+	height:40px;
 }
 
 .div_album_reply{
@@ -67,16 +67,22 @@
 	
 	%import random
 	%for i in range(5):
+	%if i %2 == 0:
+	%	onlineState="online"
+	%else:
+	%	onlineState="phone_online"
+	%end
 	<div class="row">
 		<div>
 			<div class="div_album_info">
+				<img src="res/test/a (7).jpg" class="small_profile {{onlineState}}"></img>
 				<H4 class="in_block"><small>2014/9/</small>25</H4>
 				<small style="float: right">2小时前</small>
 			</div>
 		</div>
 		<div>
 			<div class="div_album_detail">
-				<div class="div_album_detail_img" style="background-color: black">
+				<div class="div_album_detail_img" style="">
 					%ll = random.randint(1,10)
 					%for k in range(ll):
 						<img src="res/test/a ({{random.randint(1,15)}}).jpg"></img>

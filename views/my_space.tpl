@@ -8,11 +8,6 @@
 {{!page_head}}
 
 <style type="text/css">
-#img_my_head_photo{
-	width:224px;height:276px;margin-top: 10px;
-	border: 5px solid white;
-	border-bottom-width: 30px;
-}
 
 #div_profile{
 	background-color: white;
@@ -39,7 +34,13 @@
 			var u = $(this).children().attr("data");
 			$(this).parent().children("li").removeClass("active");
 			$(this).addClass("active");
-			$("#div_profile").load(u);
+			$("#div_profile").load(u,function(responseTxt,statusTxt,xhr){
+				if(statusTxt=="success")
+				  init_common();
+				if(statusTxt=="error")
+				  $("#div_profile").text("Error: "+xhr.status+": "+xhr.statusText);
+			      });
+			
 		});
 		
 		$("#tagSelector").tag_selector({edit_mode:false});
@@ -73,7 +74,7 @@
      <div class="col-md-10 col-md-offset-1" >
 	<div class="row">
 		<div class="col-md-3">
-			<img id="img_my_head_photo" src="res/test/a (11).jpg"></img>
+			<img class="normal_profile" src="res/test/a (11).jpg"></img>
 			<p class="detail_css">
 				<i class="icon-eye-open"></i>1000次 |
 				<i class="icon-heart"></i>21人 |

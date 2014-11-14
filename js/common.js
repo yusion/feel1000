@@ -525,11 +525,38 @@ function keep_over(over_elem,under_elem)
 		});
 }
 
+function set_online_tag(elems,type,title) {
+  if (!elems.length) {
+    return;
+  }
+  elems.each(function(){
+      //mark the person is cellphone online
+      var i = $("<div style='position:absolute;background-repeat:no-repeat;z-index:100;"
+                +"left:"+ $(this).position().left + "px' title='" + title + "'></div>");
+      i.css("background-image","url('res/small_icon.png')");
+      if (type) {
+        //phone
+        i.width(14);
+        i.height(20);
+        i.css("background-position","-154px 0px");
+      }
+      else
+      {
+        i.width(17);
+        i.height(17);
+        i.css("background-position","-154px -20px");
+      }
+      $(this).after(i);
+      i.css("top","" + $(this).position().top+$(this).height()-i.height() +"px");
+   });
+}
+
 function set_imgtag(items,imgSrc) {
     items.after("<img style='position:absolute;top:-3;left:-3' src='"+ imgSrc +"'>");
 }
 
-$(document).ready(function(e){
+function init_common()
+{
    $(".onlyNum").onlyNum();
     $(".onlyAlpha").onlyAlpha();
     $(".onlyNumAlpha").onlyNumAlpha();
@@ -539,4 +566,12 @@ $(document).ready(function(e){
     
     set_imgtag($(".hot_tag"),"res/hot.gif");
     set_imgtag($(".new_tag"),"res/new.gif");
+    
+    set_online_tag($(".phone_online"),true,"手机在线");
+    set_online_tag($(".online"),false,"在线");
+}
+
+$(document).ready(function(e){
+  init_common();
 });
+

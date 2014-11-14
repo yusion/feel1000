@@ -14,4 +14,18 @@
 <div id="qunit"></div>
 <div id="qunit-fixture"></div>
 %end
+
+<script>
+  less = {
+    env: "development",
+    async: false,
+    fileAsync: false,
+    poll: 1000,
+    functions: {},
+    dumpLineNumbers: "comments",
+    relativeUrls: false,
+    rootpath: ":/127.0.0.1/"
+  };
+</script>
+<script src="js/less.min.js"></script>    
 <!-- this is page foot end-->

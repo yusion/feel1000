@@ -19,19 +19,6 @@
     
 <!-- set options before less.js script -->
 <link rel="stylesheet/less" type="text/css" href="css/style.css" />
-<script>
-  less = {
-    env: "development",
-    async: false,
-    fileAsync: false,
-    poll: 1000,
-    functions: {},
-    dumpLineNumbers: "comments",
-    relativeUrls: false,
-    rootpath: ":/a.com/"
-  };
-</script>
-<script src="js/less.min.js"></script>    
     
  <!-- for unit test -->
 <link rel="stylesheet" href="css/qunit-1.15.0.css">

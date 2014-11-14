@@ -1,7 +1,7 @@
 <!-- this is page head begin -->
 <input type="hidden" id="session" value="{{session}}" />
-<div class="container"  style="width:100%">
-  <div id="head_row" class="row">
+<div id="page_container" class="container">
+  <div id="page_head_row" class="row">
     <div class="col-md-10 col-md-offset-1"  >
 	<nav class="navbar navbar-inverse" role="navigation">
  		<div class="navbar-header">

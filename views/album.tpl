@@ -31,7 +31,7 @@
 
 .div_album_like_list img{
 	width: 40px;
-	height: 60px;
+	height: 40px;
 }
 
 .div_album_reply{

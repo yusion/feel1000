@@ -8,36 +8,15 @@
 {{!page_head}}
 
 <style type="text/css">
-#my_space_head{
-	background-color: #516793;
-	color:white;
-	margin-top: -15px;
-	padding-top: 15px;
+#img_my_head_photo{
+	width:224px;height:276px;margin-top: 10px;
+	border: 5px solid white;
+	border-bottom-width: 30px;
 }
 
 #div_profile{
-/*	background-color: #f8f8f8;border:1px solid #e7e7e7*/
+	background-color: white;
 }
-
-/*my space navigator css */
-#nav_my_space{
-	margin: 0px 0px 0px 0px;
-	/*border-bottom: 4px solid transparent;*/
-}
-
-#nav_my_space .navbar-nav>li>a {
-    border-bottom: 4px solid transparent;
-}
-
-#nav_my_space .navbar-nav> li.active > a{
-    border-bottom: 4px solid orange;
-}
-
-#nav_my_space .navbar-nav>li>a:hover, 
-#nav_my_space .navbar-nav>li>a:focus {
-    border-bottom: 4px solid orange;
-}
-
 </style>
 <script type="text/javascript">
 	function init_raty(readonlyVal)
@@ -94,7 +73,7 @@
      <div class="col-md-10 col-md-offset-1" >
 	<div class="row">
 		<div class="col-md-3">
-			<img src="res/test/a (11).jpg" style="width:224px;height:276px;margin-top: 10px"></img>
+			<img id="img_my_head_photo" src="res/test/a (11).jpg"></img>
 			<p class="detail_css">
 				<i class="icon-eye-open"></i>1000次 |
 				<i class="icon-heart"></i>21人 |

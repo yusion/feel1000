@@ -1,24 +1,20 @@
 #returnTop {
-	_display:none;
 	position:fixed;
-	_position:absolute;
 	z-index:999;
 	right:15px;
 	bottom:-200px;
-	_bottom:auto;
 	width:30px;
 	height:65px;
 	text-indent:-999px;
 	overflow:hidden;
-	background-image:url(../res/small_icon.png);
-	_background-image:url(../res/small_icon.png);
+	background-image:url('../res/small_icon.png');
 	background-repeat:no-repeat;
-	background-position:-121px 0px;
+	background-position:-122px 0px;
 	transition:bottom 0.9s;
 	-webkit-transition:bottom 0.9s;
 	-moz-transition:bottom 0.9s;
 	-o-transition:bottom 0.9s;
 }
 #returnTop:hover {
-	background-position:-121px -65px;
+	background-position:-122px -65px;
 }

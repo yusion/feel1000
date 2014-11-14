@@ -6,22 +6,23 @@
 		$("#form_certif .form-group>div").addClass("col-md-4");
 		$("#form_certif H3").parent().addClass("col-md-6 col-md-offset-1");
 		$("#form_certif label").css("float","right");
+		$("#form_certif label").css("font-weight","normal");
 	});
 </script>
 <form id="form_certif" class="form-horizontal" role="form">
 	<div id="div_certif_container">
 		<div class="row">
 			<div>
-				<h3><i class="icon-nameplate"></i>身份证验证</h3>
+				<h3><i class="icon-nameplate"></i><strong>身份证</strong>验证</h3>
 			</div>
 		</div>
 		<div class="form-group">
 			<div>
-				<label for="id_photo_fontside">身份证正面相片</label>
+				<label for="id_photo_fontside">身份证<strong>正面</strong>相片</label>
 			</div>	
 			<div>
 				<div id="id_photo_fontside"  class="input-group">
-					<input type="text" class="form-control" placeholder="选择相片文件">
+					<input type="text" class="form-control" placeholder="相片文件路径">
 					<span class="input-group-btn">
 					   <button class="btn btn-default" type="button">浏览</button>
 					</span>
@@ -30,11 +31,11 @@
 		</div>
 		<div class="form-group">
 			<div>
-				<label for="id_photo_backside">身份证反面相片</label>
+				<label for="id_photo_backside">身份证<strong>反面</strong>相片</label>
 			</div>	
 			<div>	
 				<div id="id_photo_backside"  class="input-group">
-					<input type="text" class="form-control" placeholder="选择相片文件">
+					<input type="text" class="form-control" placeholder="相片文件路径">
 					<span class="input-group-btn">
 					   <button class="btn btn-default" type="button">浏览</button>
 					</span>
@@ -50,7 +51,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-2 col-md-offset-3">
-				<button type="submit" class="btn btn-success">提交认证信息</button>
+				<button type="submit" class="btn btn-success">上传认证信息</button>
 			</div>
 		</div>
 
@@ -65,7 +66,7 @@
 			</div>	
 			<div>
 				<div id="photo"  class="input-group">
-					<input type="text" class="form-control" placeholder="选择相片文件">
+					<input type="text" class="form-control" placeholder="相片文件路径">
 					<span class="input-group-btn">
 					   <button class="btn btn-default" type="button">浏览</button>
 					</span>
@@ -80,7 +81,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-2 col-md-offset-3">
-				<button type="submit" class="btn btn-success">提交认证信息</button>
+				<button type="submit" class="btn btn-success">上传认证信息</button>
 			</div>
 		</div>	
 		     
@@ -96,7 +97,7 @@
 			</div>	
 			<div>
 				<div id="photo"  class="input-group">
-					<input type="text" class="form-control" placeholder="选择相片文件">
+					<input type="text" class="form-control" placeholder="相片文件路径">
 					<span class="input-group-btn">
 					   <button class="btn btn-default" type="button">浏览</button>
 					</span>
@@ -111,7 +112,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-2 col-md-offset-3">
-				<button type="submit" class="btn btn-success">提交认证信息</button>
+				<button type="submit" class="btn btn-success">上传认证信息</button>
 			</div>
 		</div>
 		
@@ -128,7 +129,7 @@
 			</div>	
 			<div>
 				<div id="photo"  class="input-group">
-					<input type="text" class="form-control" placeholder="选择相片文件">
+					<input type="text" class="form-control" placeholder="相片文件路径">
 					<span class="input-group-btn">
 					   <button class="btn btn-default" type="button">浏览</button>
 					</span>
@@ -143,7 +144,45 @@
 		</div>
 		<div class="row">
 			<div class="col-md-2 col-md-offset-3">
-				<button type="submit" class="btn btn-success">提交认证信息</button>
+				<button type="submit" class="btn btn-success">上传认证信息</button>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div>
+				<h3><i class="icon-car"></i>公司验证</h3>
+			</div>
+		</div>
+		<div class="form-group">
+			<div>
+				<label for="photo">公司名称</label>
+			</div>	
+			<div>
+				<input type="text" class="form-control" placeholder="公司名称">
+			</div>
+		</div>
+		<div class="form-group">
+			<div>
+				<label for="photo"><strong>工卡/名片</strong>相片</label>
+			</div>	
+			<div>
+				<div id="photo"  class="input-group">
+					<input type="text" class="form-control" placeholder="相片文件路径">
+					<span class="input-group-btn">
+					   <button class="btn btn-default" type="button">浏览</button>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-9 col-md-offset-1">
+				<p class="help-block"><i class="icon-coffe-cup"></i>1、首先，此次身份信息核验是为了验证常用联系人身份信息的真实性，并不需要民众的参与，由12306网站自动完成。
+				<BR/>2、其次，在12306网站上使用二代居民身份证的注册用户和常用联系人身份信息经过身份验证将会产生三种结果：已通过、待核验和未通过。使用护照、港澳居民来往内地通行证、台湾居民来往大陆通行证的注册用户和常用联系人身份信息将有“已通过”“请报验”“预通过”“未通过”四种核验状态。
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2 col-md-offset-3">
+				<button type="submit" class="btn btn-success">上传认证信息</button>
 			</div>
 		</div>	 
 	</div>	     

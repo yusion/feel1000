@@ -15,14 +15,19 @@
 		</div>
 		<div class="collapse navbar-collapse" id="my_navbar-collapse">
 		   <ul class="nav navbar-nav">
-		       <li><a href="index"><i class="icon-temple-islam"></i> 广场</a></li>
 			<li><a href="message"><i class="icon-conversation"></i> 动态</a></li>
-			<li><a href="pkstage"><i class="icon-crown"></i> PK舞台</a></li>
-			<li class="active"><a href="my_space"><i class="icon-parents"></i> 个人主页</a></li>
+		        <li><a href="index"><i class="icon-search"></i> 查找</a></li> <!-- icon-temple-islam -->
+			<!--li><a href="pkstage"><i class="icon-crown"></i> PK舞台</a></li -->
+			<li class="active"><a href="my_space"><i class="icon-parents"></i> 我的主页</a></li>
 		   </ul>
 		</div>
 	     </nav>
      </div>
+  </div>
+  <div class="row">
+	<div class="col-md-11 col-md-offset-1">
+		个人主页->广州交友->我的认证
+	</div>
   </div>
 
 <script type="text/javascript">

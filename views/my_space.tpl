@@ -71,7 +71,7 @@
 </script>	
 
 <div id="my_space_head" class="row">
-     <div class="col-md-10 col-md-offset-1" >
+     <div class="col-md-8 col-md-offset-2" >
 	<div class="row">
 		<div class="col-md-3">
 			<img class="normal_profile hot_tag" src="res/test/a (11).jpg"></img>
@@ -136,7 +136,7 @@
      </div>
 </div>
 <div class="row">
-	<div class="col-md-10 col-md-offset-1" >
+	<div class="col-md-8 col-md-offset-2" >
 		<div class="row" style="margin-bottom: 0px;" >
 			<div class="col-md-12" >
 			<nav id="nav_my_space" class="navbar navbar-default" role="navigation">

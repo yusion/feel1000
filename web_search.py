@@ -53,7 +53,12 @@ class ctrl_search:
 def get_search_result(condition,page,page_size):
 	return utility.get_template_file("views/search_result.tpl",ctrl_search.search(condition,page_size,page))
 
-@bottle.route('/search')
+@bottle.route('/search')	
+@bottle.view('search')	
+def url_search():
+	return utility.get_dist()
+
+@bottle.route('/action/search')
 def url_search():
 	page = int(bottle.request.params.page)
 	page_size = int(bottle.request.params.page_size)

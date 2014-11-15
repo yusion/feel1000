@@ -166,7 +166,7 @@
 			{{!search_result}}
 			<div id="div_search_foot" class="row">
 				<div id="pagination">
-					<a href="search?page_size={{page_size}}&page={{int(current_page)+1}}" class="next_page">加载更多</a>		
+					<a href="action/search?page_size={{page_size}}&page={{int(current_page)+1}}" class="next_page">加载更多</a>		
 				</div>
 				<div id="infinitescroll" style="margin: 0;width: auto;height: 200px"></div>
 			</div>	

@@ -577,7 +577,7 @@ function init_common()
     set_imgtag($(".new_tag"),create_img_div(-158,-76,38,19));
     
     set_online_tag($(".phone_online"),true,"手机在线");
-    set_online_tag($(".online"),false,"在线");
+    set_online_tag($(".online"),false,"在线"); 
 }
 
 $(document).ready(function(e){

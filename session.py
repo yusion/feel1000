@@ -13,6 +13,14 @@ class session_data:
 		self.nickname = ""
 		self.session_id = ""
 		self.login_date = datetime.datetime.now()
+	
+	@property
+	def target_sex(self):
+		if self.sex == 0:
+			return 1
+		if self.sex == 1:
+			return 0
+		return -1
 
 g_session_data = {} 
 _last_session_id = int(time.time())

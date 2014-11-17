@@ -1,4 +1,13 @@
 <!-- this is page foot begin-->
+	%if is_test:
+	<div id="page_foot_row" class="row">
+		<div class="col-md-8 col-md-offset-2" >
+			<div id="qunit"></div>
+			<div id="qunit-fixture"></div>
+		</div>
+	</div>
+	%end
+	
 	<div id="page_foot_row" class="row">
 	    <div class="col-md-8 col-md-offset-3" >
 		<small>
@@ -10,10 +19,7 @@
 	</div>
 </div> <!-- container end -->
 
-%if is_test:
-<div id="qunit"></div>
-<div id="qunit-fixture"></div>
-%end
+
 
 <script>
   less = {

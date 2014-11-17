@@ -564,6 +564,7 @@ function set_imgtag(items,elem) {
     items.after(elem);
 }
 
+//breadcrumb navigator 
 function push_breadcrumb(name,url) {
   $("#my_breadcrumb li").removeClass("active");
   if (!url) {
@@ -580,6 +581,15 @@ function pop_breadcrumb() {
   $("#my_breadcrumb li:last-child").remove();
   $("#my_breadcrumb li:last-child").addClass("active");
 }
+
+function get_breadcrumb(){
+  var s = ""
+  $("#my_breadcrumb li").each(function(){
+    s+= $(this).text().trim() + "/";
+  });
+  return s.slice(0,s.length-1);
+}
+
 
 function init_common()
 {

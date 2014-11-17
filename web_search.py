@@ -56,7 +56,13 @@ def get_search_result(condition,page,page_size):
 @bottle.route('/search')	
 @bottle.view('search')	
 def url_search():
-	return utility.get_dist()
+	emptyName = "未填写"
+	d = utility.get_dist();
+	utility.update_c_table(d,"c_degree",None,emptyName)
+	utility.update_c_table(d,"c_income",None,emptyName)
+	utility.get_tag_table(d,session.get().target_sex)
+	utility.get_score_table(d,session.get().target_sex)
+	return d
 
 @bottle.route('/action/search')
 def url_search():

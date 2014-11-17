@@ -301,6 +301,16 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
      font-weight:bold;
 }
 
+/* 自动弹出下拉菜单 */
+.dropdown-hover .dropdown-menu li:hover .submenu
+{
+	visibility:visible
+}
+.dropdown-hover .dropdown:hover .dropdown-menu
+{
+	display:block
+}
+
 #my_breadcrumb{
 	background-color: @body_font_color;
 	margin: 0 0 0 0;
@@ -378,7 +388,7 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 /*my album page css */
 #my_space_head{
 	background-color: @my_space_head_color;
-	color:@body_font_color;
+	color:	@body_font_color;
 	padding-top: 15px;
 }
 

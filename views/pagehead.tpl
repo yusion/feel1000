@@ -30,8 +30,7 @@
   <div class="row"> 
 	<div class="col-md-8 col-md-offset-2">
 		<ol id="my_breadcrumb" class="breadcrumb">
-			<li style="color:#CCCCCC"><i class="icon-google-maps"></i>Î»ÖÃ </li>
-			<li><a href="index">Ö÷Ò³</a></li>
+			<li><a href="index"><i class="icon-google-maps"></i>Ö÷Ò³</a></li>
 		</ol>
 	</div>
   </div>

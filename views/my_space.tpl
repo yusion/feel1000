@@ -29,16 +29,19 @@
 	
 	$(document).ready(function(e){
 		init_raty(true);
-		
+		var isFirst = true;
 		$("#nav_my_space .navbar-nav").children("li").click(function(){
+			var text = $(this).children().text();
 			var u = $(this).children().attr("data");
 			$(this).parent().children("li").removeClass("active");
 			$(this).addClass("active");
 			$("#div_profile").load(u,function(responseTxt,statusTxt,xhr){
-				if(statusTxt=="success")
-				  init_common();
-				if(statusTxt=="error")
-				  $("#div_profile").text("Error: "+xhr.status+": "+xhr.statusText);
+				if(statusTxt!="success")
+					$("#div_profile").text("Error: "+xhr.status+": "+xhr.statusText);
+				init_common();
+				if(!isFirst) pop_breadcrumb();
+				push_breadcrumb(text,u);
+				isFirst=false;
 			      });
 			
 		});

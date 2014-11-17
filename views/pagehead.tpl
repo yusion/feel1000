@@ -27,16 +27,19 @@
 	     </nav>
      </div>
   </div>
-  <div class="row">
-	<div class="col-md-10 col-md-offset-2">
-		我的位置：主页 > 我的主页 > 我的认证
+  <div class="row"> 
+	<div class="col-md-8 col-md-offset-2">
+		<ol id="my_breadcrumb" class="breadcrumb">
+			<li style="color:#CCCCCC"><i class="icon-google-maps"></i>位置 </li>
+			<li><a href="index">主页</a></li>
+		</ol>
 	</div>
   </div>
 
 <script type="text/javascript">
 	$(document).ready(function(e){
 		$("#nav_main > li").removeClass("active");
-		$("#nav_main a").each(function(){
+		$("#nav_main .navbar-nav a").each(function(){
 			//set active tab 
 			link = $(this).attr("href").toLowerCase();
 			url = window.location.pathname.toLowerCase();
@@ -45,6 +48,7 @@
 			}
 			if (link.indexOf(url) != -1){ 
 				$(this).parent().addClass("active");
+				push_breadcrumb($(this).text());
 			}
 			else{
 				$(this).parent().removeClass("active");

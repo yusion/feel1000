@@ -564,6 +564,23 @@ function set_imgtag(items,elem) {
     items.after(elem);
 }
 
+function push_breadcrumb(name,url) {
+  $("#my_breadcrumb li").removeClass("active");
+  if (!url) {
+    url = window.location.pathname;
+  }
+  var link = $("<li><a class='active' href='" + url + "'>"+name+"</a></li>");
+  $("#my_breadcrumb").append(link);
+}
+
+function pop_breadcrumb() {
+  if ($("#my_breadcrumb li").length == 2) {
+    return;
+  }
+  $("#my_breadcrumb li:last-child").remove();
+  $("#my_breadcrumb li:last-child").addClass("active");
+}
+
 function init_common()
 {
    $(".onlyNum").onlyNum();

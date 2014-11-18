@@ -59,10 +59,10 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		//setup layout css
-		$("#div_search_cond").wrap("<small></small>");
-		$("#div_search_result .row >div:nth-of-type(1)").addClass("col-md-3 col-md-offset-2");
-		$("#div_search_result .row >div:nth-of-type(2)").addClass("col-md-2");
-		$("#div_search_result .row >div:nth-of-type(3)").addClass("col-md-3");
+		//$("#div_search_cond").wrap("<small></small>");
+		//$("#div_search_result .row >div:nth-of-type(1)").addClass("col-md-3 col-md-offset-2");
+		//$("#div_search_result .row >div:nth-of-type(2)").addClass("col-md-2");
+		//$("#div_search_result .row >div:nth-of-type(3)").addClass("col-md-3");
 		
 		//show and hide condition panel
 		$("#link_hide_cond").click(function(){
@@ -130,7 +130,7 @@
 			</li>
 			<li style="float: right">
 				共有<strong>99</strong>位女士
-				<button id="link_show_cond" class="btn btn-link"><i class="icon-expand"></i>更多选择</button>
+				<button id="link_show_cond" class="btn btn-link"><i class="icon-expand"></i>更多</button>
 			</li>
 			</ul>
 		</dd>
@@ -251,60 +251,68 @@
 <div id="div_search_result">
 %for i in range(5):
 <div class="row"> 
-	<div>
-		<div class="div_profile_img in_block" >
-			<img src="/res/test/a ({{i+1}}).jpg">
-			<div>
-				<small>
-					<i class="icon-eye-open"></i><span class="num_format">1022</span>次 |
-					<i class="icon-picture"></i><span class="num_format">11022</span>张
-				</small>
-			</div>
-		</div>		
-		<div class="div_profile_text">
-			<h4 title="姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚">姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚</h4>
-			<p>
-				<small>
-				广东广州 21岁 | 178cm | 50kg
-				</small>
-			</p>
-			<p>
-				<small>
-				本科 | 10k-15k | 租房 | 有车
-				</small>
-			</p>
-			<div class="in_block">
-				<i class="icon-iphone" title="手机认证"></i>&nbsp;
-				<i class="icon-nameplate" title="身份认证"></i>&nbsp;
-				<i class="icon-camera" title="相片认证"></i>&nbsp;
-				<i class="icon-car" title="有车认证"></i>&nbsp;
-				<i class="icon-temple-christianity-church" title="有房认证"></i>
-			</div>
-			<BR>
-			<small>
-				长相:<span class="star_readonly" star="2"></span> 英俊潇洒<BR/>
-				身材:<span class="star_readonly" star="3"></span> 英俊潇洒<BR/>
-				性格:<span class="star_readonly" star="1"></span> 英俊潇洒<BR/>
-				爱情:<span class="star_readonly" star="5"></span> 英俊潇洒<BR/>
-			</small>
-			<div class="in_block">
-				<small>
-				专情1 浪漫1 随缘1 自由1 无所
-				</small>
-			</div>
-		</div>
-	</div>	
-	<div >
-		<div class="search_item_score_css in_block">
-				<H2 class="in_block">30%</H2><H4 class="in_block">符合度</H4>
-				<div class="in_block">
-					<button id="img_popup_like" class="btn btn-success" style="width: 100%">
-						<i class="icon-heart-empty"></i><span class="num_format">22</span>人喜欢+1
+	<div class="col-md-8 col-md-offset-2" >
+		<div class="row" style="background-color:white; margin:0 0 0 0">
+			<div class="col-md-10" >
+				<div class="div_profile_img in_block" >
+					<img src="/res/test/a ({{i+1}}).jpg">
+					<div>
+						<small>
+							<i class="icon-eye-open"></i><span class="num_format">1022</span>次 |
+							<i class="icon-picture"></i><span class="num_format">11022</span>张
+							<i class="icon-heart"></i><span class="num_format">22</span>人喜欢
+						</small>
+					</div>
+				</div>		
+				<div class="div_profile_text">
+					<h4 title="姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚">姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚</h4>
+					<div class="in_block">
+						<i class="icon-iphone" title="手机认证"></i>&nbsp;
+						<i class="icon-nameplate" title="身份认证"></i>&nbsp;
+						<i class="icon-camera" title="相片认证"></i>&nbsp;
+						<i class="icon-car" title="有车认证"></i>&nbsp;
+						<i class="icon-temple-christianity-church" title="有房认证"></i>
+					</div>
+					<p>
+						<small>
+						广东广州 21岁 | 178cm | 50kg | 本科 | 10k-15k | 租房 | 有车
+						</small>
+					</p>
+					 
+					寻找住在广东广州21~30岁的男生
+					<BR>
+					<small>
+						长相:<span class="star_readonly" star="2"></span> 英俊潇洒<BR/>
+						身材:<span class="star_readonly" star="3"></span> 英俊潇洒<BR/>
+						性格:<span class="star_readonly" star="1"></span> 英俊潇洒<BR/>
+						爱情:<span class="star_readonly" star="5"></span> 英俊潇洒<BR/>
+					</small>
+					<div class="in_block">
+						<small>
+						<ul class="list-inline">
+							<li>专情</li>
+							<li>浪漫</li>
+							<li>随缘</li>
+							<li>无所</li>
+							<li>无所</li>
+						</ul>
+						</small>
+					</div>
+				</div>
+			</div>	
+			<div class="col-md-2" >
+				<div class="search_item_score_css1" >
+					<small>匹配度:</small><H2 class="match_num in_block">30%</H2>
+					<button id="img_popup_like" class="btn btn-primary btn-block">
+						<i class="icon-chat"></i>发信
 					</button>
-					<i class="icon-heart"></i><span class="num_format">22</span>人喜欢
-				<BR>
-					<div class="btn-group" style="width: 100%">
-						<button type="button" class="btn btn-warning dropdown-toggle"  data-toggle="dropdown" style="width: 100%;height: 100%">
+					
+					<button id="img_popup_like" class="btn btn-success btn-block">
+						<i class="icon-heart-empty"></i>喜欢
+					</button>
+					
+					<div class="btn-group  btn-block" >
+						<button type="button" class="btn btn-warning dropdown-toggle  btn-block"  data-toggle="dropdown" style="width: 100%;height: 100%">
 						   <i class="icon-remove-2"></i>不喜欢
 						</button>
 						<ul class="dropdown-menu" role="menu">
@@ -314,30 +322,9 @@
 						</ul>
 					</div>
 				</div>
-		</div>
-	</div>	
-	<div class="visible-md visible-lg">
-		<div class="div_profile_text in_block">
-			<h4>喜欢男士类型</h4>
-			<p class="detail_css"><small>
-				广东 广州 | 21~30岁<BR>
-				168~178厘米 | 40~60公斤
-			</small></p>
-			<p class="detail_css"><small>
-				本科以上 | 1000~2000元
-			</small></p>
-			<small>
-				长相:<span class="star_readonly" star="2"></span> 英俊潇洒<BR/>
-				身材:<span class="star_readonly" star="3"></span> 英俊潇洒<BR/>
-				性格:<span class="star_readonly" star="1"></span> 英俊潇洒<BR/>
-				爱情:<span class="star_readonly" star="5"></span> 英俊潇洒<BR/>
-			</small>
-		</div>
-		<div class="div_profile_img in_block">
-			<img src="/res/test/1-140604144444.jpg">
-			<div></div> <!--don't del, occupy space-->
+			</div>
 		</div>	
-	</div> 
+	</div>		
 </div>
 <!--HR style="color:black;border:1px solid black;"-->
 %end

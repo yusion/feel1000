@@ -143,18 +143,16 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 .img_profile_sm{
 	width:112px;
 	height:138px;
-	border-radius: 5px;
 }
 
 .img_profile_lg{
 	width:224px;
 	height:276px;
-	border-radius: 5px;
 }
 
 .div_profile_img{
-	border: 1px solid lightgray; 
-	border-radius: 5px;
+	/*border: 1px solid lightgray; 
+	border-radius: 5px;*/
 	background-color: white;
 	padding: 5px 5px 15px 5px;
 	
@@ -169,14 +167,22 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 		overflow: hidden;
 	}
 }
+.match_num{
+	font:   24px Candara;
+	color: #e46a4a;
+	margin: 0 0 0 0;
+}
 
 .div_profile_text{
 	display: inline-block;
+	
 	H4{	display: inline-block;
 		width:150px;
 		height: 20px;
 		overflow: hidden;
-		margin:0 0 0 0
+		margin:0 0 0 0;
+		color: black;
+		/*font-weight: 400;*/
 	}
 	p{      margin: 0 0 0 0;
 	}
@@ -186,7 +192,8 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 }
 
 #div_search_result .row{
-	margin-bottom: 30px;
+	/*margin-bottom: 30px;*/
+	color: gray;
 }
 
 /* 旧，查询表单的css */

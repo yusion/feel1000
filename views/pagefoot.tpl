@@ -1,6 +1,6 @@
 <!-- this is page foot begin-->
 	%if is_test:
-	<div id="page_foot_row" class="row">
+	<div class="row">
 		<div class="col-md-8 col-md-offset-2" >
 			<div id="qunit"></div>
 			<div id="qunit-fixture"></div>
@@ -9,7 +9,7 @@
 	%end
 	
 	<div id="page_foot_row" class="row">
-	    <div class="col-md-8 col-md-offset-3" >
+	    <div class="col-md-8 col-md-offset-4" >
 		<small>
 		合作网站：新闻客户端  网易云阅读  网易女人  有道词典网易论坛  网易应用  网易商城爱拍  网易保健品  网易云音乐  网易科技  查看更多>><BR>
 		..公司版权所有<BR>

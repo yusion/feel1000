@@ -590,6 +590,26 @@ function get_breadcrumb(){
   return s.slice(0,s.length-1);
 }
 
+function num_format(elems) {
+  elems.each(function(){
+      if(!/^\d+$/.test($(this).text())) {
+        return;
+      }
+    
+      var i = parseInt($(this).text());
+      if (i == NaN) {
+        return;
+      }
+      if (i >= 10000) {
+        i /= 10000;
+        $(this).text(Math.floor(i)+"万");
+      }
+      else if (i >= 1000) {
+        i /= 1000;
+        $(this).text(Math.floor(i)+"千");
+      }
+  });
+}
 
 function init_common()
 {
@@ -599,6 +619,7 @@ function init_common()
     $(".limit_s").limitLength(6);
     $(".limit_m").limitLength(20);
     $(".limit_l").limitLength(100);
+    num_format($(".num_format"));
     
     set_imgtag($(".hot_tag"),create_img_div(-158,-41,38,21));
     set_imgtag($(".new_tag"),create_img_div(-158,-76,38,19));

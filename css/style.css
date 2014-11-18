@@ -62,14 +62,7 @@
 	height:40px;
 }
 
-.small_profile{
-	width:112px;
-	height:138px;
-}
-
 .normal_profile{
-	width:224px;
-	height:276px;
 	border: 5px solid white;
 	border-bottom-width: 30px;
 }
@@ -105,19 +98,6 @@ border-color: purple;
 outline: 0;
 -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
-}
-
-.panel2_css{
-	/*border: 1px solid #eee;*/
-	border-bottom-width: 5px;
-	border-radius: 5px;
-	background-color: white;
-	margin-bottom: 10px; 
-}
-
-.panel2_css:hover{ 
-	border-bottom-color: @hover_link_color;
-	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px @hover_link_color;
 }
 
 .button_css{
@@ -158,72 +138,58 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 }
 
 /* search item css*/
-.search_item_css{
-	/*margin: 0px 0px 15px 0;*/
+
+/*所有头像的div设置 */
+.img_profile_sm{
+	width:112px;
+	height:138px;
+	border-radius: 5px;
 }
-.search_item_img_css{
-	display: inline-block;
-	border: solid 1px orange;
-	color: green;
+
+.img_profile_lg{
+	width:224px;
+	height:276px;
+	border-radius: 5px;
+}
+
+.div_profile_img{
+	border: 1px solid lightgray; 
+	border-radius: 5px;
 	background-color: white;
-	padding: 5px 5px 5px 5px;
-	/*border-radius: 5px;*/
-}
-.search_item_img_css img{
-	.small_profile;
-	vertical-align: inherit
-}
-.search_item_detail_css{
-	display: inline-block
-}
-.search_item_detail_css h4{
-	display: inline-block;
-	width:120px;
-	height: 20px;
-	overflow: hidden;
-	margin:0 0 0 0
-}
-
-.badge_css{
-	display: inline-block;
-}
-
-.detail_css{
-	margin:0 0 0 0
-}
-
-.search_item_score_css{
+	padding: 5px 5px 15px 5px;
 	
+	img{
+		.img_profile_sm
+	}
+	
+	div{
+		width:112px;
+		height: 20px;
+		margin: 0 0 0 0;
+		overflow: hidden;
+	}
 }
-/*
-.search_item_btn_css{
+
+.div_profile_text{
 	display: inline-block;
-	width:20px;
-	height:100%
+	H4{	display: inline-block;
+		width:150px;
+		height: 20px;
+		overflow: hidden;
+		margin:0 0 0 0
+	}
+	p{      margin: 0 0 0 0;
+	}
+	.star_readonly{
+		vertical-align: text-bottom;
+	}
 }
 
-.search_item_btn_css>a{
-	display: block;color:red;font-size: 20px;cursor:pointer;margin: 0px 0px 0px 0px;width:100%;height: 50%;
+#div_search_result .row{
+	margin-bottom: 30px;
 }
 
-.search_item_dislike_btn_css>a{
-	color:black;font-size: 20px;cursor:pointer;width:100%;height: 50%;display: inline-block;margin: 0px 0px 0px 0px
-}
-
-.search_item_dislike_btn_css>ul>li:first-child{
-	padding: 10px 3px 3px 20px;
-}
-*/
-
-/* search form css */
-/*#search_form{
-	padding: 20px 0px 10px 0px;
-}
-
-#search_form>div{
-	padding: 10px 5px 10px 5px
-}
-*/
+/* 旧，查询表单的css */
 #search_form label{
 	padding: 0px 0px 0px 20px
 }
@@ -254,7 +220,7 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 	padding: 0px 20px 0px 0px;
 }
 
-/* navigator ctrl */
+/* 首部导航设计 */
 .navbar-inverse {
     background-color:transparent;
     border-width: 0px;
@@ -311,6 +277,7 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 	display:block
 }
 
+/*面包导航设计*/
 #my_breadcrumb{
 	background-color: @body_font_color;
 	margin: 0 0 0 0;
@@ -321,13 +288,14 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
     content: ">";
 }
 
-/* page head css*/
+/* 共用页面设计 */
 #page_head_row{
 	background-color: @head_color;
 }
 
 #page_container{
 	width:100%;
+	padding: 0 0 0 0;
 	background-color: @body_color;
 }
 
@@ -336,8 +304,7 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 	margin: 0px 0px 0px 0px;
 }
 
-
-
+/*自定义标签控件 */
 /*jquery ctrl: for tag selector */
 .tagItem{
 	min-width: 50px;

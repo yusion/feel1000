@@ -3,12 +3,12 @@
 @head_color: #154478;
 @body_color: #efeff1;
 @body_font_color: white;
-@foot_color: #f938ab;
+@foot_color: @head_color;
 
 @active_nav_color:#efeff1;
 @active_nav_font_color:black; 
 
-@active_link_color: #ff3333;
+@active_link_color: orange;
 @hover_link_color: #ff3333;
 
 @my_space_head_color: #331344;
@@ -53,6 +53,10 @@
 
 .in_block{
 	display: inline-block
+}
+
+.hide_block{
+	display: none
 }
 
 .row{margin-bottom:15px
@@ -142,8 +146,9 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 /*查询结果的css设置*/
 
 /*所有头像的div设置 */
+@img_profile_sm_width: 112px;
 .img_profile_sm{
-	width:112px;
+	width:@img_profile_sm_width;
 	height:138px;
 }
 
@@ -181,8 +186,6 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 }
 
 .div_profile_text{
-	display: inline-block;
-	
 	.text_nickname{	display: inline-block;
 		max-width: 200px;
 		max-height: 20px;
@@ -191,7 +194,7 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 		color: #003D79;
 		/*font-weight: 400;*/
 	}
-	p{      margin: 0 0 0 0;
+	p{	margin: 0 0 0 0;
 	}
 	.star_readonly{
 		vertical-align: text-bottom;
@@ -254,6 +257,41 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 #tab_dispaly >li>a:hover {
 	border-bottom-width: 2px;
 	border-bottom-color: orange;  
+}
+
+/* 切换不同的显示效果 */
+.search_display_sm{
+	.div_view_stat, .text_profile_info2, .div_certif, .div_match,
+	.div_score, .div_tags, .text_profile_city, .div_space, .text_like_it, .text_btn{
+		.hide_block
+	}
+	.div_profile_img{
+		padding: 0 0 0 0;
+	}
+	.div_profile_img > img{
+		width: 90%;
+		height: auto;
+	}
+	.text_nickname1{
+		max-width:@img_profile_sm_width;
+		height: 20px;
+		margin: 4px 0 0 0;
+		font-size: 15px;
+		overflow: hidden; 
+	}
+	.text_profile_info1{
+		font-weight: lighter;
+		font-size: 10px;
+	}
+	p{
+		margin: 0 0 0 0;
+	}
+}
+
+.search_display_lg{
+	.div_profile_img > div{
+		.hide_block
+	}
 }
 
 /* 旧，查询表单的css */
@@ -332,6 +370,10 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 /*修复bootstrap3.0的bug*/
 .nav > li.active{
      font-weight:bold;
+}
+
+.btn.active{
+	background-color: @active_link_color;
 }
 
 /* 自动弹出下拉菜单 */

@@ -285,8 +285,8 @@
 						<strong>广东广州 | 21岁 | 178cm | 50kg</strong>
 						
 					</p>
-					<p>
-					 <small>本科 | 10k-15k | 租房 | 有车</small>
+					<p class="small">
+					 本科 | 10k-15k | 租房 | 有车
 					</p>
 					<small>
 						长相:<span class="star_readonly" star="2"></span> 英俊潇洒<BR/>
@@ -294,8 +294,7 @@
 						性格:<span class="star_readonly" star="1"></span> 英俊潇洒<BR/>
 						爱情:<span class="star_readonly" star="5"></span> 英俊潇洒<BR/>
 					</small>
-					<div class="in_block">
-						<small>
+					<div class="in_block small">
 						<ul class="list-inline tag_readOnly">
 							<li>专情</li>
 							<li>浪漫</li>
@@ -303,17 +302,17 @@
 							<li>无所</li>
 							<li>无所外表</li>
 						</ul>
-						</small>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
-				<div class="visible-md visible-lg" style="width:10px;height: 20px"></div>
-				<strong>寻找住在广东广州21~30岁的男生</strong>
+				<span class="match_num">匹配度:<H1 class="in_block">30%</H1></span>
+				<BR>
+				寻找广东广州21~30岁的男生
 			</div>
 			<div class="col-md-2" >
 				<div class="search_item_score_css1" >
-					<small>匹配度:</small><H2 class="match_num in_block">30%</H2>
+					<div class="visible-md visible-lg" style="width:10px;height: 30px"></div>
 					<button id="img_popup_like" class="btn btn-primary btn-block">
 						<i class="icon-chat"></i>发信
 					</button>

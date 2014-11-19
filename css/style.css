@@ -139,7 +139,7 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 	background-position: -200px 0px;
 }
 
-/* search item css*/
+/*查询结果的css设置*/
 
 /*所有头像的div设置 */
 .img_profile_sm{
@@ -207,6 +207,53 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 #div_search_result .row{
 	/*margin-bottom: 30px;*/
 	color: gray;
+}
+
+#div_search_cond dl{
+	background-color:white;
+}
+#div_search_cond hr{
+	margin: 0 0 10px 0;
+}
+#div_search_cond dl > dt{
+	width: 70px;
+	color: gray;
+}
+#div_search_cond dl > dd{
+	margin-left: 90px;
+	color: gray;
+}
+
+#div_search_cond .badge{
+	background-color: lightgray;
+}
+ 
+#tab_dispaly .navbar-text, #tab_dispaly  .navbar-form{
+	margin: 0px 15px 0px 15px;
+}
+
+#link_show_cond,#link_hide_cond{
+	text-decoration:none;
+	padding: 0 10px 0 0;
+}
+
+#tab_dispaly > li {
+	float: left;
+	margin-bottom: -2px; 
+}
+
+#tab_dispaly {
+	border-bottom: 2px solid #ddd;
+}
+
+#tab_dispaly >li>a{
+	border-bottom-width: 2px;
+	border-bottom-color: transparent;  
+}
+
+#tab_dispaly >li>a:hover {
+	border-bottom-width: 2px;
+	border-bottom-color: orange;  
 }
 
 /* 旧，查询表单的css */

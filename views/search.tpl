@@ -8,53 +8,6 @@
 %import random
 
 <style type="text/css">
-#div_search_cond dl{
-	background-color:white;
-}
-#div_search_cond hr{
-	margin: 0 0 10px 0;
-}
-#div_search_cond dl > dt{
-	width: 70px;
-	color: gray;
-}
-#div_search_cond dl > dd{
-	margin-left: 90px;
-	color: gray;
-}
-
-#div_search_cond .badge{
-	background-color: lightgray;
-}
- 
-#tab_dispaly .navbar-text, #tab_dispaly  .navbar-form{
-	margin: 0px 15px 0px 15px;
-}
-
-#link_show_cond,#link_hide_cond{
-	text-decoration:none;
-	padding: 0 10px 0 0;
-}
-
-#tab_dispaly > li {
-	float: left;
-	margin-bottom: -2px; 
-}
-
-#tab_dispaly {
-	border-bottom: 2px solid #ddd;
-}
-
-#tab_dispaly >li>a{
-	border-bottom-width: 2px;
-	border-bottom-color: transparent;  
-}
-
-#tab_dispaly >li>a:hover {
-	border-bottom-width: 2px;
-	border-bottom-color: orange;  
-}
-
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -84,8 +37,8 @@
 		
 		$("#link_hide_cond").click();
 				
-		//auto set order mark
-		function add_mark(elem)
+		//设置排序指示图标
+		function add_order_mark(elem)
 		{
 			if (elem.hasClass("up")) {
 				elem.append("<i class='icon-up-arrow order_mark'></i>");
@@ -112,16 +65,53 @@
 				{
 					p.removeClass("up");
 				}
-				add_mark(p);
+				add_order_mark(p);
 				p.find(".caret").hide()
 			}
-			add_mark($(this));
+			add_order_mark($(this));
 		});
-		add_mark($("#tab_dispaly .active>a"));
+		add_order_mark($("#tab_dispaly .active>a"));
 		
+		//按喜欢的动态效果
+		$("#move_heart").hide();
+		function set_like_it_btn(btn){
+			btn.html("<i class='icon-heart-empty'></i>喜欢");
+		}
+		set_like_it_btn($(".btn_move_heart"));
+		
+		$(".btn_move_heart").click(function(){
+			var btn = $(this);
+			var t = $("#move_heart");
+			var src = btn.find("i");
+			var n = btn.parent().find(".text_like_num");
+			var dest = btn.parent().find(".move_heart_dest");
+			
+			if (!src.length) {
+							
+				n.text(parseInt(n.text()) - 1);
+				set_like_it_btn(btn);
+			}
+			else
+			{
+				t.css({top: src.offset().top,
+				left:src.offset().left});
+				t.show();
+			
+				t.animate({
+				  left:dest.offset().left,
+				  top:dest.offset().top
+				  },
+				  "slow",function(){
+					t.hide(100);
+					n.text(parseInt(n.text()) + 1);
+					btn.text("取消喜欢");
+				});
+			}
+			
+		});
 	}); 
 </script>
-
+<p id="move_heart" class="icon-heart" style="position: absolute;color:red;z-index:100"> +1</p>
 <div class="row">
 	<div id="div_search_cond" class="col-md-8 col-md-offset-2">
 	<dl class="dl-horizontal" style="margin: 0 0 0 0;padding-top: 10px">
@@ -210,9 +200,9 @@
 		<hr/>
 		<dt>标签</dt>
 		<dd>
-			<ul class="list-inline">
+			<ul class="list-inline tag_readOnly">
 			%for t in c_tag:
-				<li><div class="tagItem " >{{t[1]}}<span class="badge">{{random.randint(1,300)}}</span></div></li>
+				<li>{{t[1]}}<span class="badge">{{random.randint(1,300)}}</span></li>
 			%end 
 			</ul>
 		</dd>
@@ -268,7 +258,6 @@
 						<small>
 							<i class="icon-eye-open"></i><span class="num_format">1022</span>次 |
 							<i class="icon-picture"></i><span class="num_format">11022</span>张
-							<i class="icon-heart"></i><span class="num_format">22</span>人喜欢
 						</small>
 					</div>
 				</div>		
@@ -312,13 +301,14 @@
 			</div>
 			<div class="col-md-2" >
 				<div class="search_item_score_css1" >
-					<div class="visible-md visible-lg" style="width:10px;height: 30px"></div>
+					<div class="visible-md visible-lg" style="width:10px;height: 10px"></div>
+					<p class="text-center" style="color:#FF60AF;"><span class="text_like_num">221256</span>人喜欢<i class="icon-heart move_heart_dest"></i></p>
 					<button id="img_popup_like" class="btn btn-primary btn-block">
-						<i class="icon-chat"></i>发信
+						<i class="icon-chat"></i>发信息
 					</button>
 					
-					<button id="img_popup_like" class="btn btn-success btn-block">
-						<i class="icon-heart-empty"></i>喜欢
+					<button id="img_popup_like" class="btn btn-success btn-block btn_move_heart">
+						<!--i class="icon-heart-empty"></i>喜欢-->
 					</button>
 					
 					<div class="btn-group  btn-block dropdown-hover" >

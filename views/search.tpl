@@ -77,9 +77,9 @@
 		function set_like_it_btn(btn){
 			btn.html("<i class='icon-heart-empty'></i>喜欢");
 		}
-		set_like_it_btn($(".btn_move_heart"));
+		set_like_it_btn($(".btn_like_it"));
 		
-		$(".btn_move_heart").click(function(){
+		$(".btn_like_it").click(function(){
 			var btn = $(this);
 			var t = $("#move_heart");
 			var src = btn.find("i");
@@ -108,6 +108,11 @@
 				});
 			}
 			
+		});
+		//按不喜欢的动态效果
+		$(".btn_dontlike_it .dropdown-menu li>a").click(function(){
+			var r = $(this).parents(".top_row");
+			r.fadeOut(800);
 		});
 	}); 
 </script>
@@ -248,7 +253,7 @@
 
 <div id="div_search_result">
 %for i in range(5):
-<div class="row"> 
+<div class="row top_row"> 
 	<div class="col-md-8 col-md-offset-2" >
 		<div class="row" style="background-color:white; margin:0 0 0 0">
 			<div class="col-md-6" style="padding-left: 10px;padding-top: 10px">
@@ -303,15 +308,15 @@
 				<div class="search_item_score_css1" >
 					<div class="visible-md visible-lg" style="width:10px;height: 10px"></div>
 					<p class="text-center" style="color:#FF60AF;"><span class="text_like_num">221256</span>人喜欢<i class="icon-heart move_heart_dest"></i></p>
-					<button id="img_popup_like" class="btn btn-primary btn-block">
+					<button class="btn btn-primary btn-block">
 						<i class="icon-chat"></i>发信息
 					</button>
 					
-					<button id="img_popup_like" class="btn btn-success btn-block btn_move_heart">
+					<button class="btn btn-success btn-block btn_like_it">
 						<!--i class="icon-heart-empty"></i>喜欢-->
 					</button>
 					
-					<div class="btn-group  btn-block dropdown-hover" >
+					<div class="btn-group  btn-block dropdown-hover btn_dontlike_it" >
 						<button type="button" class="btn btn-warning dropdown-toggle  btn-block"  data-toggle="dropdown" style="width: 100%;height: 100%">
 						   <i class="icon-remove-2"></i>不喜欢
 						</button>
@@ -382,7 +387,7 @@
 		assert.ok(!$("#link_hide_cond").is(":visible"));
 		assert.equal($("#div_search_cond dl").children(":visible").length,2);
 		QUnit.start();
-	}, 300);
+	}, 500);
      });
      
      QUnit.asyncTest("show_condition_panel",function(assert){
@@ -395,7 +400,49 @@
 		QUnit.start();
 	}, 300);
 	
-	
+     QUnit.asyncTest("like_it1",function(assert){
+	//TODO:还需要加上后台互动
+	expect(4);
+	var a = $($(".btn_like_it")[2]);
+	assert.ok(a.text().indexOf("喜欢")!=-1);
+	assert.ok(a.text().indexOf("取消喜欢")==-1);
+	var count = parseInt(a.parent().find(".text_like_num").text());
+	a.click();
+	setTimeout(function() {
+		assert.equal(parseInt(a.parent().find(".text_like_num").text()),count+1);
+		assert.ok(a.text().indexOf("取消喜欢")!=-1); 
+		QUnit.start();
+	}, 1000);
+     });
+     
+     QUnit.asyncTest("like_it2",function(assert){
+	//TODO:还需要加上后台互动
+	expect(4);
+	var a = $($(".btn_like_it")[2]);
+	assert.ok(a.text().indexOf("取消喜欢")!=-1);
+	var count = parseInt(a.parent().find(".text_like_num").text());
+	a.click();
+	setTimeout(function() {
+		assert.equal(parseInt(a.parent().find(".text_like_num").text()),count-1);
+		assert.ok(a.text().indexOf("取消喜欢")==-1);
+		assert.ok(a.text().indexOf("喜欢")!=-1); 
+		QUnit.start();
+	}, 1000);
+     });
+     
+     QUnit.asyncTest("dont_like_it",function(assert){
+	expect(2);
+	//TODO:还需要加上后台互动 
+	var a = $(".btn_dontlike_it .dropdown-menu li>a")[2];
+	var len = $(".top_row").length;
+	a.click();
+	var p = $(a).parents(".top_row:visible");
+	setTimeout(function() {
+		assert.equal(len-1,$(".top_row:visible").length); 
+		assert.ok(!p.is("visible"));
+		QUnit.start();
+	}, 1000);
+     });
      });
 </script>
 %end     

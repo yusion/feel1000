@@ -65,16 +65,23 @@
 		//$("#div_search_result .row >div:nth-of-type(3)").addClass("col-md-3");
 		
 		//show and hide condition panel
-		$("#link_hide_cond").click(function(){
-			$(this).parents("dd").nextAll().hide();
-			$(this).hide();
+		function hideSearchPanel(){
+			$("#dt_cond_area").nextAll().fadeOut(500);
+			$("#link_hide_cond").hide();
 			$("#link_show_cond").show();
-		});
-		$("#link_show_cond").click(function(){
-			$(this).parents("dd").nextAll().show();
-			$(this).hide();
+		}
+		
+		function showSearchPanel(){
+			$("#dt_cond_area").nextAll().fadeIn(500);
+			$("#link_show_cond").hide();
 			$("#link_hide_cond").show();
-		});
+		}
+		
+		$("#link_hide_cond").click(hideSearchPanel);
+		$("#link_show_cond").click(showSearchPanel);
+		//$("#div_search_cond").mouseenter(showSearchPanel);
+		//$("#div_search_cond").mouseleave(hideSearchPanel);
+		
 		$("#link_hide_cond").click();
 				
 		//auto set order mark
@@ -111,6 +118,7 @@
 			add_mark($(this));
 		});
 		add_mark($("#tab_dispaly .active>a"));
+		
 	}); 
 </script>
 
@@ -118,7 +126,7 @@
 	<div id="div_search_cond" class="col-md-8 col-md-offset-2">
 	<dl class="dl-horizontal" style="margin: 0 0 0 0;padding-top: 10px">
 		<dt>地区</dt>
-		<dd>
+		<dd  id="dt_cond_area">
 			<ul class="list-inline">
 			<li><a href="#">广东<span class="badge">111</span></a></li>
 			%for i in range(1):
@@ -253,8 +261,8 @@
 <div class="row"> 
 	<div class="col-md-8 col-md-offset-2" >
 		<div class="row" style="background-color:white; margin:0 0 0 0">
-			<div class="col-md-10" >
-				<div class="div_profile_img in_block" >
+			<div class="col-md-6" style="padding-left: 10px;padding-top: 10px">
+				<div class="div_profile_img in_block"">
 					<img src="/res/test/a ({{i+1}}).jpg">
 					<div>
 						<small>
@@ -265,8 +273,8 @@
 					</div>
 				</div>		
 				<div class="div_profile_text">
-					<h4 title="姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚">姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚</h4>
-					<div class="in_block">
+					<h4 class="text_nickname" title="姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚">姚姚姚</h4>
+					<div class="in_block" style="margin-left:20px">
 						<i class="icon-iphone" title="手机认证"></i>&nbsp;
 						<i class="icon-nameplate" title="身份认证"></i>&nbsp;
 						<i class="icon-camera" title="相片认证"></i>&nbsp;
@@ -274,13 +282,12 @@
 						<i class="icon-temple-christianity-church" title="有房认证"></i>
 					</div>
 					<p>
-						<small>
-						广东广州 21岁 | 178cm | 50kg | 本科 | 10k-15k | 租房 | 有车
-						</small>
+						<strong>广东广州 | 21岁 | 178cm | 50kg</strong>
+						
 					</p>
-					 
-					寻找住在广东广州21~30岁的男生
-					<BR>
+					<p>
+					 <small>本科 | 10k-15k | 租房 | 有车</small>
+					</p>
 					<small>
 						长相:<span class="star_readonly" star="2"></span> 英俊潇洒<BR/>
 						身材:<span class="star_readonly" star="3"></span> 英俊潇洒<BR/>
@@ -289,17 +296,21 @@
 					</small>
 					<div class="in_block">
 						<small>
-						<ul class="list-inline">
+						<ul class="list-inline tag_readOnly">
 							<li>专情</li>
 							<li>浪漫</li>
-							<li>随缘</li>
+							<li>随缘外表</li>
 							<li>无所</li>
-							<li>无所</li>
+							<li>无所外表</li>
 						</ul>
 						</small>
 					</div>
 				</div>
-			</div>	
+			</div>
+			<div class="col-md-4">
+				<div class="visible-md visible-lg" style="width:10px;height: 20px"></div>
+				<strong>寻找住在广东广州21~30岁的男生</strong>
+			</div>
 			<div class="col-md-2" >
 				<div class="search_item_score_css1" >
 					<small>匹配度:</small><H2 class="match_num in_block">30%</H2>
@@ -311,7 +322,7 @@
 						<i class="icon-heart-empty"></i>喜欢
 					</button>
 					
-					<div class="btn-group  btn-block" >
+					<div class="btn-group  btn-block dropdown-hover" >
 						<button type="button" class="btn btn-warning dropdown-toggle  btn-block"  data-toggle="dropdown" style="width: 100%;height: 100%">
 						   <i class="icon-remove-2"></i>不喜欢
 						</button>

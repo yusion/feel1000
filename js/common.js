@@ -457,6 +457,46 @@ function create_img_div(left,top,width,height)
     }
 })(jQuery);
 
+//设置自动弹出菜单，注意导航栏是通过css设置的 
+function set_dropdown_hover(elems){
+  elems.each(function(){
+    
+      var timerID1;
+      var timerID2;
+      var This = $(this);
+      
+      function showMenu()
+      {
+        This.addClass("open");
+      }
+      
+      function hideMenu()
+      {
+        This.removeClass("open");
+      }
+      
+      This.mouseenter(function(){
+          clearTimeout(timerID1);
+          clearTimeout(timerID2);
+          showMenu();
+        });
+       
+      This.mouseleave(function(){
+          timerID1 = setTimeout(hideMenu,200);
+        });
+        
+      This.find("ul").mouseenter(function(){
+          clearTimeout(timerID1);
+          clearTimeout(timerID2);
+          showMenu();
+        });
+      This.find("ul").mouseleave(function(){
+          timerID2 = setTimeout(hideMenu,200);
+      });
+  });
+}
+		
+
 //set a auto popup div(#pop_div) on img element
 function set_pop_div(img,pop_div) {
   pop_div.hide();
@@ -625,7 +665,9 @@ function init_common()
     set_imgtag($(".new_tag"),create_img_div(-158,-76,38,19));
     
     set_online_tag($(".phone_online"),true,"手机在线");
-    set_online_tag($(".online"),false,"在线"); 
+    set_online_tag($(".online"),false,"在线");
+    
+    set_dropdown_hover($("div.dropdown-hover"));
 }
 
 $(document).ready(function(e){

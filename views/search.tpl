@@ -10,13 +10,72 @@
 <style type="text/css">
 </style>
 <script type="text/javascript">
-	$(document).ready(function(){
-		//setup layout css
-		//$("#div_search_cond").wrap("<small></small>");
-		//$("#div_search_result .row >div:nth-of-type(1)").addClass("col-md-3 col-md-offset-2");
-		//$("#div_search_result .row >div:nth-of-type(2)").addClass("col-md-2");
-		//$("#div_search_result .row >div:nth-of-type(3)").addClass("col-md-3");
+	function set_like_it_btn(btn){
+		btn.html("<i class='icon-heart' style='color:#FF60AF'></i><span class='sm_hide'>喜欢</span>");
+	}
+	
+	function set_dislike_it_btn(btn){
+		btn.html("<i class='icon-heart' style='color:black'></i><span class='sm_hide'>取消喜欢</span>");
+		btn.attr("cancel","true"); 
+	}	
 		
+	function click_like_it(btn)
+	{	//按喜欢的动态效果，只能写到html里，不能用jquery事件
+		function update_like_it(isIncrease)
+		{//TODO:远程调用未完成 
+		}
+		
+		btn.attr("disabled","disabled");
+		var src = btn.find("i");
+		var n = btn.parent().find(".text_like_num");
+		var showValue = !$("#div_search_result").hasClass("search_display_list");
+		var isIncrease = btn.attr("cancel")!="true";
+		$("#add_heart,#del_heart").hide();
+		var t;
+		if (isIncrease) {
+			t = $("#add_heart");
+			if (showValue) {
+				t.text(n.text() + "人喜欢 +1");
+			}
+		}
+		else{
+			t = $("#del_heart");
+			if (showValue) {
+				t.text(n.text() + "人喜欢 -1");
+			}
+		}
+		if (showValue) {
+			t.css("border","1px solid white");
+		}
+		else{
+			t.css("border","transparent");
+		}
+		t.show();
+		t.css({top: src.offset().top,left:src.offset().left,opacity:1});
+		t.animate({top:t.offset().top-30,
+			  opacity:0
+			  },
+			  1200,function(){
+				if (isIncrease) {
+					t.hide(100);
+					n.text(parseInt(n.text()) + 1);
+					set_dislike_it_btn(btn);
+				}else{
+					n.text(parseInt(n.text()) - 1);
+					set_like_it_btn(btn);
+				}
+				update_like_it(isIncrease);
+				btn.removeAttr("disabled");
+			});
+	}
+	
+	function click_dislike_it(btn)
+	{	//按不喜欢的动态效果，只能写到html里，不能用jquery事件
+		var r = btn.parents(".top_row");
+		r.fadeOut(800,function(){r.remove()});
+	}
+	
+	$(document).ready(function(){
 		//show and hide condition panel
 		function hideSearchPanel(timeout){
 			if (timeout == null) timeout = 500;
@@ -39,6 +98,9 @@
 		//设置排序指示图标
 		function add_order_mark(elem)
 		{
+			if (elem.find(".order_mark").length) {
+				return;
+			}
 			if (elem.hasClass("up")) {
 				elem.append("<i class='icon-up-arrow order_mark'></i>");
 			}
@@ -75,48 +137,15 @@
 		$("#div_display_order .btn").height(20);//加了icon后，高度会变形
 		$("#div_display_order .btn").width(50);
 		
-		//按喜欢的动态效果
-		$("#move_heart").hide();
+		//初始化喜欢效果 
+		$("#add_heart").hide();
+		$("#del_heart").hide();
 		function set_like_it_btn(btn){
-			btn.html("<i class='icon-heart-empty'></i><span class='sm_hide'>喜欢</span>");
+			btn.html("<i class='icon-heart' style='color:#FF60AF'></i><span class='sm_hide'>喜欢</span>");
+			btn.removeAttr("cancel");
 		}
 		set_like_it_btn($(".btn_like_it"));
-		
-		$(".btn_like_it").click(function(){
-			var btn = $(this);
-			var t = $("#move_heart");
-			var src = btn.find("i");
-			var n = btn.parent().find(".text_like_num");
-			var dest = btn.parent().find(".move_heart_dest");
 			
-			if (!src.length) {
-							
-				n.text(parseInt(n.text()) - 1);
-				set_like_it_btn(btn);
-			}
-			else
-			{
-				t.css({top: src.offset().top,
-				left:src.offset().left});
-				t.show();
-			
-				t.animate({
-				  left:dest.offset().left,
-				  top:dest.offset().top
-				  },
-				  "slow",function(){
-					t.hide(100);
-					n.text(parseInt(n.text()) + 1);
-					btn.text("<span class='sm_hide'>取消喜欢</span>");
-				});
-			}
-			
-		});
-		//按不喜欢的动态效果
-		$(".btn_dontlike_it .dropdown-menu li>a").click(function(){
-			var r = $(this).parents(".top_row");
-			r.fadeOut(800);
-		});
 		//列表显示切换效果
 		$("#div_display_ctrl > button").click(function(){
 			$(this).siblings().removeClass("active");
@@ -134,7 +163,7 @@
 				var r = container.children(".row:last");
 				var isFirst=false;
 				if (r.length == 0 || r.children(".col").length == columnCount) {
-					r = $("<div class='row'></div>");
+					r = $("<div class='row top_row'></div>");
 					container.append(r);
 					isFirst = true;
 				}
@@ -197,15 +226,13 @@
 					c.append(match[i]);
 					addContainer(c,2);
 				}
-			}
-		}); 
-		//$("#btn_display_lg").click(); //TODO
-		$("#btn_display_sm").click();
-		$("#btn_display_list").click();
-		//TODO:按年龄排序，离开时，用js实现
-	}); 
+			} 
+			init_common();
+		});
+	});
 </script>
-<p id="move_heart" class="icon-heart" style="position: absolute;color:red;z-index:100;display: none"> +1</p>
+<p id="add_heart" class="icon-heart" style="position: absolute;color:red;z-index:100;display: none"> +1</p>
+<p id="del_heart" class="icon-heart" style="position: absolute;color:black;z-index:100;display: none"> -1</p>
 <div class="row">
 	<div id="div_search_cond" class="col-md-8 col-md-offset-2">
 	<dl class="dl-horizontal" style="margin: 0 0 0 0;padding-top: 10px">
@@ -340,12 +367,12 @@
 	</div>
 </div>
 
-<div id="div_search_result">
-%for i in range(10):
-<div class="row top_row search_display_list"> 
-	<div class="col-md-8 col-md-offset-2" >
+<div id="div_search_result" class="search_display_list">
+%for i in range(50):
+<div class="row top_row "> 
+	<div class="col col-md-8 col-md-offset-2" >
 		<div class="row list_item">
-			<div class="col col-md-6" style="padding-left: 10px;padding-top: 10px">
+			<div class="col-md-6" style="padding-left: 10px;padding-top: 10px">
 				<div class="div_profile">
 					<div class="div_profile_img in_block"">
 						<img src="/res/test/a ({{i%10+1}}).jpg">
@@ -392,43 +419,42 @@
 					</div>
 				</div>
 			</div>
-			<div class="col col-md-4">
+			<div class="col-md-4">
 				<div class="div_match sm_hide lg_hide">
 					<span class="match_num">匹配度:<H1 class="in_block">30%</H1></span>
 					<BR>
 					寻找广东广州21~30岁的男生
 				</div>	
 			</div>
-			<div class="col col-md-2" >
+			<div class="col-md-2" >
 				<div class="div_btn">
 					<div class="visible-md visible-lg div_space sm_hide lg_hide" style="width:10px;height: 10px"></div>
-					<p class="text_like text-center  sm_hide lg_hide visible-md visible-lg " style="color:#FF60AF;"><span class="text_like_num">221256</span>人喜欢<i class="icon-heart move_heart_dest"></i></p>
+					<p class="text_like text-center  sm_hide lg_hide visible-md visible-lg " style="color:#FF60AF;"><span class="text_like_num">221256</span>人喜欢<i class="icon-heart"></i></p>
 					<button class="btn btn-primary btn_send_msg">
 						<i class="icon-chat"></i><span class="sm_hide">发信息</span>
 					</button>
 					
-					<button class="btn btn-success btn_like_it">
+					<button class="btn btn-success btn_like_it" onclick="click_like_it($(this))">
 						<!--i class="icon-heart-empty"></i>喜欢-->
 					</button>
 					
-					<div class="btn-group dropdown-hover btn_dontlike_it" >
-						<button type="button" class="btn btn-warning dropdown-toggle"  data-toggle="dropdown" style="width: 100%;height: 100%">
+					<div class="btn_dislike_it btn-group dropdown-hover" >
+						<button type="button" class="btn btn-warning dropdown-toggle"  data-toggle="dropdown" style="width:100%">
 						   <i class="icon-remove-2"></i><span class="sm_hide">不喜欢<span><span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
-						   <li><a href="#">外表不喜欢</a></li>
-						   <li><a href="#">PS痕迹严重</a></li>
-						   <li><a href="#">感觉不好</a></li>
+						   <li><a href="#" onclick="click_dislike_it($(this))">外表不喜欢</a></li>
+						   <li><a href="#" onclick="click_dislike_it($(this))">PS痕迹严重</a></li>
+						   <li><a href="#" onclick="click_dislike_it($(this))">感觉不好</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>	
 	</div>		
-</div>
-<!--HR style="color:black;border:1px solid black;"-->
+</div> 
 %end
-
+</div>	
 %if is_test:
 <span id="span_test"></span>
 <script type="text/javascript">
@@ -525,10 +551,10 @@
 	}, 1000);
      });
      
-     QUnit.asyncTest("dont_like_it",function(assert){
+     QUnit.asyncTest("dislike_it",function(assert){
 	expect(2);
 	//TODO:还需要加上后台互动 
-	var a = $(".btn_dontlike_it .dropdown-menu li>a")[2];
+	var a = $(".btn_dislike_it .dropdown-menu li>a")[2];
 	var len = $(".top_row").length;
 	a.click();
 	var p = $(a).parents(".top_row:visible");

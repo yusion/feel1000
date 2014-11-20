@@ -74,7 +74,7 @@
 		//按喜欢的动态效果
 		$("#move_heart").hide();
 		function set_like_it_btn(btn){
-			btn.html("<i class='icon-heart-empty'></i><span class='text_btn'>喜欢</span>");
+			btn.html("<i class='icon-heart-empty'></i><span class='sm_hide'>喜欢</span>");
 		}
 		set_like_it_btn($(".btn_like_it"));
 		
@@ -103,7 +103,7 @@
 				  "slow",function(){
 					t.hide(100);
 					n.text(parseInt(n.text()) + 1);
-					btn.text("<span class='text_btn'>取消喜欢</span>");
+					btn.text("<span class='sm_hide'>取消喜欢</span>");
 				});
 			}
 			
@@ -119,7 +119,12 @@
 			$(this).addClass("active");
 			
 			var container = $("#div_search_result");
-			var rows = container.find(".top_row");
+			var info = container.find(".div_profile");
+			var match = container.find(".div_match");
+			var btns = container.find(".div_btn");
+			assert(info.length == match.length,"html格式错误");
+			assert(btns.length == match.length,"html格式错误2");
+			container.empty();
 			
 			function addContainer(elem,columnCount){
 				var r = container.children(".row:last");
@@ -139,39 +144,61 @@
 			
 			var id = $(this).attr("id");
 			if (id == "btn_display_list") {
-				$(".top_row").removeClass("search_display_sm");
-				$(".top_row").removeClass("search_display_lg");
-				$(".top_row .btn").removeClass("btn-xs");
+				container.removeClass("search_display_sm");
+				container.removeClass("search_display_lg");
+				container.addClass("search_display_list");
+				btns.find(".div_space").addClass("visible-md visible-lg");
+				btns.find(".text_like").addClass("visible-md visible-lg");
+				btns.find("button").removeClass("btn-xs");
+				for(var i=0;i<info.length;i++){
+					r = $("<div class='row list_item'></>");
+					var c1 = $("<div class='col-md-6' style='padding-left: 10px;padding-top: 10px'>")
+					var c2 = $("<div class='col-md-4'></div>");
+					var c3 = $("<div class='col-md-2'></div>");
+					c1.append(info[i]);
+					c2.append(match[i]);
+					c3.append(btns[i]);
+					r.append(c1);
+					r.append(c2);
+					r.append(c3);
+					addContainer(r,1);
+				}
 			}
 			else if (id == "btn_display_sm") {
-				container.removeClass("search_display_lg");
+				container.removeClass("search_display_lg search_display_list");
 				container.addClass("search_display_sm");
-				container.find("button").addClass("btn-xs");
-				container.empty();
-				
-				rows.each(function(){
-					var name = $(this).find(".text_nickname").parent();
-					var info = $(this).find(".text_profile_info1");
-					var img = $(this).find(".div_profile_img");
-					var btns = $(this).find(".div_btn");
-					btns.children(".btn-block").removeClass("btn-block");
-					var c = $("<div  style='background-color:white' class='text-center'></div>");
-					c.append(img);
-					c.append(name);
-					c.append(info);
-					c.append(btns);
-					$(".div_space").removeClass("visible-md visible-lg");
+				btns.find("button").addClass("btn-xs");
+				btns.find(".div_space").removeClass("visible-md visible-lg");
+				btns.find(".text_like").removeClass("visible-md visible-lg");
+	 
+				for(var i=0;i<info.length;i++){
+					c = $("<div class='sm_item'></>");
+					c.append(info[i]);
+					c.append(btns[i]);
+					c.append(match[i]);
 					addContainer(c,4);
-				});
+				}
 			}
 			else if (id == "btn_display_lg") {
-				$(".top_row").removeClass("search_display_sm");
-				$(".top_row").addClass("search_display_lg");
-				$(".top_row .btn").removeClass("btn-xs");
+				container.removeClass("search_display_sm search_display_list");
+				container.addClass("search_display_lg");
+				btns.find("button").removeClass("btn-xs");
+				btns.find(".div_space").addClass("visible-md visible-lg");
+				btns.find(".text_like").removeClass("visible-md visible-lg");
+				
+				for(var i=0;i<info.length;i++){
+					c = $("<div class='lg_item'></>");
+					c.append(info[i]);
+					c.append(btns[i]);
+					c.append(match[i]);
+					addContainer(c,2);
+				}
 			}
-		});
-		alert("hi");
-		$("#btn_display_sm").click(); //TODO
+		}); 
+		//$("#btn_display_lg").click(); //TODO
+		$("#btn_display_sm").click();
+		$("#btn_display_list").click();
+		//TODO:按年龄排序，离开时，用js实现
 	}); 
 </script>
 <p id="move_heart" class="icon-heart" style="position: absolute;color:red;z-index:100;display: none"> +1</p>
@@ -275,108 +302,117 @@
 </div>
 <div class="row" id="div_display_ctrl">
 	<div class="col-md-8 col-md-offset-2" >
-		<ul id="tab_dispaly" class="nav nav-tabs dropdown-hover">
-		   <li class="active"><a href="#" data-toggle="tab">匹配度</a></li>
-		   <li><a href="#" data-toggle="tab">人气</a></li>
-		   <li><a href="#" data-toggle="tab">活跃度</a></li>
-		    <li><a href="#" data-toggle="tab">收入</a></li>
-		   <li class="dropdown">
-		      <a href="#" class="dropdown-toggle" data-toggle="dropdown">年龄
-			 <b class="caret"></b>
-		      </a>
-		      <ul class="dropdown-menu" role="menu">
-			 <li><a href="#" class="up" tabindex="-1" data-toggle="tab">按年龄<strong>由小到大</strong>排序</a></li>
-			 <li><a href="#" tabindex="-1" data-toggle="tab">按年龄<strong>由大到小</strong>排序</a></li>
-		      </ul>
-		   </li>
-		   <li class="dropdown">
-		      <a href="#" class="dropdown-toggle" data-toggle="dropdown">身高 
-			 <b class="caret"></b>
-		      </a>
-		      <ul class="dropdown-menu" role="menu">
-			 <li><a href="#" tabindex="-1" data-toggle="tab">按身高<strong>由高到低</strong>排序</a></li>
-			 <li><a href="#" class="up" tabindex="-1" data-toggle="tab">按身高<strong>由低到高</strong>排序</a></li>
-		      </ul>
-		   </li>
-			<div id="div_display_ctrl" class="btn-group btn-group-sm navbar-right">
-				<button id="btn_display_list" class="btn btn-default active"><i class="icon-list"></i> 列表显示</button>
-				<button id="btn_display_sm" class="btn btn-default"><i class="icon-show-thumbnails"></i>小图 </button>
-				<button id="btn_display_lg" class="btn btn-default"><i class="icon-show-big-thumbnails"></i>大图 </button>
+		<div id="tab_dispaly" class="btn-group">
+			<button class="btn btn-default active">匹配度</button>
+			<button class="btn btn-default">人气 </button>
+			<button class="btn btn-default">收入</button> 
+			<div class="btn-group">
+				<button type="button" class="btn btn-default dropdown-toggle" 
+				  data-toggle="dropdown">
+				  年龄
+				  <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+				   <li><a href="#" data-toggle="tab">按身高<strong>由高到低</strong>排序</a></li>
+				   <li><a href="#" class="up" data-toggle="tab">按身高<strong>由低到高</strong>排序</a></li>
+				</ul>
 			</div>
-		    </ul>
+			
+			<div class="btn-group">
+				<button type="button" class="btn btn-default dropdown-toggle" 
+				  data-toggle="dropdown">
+				  身高
+				  <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+				  <li><a href="#" class="up" data-toggle="tab">按年龄<strong>由小到大</strong>排序</a></li>
+				  <li><a href="#" data-toggle="tab">按年龄<strong>由大到小</strong>排序</a></li>
+				</ul>
+			</div>
+		</div>
+		
+		<div id="div_display_ctrl" class="btn-group btn-group-sm navbar-right">
+			<button id="btn_display_list" class="btn btn-default active"><i class="icon-list"></i> 列表显示</button>
+			<button id="btn_display_sm" class="btn btn-default"><i class="icon-show-thumbnails"></i>小图 </button>
+			<button id="btn_display_lg" class="btn btn-default"><i class="icon-show-big-thumbnails"></i>大图 </button>
+		</div>
 	</div>
 </div>
 
 <div id="div_search_result">
-%for i in range(1000):
-<div class="row top_row search_display_sm"> 
+%for i in range(10):
+<div class="row top_row search_display_list"> 
 	<div class="col-md-8 col-md-offset-2" >
-		<div class="row" style="background-color:white; margin:0 0 0 0">
+		<div class="row list_item">
 			<div class="col col-md-6" style="padding-left: 10px;padding-top: 10px">
-				<div class="div_profile_img in_block"">
-					<img src="/res/test/a ({{i%10+1}}).jpg">
-					<div class="div_view_stat">
-						<small>
-							<i class="icon-eye-open"></i><span class="num_format">1022</span>次 |
-							<i class="icon-picture"></i><span class="num_format">11022</span>张
-						</small>
-					</div>
-				</div>		
-				<div class="div_profile_text in_block">
-					<div class="text-center" style="overflow: hidden;height: 20px;padding: 0 10px 0 10px">
-					<p class="text_nickname" title="姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚">姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚</p>
-					</div>
-					<div class="in_block div_certif" style="margin-left:20px">
-						<i class="icon-iphone" title="手机认证"></i>&nbsp;
-						<i class="icon-nameplate" title="身份认证"></i>&nbsp;
-						<i class="icon-camera" title="相片认证"></i>&nbsp;
-						<i class="icon-car" title="有车认证"></i>&nbsp;
-						<i class="icon-temple-christianity-church" title="有房认证"></i>
-					</div>
-					<p class="text_profile_info1">
-						<strong class="text_profile_city">广东广州 | </strong><strong>21岁 | 178cm | 50kg</strong>
-						
-					</p>
-					<p class="small text_profile_info2">
-					 本科 | 10k-15k | 租房 | 有车
-					</p>
-					<div class="div_score small in_block">
-						长相:<span class="star_readonly" star="2"></span> 英俊潇洒<BR/>
-						身材:<span class="star_readonly" star="3"></span> 英俊潇洒<BR/>
-						性格:<span class="star_readonly" star="1"></span> 英俊潇洒<BR/>
-						爱情:<span class="star_readonly" star="5"></span> 英俊潇洒<BR/>
-					</div>
-					<div class="in_block small div_tags">
-						<ul class="list-inline tag_readOnly">
-							<li>专情</li>
-							<li>浪漫</li>
-							<li>随缘外表</li>
-							<li>无所</li>
-							<li>无所外表</li>
-						</ul>
+				<div class="div_profile">
+					<div class="div_profile_img in_block"">
+						<img src="/res/test/a ({{i%10+1}}).jpg">
+						<div class="sm_hide lg_hide">
+							<small>
+								<i class="icon-eye-open"></i><span class="num_format">1022</span>次 |
+								<i class="icon-picture"></i><span class="num_format">11022</span>张
+							</small>
+						</div>
+					</div>		
+					<div class="div_profile_text in_block">
+						<div class="in_block text_nickname">
+							<p title="姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚">姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚end</p>
+						</div>
+						<div class="in_block sm_hide lg_hide" style="margin-left:6px">
+							<i class="icon-iphone" title="手机认证"></i>&nbsp;
+							<i class="icon-nameplate" title="身份认证"></i>&nbsp;
+							<i class="icon-camera" title="相片认证"></i>&nbsp;
+							<i class="icon-car" title="有车认证"></i>&nbsp;
+							<i class="icon-temple-christianity-church" title="有房认证"></i>
+						</div>
+						<p class="text_profile_info1">
+							<strong class="sm_hide">广东广州 | </strong><strong>21岁 | 178cm | 50kg</strong>
+							
+						</p>
+						<p class="small sm_hide">
+						 本科 | 10k-15k | 租房 | 有车
+						</p>
+						<div class="sm_hide lg_hide small in_block">
+							长相:<span class="star_readonly" star="2"></span> 英俊潇洒<BR/>
+							身材:<span class="star_readonly" star="3"></span> 英俊潇洒<BR/>
+							性格:<span class="star_readonly" star="1"></span> 英俊潇洒<BR/>
+							爱情:<span class="star_readonly" star="5"></span> 英俊潇洒<BR/>
+						</div>
+						<div class="small sm_hide lg_hide">
+							<ul class="list-inline tag_readOnly" style="margin-top: 6px;margin-bottom: 0px;">
+								<li>专情</li>
+								<li>浪漫</li>
+								<li>随缘外表</li>
+								<li>无所</li>
+								<li>无所外表</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col col-md-4 div_match">
-				<span class="match_num">匹配度:<H1 class="in_block">30%</H1></span>
-				<BR>
-				寻找广东广州21~30岁的男生
+			<div class="col col-md-4">
+				<div class="div_match sm_hide lg_hide">
+					<span class="match_num">匹配度:<H1 class="in_block">30%</H1></span>
+					<BR>
+					寻找广东广州21~30岁的男生
+				</div>	
 			</div>
 			<div class="col col-md-2" >
 				<div class="div_btn">
-					<div class="visible-md visible-lg div_space" style="width:10px;height: 10px"></div>
-					<p class="text-center text_like_it" style="color:#FF60AF;"><span class="text_like_num">221256</span>人喜欢<i class="icon-heart move_heart_dest"></i></p>
-					<button class="btn btn-primary btn-block btn_send_msg">
-						<i class="icon-chat"></i><span class="text_btn">发信息</span>
+					<div class="visible-md visible-lg div_space sm_hide lg_hide" style="width:10px;height: 10px"></div>
+					<p class="text_like text-center  sm_hide lg_hide visible-md visible-lg " style="color:#FF60AF;"><span class="text_like_num">221256</span>人喜欢<i class="icon-heart move_heart_dest"></i></p>
+					<button class="btn btn-primary btn_send_msg">
+						<i class="icon-chat"></i><span class="sm_hide">发信息</span>
 					</button>
 					
-					<button class="btn btn-success btn-block btn_like_it">
+					<button class="btn btn-success btn_like_it">
 						<!--i class="icon-heart-empty"></i>喜欢-->
 					</button>
 					
-					<div class="btn-group  btn-block dropdown-hover btn_dontlike_it" >
+					<div class="btn-group dropdown-hover btn_dontlike_it" >
 						<button type="button" class="btn btn-warning dropdown-toggle"  data-toggle="dropdown" style="width: 100%;height: 100%">
-						   <i class="icon-remove-2"></i><span class="text_btn">不喜欢<span>
+						   <i class="icon-remove-2"></i><span class="sm_hide">不喜欢<span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
 						   <li><a href="#">外表不喜欢</a></li>

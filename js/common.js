@@ -651,6 +651,12 @@ function num_format(elems) {
   });
 }
 
+function assert(value,msg) {
+  if (!value) {
+    alert(msg);
+  }
+}
+
 function init_common()
 {
    $(".onlyNum").onlyNum();

@@ -227,6 +227,10 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 	border-radius: 4px;
 	background-color: #FCFCFC;
 }
+.text_nickname{
+	color: dimgray;
+	margin:0 0 0 0;
+}
 
 .search_display_sm{
 	.sm_hide{
@@ -253,14 +257,8 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 	p{
 		margin: 0 0 0 0;
 	}
-	.text_nickname{	display: inline-block;
-		max-width: @img_profile_sm_width;
-		height: 20px;
-		overflow: hidden;
-		margin:0 0 0 0;
-		color: dimgray;
+	.text_nickname{	
 		font-size: 18px;
-		/*font-weight: 400;*/
 	}
 }
 
@@ -284,9 +282,6 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 		height: auto;
 	}
 	.text_nickname>p{
-		display: inline-block;
-		margin:0 0 0 0;
-		color: dimgray;
 		font-size: 20px;
 		font-weight: 800;
 	}
@@ -308,12 +303,11 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 	.div_profile_img{
 		display: inline-block;
 	}
-	.text_nickname{	display: inline-block;
+	.text_nickname{
+		display: inline-block;
 		max-width: 150px;
 		height: 25px;
 		overflow: hidden;
-		margin:0 0 0 0;
-		color: dimgray;
 		font-size: 20px;
 		font-weight: 800;
 	}

@@ -46,16 +46,18 @@
 			{
 				elem.append("<i class='icon-down-arrow order_mark'></i>");	
 			}
+			elem.addClass("active");
 		}
 		
-		$("#tab_dispaly li a").click(function(){
+		$("#div_display_order .btn,#div_display_order li>a").click(function(){
 			if ($(this).hasClass("dropdown-toggle")) {
 				return;
 			}
-			$("#tab_dispaly .order_mark").remove();
-			$("#tab_dispaly .caret").show();
+			$("#div_display_order .order_mark").remove();
+			$("#div_display_order .active").removeClass("active");
+			$("#div_display_order .caret").show();
 			//find dropdown-toggle link
-			var p = $(this).parents(".dropdown").children("a");
+			var p = $(this).parent().parent().prev();
 			if (p.length) {
 				if ($(this).hasClass("up")) {
 					p.addClass("up");
@@ -69,7 +71,9 @@
 			}
 			add_order_mark($(this));
 		});
-		add_order_mark($("#tab_dispaly .active>a"));
+		add_order_mark($("#div_display_order .active"));
+		$("#div_display_order .btn").height(20);//加了icon后，高度会变形
+		$("#div_display_order .btn").width(50);
 		
 		//按喜欢的动态效果
 		$("#move_heart").hide();
@@ -302,31 +306,28 @@
 </div>
 <div class="row" id="div_display_ctrl">
 	<div class="col-md-8 col-md-offset-2" >
-		<div id="tab_dispaly" class="btn-group">
-			<button class="btn btn-default active">匹配度</button>
-			<button class="btn btn-default">人气 </button>
-			<button class="btn btn-default">收入</button> 
-			<div class="btn-group">
-				<button type="button" class="btn btn-default dropdown-toggle" 
-				  data-toggle="dropdown">
+		<div id="div_display_order" class="btn-group">
+			<button class="btn btn-default active btn-sm">匹配度</button>
+			<button class="btn btn-default btn-sm">人气 </button>
+			<button class="btn btn-default btn-sm">收入</button>
+			<div class="btn-group btn-group-sm dropdown-hover">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 				  年龄
 				  <span class="caret"></span>
 				</button>
-				<ul class="dropdown-menu">
-				   <li><a href="#" data-toggle="tab">按身高<strong>由高到低</strong>排序</a></li>
-				   <li><a href="#" class="up" data-toggle="tab">按身高<strong>由低到高</strong>排序</a></li>
+				<ul class="dropdown-menu" role="menu">
+				  <li><a href="#" class="up">按年龄<strong>由小到大</strong>排序</a></li>
+				  <li><a href="#">按年龄<strong>由大到小</strong>排序</a></li>
 				</ul>
 			</div>
-			
-			<div class="btn-group">
-				<button type="button" class="btn btn-default dropdown-toggle" 
-				  data-toggle="dropdown">
+			<div class="btn-group btn-group-sm dropdown-hover">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 				  身高
 				  <span class="caret"></span>
 				</button>
-				<ul class="dropdown-menu">
-				  <li><a href="#" class="up" data-toggle="tab">按年龄<strong>由小到大</strong>排序</a></li>
-				  <li><a href="#" data-toggle="tab">按年龄<strong>由大到小</strong>排序</a></li>
+				<ul class="dropdown-menu" role="menu">
+				   <li><a href="#">按身高<strong>由高到低</strong>排序</a></li>
+				   <li><a href="#" class="up">按身高<strong>由低到高</strong>排序</a></li>
 				</ul>
 			</div>
 		</div>
@@ -412,7 +413,7 @@
 					
 					<div class="btn-group dropdown-hover btn_dontlike_it" >
 						<button type="button" class="btn btn-warning dropdown-toggle"  data-toggle="dropdown" style="width: 100%;height: 100%">
-						   <i class="icon-remove-2"></i><span class="sm_hide">不喜欢<span>
+						   <i class="icon-remove-2"></i><span class="sm_hide">不喜欢<span><span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
 						   <li><a href="#">外表不喜欢</a></li>

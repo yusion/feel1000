@@ -53,8 +53,7 @@
 		t.show();
 		t.css({top: src.offset().top,left:src.offset().left,opacity:1});
 		t.animate({top:t.offset().top-30,
-			  opacity:0
-			  },
+			  opacity:0},
 			  1200,function(){
 				if (isIncrease) {
 					t.hide(100);
@@ -71,8 +70,11 @@
 	
 	function click_dislike_it(btn)
 	{	//按不喜欢的动态效果，只能写到html里，不能用jquery事件
-		var r = btn.parents(".top_row");
-		r.fadeOut(800,function(){r.remove()});
+		var r = btn.parents(".col");
+		r.fadeOut(800,function(){
+			r.remove()
+			$("#div_display_ctrl .active").click();
+		});
 	}
 	
 	$(document).ready(function(){

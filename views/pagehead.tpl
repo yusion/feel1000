@@ -21,7 +21,7 @@
 			<li><a href="index"><i class="icon-conversation"></i> 动态</a></li>
 		        <li><a href="search"><i class="icon-search"></i> 查找</a></li> <!-- icon-temple-islam -->
 			<!--li><a href="pkstage"><i class="icon-crown"></i> PK舞台</a></li -->
-			<li class="active"><a href="my_space"><i class="icon-parents"></i> 我的主页</a></li>
+			<li class="active"><a href="my_space"><i class="icon-user"></i> 我的主页</a></li>
 		   </ul>
 		</div>
 	     </nav>

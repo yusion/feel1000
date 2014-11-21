@@ -429,9 +429,9 @@
 			<div class="col-md-2" >
 				<div class="div_btn">
 					<div class="visible-md visible-lg div_space sm_hide lg_hide" style="width:10px;height: 10px"></div>
-					<p class="text_like text-center  sm_hide lg_hide visible-md visible-lg " style="color:#FF60AF;"><span class="text_like_num">221256</span>人喜欢<i class="icon-heart"></i></p>
+					<p class="text_like text-center  sm_hide lg_hide visible-md visible-lg" ><span class="text_like_num">221256</span>人喜欢<i class="icon-heart"></i></p>
 					<button class="btn btn-primary btn_send_msg">
-						<i class="icon-chat"></i><span class="sm_hide">发信息</span>
+						<i class="icon-envelope"></i><span class="sm_hide">发信息</span>
 					</button>
 					
 					<button class="btn btn-success btn_like_it" onclick="click_like_it($(this))">

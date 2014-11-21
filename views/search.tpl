@@ -12,6 +12,7 @@
 <script type="text/javascript">
 	function set_like_it_btn(btn){
 		btn.html("<i class='icon-heart' style='color:#FF60AF'></i><span class='sm_hide'>喜欢</span>");
+		btn.removeAttr("cancel");
 	}
 	
 	function set_dislike_it_btn(btn){
@@ -142,10 +143,7 @@
 		//初始化喜欢效果 
 		$("#add_heart").hide();
 		$("#del_heart").hide();
-		function set_like_it_btn(btn){
-			btn.html("<i class='icon-heart' style='color:#FF60AF'></i><span class='sm_hide'>喜欢</span>");
-			btn.removeAttr("cancel");
-		}
+
 		set_like_it_btn($(".btn_like_it"));
 			
 		//列表显示切换效果

@@ -111,7 +111,7 @@
 				</div>
 			</div>
 			<h5 class="in_block icon-edit readonly_hide" style="margin-left: 50px;margin-top: 0px;vertical-align: top;cursor:pointer" edit_mode="False" onclick="click_edit()">
-					编辑
+				点击编辑
 			</h5>
 			<BR>
 			<div id="tagSelector" style="margin-bottom: 8px">
@@ -181,10 +181,10 @@
 				</div>
 				<div class="collapse navbar-collapse" id="example-navbar-collapse">
 				   <ul class="nav navbar-nav">
-				      <li ><a href="#" data="album" class="icon-camera">   我的动态</a></li>
+				      <li id="first_nav_tag"><a href="#" data="album" class="icon-camera">   我的动态</a></li>
 				      <li ><a href="#" class="icon-group">   我的好友</a></li>
 				      <li><a href="#" data="profile" class="icon-user">我的资料</a></li>
-				      <li id="first_nav_tag"><a href="#" data="certif" class="icon-certificate">  我的认证</a></li>
+				      <li><a href="#" data="certif" class="icon-certificate">  我的认证</a></li>
 				      <li ><a href="#" class="icon-star">对TA的要求</a></li>
 				      <li ><a href="#" class="icon-envelope">   留言<span class="badge">20</span></a></li>
 				   </ul>

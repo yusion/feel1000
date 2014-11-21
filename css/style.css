@@ -64,8 +64,10 @@
 
 /* user profile*/
 .thumbnail_profile{
-	width: 40px;
-	height:40px;
+	width: 52px;
+	height: auto;
+	padding: 2px 2px 2px 2px;
+	border: solid 1px gray;
 }
 
 .panel_css{
@@ -144,7 +146,7 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 @img_profile_sm_width: 112px;
 .img_profile_sm{
 	width:@img_profile_sm_width;
-	height:138px;
+	height:auto;
 }
 
 .img_profile_lg{
@@ -520,6 +522,52 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 		.hide_block
 	}
 }
+
+/*我的主页->回复列表*/
+.div_reply_container{
+	margin-right: 20px;
+	background-color : 	#F0F0F0;
+	padding: 20px 20px 20px 20px;
+	HR{
+		border-style: dotted;
+		border-color: #3C3C3C;
+		margin-top: 30px;
+		margin-bottom: 20px;
+	}
+	
+	.div_reply_user{
+		width: 50px;
+		float: left;
+		padding-top: 6px;
+	}
+	
+	.div_reply_content{
+		margin-left: 60px;
+		padding: 6px 1px 1px 6px; 
+	} 
+}
+
+.div_album_user{
+	text-align: center;
+	padding: 10px 10px 0px 5px;
+	margin-right: -10px;
+	button{
+		width:100%;
+		margin-bottom:10px;
+	}
+}
+
+#div_album_container{
+	background-color: white;
+	.row{
+		margin-bottom: 15px;
+		>HR{
+			border:1px solid gray;
+			margin: 20px 15px 20px 15px;
+		}
+	}
+}
+
 
 /*
 设计label check的方法

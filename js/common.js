@@ -680,3 +680,4 @@ $(document).ready(function(e){
   init_common();
 });
 
+/*TODO 对时间的整理 1小时前，昨天，1天前，5天前，一个月前，一年前*/

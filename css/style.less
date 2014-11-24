@@ -1,0 +1,598 @@
+﻿@charset "utf-8";
+/* global variables */
+@head_color: #154478;
+@body_color: #efeff1;
+@body_font_color: white;
+@foot_color: @head_color;
+
+@active_nav_color:#efeff1;
+@active_nav_font_color:black; 
+
+@active_link_color: orange;
+@hover_link_color: #ff3333;
+
+@my_space_head_color: #331344;
+
+@tip_color: #ffffe1;
+
+/* common css */
+.double_div{
+	border-style: double;
+	border-color: green;
+}
+
+.center_pos{
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.lefttop_pos{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.red_div{
+	background-color: pink
+}
+
+.blue_div{
+	background-color: lightblue
+}
+
+.green_div{
+	background-color: lightgreen
+}
+
+.yellow_div{
+	background-color: lightyellow
+}
+
+.white_div{
+	background-color: yellow
+}
+
+.in_block{
+	display: inline-block
+}
+
+.hide_block{
+	display: none
+}
+
+.row{margin-bottom:15px
+}
+
+/* user profile*/
+.thumbnail_profile{
+	width: 52px;
+	height: auto;
+	padding: 2px 2px 2px 2px;
+	border: solid 1px gray;
+}
+
+.panel_css{
+	border:1px solid #9966cc;
+	border-top-width: 30px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	background-color: white;
+	 
+  background: -webkit-linear-gradient(#9966cc,white,  white, white, white, white, white, white); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#9966cc, white, white, white, white, white, white, white); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#9966cc, white, white, white, white, white, white, white); /* Firefox 3.6 - 15 */
+  background: linear-gradient(#9966cc, white, white, white, white, white, white, white); /* 标准的语法 */
+ /*
+   -moz-box-shadow: 3px 3px 4px #000;
+    -webkit-box-shadow: 3px 3px 4px #000;
+    box-shadow: 3px 3px 4px #000;*/
+    /* For IE 8 */
+    /*-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";*/
+    /* For IE 5.5 - 7 */
+    /*filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');*/
+}
+
+.panel_css hr{
+	height:0px;
+	border-top:1px solid purple;
+}
+
+.panel_css .form-control:focus {
+border-color: purple;
+outline: 0;
+-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
+box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
+}
+
+.button_css{
+	color:white;
+	background-color:#9966cc;
+}
+
+.button_css:hover{
+	color:white;
+	background-color: #b07ed3;
+}
+
+/* star rating css, usage <span class="star_readonly" star="2"></span>*/
+.star_readonly{
+	background-image: url('/res/small_icon.png');
+	background-repeat: no-repeat;
+	height: 14px;
+	width: 80px; 
+	display:inline-block;
+}
+.star_readonly[star="0"]{
+	background-position: -200px -75px;
+}
+.star_readonly[star="1"]{
+	background-position: -200px -60px;
+}
+.star_readonly[star="2"]{
+	background-position: -200px -45px;
+}
+.star_readonly[star="3"]{
+	background-position: -200px -30px;
+}
+.star_readonly[star="4"]{
+	background-position: -200px -15px;
+}
+.star_readonly[star="5"]{
+	background-position: -200px 0px;
+}
+
+/*查询结果的css设置*/
+
+/*所有头像的div设置 */
+@img_profile_sm_width: 112px;
+.img_profile_sm{
+	width:@img_profile_sm_width;
+	height:auto;
+}
+
+.img_profile_lg{
+	width:90%;
+	height:auto;
+	max-width: 400px;
+}
+
+#div_search_result .row{
+	/*margin-bottom: 30px;*/
+	color: gray;
+}
+
+#div_search_cond dl{
+	background-color:white;
+}
+#div_search_cond hr{
+	margin: 0 0 10px 0;
+}
+#div_search_cond dl > dt{
+	width: 70px;
+	color: gray;
+}
+#div_search_cond dl > dd{
+	margin-left: 90px;
+	color: gray;
+}
+
+#div_search_cond .badge{
+	background-color: lightgray;
+}
+  
+#link_show_cond,#link_hide_cond{
+	text-decoration:none;
+	padding: 0 10px 0 0;
+}
+ 
+.div_profile_text{
+	p{	margin: 0 0 0 0;
+	}
+	.star_readonly{
+		vertical-align: text-bottom;
+	}
+	vertical-align:top;
+}
+
+/* 切换不同的显示效果 */
+.div_profile_img{
+	background-color: white;
+	padding: 5px 5px 15px 5px;
+	
+	img{
+		.img_profile_sm
+	}
+	
+	div{
+		width:112px;
+		height: 20px;
+		margin: 0 0 0 0;
+		overflow: hidden;
+	}
+}
+.match_num{
+	H1{
+		font:   30px Candara;
+		color: #e46a4a;	
+	}
+	&:hover{
+		cursor: pointer;
+		border-bottom:2px solid @hover_link_color;
+	}
+}
+
+.tag_readOnly > li{
+	border:  1px solid gray;
+	border-radius: 4px;
+	background-color: #FCFCFC;
+}
+.text_nickname{
+	color: dimgray;
+	margin:0 0 0 0;
+}
+
+.search_display_sm{
+	.sm_hide{
+		.hide_block
+	}
+	.sm_item{
+		background-color:@body_font_color;
+		text-align: center;
+	}
+	.btn, .btn_group{
+		width: auto;
+	}
+	.div_profile_img{
+		padding: 0 0 0 0;
+	}
+	.div_profile_img > img{
+		width: 90%;
+		height: auto;
+	}
+	.text_profile_info1{
+		font-weight: lighter;
+		font-size: 10px;
+	}
+	p{
+		margin: 0 0 0 0;
+	}
+	.text_nickname{	
+		font-size: 18px;
+	}
+}
+
+.search_display_lg{
+	.lg_hide{
+		.hide_block
+	}
+	.lg_item{
+		background-color:@body_font_color;
+		text-align: center;
+		padding-bottom: 20px;
+		margin-bottom: 10px;
+	}
+
+	.div_profile_img{
+		display: block;
+	}
+
+	.div_profile_img > img{
+		width: 90%;
+		height: auto;
+	}
+	.text_nickname>p{
+		font-size: 20px;
+		font-weight: 800;
+	}
+}
+
+.search_display_list{
+	.list_hide{
+		.hide_block
+	}
+	.div_btn > button, .div_btn > .btn-group{
+		width: 100%;
+		margin-bottom: 10px;/**/
+	}
+	.list_item{
+		background-color:@body_font_color;
+		margin:0 0 0 0;
+	}
+	.div_profile_img{
+		display: inline-block;
+	}
+	.text_nickname{
+		display: inline-block;
+		max-width: 120px;
+		height: 25px;
+		overflow: hidden;
+		font-size: 18px;
+		font-weight: 800;
+	}
+}
+
+.text_like{
+	color:#FF60AF;
+}
+
+/* 旧，查询表单的css */
+#search_form label{
+	padding: 0px 0px 0px 20px
+}
+
+#search_form input,#search_form select{
+	padding: 0px 0px 0px 0px
+}
+
+#search_form .form-group{
+	padding: 0px 0px 0px 0px;
+	margin-bottom: 5px;
+}
+
+#search_form HR{
+	width:80%;
+	margin: 10px auto 10px auto
+}
+
+#search_form .save_search_link{
+	width:80%;
+	display: inline-block
+}
+
+#search_form .del_search_link{
+	width:10%;
+	display: inline-block;
+	float: right;
+	padding: 0px 20px 0px 0px;
+}
+
+/* 首部导航设计 */
+.navbar-inverse {
+    background-color:transparent;
+    border-width: 0px;
+    margin: 0 0 0 0;
+}
+
+/* navigator LOGO 部分背景色和字体颜色*/
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+
+/* navigator LOGO 部分hover时背景色和字体颜色*/
+.navbar-inverse .navbar-brand:hover, 
+.navbar-inverse .navbar-brand:focus {
+    color: white;
+    background-color: transparent;
+    border-bottom: 4px solid transparent;
+}
+
+/* navigator 普通菜单项的颜色和背景  */
+.navbar-inverse .navbar-nav>li>a {
+    color: white;
+    border-bottom: 4px solid transparent;
+}
+
+/* navigator 普通菜单项hover时的字体颜色和背景  */
+.navbar-inverse .navbar-nav>li>a:hover, 
+.navbar-inverse .navbar-nav>li>a:focus {
+    color: white;
+    background-color: @head_color;
+    border-bottom: 4px solid @hover_link_color;
+}
+
+/* navigator 当前选中菜单项的字体颜色和背景  */
+.navbar-inverse .navbar-nav>.active>a, 
+.navbar-inverse .navbar-nav>.active>a:hover, 
+.navbar-inverse .navbar-nav>.active>a:focus {
+    color: @active_nav_font_color;
+    background-color:@active_nav_color;
+}
+
+/*修复bootstrap3.0的bug*/
+.nav > li.active{
+     font-weight:bold;
+}
+
+.btn.active{
+	background-color: @active_link_color;
+}
+
+/* 自动弹出下拉菜单 */
+.dropdown-hover .dropdown-menu li:hover .submenu{
+	visibility:visible
+}
+.dropdown-hover .dropdown:hover .dropdown-menu{
+	display:block
+} 
+
+/*面包导航设计*/
+#my_breadcrumb{
+	background-color: @body_font_color;
+	margin: 0 0 0 0;
+}
+
+#my_breadcrumb > li + li:before {
+    color: #CCCCCC;
+    content: ">";
+}
+
+/* 共用页面设计 */
+#page_head_row{
+	background-color: @head_color;
+}
+
+#page_container{
+	width:100%;
+	padding: 0 0 0 0;
+	background-color: @body_color;
+}
+
+#page_foot_row{
+	background-color: @foot_color;
+	margin: 0px 0px 0px 0px;
+}
+
+/*自定义标签控件 */
+/*jquery ctrl: for tag selector */
+.tagItem{
+	min-width: 50px;
+	display: inline-block;
+	color: black;
+	margin: 0px 10px 5px 0px;
+	padding: 2px 10px 2px 15px;
+	background-image: url('/res/small_icon.png');
+	background-position: -0px -58px;
+	border-bottom: solid 2px transparent;
+}
+.tagItem_edit{
+	cursor: pointer;
+}
+
+.tagItem_edit:hover{
+	border-bottom: solid 2px @hover_link_color;
+}
+
+.linkTagNew{
+	cursor:pointer;
+	color:#faae7d;
+}
+
+.linkTagNew:hover{
+	cursor:pointer;
+	color:#f68e51;
+	text-decoration:none;
+}
+
+.divTagNew{
+	position: absolute;
+	color: black;
+	background-color: #ffffe1;
+	padding: 10px 10px 10px 10px;
+	border: 1px solid dark;
+	z-index: 500;
+	border-radius: 2px;
+	-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	box-shadow: 3px 3px 4px #000;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+}
+
+/*my album page css */
+#my_space_head{
+	background-color: @my_space_head_color;
+	color:	@body_font_color;
+	padding-top: 15px;
+}
+
+/*my space navigator css */
+#nav_my_space{
+	margin: 0px 0px 0px 0px;
+	/*border-bottom: 4px solid transparent;*/
+}
+
+#nav_my_space .navbar-nav>li>a {
+    border-bottom: 4px solid transparent;
+}
+
+#nav_my_space .navbar-nav> li.active > a{
+    border-bottom: 4px solid @active_link_color;
+}
+
+#nav_my_space .navbar-nav>li>a:hover, 
+#nav_my_space .navbar-nav>li>a:focus {
+    border-bottom: 4px solid @hover_link_color;
+}
+
+/*我的主页的CSS*/
+#div_profile{
+	background-color: @body_font_color;
+}
+
+.div_space_readonly{
+	.readonly_hide{
+		.hide_block
+	}
+	
+}
+
+.div_space_edit{
+	.edit_hide{
+		.hide_block
+	}
+}
+
+/*我的主页->回复列表*/
+.div_reply_container{
+	margin-right: 20px;
+	background-color : 	#F0F0F0;
+	padding: 20px 20px 20px 20px;
+	HR{
+		border-style: dotted;
+		border-color: #3C3C3C;
+		margin-top: 30px;
+		margin-bottom: 20px;
+	}
+	
+	.div_reply_user{
+		width: 50px;
+		float: left;
+		padding-top: 6px;
+	}
+	
+	.div_reply_content{
+		margin-left: 60px;
+		padding: 6px 1px 1px 6px; 
+	} 
+}
+
+.div_album_user{
+	text-align: center;
+	padding: 10px 10px 0px 5px;
+	margin-right: -10px;
+	button{
+		width:100%;
+		margin-bottom:10px;
+	}
+}
+
+#div_album_container{
+	background-color: white;
+	.row{
+		margin-bottom: 15px;
+		>HR{
+			border:1px solid gray;
+			margin: 20px 15px 20px 15px;
+		}
+	}
+}
+
+
+/*
+设计label check的方法
+ <style type="text/css">
+input.error { border: 1px solid red; }
+label.error {
+  background:url("res/unchecked.gif") no-repeat 0px 0px;
+
+  padding-left: 16px;
+
+  padding-bottom: 2px;
+
+  font-weight: bold;
+
+  color: #EA5200;
+}
+
+label.checked {
+  background:url("res/checked.gif") no-repeat 0px 0px;
+}
+ 
+</style>
+ */
+
+
+
+
+

@@ -1,3 +1,9 @@
+function assert(value,msg) {
+  if (!value) {
+    alert(msg);
+  }
+}
+
 //ie8 doesn't support indexOf
 if(!Array.prototype.indexOf){  
         Array.prototype.indexOf = function(elt /*, from*/){  
@@ -154,14 +160,58 @@ $.fn.check = function(){
   return false;
 }
 
-function check_browser_version()
+version=new Object();
+function get_browser_info()
 {
-	var userAgent = $(window).navigator.userAgent.toLowerCase();
-	$.browser.ie10 = $.browser.msie && /msie 10\.0/i.test(userAgent);
-	$.browser.ie9 = $.browser.msie && /msie 9\.0/i.test(userAgent);
-	$.browser.ie8 = $.browser.msie && /msie 8\.0/i.test(userAgent);
-	$.browser.ie7 = $.browser.msie && /msie 7\.0/i.test(userAgent);
-	$.browser.ie6 = !$.browser.msie8 && !$.browser.msie7 && $.browser.msie && /msie 6\.0/i.test(userAgent);
+    version.chrome = false;
+    version.firefox = false;
+    version.safari = false;
+    version.mozilla = false;
+    version.camino = false;
+    version.opera = false;
+    version.name = navigator.appName;
+    version.ie = false;
+    version.version = 0;
+    
+    var ua = navigator.userAgent.toLowerCase();
+    if (window.ActiveXObject) {
+      if (/msie 10\.0/i.test(ua)) {
+       version.version = 10;
+      }
+      else if (/msie 9\.0/i.test(ua)) {
+       version.version = 9;
+      }
+      else if (/msie 8\.0/i.test(ua)) {
+       version.version = 8;
+      }
+      else if (/msie 7\.0/i.test(ua)) {
+       version.version = 7;
+      }
+      else if (/msie 6\.0/i.test(ua)) {
+       version.version = 6;
+      }
+      version.ie = true;
+    }
+
+    if (window.chrome) {
+      version.chrome = true;
+       version.version = ua.match(/chrome\/([\d.]+)/)[1];
+       version.name = "chrome";
+    }
+    else if (ua.indexOf("firefox")>0) {
+      version.firefox = ua.match(/firefox\/([\d.]+)/)[1];
+    }
+    else if (window.opera)
+    {
+      version.opera = true;
+      version.version = ua.match(/opera.([\d.]+)/)[1];
+    }
+    else if (window.openDatabase)
+    {
+      version.safari = true;
+      version.version = ua.match(/version\/([\d.]+)/)[1];
+    }
+    return version;
 }
  	
 jQuery.extend(jQuery.validator.messages, {
@@ -381,7 +431,7 @@ function create_img_div(left,top,width,height)
 (function ($) {
     $.fn.inline_popup = function (options) {
         default_options = {
-          "opacity":"0.8",
+          "opacity":"0.8"
           };
           
         if (!options.opacity) {
@@ -565,7 +615,7 @@ function keep_over(over_elem,under_elem)
     over_elem.css({"position":"absolute",
               "z-index":"900",// + under_elem.css("z-index"),
               "top":"" + (under_elem.position().top) + "px",
-              "left":"" + (under_elem.position().left) +"px",
+              "left":"" + (under_elem.position().left) +"px"
            //   "width":"20px",
            //   "height":"20px"
               });
@@ -593,7 +643,7 @@ function set_online_tag(elems,type,title) {
       }
       i.css("position","absolute");
       i.css("left","" + $(this).position().left + "px");
-      i.css("top","" + $(this).position().top+$(this).height()-i.height() +"px");
+      i.css("top","" + ($(this).position().top + $(this).height() - i.height()) +"px");
       i.attr("title",title);
       $(this).after(i);
    });
@@ -651,12 +701,6 @@ function num_format(elems) {
   });
 }
 
-function assert(value,msg) {
-  if (!value) {
-    alert(msg);
-  }
-}
-
 function init_common()
 {
    $(".onlyNum").onlyNum();
@@ -674,10 +718,12 @@ function init_common()
     set_online_tag($(".online"),false,"在线");
     
     set_dropdown_hover($("div.dropdown-hover"));
+    
 }
 
 $(document).ready(function(e){
   init_common();
+  get_browser_info();
 });
 
 /*TODO 对时间的整理 1小时前，昨天，1天前，5天前，一个月前，一年前*/

@@ -374,7 +374,7 @@
 		<div class="row list_item">
 			<div class="col-md-6" style="padding-left: 10px;padding-top: 10px">
 				<div class="div_profile">
-					<div class="div_profile_img in_block"">
+					<div class="div_profile_img in_block">
 						<img src="/res/test/a ({{i%10+1}}).jpg">
 						<div class="sm_hide lg_hide">
 							<small>

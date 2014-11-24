@@ -6,11 +6,6 @@
 	
 }
 
-.div_album_detail_img img{
-	width: 100px;
-	height: auto;
-}
- 
 .div_album_reply{
 	margin-left: 40px;
 	background-color:lightgray;
@@ -19,8 +14,6 @@
 .div_album_reply >div{
 	margin-bottom: 10px;
 }
-
-
 
 </style>
 <script type="text/javascript">
@@ -54,13 +47,12 @@
 					%ll = random.randint(1,10)
 					%for k in range(ll):
 						<img src="res/test/a ({{random.randint(1,15)}}).jpg"></img>
-					%end
-					
+					%end					
 				</div>
 				<div class="div_album_detail_text">
 					报道称，国际能源署在一年一度的《世界能源展望》报告中预测，全球能源需求到2040年将增长37%，从去年的每天9000万桶，上升至每天1亿400万桶。尽管气候暖化问题受到关注，但石化燃料仍将是主要的能源来源。
 				</div>
-				<ul class="list-inline">
+				<ul class="list-inline likeit_list">
 					%for m in range(5):
 					<li><img class="thumbnail_profile" src="res/test/a (1).jpg" title="姚姚"></img></li>
 					%end
@@ -74,10 +66,7 @@
 					</div>
 					<div class="div_reply_content">
 						<strong>某某</strong>回复<strong>某某</strong>：	
-							张继科有几项比较突出的技术值的学习： 1.发球 张继科的发球以逆向发球为主，
-							每个人的发球特点是不同的，张继科在逆向发球时首先身体前倾，发球时站位与球台成90度角度，引拍时大臂抬至高点，肘部抬高，当球下落到右胸部时以摩擦为主击球的中下部，
-							与此同时手腕往上抖动。这样发出来的球具有强烈的旋转。对方只能发力搓，否则会造成下网。 2.反手侧拧 张继科的反手侧拧技术可以说是张继科的制胜法宝，虽然近年来很多选手都纷纷采用这项技术，
-							但张继科将这项技术发挥至极致。这项技术有效地解决了反手接发下旋短球如何进攻的问题，使接发球一方在前三板不至于直接陷入被动。</dd>
+							张继科有几项比较突出的技术值的学习： </dd>
 						<div style="width:100%">
 							<div class="div_reply_ctrl" style="float:right;margin-top:10px">
 								<div class="dropdown small in_block">

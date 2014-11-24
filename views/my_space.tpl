@@ -172,14 +172,14 @@
 			<nav id="nav_my_space" class="navbar navbar-default" role="navigation">
 				<div class="navbar-header">
 				   <button type="button" class="navbar-toggle" data-toggle="collapse" 
-				      data-target="#example-navbar-collapse">
+				      data-target="#space-navbar-collapse">
 				      <span class="sr-only">切换导航</span>
 				      <span class="icon-bar"></span>
 				      <span class="icon-bar"></span>
 				      <span class="icon-bar"></span>
 				   </button>
 				</div>
-				<div class="collapse navbar-collapse" id="example-navbar-collapse">
+				<div class="collapse navbar-collapse" id="space-navbar-collapse" style="padding-left: 0px">
 				   <ul class="nav navbar-nav">
 				      <li id="first_nav_tag"><a href="#" data="album" class="icon-camera">   我的动态</a></li>
 				      <li ><a href="#" class="icon-group">   我的好友</a></li>

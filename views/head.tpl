@@ -34,5 +34,11 @@
  
 <!-- for unit test -->
 <link rel="stylesheet" href="css/qunit-1.15.0.css">
-<script src="js/qunit-1.15.0.js"></script>    
-   
+<script src="js/qunit-1.15.0.js"></script>
+
+<script type="text/javascript">
+%if is_test:
+    set_test(true);
+%end    
+</script>
+  

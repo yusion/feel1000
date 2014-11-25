@@ -11,6 +11,7 @@ g_db = None
 _is_test = False;
 g_test_id = None
 __c_table = {}
+g_version = "0.0.1"
 
 def set_session_id(id):
 	''' for test only '''
@@ -46,6 +47,7 @@ def get_template_file(filename,keyword):
 def get_dist():
 	session_id = get_session_id()
 	d = {}
+	d["version"] = g_version;
 	d["is_test"] = _is_test
 	d["session"] = str(session_id)
 	d["web_head"] = get_template_file("views/head.tpl",d)

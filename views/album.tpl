@@ -15,18 +15,114 @@
 	margin-bottom: 10px;
 }
 
+
+.link_show_reply{
+	padding: 10px 10px 0px 10px;
+	margin-right: 10px;
+}
+
+.div_show_reply{
+	width:20%;
+	margin-top: 33px;
+	float:right;
+	vertical-align: bottom;
+}
+ 
 </style>
 <script type="text/javascript">
+	//展开收起回复按钮
+	function link_show_reply(item)
+	{
+		var c = item.parents(".div_album_detail").find(".div_reply_container");
+		var i = c.find(".div_reply_one_container").length;
+		if (c.hasClass("reply_expand")) {
+			if (i==0) {
+				//没有回复，则直接显示回复框 
+				item.text("回复");
+				c.find(".div_reply_more").hide();
+				c.find(".div_reply_edit").show();
+			}
+			else
+			{
+				c.find(".div_reply_more").show();
+				c.find(".div_reply_edit").hide();
+				item.text("回复(" +i+")");				
+			}
+		}
+		else
+		{
+			if (i == 0) {
+				c.find(".div_reply_more").hide();
+				c.find(".div_reply_edit").show();
+			}
+			item.text("收起回复");	
+		}
+		
+		c.fadeToggle();
+		c.toggleClass("reply_expand");
+	}
+	
+	//显示所有的回复
+	function show_all_reply(item) {
+		var c = item.parents(".div_reply_container");
+		c.addClass("show_all");
+		c.find(".div_reply_one_container").show();
+		c.find(".div_more_reply").hide();
+	}
+	
+	//自动收藏多余的回复 
+	function hide_more_reply(container,num){
+		container.each(function(){
+			if($(this).hasClass("show_all"))
+			{
+				c.find(".div_more_reply").hide();
+				return 0;
+			}
+			
+			var c = $(this).find(".div_reply_one_container");
+			var r = 0;
+			
+			for(var i=num;i<c.length;i++)
+			{
+				c.eq(i).hide();
+				r++;
+			}
+			$(this).parent().find(".text_reply_count").text(""+r);
+			
+			if (c.length == 0) {
+				//如果没有回复条目，就收起回复 
+ 				$(this).parent().find(".link_show_reply").click();
+ 			}
+		});
+	}
+	
+	//显示回复对话框
+	function show_reply_edit(item){
+		item.parents(".div_reply_container").find(".div_reply_edit").toggle();
+	}
+	
+	//点赞文章按钮
+	function like_it(item){
+		var t = item.parent().parent().find(".text_likeit_num");
+		t.text("" + (parseInt(t.text()) + 1));
+		item.html("已赞");
+		item.removeAttr("onclick");
+		item.removeClass("link_span");
+	}
+	
 	$(document).ready(function(e){
 		$(".div_album_user").parent().addClass("col-md-2");
 		$(".div_album_detail").parent().addClass("col-md-10");
-		//$("#div_album_container HR").addClass("visible-xs visible-sm");
 		
+		hide_more_reply($(".div_reply_container"),5);
+		$(".div_reply_edit").hide();
 	});
+
+	
 </script>
 <div id="div_album_container">
 	%import random
-	%for i in range(5):
+	%for i in range(1):
 	%if i %2 == 0:
 	%	onlineState="online"
 	%else:
@@ -37,14 +133,12 @@
 			<div class="div_album_user">
 				<img src="res/test/a (7).jpg" class="img_profile_sm {{onlineState}}"></img>
 				<H4 class="in_block"><small>2014/9/</small>25 2小时前</H4> 
-				<button class="btn icon-heart btn-success"> 点赞</button>
-				<button class="btn btn-primary icon-comments"> 回复</button>
 			</div>
 		</div>
 		<div>
 			<div class="div_album_detail">
 				<div class="div_album_detail_img" style="">
-					%ll = random.randint(1,10)
+					%ll = random.randint(1,8)
 					%for k in range(ll):
 						<img src="res/test/a ({{random.randint(1,15)}}).jpg"></img>
 					%end					
@@ -52,52 +146,61 @@
 				<div class="div_album_detail_text">
 					报道称，国际能源署在一年一度的《世界能源展望》报告中预测，全球能源需求到2040年将增长37%，从去年的每天9000万桶，上升至每天1亿400万桶。尽管气候暖化问题受到关注，但石化燃料仍将是主要的能源来源。
 				</div>
-				<ul class="list-inline likeit_list">
-					%for m in range(5):
-					<li><img class="thumbnail_profile" src="res/test/a (1).jpg" title="姚姚"></img></li>
-					%end
-					<small style="vertical-align: bottom">等40个人点了赞</small>
-					<a href="#">收起回复|共有10条回复</a>
-				</ul> 					
-				<div class="div_reply_container">
-					%for a in range(2):
-					<div class="div_reply_user">
-						<img class="thumbnail_profile" src="res/test/a (1).jpg"></img>
+				<div sytle="width:100%">
+					<ul class="list-inline likeit_list in_block" style="width:80%">
+						%for m in range(5):
+						<li><img class="thumbnail_profile" src="res/test/a (1).jpg" title="姚姚"></img></li>
+						%end
+						<li style="vertical-align: bottom" class="small">
+							等<span class="text_likeit_num">40</span>个人点了赞
+						</li>
+					</ul>
+					<div class="div_show_reply in_block">
+						<span class="link_span" style="margin-right: 10px" onclick="like_it($(this))">点赞</span>|
+						<span class="link_span link_show_reply" onclick="link_show_reply($(this))" >收起回复</span>
 					</div>
-					<div class="div_reply_content">
-						<strong>某某</strong>回复<strong>某某</strong>：	
-							张继科有几项比较突出的技术值的学习： </dd>
-						<div style="width:100%">
-							<div class="div_reply_ctrl" style="float:right;margin-top:10px">
-								<div class="dropdown small in_block">
-								   <a href="#" class="dropdown-toggle icon-bell" data-toggle="dropdown">
-								      举报
-								      <span class="caret"></span>
-								   </a>
-								   <ul class="dropdown-menu" role="menu">
-									<li><a role="menuitem" tabindex="-1" href="#">个人攻击</a></li>
-									<li><a role="menuitem" tabindex="-1" href="#">个人攻击</a></li>
-									<li><a role="menuitem" tabindex="-1" href="#">个人攻击</a></li>
-								   </ul>
-								</div>
-								<span>2013-7-21&nbsp;10:35</span>&nbsp;
-								<a href="#">回复</a>
-							</div>
-						</div>			
-					</div>
-					<HR>
-					%end
-					<div style="height:25px;width: 100%;margin-bottom: 20px" class="in_block">
-						<div class="text-center in_block" style="width: 80%">
-							还有5条回复，<a href="#">请点击查看</a>
+				</div>
+				<div class="div_reply_container reply_expand">
+					%for a in range(12):
+					<div class="div_reply_one_container">
+						<div class="div_reply_user">
+							<img class="thumbnail_profile" src="res/test/a (1).jpg"></img>
 						</div>
-						<button class="btn in_block btn-sm" style="float:right;padding: 2px 6px 2px 6px">
+						<div class="div_reply_content">
+							<strong>某某</strong>回复<strong>某某</strong>：	
+								张继科有几项比较突出的技术值的学习： </dd>
+							<div style="width:100%">
+								<div class="div_reply_ctrl small" style="float:right;margin-top:10px">
+									<div class="dropdown small in_block">
+									   <a href="#" class="dropdown-toggle icon-bell" data-toggle="dropdown">
+									      举报
+									      <span class="caret"></span>
+									   </a>
+									   <ul class="dropdown-menu" role="menu">
+										<li><a role="menuitem" tabindex="-1" href="#">个人攻击</a></li>
+										<li><a role="menuitem" tabindex="-1" href="#">个人攻击</a></li>
+										<li><a role="menuitem" tabindex="-1" href="#">个人攻击</a></li>
+									   </ul>
+									</div>
+									<span>2013-7-21&nbsp;10:35</span>&nbsp;
+									<span class="link_span" >回复</span>
+								</div>
+							</div>			
+						</div>
+						<HR>
+					</div>
+					%end
+					<div  class="in_block div_reply_more" style="height:25px;width: 100%;margin-bottom: 20px">
+						<div class="text-center in_block div_more_reply small" style="width: 80%">
+							还有<span class="text_reply_count">5</span>条回复，<span class="link_span" onclick="show_all_reply($(this))">请点击查看</span>
+						</div>
+						<button class="btn in_block btn-sm" style="float:right;padding: 2px 6px 2px 6px" onclick="show_reply_edit($(this))">
 							<i class="icon-comments " style="color:lightblue;"></i> 我也说一句
 						</button>
 					</div>
-					<div style="height:100px">
+					<div style="height:120px" class="div_reply_edit">
 						<textarea class="form-control" rows="3"></textarea>
-						<button class="btn btn-primary btn-sm" style="margin-top: 10px;padding: 2px 6px 2px 6px;float:right">
+						<button class="btn in_block btn-sm" style="margin-top: 10px;padding: 4px 10px 4px 10px;float:right">
 							发表
 						</button>
 					</div>

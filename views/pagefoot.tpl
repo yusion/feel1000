@@ -1,4 +1,6 @@
 <!-- this is page foot begin-->
+<script src="js/test_common.js"></script>
+
 	%if is_test:
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2" >
@@ -12,7 +14,8 @@
 	    <div class="col-md-8 col-md-offset-4" >
 		<small>
 		合作网站：新闻客户端  网易云阅读  网易女人  有道词典网易论坛  网易应用  网易商城爱拍  网易保健品  网易云音乐  网易科技  查看更多>><BR>
-		..公司版权所有<BR>
+		..公司版权所有<BR>版本号 {{version}}
+		
 		<p id="browser_version"></p>
 		Copyright 360.CN  京ICP备08010314号-19  京公网安备110000000006号
 		</small>

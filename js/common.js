@@ -1,7 +1,18 @@
+
 function assert(value,msg) {
   if (!value) {
     alert(msg);
   }
+}
+
+//是否为单元测试 
+var g_test = false;
+function set_test(val){
+  g_test = val;
+}
+
+function is_test(){
+  return g_test;
 }
 
 //ie8 doesn't support indexOf
@@ -680,6 +691,7 @@ function get_breadcrumb(){
   return s.slice(0,s.length-1);
 }
 
+//把数值显示为多少千，多少万
 function num_format(elems) {
   elems.each(function(){
       if(!/^\d+$/.test($(this).text())) {
@@ -701,6 +713,72 @@ function num_format(elems) {
   });
 }
 
+//把时间显示为多少小时前
+function data_format(elems) {   
+    //字符串转成Time(dateDiff)所需方法 
+    this.strToTime = function(str){ 
+        var f = str.split(' ', 2); 
+        var d = (f[0] ? f[0] : '').split('-', 3); 
+        var t = (f[1] ? f[1] : '').split(':', 3); 
+        return new Date( 
+            parseInt(d[0]) || null, 
+            (parseInt(d[1]) || 1)-1, 
+            parseInt(d[2]) || null, 
+            parseInt(t[0]) || null, 
+            parseInt(t[1]) || null, 
+            parseInt(t[2]) || null,
+            0
+            );
+    };
+    
+    this.dateDiff = function(date1, date2){ 
+        if(typeof(date1) == 'string') 
+          date1 = strToTime(date1); 
+        if(typeof(date2) == 'string') 
+          date2 = strToTime(date2); 
+        return (date1.getTime() - date2.getTime()) / 1000;//结果是秒 
+    };
+
+    this.secToStr = function(s)
+    {
+        if (s < 60) {
+          return "刚刚";
+        }
+        s = (s/60).toFixed(0);
+        if(s<=60)
+        {
+            return "" + s + "分钟";
+        }
+        s = (s/60).toFixed(0);
+        if (s <= 24) {
+          return "" + i + "小时";
+        }
+        
+        s = (s/24).toFixed(0);
+        if (s <=30) {
+          return "" + s + "天";
+        }
+        
+         s = (s/30).toFixed(0);
+        if (s <=12) {
+          return "" + s + "月";
+        }
+        
+        s = (s/12).toFixed(0);
+        return "" + s + "年";
+    }
+  
+  if (!elems) {
+    return;
+  }
+    //调用 dateDiff("2009-10-10 19:00:00","2009-10-10 18:00:00")
+  var now = new Date();
+    elems.each(function(){
+        var s = dateDiff(now,$(this).text());
+        $(this).text(secToStr(s) + "前");
+    });
+}
+
 function init_common()
 {
    $(".onlyNum").onlyNum();
@@ -710,6 +788,7 @@ function init_common()
     $(".limit_m").limitLength(20);
     $(".limit_l").limitLength(100);
     num_format($(".num_format"));
+    data_format($(".data_format"));
     
     set_imgtag($(".hot_tag"),create_img_div(-158,-41,38,21));
     set_imgtag($(".new_tag"),create_img_div(-158,-76,38,19));
@@ -726,4 +805,4 @@ $(document).ready(function(e){
   get_browser_info();
 });
 
-/*TODO 对时间的整理 1小时前，昨天，1天前，5天前，一个月前，一年前*/
+

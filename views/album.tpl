@@ -27,6 +27,13 @@
 	float:right;
 	vertical-align: bottom;
 }
+
+.div_album_title{
+	height: 30px;
+	width:100%;
+	padding: 10px 10px 10px 10px;
+	margin-top: 24px; 
+}
  
 </style>
 <script type="text/javascript">
@@ -132,10 +139,19 @@
 		<div>
 			<div class="div_album_user">
 				<img src="res/test/a (7).jpg" class="img_profile_sm {{onlineState}}"></img>
-				<H4 class="in_block"><small>2014/9/</small>25 2小时前</H4> 
+				<small>广州|21岁|178cm</small>
 			</div>
 		</div>
 		<div>
+			<div class="div_album_title">
+				<div style="width:75%"  class="in_block"> 
+				发表了一篇日志<span>2013-7-21&nbsp;10:35</span>
+				</div>
+				<div class="in_block" style="width:20%;float:right" >
+					<span class="link_span" style="margin-right: 10px" onclick="like_it($(this))">点赞</span>|
+					<span class="link_span link_show_reply" onclick="link_show_reply($(this))" >收起回复</span>
+				</div>
+			</div>
 			<div class="div_album_detail">
 				<div class="div_album_detail_img" style="">
 					%ll = random.randint(1,8)

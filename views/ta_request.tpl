@@ -78,7 +78,7 @@
 		<div class="form-group">
 			<label class="control-label" for="income">收入</label>
 			<div>
-				<select id="income" class="txt_input form-control">
+				<select id="income" class="txt_input form-control hover">
 					%for x in c_income:
 						<option value="{{x[0]}}" 
 						%if x[0] == income:
@@ -93,7 +93,7 @@
 			<div class="form-group">
 				<label class="control-label" for="degree">学历</label>
 				<div>
-					<select id="degree" class="txt_input  form-control">
+					<select id="degree" class="txt_input  form-control hover">
 						%for x in c_degree:
 							<option value="{{x[0]}}"
 							%if x[0] == degree:
@@ -108,7 +108,7 @@
 		<div class="form-group">
 			<label for="condition" class="control-label">条件</label>
 			<div >
-				<select id="condition" class="form-control">
+				<select id="condition" class="form-control hover">
 					<option>无</option>
 					<option>有车</option>
 					<option>有房</option>

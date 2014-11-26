@@ -518,7 +518,51 @@ function create_img_div(left,top,width,height)
     }
 })(jQuery);
 
-//设置自动弹出菜单，注意导航栏是通过css设置的 
+//设置自动弹出select控件,需设置 <select class="hover">
+function set_select_hover(elems){
+    elems.css("cursor","pointer");
+    elems.css("overflow","visible");
+     
+    elems.each(function(){
+         $(this).mouseenter(function(){
+            $(this).attr("multiple","true");
+            $(this).focus().select();
+            $(this).css("position","absolute");
+            $(this).css("z-index","10000");
+            
+            var oldItem = $(this).children("option[selected]");
+            var opItems = $(this).children("option");
+            opItems.css("cursor","pointer");
+            $(this).css("height","" +(opItems.length*20));
+                    
+            opItems.mouseenter(function(){
+               $(this).parent().children("option[selected]").removeAttr("selected");
+               $(this).attr("selected","selected");
+             });
+            
+            opItems.click(function(){
+               $(this).parent().children("option[selected]").removeAttr("selected");
+               opItems.mouseleave();
+               oldItem = $(this);
+               oldItem.attr("selected","selected");
+             });
+            
+            opItems.mouseleave(function(){
+                $(this).parent().children("option[selected]").removeAttr("selected");
+                oldItem.attr("selected","selected");
+             });
+       });
+      
+      $(this).mouseleave(function(){
+            $(this).css("position","inherit");
+            $(this).css("z-index","0");
+            $(this).removeAttr("multiple");
+            $(this).css("height","auto");
+          });
+   });
+}
+
+//设置自动弹出菜单 
 function set_dropdown_hover(elems){
   elems.each(function(){
     
@@ -811,7 +855,8 @@ function init_common()
     
     set_online_tag($(".phone_online"),true,"手机在线");
     set_online_tag($(".online"),false,"在线");
-    
+
+    set_select_hover($("select.hover"))
     set_dropdown_hover($("div.dropdown-hover"));
     
     $(".checkbox_ctrl").checkbox_ctrl();

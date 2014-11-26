@@ -46,21 +46,18 @@
 			if (i==0) {
 				//没有回复，则直接显示回复框 
 				item.text("回复");
-				c.find(".div_reply_more").hide();
-				c.find(".div_reply_edit").show();
+				c.find(".div_more_reply").hide();
 			}
 			else
 			{
-				c.find(".div_reply_more").show();
-				c.find(".div_reply_edit").hide();
+				c.find(".div_more_reply").show();
 				item.text("回复(" +i+")");				
 			}
 		}
 		else
 		{
 			if (i == 0) {
-				c.find(".div_reply_more").hide();
-				c.find(".div_reply_edit").show();
+				c.find(".div_more_reply").hide();
 			}
 			item.text("收起回复");	
 		}
@@ -74,7 +71,7 @@
 		var c = item.parents(".div_reply_container");
 		c.addClass("show_all");
 		c.find(".div_reply_one_container").show();
-		c.find(".div_more_reply").hide();
+		c.find(".div_reply_more").hide();
 	}
 	
 	//自动收藏多余的回复 
@@ -102,12 +99,7 @@
  			}
 		});
 	}
-	
-	//显示回复对话框
-	function show_reply_edit(item){
-		item.parents(".div_reply_container").find(".div_reply_edit").toggle();
-	}
-	
+	 
 	//点赞文章按钮
 	function like_it(item){
 		var t = item.parent().parent().find(".text_likeit_num");
@@ -117,12 +109,24 @@
 		item.removeClass("link_span");
 	}
 	
+	//显示扩大的回复对话框
+	function show_edit_ctrl(item){//;" onblur="hide_edit_ctrl($(this));"
+		item.attr("rows","3");
+		item.nextAll().show();
+		item.parent().css("padding-bottom","50px");
+	}
+	
+	function hide_edit_ctrl(item){
+		item.attr("rows","1");
+		item.nextAll().hide();
+		item.parent().css("padding-bottom","20px");
+	}
+	
 	$(document).ready(function(e){
 		$(".div_album_user").parent().addClass("col-md-2");
 		$(".div_album_detail").parent().addClass("col-md-10");
 		
 		hide_more_reply($(".div_reply_container"),5);
-		$(".div_reply_edit").hide();
 	});
 
 	
@@ -206,17 +210,12 @@
 						<HR>
 					</div>
 					%end
-					<div  class="in_block div_reply_more" style="height:25px;width: 100%;margin-bottom: 20px">
-						<div class="text-center in_block div_more_reply small" style="width: 80%">
-							还有<span class="text_reply_count">5</span>条回复，<span class="link_span" onclick="show_all_reply($(this))">请点击查看</span>
-						</div>
-						<button class="btn in_block btn-sm" style="float:right;padding: 2px 6px 2px 6px" onclick="show_reply_edit($(this))">
-							<i class="icon-comments " style="color:lightblue;"></i> 我也说一句
-						</button>
+					<div  class="in_block div_reply_more text-center" style="height:25px;width: 100%;margin-bottom: 15px">
+						还有<span class="text_reply_count">5</span>条回复，<span class="link_span" onclick="show_all_reply($(this))">请点击查看</span>
 					</div>
-					<div style="height:120px" class="div_reply_edit">
-						<textarea class="form-control" rows="3"></textarea>
-						<button class="btn in_block btn-sm" style="margin-top: 10px;padding: 4px 10px 4px 10px;float:right">
+					<div class="div_reply_edit" style="padding-bottom: 20px" >
+						<textarea class="form-control" rows="1" onfocus="show_edit_ctrl($(this));" onblur="hide_edit_ctrl($(this));" placeholder="回复内容"></textarea>
+						<button class="btn btn-primary in_block btn-sm icon-comments" style="display: none;margin-top: 10px;padding: 4px 10px 4px 10px;float:right">
 							发表
 						</button>
 					</div>

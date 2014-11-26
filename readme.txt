@@ -187,25 +187,7 @@ Unslider ¡ª Ò»¸ö³¬Ð¡µÄ jQuery ÂÖ²¥£¨slider£© ²å¼þ¡£Ö§³ÖÖ÷Á÷ä¯ÀÀÆ÷¡¢¼üÅÌµ¼º½¡¢×Ô¶
 
 Image Zoom 2.0 ÉèÖÃÍ¼ÏñµÄ·Å´óÐ§¹û
 http://andreaslagerkvist.com/jquery/image-zoom/#jquery-plugin-example
+ 
+ 
+·À´òÈÅÉèÖÃ£º
 
-
-
-¼ÆËã»ú/»¥ÁªÍø/Í¨ÐÅ
-¹«ÎñÔ±/ÊÂÒµµ¥Î»
-½ÌÊ¦
-Ò½Éú
-»¤Ê¿
-¿Õ³ËÈËÔ±
-Éú²ú/¹¤ÒÕ/ÖÆÔì
-ÉÌÒµ/·þÎñÒµ/¸öÌå¾­Óª
-½ðÈÚ/ÒøÐÐ/Í¶×Ê/±£ÏÕ
-ÎÄ»¯/¹ã¸æ/´«Ã½
-ÓéÀÖ/ÒÕÊõ/±íÑÝ
-ÂÉÊ¦/·¨Îñ
-½ÌÓý/ÅàÑµ/¹ÜÀí×ÉÑ¯
-½¨Öþ/·¿µØ²ú/ÎïÒµ
-Ïû·ÑÁãÊÛ/Ã³Ò×/½»Í¨ÎïÁ÷
-¾ÆµêÂÃÓÎ
-ÏÖ´úÅ©Òµ
-ÔÚÐ£Ñ§Éú
-ÆäËü

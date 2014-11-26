@@ -173,9 +173,17 @@
 			</div>
 		</div>	
 		<div class="form-group">
-			<label class="control-label" for="career">职务</label>
+			<label class="control-label" for="career">职业</label>
 			<div>
-				<input class="txt_input form-control" id="career"  value="{{!career}}" />
+				<select id="career" class="txt_input form-control">
+					%for x in c_career:
+						<option value="{{x[0]}}" 
+						%if x[0] == career:
+							selected="selected"
+						%end
+						>{{x[1]}}</option>
+					%end
+				</select> 
 			</div>
 		</div>
 		<div class="form-group">

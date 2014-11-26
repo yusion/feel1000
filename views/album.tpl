@@ -22,7 +22,7 @@
 }
 
 .div_show_reply{
-	width:20%;
+	width:auto;
 	margin-top: 33px;
 	float:right;
 	vertical-align: bottom;
@@ -46,18 +46,18 @@
 			if (i==0) {
 				//没有回复，则直接显示回复框 
 				item.text("回复");
-				c.find(".div_more_reply").hide();
+				c.find(".div_reply_more").hide();
 			}
 			else
 			{
-				c.find(".div_more_reply").show();
+				c.find(".div_reply_more").show();
 				item.text("回复(" +i+")");				
 			}
 		}
 		else
 		{
 			if (i == 0) {
-				c.find(".div_more_reply").hide();
+				c.find(".div_reply_more").hide();
 			}
 			item.text("收起回复");	
 		}
@@ -131,9 +131,23 @@
 
 	
 </script>
+<div class="row" style="margin-bottom: 0px"> 
+	<div class="col-md-10 col-md-offset-2">
+		<ul class="list-inline" style="margin-top: 10px;margin-bottom: 10px">
+			<li><input type="checkbox">全部<span class="badge">10</span></li>
+			<li><input type="checkbox">日志<span class="badge">10</span></li>
+			<li><input type="checkbox">留言<span class="badge">10</span></li>
+			<li><input type="checkbox">系统<span class="badge">10</span></li>
+		</ul>
+	</div>
+</div>		
+<div class="row" style="background-color:#efeff1;margin: 0px 0px 0px 0px" >
+	<div style="height: 15px" class="col-md-10 col-md-offset-2">
+	</div>
+</div>		
 <div id="div_album_container">
 	%import random
-	%for i in range(1):
+	%for i in range(5):
 	%if i %2 == 0:
 	%	onlineState="online"
 	%else:
@@ -181,7 +195,7 @@
 					</div>
 				</div>
 				<div class="div_reply_container reply_expand">
-					%for a in range(12):
+					%for a in range(0):
 					<div class="div_reply_one_container">
 						<div class="div_reply_user">
 							<img class="thumbnail_profile" src="res/test/a (1).jpg"></img>

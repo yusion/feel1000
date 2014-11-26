@@ -191,3 +191,4 @@ http://andreaslagerkvist.com/jquery/image-zoom/#jquery-plugin-example
  
 防打扰设置：
 
+个人资料不填啥，就不显示啥

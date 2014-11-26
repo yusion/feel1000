@@ -221,6 +221,7 @@ def url_show_profile():
 	utility.update_c_table(d,"c_income",u.income)
 	utility.update_c_table(d,"c_star",u.star)
 	utility.update_c_table(d,"c_degree",u.degree)
+	utility.update_c_table(d,"c_career",u.career)
 	return d
 
 @bottle.route('/action/update_profile')	

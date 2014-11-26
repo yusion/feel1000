@@ -590,6 +590,7 @@ function set_dropdown_hover(elems){
       }
       
       This.mouseenter(function(){
+          This.siblings(".open").removeClass("open");
           clearTimeout(timerID1);
           clearTimeout(timerID2);
           showMenu();

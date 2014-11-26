@@ -209,6 +209,20 @@ class ctrl_profile:
 def url_show_space():
 	d = utility.get_dist()
 	return d
+
+@bottle.route('/ta_request')	
+@bottle.view('ta_request')	
+def url_show_ta_request():
+	d = utility.get_dist()
+	u = ctrl_profile.get()
+	d["photo_url"] = u.photo_url
+	d["normal_photo_url"] = u.normal_photo_url
+	d.update(u.get_dict())
+	utility.update_c_table(d,"c_income",u.income)
+	utility.update_c_table(d,"c_star",u.star)
+	utility.update_c_table(d,"c_degree",u.degree)
+	utility.update_c_table(d,"c_career",u.career)
+	return d
 		
 @bottle.route('/profile')	
 @bottle.view('profile')	

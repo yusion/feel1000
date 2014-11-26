@@ -4,7 +4,7 @@ import pytest
 import platform  
 import sys,os,bottle
 import session,utility
-from web_profile import url_show_profile
+from web_profile import url_show_profile,url_show_ta_request
 from web_login import url_show_login
 from web_album import url_show_album
 from web_search import *
@@ -53,9 +53,7 @@ def url_index():
 	d = utility.get_dist()
 	d["session"] = ""
 	return d
-
-#import web_register
-
+ 
 if __name__ == '__main__':
 	print("python " + platform.python_version())
 	#utility.set_is_test(True);

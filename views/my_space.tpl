@@ -3,6 +3,11 @@
 <head>
 	{{!web_head}}
 	<script src="js/jquery.raty.min.js"></script>
+	<link rel="stylesheet" href="css/rangeslider/ion.rangeSlider.css" />
+	<link rel="stylesheet" href="css/rangeslider/ion.rangeSlider.skinFlat.css"/>
+	<script src="js/ion.rangeSlider.js"></script>
+	<link href="css/return_top.css" rel="stylesheet"  type="text/css"/>
+	<script src="js/return_top.js" type="text/javascript"></script>
 </head>
 <body>
 {{!page_head}}
@@ -12,15 +17,15 @@
 <script type="text/javascript">
 	function init_raty(readonlyVal)
 	{
-		$("#star_rating1").empty();
-		$("#star_rating2").empty();
-		$("#star_rating3").empty();
-		$("#star_rating4").empty();
-		
-		$("#star_rating1").raty({ start:3,inline_width:38,readOnly:readonlyVal});
-		$("#star_rating2").raty({ start:3,inline_width:68,readOnly:readonlyVal});
-		$("#star_rating3").raty({ start:3,inline_width:68,readOnly:readonlyVal});
-		$("#star_rating4").raty({ start:3,inline_width:68,readOnly:readonlyVal});
+		$("#star_appearance").empty();
+		$("#star_figure").empty();
+		$("#star_character").empty();
+		$("#star_attitude").empty();
+				  
+		$("#star_appearance").raty({ start:3,inline_width:38,readOnly:readonlyVal});
+		$("#star_figure").raty({ start:3,inline_width:68,readOnly:readonlyVal});
+		$("#star_character").raty({ start:3,inline_width:68,readOnly:readonlyVal});
+		$("#star_attitude").raty({ start:3,inline_width:68,readOnly:readonlyVal});
 	}
 	
 	$(document).ready(function(e){
@@ -96,18 +101,18 @@
 			<p>
 				 本科 | 10k-15k | 租房 | 有车
 			</p>
-			<div class="in_block" >
+			<div class="in_block" > 
 				<div style="margin-bottom: 5px">
-					<span>长相：</span><div id="star_rating1" class="in_block"></div><span class="small">英俊潇洒</span><BR/>
+					<span>长相：</span><div id="star_appearance" class="in_block"></div><span class="small">英俊潇洒</span><BR/>
 				</div>
 				<div style="margin-bottom: 5px">
-					<span>身材：</span><div id="star_rating2" class="in_block"></div><span class="small">英俊潇洒</span><BR/>
+					<span>身材：</span><div id="star_figure" class="in_block"></div><span class="small">英俊潇洒</span><BR/>
 				</div>
 				<div style="margin-bottom: 5px">
-					<span>性格：</span><div id="star_rating3" class="in_block"></div><span class="small">英俊潇洒</span><BR/>
+					<span>性格：</span><div id="star_character" class="in_block"></div><span class="small">英俊潇洒</span><BR/>
 				</div>
 				<div style="margin-bottom: 5px">
-					<span>态度：</span><div id="star_rating4" class="in_block"></div><span class="small">英俊潇洒</span><BR/>
+					<span>态度：</span><div id="star_attitude" class="in_block"></div><span class="small">英俊潇洒</span><BR/>
 				</div>
 			</div>
 			<h5 class="in_block icon-edit readonly_hide" style="margin-left: 50px;margin-top: 0px;vertical-align: top;cursor:pointer" edit_mode="False" onclick="click_edit()">
@@ -181,11 +186,11 @@
 				</div>
 				<div class="collapse navbar-collapse" id="space-navbar-collapse" style="padding-left: 0px">
 				   <ul class="nav navbar-nav">
-				      <li id="first_nav_tag"><a href="#" data="album" class="icon-envelope">   我的动态<span class="badge">20</span></a></li>
-				      <li ><a href="#" class="icon-group">   我的好友</a></li>
+				      <li><a href="#" data="album" class="icon-envelope">   我的动态<span class="badge">20</span></a></li>
+				      <li><a href="#" class="icon-group">   我的好友</a></li>
 				      <li><a href="#" data="profile" class="icon-user">我的资料</a></li>
 				      <li><a href="#" data="certif" class="icon-certificate">  我的认证</a></li>
-				      <li ><a href="#" class="icon-star">对TA的要求</a></li>
+				      <li  id="first_nav_tag"><a href="#" data="ta_request" class="icon-star">对TA的要求</a></li>
 				   </ul>
 				</div>
 			</nav>

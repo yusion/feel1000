@@ -779,6 +779,22 @@ function data_format(elems) {
     });
 }
 
+//自定义的checkbox
+//html写法 <span class="checkbox_ctrl" checked="true">广东省</span>
+//可以通过属性checked来查看是否选中
+$.fn.checkbox_ctrl = function () {
+  $(this).click(function(){
+    if($(this).attr("checked"))
+    {
+      $(this).removeAttr("checked");
+    }
+    else
+    {
+      $(this).attr("checked","true");
+    }
+   });
+};
+
 function init_common()
 {
    $(".onlyNum").onlyNum();
@@ -798,6 +814,7 @@ function init_common()
     
     set_dropdown_hover($("div.dropdown-hover"));
     
+    $(".checkbox_ctrl").checkbox_ctrl();
 }
 
 $(document).ready(function(e){

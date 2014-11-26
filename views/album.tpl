@@ -134,10 +134,10 @@
 <div class="row" style="margin-bottom: 0px"> 
 	<div class="col-md-10 col-md-offset-2">
 		<ul class="list-inline" style="margin-top: 10px;margin-bottom: 10px">
-			<li><input type="checkbox">全部<span class="badge">10</span></li>
-			<li><input type="checkbox">日志<span class="badge">10</span></li>
-			<li><input type="checkbox">留言<span class="badge">10</span></li>
-			<li><input type="checkbox">系统<span class="badge">10</span></li>
+			<li><span class="checkbox_ctrl">全部<span class="badge">10</span></span></li>
+			<li><span class="checkbox_ctrl">日志<span class="badge">10</span></span></li>
+			<li><span class="checkbox_ctrl">留言<span class="badge">10</span></span></li>
+			<li><span class="checkbox_ctrl">系统<span class="badge">10</span></span></li>
 		</ul>
 	</div>
 </div>		

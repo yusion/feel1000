@@ -601,29 +601,19 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px purple;
 	}
 }
 
-
-/*
-设计label check的方法
- <style type="text/css">
-input.error { border: 1px solid red; }
-label.error {
-  background:url("res/unchecked.gif") no-repeat 0px 0px;
-
-  padding-left: 16px;
-
-  padding-bottom: 2px;
-
-  font-weight: bold;
-
-  color: #EA5200;
+/* 自定义的checkbox */
+span.checkbox_ctrl{
+	padding-left: 22px;
+	height: 22px;
+	width: auto;
+	display: inline-block;
+	cursor: pointer;
+	background:url("/res/small_icon.png") no-repeat 0px -156px;
 }
 
-label.checked {
-  background:url("res/checked.gif") no-repeat 0px 0px;
+span.checkbox_ctrl[checked]{
+	background:url("/res/small_icon.png") no-repeat 0px -134px;
 }
- 
-</style>
- */
 
 
 

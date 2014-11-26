@@ -32,7 +32,7 @@
 		init_raty(true);
 		var isFirst = true;
 		$("#nav_my_space .navbar-nav").children("li").click(function(){
-			var text = $(this).children().text();
+			var text = $(this).find("span:first").text();
 			var u = $(this).children().attr("data");
 			$(this).parent().children("li").removeClass("active");
 			$(this).addClass("active");
@@ -186,11 +186,11 @@
 				</div>
 				<div class="collapse navbar-collapse" id="space-navbar-collapse" style="padding-left: 0px">
 				   <ul class="nav navbar-nav">
-				      <li><a href="#" data="album" class="icon-envelope">   我的动态<span class="badge">20</span></a></li>
-				      <li><a href="#" class="icon-group">   我的好友</a></li>
-				      <li><a href="#" data="profile" class="icon-user">我的资料</a></li>
-				      <li><a href="#" data="certif" class="icon-certificate">  我的认证</a></li>
-				      <li  id="first_nav_tag"><a href="#" data="ta_request" class="icon-star">对TA的要求</a></li>
+				      <li><a href="#" data="album" class="icon-envelope"><span>我的动态</span><span class="badge">20</span></a></li>
+				      <li><a href="#" class="icon-group"><span>我的好友</span></a></li>
+				      <li><a href="#" data="profile" class="icon-user"><span>我的资料</span></a></li>
+				      <li><a href="#" data="certif" class="icon-certificate"><span>我的认证</span></a></li>
+				      <li  id="first_nav_tag"><a href="#" data="ta_request" class="icon-star"><span>对TA的要求</span></a></li>
 				   </ul>
 				</div>
 			</nav>

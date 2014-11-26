@@ -6,12 +6,9 @@
 
 <script type="text/javascript">
  	$(document).ready(function(e){
-		test("ddddd");
 		$("#form_ta_request label").addClass("col-md-2");
 		$("#form_ta_request .form-group>div").addClass("col-md-5");
 		$("#form_ta_request H3").parent().addClass("col-md-6 col-md-offset-1");
-		
-		var c = new Vcity.CitySelector({input:'city'});
 				
 		//设置星星评价
 		$("#star_ta_appearance").raty({ start:2,inline_width:68});
@@ -71,9 +68,10 @@
 <form id="form_ta_request" class="form-horizontal" role="form" style="padding-top: 30px;padding-bottom: 20px">
 	<div>
 		<div class="form-group">
-			<label class="control-label">城市</label>
+			<label class="control-label">地点</label>
 			<div>
-				<input class="txt_input form-control" id="city" value="{{!city}}" />
+				<span class="checkbox_ctrl" checked="true">广东省</span>
+				<span class="checkbox_ctrl" style="margin-left: 20px">广州市</span>
 			</div>
 		</div>
 		

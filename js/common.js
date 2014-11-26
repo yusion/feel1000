@@ -519,21 +519,31 @@ function create_img_div(left,top,width,height)
 })(jQuery);
 
 //设置自动弹出select控件,需设置 <select class="hover">
+//注意要设置父元素的高度，要不然会跳变。。。 
 function set_select_hover(elems){
     elems.css("cursor","pointer");
-    elems.css("overflow","visible");
-     
+    elems.css("overflow","hidden"); 
+    
+    function reset(item){
+         item.css("position","inherit");
+         item.css("z-index","0");
+         item.removeAttr("multiple");
+         item.css("height","auto");
+    }
+    
     elems.each(function(){
          $(this).mouseenter(function(){
+            var ww = $(this).width();
             $(this).attr("multiple","true");
-            $(this).focus().select();
             $(this).css("position","absolute");
             $(this).css("z-index","10000");
             
             var oldItem = $(this).children("option[selected]");
             var opItems = $(this).children("option");
             opItems.css("cursor","pointer");
-            $(this).css("height","" +(opItems.length*20));
+            $(this).css("height","" +(opItems.length*20) + "px");
+            $(this).width(ww);
+            $(this).focus().select();
                     
             opItems.mouseenter(function(){
                $(this).parent().children("option[selected]").removeAttr("selected");
@@ -542,9 +552,11 @@ function set_select_hover(elems){
             
             opItems.click(function(){
                $(this).parent().children("option[selected]").removeAttr("selected");
-               opItems.mouseleave();
+               opItems.unbind("mouseenter");
+               opItems.unbind("mouseleave");
                oldItem = $(this);
                oldItem.attr("selected","selected");
+               reset($(this).parent());
              });
             
             opItems.mouseleave(function(){
@@ -554,10 +566,7 @@ function set_select_hover(elems){
        });
       
       $(this).mouseleave(function(){
-            $(this).css("position","inherit");
-            $(this).css("z-index","0");
-            $(this).removeAttr("multiple");
-            $(this).css("height","auto");
+         reset($(this));
           });
    });
 }

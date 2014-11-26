@@ -75,7 +75,7 @@
 			</div>
 		</div>
 		
-		<div class="form-group">
+		<div class="form-group" style="height:32px">
 			<label class="control-label" for="income">收入</label>
 			<div>
 				<select id="income" class="txt_input form-control hover">
@@ -87,10 +87,9 @@
 						>{{x[1]}}</option>
 					%end
 				</select> 
-				</div>
 			</div>
 		</div>	 
-			<div class="form-group">
+			<div class="form-group" style="height:32px">
 				<label class="control-label" for="degree">学历</label>
 				<div>
 					<select id="degree" class="txt_input  form-control hover">
@@ -105,7 +104,7 @@
 				</div>
 			</div>
 		
-		<div class="form-group">
+		<div class="form-group" style="height:32px">
 			<label for="condition" class="control-label">条件</label>
 			<div >
 				<select id="condition" class="form-control hover">

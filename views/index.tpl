@@ -12,8 +12,6 @@
 	<link rel="stylesheet" href="css/rangeslider/ion.rangeSlider.css" />
 	<link rel="stylesheet" href="css/rangeslider/ion.rangeSlider.skinFlat.css"/>
 	<script src="js/ion.rangeSlider.js"></script>
-	<link href="css/return_top.css" rel="stylesheet"  type="text/css"/>
-	<script src="js/return_top.js" type="text/javascript"></script>
 </head>
 <body>
 {{!page_head}}

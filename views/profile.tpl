@@ -75,6 +75,7 @@
 		});
 		$("#form_profile select").each(function()
 		{
+			$(this).addClass("hover");
 			add_p($(this),$(this).find("option:selected").text());
 		});
 		
@@ -174,7 +175,7 @@
 		</div>	
 		<div class="form-group">
 			<label class="control-label" for="career">职业</label>
-			<div>
+			<div style="height:34px">
 				<select id="career" class="txt_input form-control">
 					%for x in c_career:
 						<option value="{{x[0]}}" 
@@ -188,7 +189,7 @@
 		</div>
 		<div class="form-group">
 			<label class="control-label" for="income">收入</label>
-			<div>
+			<div style="height:34px">
 				<select id="income" class="txt_input form-control">
 					%for x in c_income:
 						<option value="{{x[0]}}" 
@@ -214,7 +215,7 @@
 		</div>
 		<div class="form-group">
 			<label class="control-label" for="degree">学历</label>
-			<div>
+			<div style="height:34px">
 				<select id="degree" class="txt_input  form-control">
 					%for x in c_degree:
 						<option value="{{x[0]}}"
@@ -243,7 +244,7 @@
 		</div>
 			<div class="form-group">
 				<label class="control-label" for="star">星座</label>
-				<div>
+				<div style="height:34px">
 					<select id="star" class="txt_input form-control">
 					%for x in c_star:
 					<option value="{{x[0]}}"

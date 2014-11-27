@@ -5,7 +5,7 @@
 <meta name="renderer" content="webkit">
     
 <link href="css/bootstrap.min.css" rel="stylesheet"/>
-<link href="css/bootstrap-theme.css" rel="stylesheet"/>
+<!-- link href="css/bootstrap-theme.css" rel="stylesheet"/ -->
  
 <script src="js/jquery-1.11.1.min.js"></script>
 

@@ -294,28 +294,25 @@
 .navbar-inverse .navbar-brand:focus {
     color: white;
     background-color: transparent;
-    border-bottom: 4px solid transparent;
-}
+ }
 
 /* navigator 普通菜单项的颜色和背景  */
 .navbar-inverse .navbar-nav>li>a {
     color: white;
-    border-bottom: 4px solid transparent;
-}
+ }
 
 /* navigator 普通菜单项hover时的字体颜色和背景  */
 .navbar-inverse .navbar-nav>li>a:hover, 
 .navbar-inverse .navbar-nav>li>a:focus {
-    color: white;
-    background-color: @head_color;
-    border-bottom: 4px solid @hover_link_color;
+    //color: @hover_link_color;
+    font-weight: bold; 
 }
 
 /* navigator 当前选中菜单项的字体颜色和背景  */
 .navbar-inverse .navbar-nav>.active>a, 
 .navbar-inverse .navbar-nav>.active>a:hover, 
 .navbar-inverse .navbar-nav>.active>a:focus {
-    color: white;
+    color: black;
     background-color:@active_nav_color;
 }
 
@@ -575,6 +572,70 @@ span.checkbox_ctrl[checked]{
 	background-position:-122px -65px;
 }
 
+/*主页的新成员展示CSS */
+#div_new_member .carousel {
+    border: 1px solid #ddd;
+    background-color: white;
+    float: left;
+    padding-left: 0px;
+}
 
+#div_new_member ul >li >img{
+        .img_profile_sm;
+        height: 118px;
+        vertical-align:middle;
+        margin: 8px 8px 8px 0;
+        border-radius: 1px;
+	cursor:pointer;
+}
 
+#div_new_member{
+	p{	background-image: url('/res/small_icon.png');
+		position:absolute;
+		top: 50px; 
+		z-index: 1000;
+		cursor: pointer;
+		width:32px;
+		height:41px;
+	}
+	
+	.prev {
+		background-position: -292px 0px;
+		left: 16px;
+	}
+
+	.next {
+		background-position: -327px 0px;
+		right: 15px; 
+	}
+	
+	&:hover{
+		.prev {
+			background-position: -362px 0px;
+		}
+		.next {
+			background-position: -397px 0px;
+		}		
+	}
+}
+
+#div_carousel_ctrl{
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	z-index: 10;
+	.go{
+		padding: 0px 5px 0px 5px;
+		margin-right: 5px;
+		background-color:gray;
+		color: white;
+		text-decoration: none;
+		&:hover{
+			color: @hover_link_color;
+		}
+		&.active{
+			color: @active_link_color;
+		}
+	}
+}
 

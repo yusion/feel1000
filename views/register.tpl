@@ -7,14 +7,16 @@
 <input type="hidden" id="result" value="unknown">
 <div id="div_register">
 	<div class="row">
-		<div class="col-md-7">
+		<div class="col-md-7 small">
+			性别：
 			<input type="radio" name="sex" id="radio_male" value="0" checked="checked" style="heigth:auto">
 				帅哥
-			<input type="radio" name="sex" id="radio_female" value="1" style="margin-left: 20px">
+			<input type="radio" name="sex" id="radio_female" value="1" style="margin-left: 10px">
 				美女
 		</div>
-		<div class="col-md-5 pull-right">
-			<select id="age" name="age" class="form-control input-sm" style="padding-left: 10px;">
+		<div class="col-md-5 pull-right small" style="padding: 0 0 0 0">
+			年龄：
+			<select id="age" name="age" class="form-control input-sm in_block" style="padding: 0 0 0 0;width:50px;height:24px">
 			%for a in range(18,41):
 				<option value="{{a}}"
 					%if a == 24:
@@ -46,7 +48,7 @@
 			<a href="/agreement.html" target="_blank">《用户服务协议》</a>
 		</div>
 	</div>
-	<div class="row" style="margin-bottom: -2px">
+	<div class="row" style="margin-bottom: 4px">
 		<div class="col-md-12">
 			<button id="btn_register" type="button" class="btn btn-success form-control ">注&nbsp; 册</button>
 		</div>

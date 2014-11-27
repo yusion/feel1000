@@ -19,7 +19,7 @@
 		<div class="collapse navbar-collapse" id="my_navbar-collapse">
 		   <ul class="nav navbar-nav">
 			<li  class="active"><a href="index"><i class="icon-home"></i> 主页</a></li>
-			<li><a href="index2"><i class="icon-conversation"></i> 动态</a></li>
+			<li><a href=""><i class="icon-conversation"></i> 动态</a></li>
 		        <li><a href="search"><i class="icon-search"></i> 查找</a></li>  
 			<li><a href="my_space"><i class="icon-user"></i> 我的主页</a></li>
 		   </ul>

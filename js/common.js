@@ -715,7 +715,7 @@ function set_online_tag(elems,type,title) {
 }
 
 function set_imgtag(items,elem) {
-    elem.css({"position":"absolute","top":"0px","left":"0px"});
+    elem.css({"position":"absolute","top":"0px","left":"0px","z-index":"9000"});
     items.after(elem);
 }
 

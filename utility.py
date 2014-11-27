@@ -41,7 +41,7 @@ def set_is_test(value):
 
 def get_template_file(filename,keyword):
 	with open(filename,"r") as f:
-	    tpl = bottle.SimpleTemplate(f.read())
+	    tpl = bottle.SimpleTemplate(f.read(),encoding='utf8')
 	    return tpl.render(keyword)
 
 def get_dist():

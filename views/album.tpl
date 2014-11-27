@@ -228,7 +228,7 @@
 						还有<span class="text_reply_count">5</span>条回复，<span class="link_span" onclick="show_all_reply($(this))">请点击查看</span>
 					</div>
 					<div class="div_reply_edit" style="padding-bottom: 20px" >
-						<textarea class="form-control" rows="1" onfocus="show_edit_ctrl($(this));" onblur="hide_edit_ctrl($(this));" placeholder="回复内容"></textarea>
+						<textarea class="form-control" rows="1" onfocus="show_edit_ctrl($(this));" onblur="hide_edit_ctrl($(this));" placeholder="我也说一句"></textarea>
 						<button class="btn btn-primary in_block btn-sm icon-comments" style="display: none;margin-top: 10px;padding: 4px 10px 4px 10px;float:right">
 							发表
 						</button>

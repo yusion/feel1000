@@ -1,53 +1,57 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-	{{!web_head}}
-	<script type="text/javascript" src="./js/md5.js"></script >
-</head>
-<body>
-{{!page_head}}
+<style type="text/css">
+#div_register .row{
+	margin-bottom: 8px;
+}
+</style>
+
 <input type="hidden" id="result" value="unknown">
-<form id="reg_form" class="form-horizontal" role="form">
+<div id="div_register">
 	<div class="row">
-		<div class="hidden-xs hidden-sm" style="height: 0px;width:100%">
+		<div class="col-md-7">
+			<input type="radio" name="sex" id="radio_male" value="0" checked="checked" style="heigth:auto">
+				Ë§¸ç
+			<input type="radio" name="sex" id="radio_female" value="1" style="margin-left: 20px">
+				ÃÀÅ®
+		</div>
+		<div class="col-md-5 pull-right">
+			<select id="age" name="age" class="form-control input-sm" style="padding-left: 10px;">
+			%for a in range(18,41):
+				<option value="{{a}}"
+					%if a == 24:
+						selected="selected"
+					%end
+				>{{a}}Ëê</option>
+			%end
+			</select>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-4 col-sm-offset-4">
-			<div class="form-group">
-				<label class="btn btn-info col-sm-3"">
-					<input type="radio" name="sex" id="radio_male" value="0" checked="checked">å¸…å“¥
-				</label>
-				<label class="btn btn-warning col-sm-3  col-sm-offset-1">
-					<input type="radio" name="sex" id="radio_female" value="1">ç¾å¥³
-				</label>
-			</div>
-			<div class="form-group">
-				<input type="text" id="nickname" name="nickname" class="form-control limit_m" placeholder="æ˜µç§°">
-			</div>
-			<div class="form-group">
-				<input type="text" class="form-control onlyNum limit_m" id="phone" name="phone" placeholder="æ‰‹æœºå·ç ">
-			</div>
-			<div class="form-group">
-				<input type="password" class="form-control limit_m" id="password" name="password" placeholder="å¯†ç ">
-			</div>
-			<div class="form-group">
-				<small>
-					<input id="chk_agreement" type="checkbox" checked="checked" name="agreement">æˆ‘å·²é˜…è¯»å¹¶åŒæ„
-					<a href="/agreement.html" target="_blank">ã€Šç”¨æˆ·æœåŠ¡åè®®ã€‹</a>
-				</small>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-4">
-				   <button id="btn_register" type="button" class="btn btn-primary">æ³¨&nbsp; å†Œ</button>	
-				</div>
-				<div class="pull-right">
-				   <a href="/login" class="registor_now">å·²æœ‰å¸å·ï¼Œç›´æ¥ç™»å½•</a>
-				</div>
-			</div>
+		<div class="col-md-12">
+			<input type="text" class="form-control onlyNum limit_m input-sm" id="phone" name="phone" placeholder="ÊÖ»úºÅÂë">
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-md-12">
+			<input type="text" id="nickname" name="nickname" class="form-control limit_m input-sm" placeholder="êÇ³Æ">
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<input type="password" class="form-control limit_m input-sm" id="password" name="password" placeholder="ÃÜÂë">
+		</div>	
+	</div>
+	<div class="row">
+		<div class="col-md-12 small">
+			<span id="chk_agreement" checked="checked" class="checkbox_ctrl text-left" >ÎÒÒÑÔÄ¶Á²¢Í¬Òâ</span>
+			<a href="/agreement.html" target="_blank">¡¶ÓÃ»§·şÎñĞ­Òé¡·</a>
 		</div>
 	</div>
-</form>
+	<div class="row" style="margin-bottom: -2px">
+		<div class="col-md-12">
+			<button id="btn_register" type="button" class="btn btn-success form-control ">×¢&nbsp; ²á</button>
+		</div>
+	</div> 
+</div>
 
 <script type="text/javascript">
 	function submit()
@@ -59,13 +63,13 @@
 			phone:$("#phone").val(), 
 			sex:sex},
 			function(json){
-				//TODO:è‡ªåŠ¨ç™»é™†ï¼Œå¹¶è·³è½¬
-				//TODO:ç”¨çŸ­ä¿¡éªŒè¯åŠŸèƒ½ï¼Œå…ˆæ³¨å†Œï¼ŒåéªŒè¯ï¼Œè¿™æ ·çœé’±
+				//TODO:×Ô¶¯µÇÂ½£¬²¢Ìø×ª
+				//TODO:ÓÃ¶ÌĞÅÑéÖ¤¹¦ÄÜ£¬ÏÈ×¢²á£¬ºóÑéÖ¤£¬ÕâÑùÊ¡Ç®
 				$("#result").val(json.result);
 		});
-	}
+	}   
 	
-	$(document).ready(function(e){
+	$(document).ready(function(e){	
 		var firstcheck = true;
  		$("#chk_agreement").change(function(e){
 			firstcheck = !firstcheck;
@@ -109,8 +113,8 @@
 			   password:{required: true,minlength:6,maxlength:20}
 			   },
 			messages:{
-				nickname:{remote:"è¯¥æ˜µç§°å·²ç»æ³¨å†Œ"},
-				phone:{remote:"è¯¥å·ç å·²ç»æ³¨å†Œ"},
+				nickname:{remote:"¸ÃêÇ³ÆÒÑ¾­×¢²á"},
+				phone:{remote:"¸ÃºÅÂëÒÑ¾­×¢²á"},
 			}
 			});
 	});
@@ -137,17 +141,17 @@
 	$("#nickname").val("a");
 	$("#nickname").focusout();
 	assert.ok($("#nickname-error").is(":visible"), "error msg is visibled");
-	assert.ok($("#nickname-error").text().indexOf("é•¿åº¦ä¸èƒ½å°‘äº2ä¸ªå­—") != -1,"wrong msg");
+	assert.ok($("#nickname-error").text().indexOf("³¤¶È²»ÄÜÉÙÓÚ2¸ö×Ö") != -1,"wrong msg");
  
 	$("#nickname").focusin();
 	$("#nickname").val("");
 	$("#nickname").focusout();
-	assert.ok($("#nickname-error").text().indexOf("è¯·å¡«å†™è¯¥ä¿¡æ¯") != -1,"wrong msg");
+	assert.ok($("#nickname-error").text().indexOf("ÇëÌîĞ´¸ÃĞÅÏ¢") != -1,"wrong msg");
 	
 	$("#nickname").focusin();
 	$("#nickname").val("123456789012345678901");
 	$("#nickname").focusout();
-	assert.ok($("#nickname-error").text().indexOf("é•¿åº¦ä¸èƒ½è¶…è¿‡20ä¸ªå­—") != -1,"wrong msg");
+	assert.ok($("#nickname-error").text().indexOf("³¤¶È²»ÄÜ³¬¹ı20¸ö×Ö") != -1,"wrong msg");
 	
 	$("#nickname").focusin();
 	$("#nickname").val("12345678901234567890");
@@ -164,17 +168,17 @@
 	$("#phone").focusin();
 	$("#phone").val("139289790011");
 	$("#phone").focusout();
-	assert.ok($("#phone-error").text().indexOf("è¯·å¡«å†™æ­£ç¡®çš„æ‰‹æœºå·ç ") != -1,"wrong msg");
+	assert.ok($("#phone-error").text().indexOf("ÇëÌîĞ´ÕıÈ·µÄÊÖ»úºÅÂë") != -1,"wrong msg");
 	
 	$("#phone").focusin();
 	$("#phone").val("");
 	$("#phone").focusout();
-	assert.ok($("#phone-error").text().indexOf("è¯·å¡«å†™è¯¥ä¿¡æ¯") != -1,"wrong msg");
+	assert.ok($("#phone-error").text().indexOf("ÇëÌîĞ´¸ÃĞÅÏ¢") != -1,"wrong msg");
 	
 	$("#phone").focusin();
 	$("#phone").val("1392897901");
 	$("#phone").focusout();
-	assert.ok($("#phone-error").text().indexOf("è¯·å¡«å†™æ­£ç¡®çš„æ‰‹æœºå·ç ") != -1,"wrong msg");
+	assert.ok($("#phone-error").text().indexOf("ÇëÌîĞ´ÕıÈ·µÄÊÖ»úºÅÂë") != -1,"wrong msg");
 	
 	$("#phone").focusin();
 	$("#phone").val("13259790114");
@@ -193,7 +197,7 @@
 	$("#nickname").focusout();
 	
 	setTimeout(function() {
-		assert.ok($("#nickname-error").text().indexOf("è¯¥æ˜µç§°å·²ç»æ³¨å†Œ") != -1,"wrong msg");
+		assert.ok($("#nickname-error").text().indexOf("¸ÃêÇ³ÆÒÑ¾­×¢²á") != -1,"wrong msg");
 		QUnit.start();
 	}, 500);
      });
@@ -204,17 +208,17 @@
 	$("#password").val("12345");
 	$("#password").focusout();
 	assert.ok($("#password-error").is(":visible"), "error msg is visibled");
-	assert.ok($("#password-error").text().indexOf("é•¿åº¦ä¸èƒ½å°‘äº6ä¸ªå­—") != -1,"wrong msg");
+	assert.ok($("#password-error").text().indexOf("³¤¶È²»ÄÜÉÙÓÚ6¸ö×Ö") != -1,"wrong msg");
  
 	$("#password").focusin();
 	$("#password").val("");
 	$("#password").focusout();
-	assert.ok($("#password-error").text().indexOf("è¯·å¡«å†™è¯¥ä¿¡æ¯") != -1,"wrong msg");
+	assert.ok($("#password-error").text().indexOf("ÇëÌîĞ´¸ÃĞÅÏ¢") != -1,"wrong msg");
 	
 	$("#password").focusin();
 	$("#password").val("12345678901234567890x");
 	$("#password").focusout();
-	assert.ok($("#password-error").text().indexOf("é•¿åº¦ä¸èƒ½è¶…è¿‡20ä¸ªå­—") != -1,"wrong msg");
+	assert.ok($("#password-error").text().indexOf("³¤¶È²»ÄÜ³¬¹ı20¸ö×Ö") != -1,"wrong msg");
 	});
       
      QUnit.asyncTest("check_phone_repeat",function(assert){
@@ -224,7 +228,7 @@
 	$("#phone").focusout();
 	
 	setTimeout(function() {
-		assert.ok($("#phone-error").text().indexOf("è¯¥å·ç å·²ç»æ³¨å†Œ") != -1,"wrong msg");
+		assert.ok($("#phone-error").text().indexOf("¸ÃºÅÂëÒÑ¾­×¢²á") != -1,"wrong msg");
 		QUnit.start();
 	}, 500);
      });
@@ -282,6 +286,3 @@
 	});
      </script>
      %end
-{{!page_foot}}	    
-</body>
-</html>

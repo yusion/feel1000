@@ -38,20 +38,8 @@ def url_index():
 	user = session.login("ycat2","123456")
 	bottle.response.set_header('Set-Cookie', 'session=%s'%user.session_id)
 	d["session"] = user.session_id
-	
-	page = 0
-	page_size = 10
-	d["search_result"] = get_search_result(None,page,page_size)
-	d["page_size"] = page_size
-	d["current_page"] = page
-	d["search_form"] = utility.get_template_file("views/search_form.tpl",{})
-	#d["search_item"] = utility.get_template_file("views/search_item.tpl",{})
-	d["user_panel"] = utility.get_template_file("views/user_panel.tpl",{})
-	return d
-
-def url_index():
-	d = utility.get_dist()
-	d["session"] = ""
+	d["register"] = utility.get_template_file("views/register.tpl",d)
+	d["login"] = utility.get_template_file("views/login.tpl",d)
 	return d
  
 if __name__ == '__main__':

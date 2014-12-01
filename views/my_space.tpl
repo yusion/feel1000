@@ -184,12 +184,12 @@
 				</div>
 				<div class="collapse navbar-collapse" id="space-navbar-collapse" style="padding-left: 0px">
 				   <ul class="nav navbar-nav">
-				      <li id="first_nav_tag"><a href="#" data="album" class="icon-envelope"><span>我的动态</span><span class="badge">20</span></a></li>
+				      <li><a href="#" data="album" class="icon-envelope"><span>我的动态</span><span class="badge">20</span></a></li>
 				      <li><a href="#" class="icon-group"><span>我的好友</span></a></li>
 				      <li><a href="#" data="profile" class="icon-user"><span>我的资料</span></a></li>
-				      <li><a href="#" data="certif" class="icon-certificate"><span>我的认证</span></a></li>
+				      <li  id="first_nav_tag"><a href="#" data="certif" class="icon-certificate"><span>我的认证</span></a></li>
 				      <li><a href="#" data="record" class="icon-book-open"><span>个人喜好</span></a></li>
-				      <li><a href="#" data="ta_request" class="icon-star"><span>对TA的要求</span></a></li>
+				      <li><a href="#" data="ta_request" class="icon-star"><span>对方要求</span></a></li>
 				   </ul>
 				</div>
 			</nav>

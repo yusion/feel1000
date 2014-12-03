@@ -4,7 +4,7 @@ import pytest
 import platform  
 import sys,os,bottle
 import session,utility
-from web_profile import url_show_profile,url_show_ta_request,url_show_record
+from web_profile import url_show_profile,url_show_ta_request,url_show_record,url_upload_id_cerf
 from web_login import url_show_login
 from web_album import url_show_album
 from web_search import *

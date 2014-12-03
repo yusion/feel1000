@@ -274,10 +274,23 @@ def url_upload():
 	mem = io.BytesIO()
 	upload.save(mem)
 	mem.seek(0)
-	ctrl_profile.handle_profile_img(mem,user)
+	#ctrl_profile.handle_profile_img(mem,user)
 	mem.close()
+	print(mem.readlines().count);
 	return 0
 
+@bottle.post('/action/upload_id_cerf')
+def url_upload_id_cerf():
+	user = ctrl_profile.get()
+	upload = bottle.request.files.get('qqfile')
+	mem = io.BytesIO()
+	upload.save(mem)
+	mem.seek(0)
+	#ctrl_profile.handle_profile_img(mem,user)
+	mem.close()
+	
+	bottle.response.content_type = 'text/plain'
+	return json.dumps({"success":"true"})
 
 if __name__ == '__main__':
 	utility.run_tests("test_user_profile.py")

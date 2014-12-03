@@ -13,7 +13,7 @@
 		   </button>
 		   <a class="navbar-brand" href="index" style="padding: 0 20px 0 0px">
 		    <img alt="logo" src="res/logo.gif" style="width:50px;height:auto"></img>
-		    <span style="font-weight:900;font-size: 20px;vertical-align: middle;color: yellow">LoveCC</span>
+		    <span style="font-weight:900;font-size: 20px;vertical-align: middle;color: yellow">¸É¾»½»ÓÑ.LoveCC</span>
 		   </a>
 		</div>
 		<div class="collapse navbar-collapse" id="my_navbar-collapse">

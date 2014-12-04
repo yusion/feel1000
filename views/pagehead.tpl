@@ -2,7 +2,7 @@
 <input type="hidden" id="session" value="{{session}}" />
 <div id="page_container" class="container">
   <div id="page_head_row" class="row">
-    <div class="col-md-10 col-md-offset-2"  >
+    <div class="col-md-6 col-md-offset-2"  >
 	<nav id="nav_main" class="navbar navbar-inverse" role="navigation">
  		<div class="navbar-header">
 		   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#my_navbar-collapse">
@@ -13,7 +13,7 @@
 		   </button>
 		   <a class="navbar-brand" href="index" style="padding: 0 20px 0 0px">
 		    <img alt="logo" src="res/logo.gif" style="width:50px;height:auto"></img>
-		    <span style="font-weight:900;font-size: 20px;vertical-align: middle;color: yellow">干净交友.LoveCC</span>
+		    <span style="font-weight:900;font-size: 20px;vertical-align: middle;color: yellow">LoveCC</span>
 		   </a>
 		</div>
 		<div class="collapse navbar-collapse" id="my_navbar-collapse">
@@ -25,6 +25,29 @@
 		   </ul>
 		</div>
 	     </nav>
+     </div>
+     <div class="col-md-3 col-md-pull-1 visible-md visible-lg">
+	<div style="float: right;color:white">
+		<div class="dropdown dropdown-hover">
+			<img src="res/test/a (5).jpg" style="width:30px;heigth:auto"></img>
+			<button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" style="color:white">
+				天天爱酷跑
+			   <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu pull-right" role="menu" >
+			   <li role="presentation">
+			      <a role="menuitem" tabindex="-1" href="#">我的好友</a>
+			   </li>
+			   <li role="presentation">
+			      <a role="menuitem" tabindex="-1" href="#">帐号设置</a>
+			   </li>
+			   <li role="presentation" class="divider"></li>
+			   <li role="presentation">
+			      <a role="menuitem" tabindex="-1" href="#">退出登陆</a>
+			   </li>
+			</ul>
+	     </div>
+	</div>	
      </div>
   </div>
   <div class="row"> 

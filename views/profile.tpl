@@ -124,7 +124,7 @@
 		<div class="row">
 			<div>
 				<H3>联系信息    <small><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></small></H3>
-				<H4><i class="icon-edit">点击编辑</i></H4>
+				<H4><i class="icon-edit">编辑资料</i></H4>
 			</div>
 		</div>	
 		<div class="form-group">
@@ -170,7 +170,7 @@
 		<div class="row">
 			<div>
 				<H3>生活信息    <small><i class="icon-star"></i><i class="icon-star"></i></small></H3>
-				<H4><i class="icon-edit">点击编辑</i></H4>	
+				<H4><i class="icon-edit">编辑资料</i></H4>	
 			</div>
 		</div>	
 		<div class="form-group">
@@ -233,7 +233,7 @@
 		<div class="row">
 			<div>
 				<H3>特征信息</H3>
-				<H4><i class="icon-edit">点击编辑</i></H4>
+				<H4><i class="icon-edit">编辑资料</i></H4>
 			</div>
 		</div>	
 		<div class="form-group">

@@ -114,7 +114,7 @@
 				</div>
 			</div>
 			<h5 class="in_block icon-edit readonly_hide" style="margin-left: 50px;margin-top: 0px;vertical-align: top;cursor:pointer" edit_mode="False" onclick="click_edit()">
-				点击编辑
+				编辑资料
 			</h5>
 			<BR>
 			<div id="tagSelector" style="margin-bottom: 8px">

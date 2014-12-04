@@ -91,6 +91,11 @@
 			$(this).children("p").hide();
 			$("#div_new_member .carousel").AutoCarouselLite("true");
 		});
+		
+		//自动切换注册和登陆页面
+		$("#tab_login > li").mouseenter(function(){
+			$(this).children("a").click();
+		});
 	});
 </script>
 

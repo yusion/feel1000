@@ -10,6 +10,12 @@ class session_data:
 		self.user_id = 0
 		self.sex = -1
 		self.ip = ""
+		self.age = 0
+		#0 代表未通过手机认证
+		#1 已经通过手机认证
+		#2 已经通过身份证认证
+		#3 已经通过公司认证 
+		self.certf_state = 0 
 		self.nickname = ""
 		self.session_id = ""
 		self.login_date = datetime.datetime.now()
@@ -32,7 +38,7 @@ def make_session_id():
 
 def login(loginName,password):
 	c = utility.get_cursor()
-	c.execute("SELECT ID,NickName,Sex FROM u_user WHERE password=? AND (nickname=? OR phone=?)",(password,loginName,loginName))
+	c.execute("SELECT ID,NickName,Sex,birthdayYear,certfState FROM u_user WHERE password=? AND (nickname=? OR phone=?)",(password,loginName,loginName))
 	rows = c.fetchall()
 	if len(rows) == 0:
 		return None
@@ -42,6 +48,8 @@ def login(loginName,password):
 	user.nickname = r[1]
 	user.sex = r[2]
 	user.session_id = make_session_id()
+	user.age = utility.now().year - r[3]
+	user.certf_state = r[4]
 	
 	global g_session_data
 	g_session_data[user.session_id] = user

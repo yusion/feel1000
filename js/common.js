@@ -888,7 +888,7 @@ function init_common()
    $(".onlyNum").onlyNum();
     $(".onlyAlpha").onlyAlpha();
     $(".onlyNumAlpha").onlyNumAlpha();
-    $(".limit_s").limitLength(6);
+    $(".limit_s").limitLength(10);
     $(".limit_m").limitLength(20);
     $(".limit_l").limitLength(100);
     num_format($(".num_format"));

@@ -4,6 +4,7 @@
 	{{!web_head}}
 	<script src="js/jquery.jcarousellite.js"></script> <!-- ycat modify -->
 	<script src="js/jquery-scrolltofixed-min.js"></script>
+	<script src="js/md5.js"></script>
 </head>
 <body>
 {{!page_head}}

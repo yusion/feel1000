@@ -34,7 +34,7 @@
 				天天爱酷跑
 			   <span class="caret"></span>
 			</button>
-			<ul class="dropdown-menu pull-right" role="menu" >
+			<ul class="dropdown-menu pull-right small" role="menu" >
 			   <li role="presentation">
 			      <a role="menuitem" tabindex="-1" href="#">我的好友</a>
 			   </li>

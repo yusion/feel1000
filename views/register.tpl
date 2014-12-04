@@ -1,13 +1,13 @@
 <style type="text/css">
-#div_register .row{
+#form_register .row{
 	margin-bottom: 8px;
 }
 </style>
 
 <input type="hidden" id="result" value="unknown">
-<div id="div_register">
+<form id="form_register">
 	<div class="row">
-		<div class="col-md-7 small">
+		<div class="col-md-7 small" style="padding-right: 0px">
 			性别：
 			<input type="radio" name="sex" id="radio_male" value="0" checked="checked" style="heigth:auto">
 				帅哥
@@ -34,7 +34,7 @@
 	</div>	
 	<div class="row">
 		<div class="col-md-12">
-			<input type="text" id="nickname" name="nickname" class="form-control limit_m input-sm" placeholder="昵称">
+			<input type="text" id="nickname" name="nickname" class="form-control limit_s input-sm" placeholder="昵称">
 		</div>		
 	</div>
 	<div class="row">
@@ -44,8 +44,8 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12 small">
-			<span id="chk_agreement" checked="checked" class="checkbox_ctrl text-left" >我已阅读并同意</span>
-			<a href="/agreement.html" target="_blank">《用户服务协议》</a>
+			<span id="chk_agreement" checked="checked" class="checkbox_ctrl text-left">我已阅读并同意</span>
+			<a href="/agreement" target="_blank">《用户服务协议》</a>
 		</div>
 	</div>
 	<div class="row" style="margin-bottom: 4px">
@@ -53,7 +53,7 @@
 			<button id="btn_register" type="button" class="btn btn-success form-control ">注&nbsp; 册</button>
 		</div>
 	</div> 
-</div>
+</form>
 
 <script type="text/javascript">
 	function submit()
@@ -63,7 +63,8 @@
 		{ 	nick: $("#nickname").val(), 
 			pass: hex_md5("pwd" + $("#password").val()),
 			phone:$("#phone").val(), 
-			sex:sex},
+			sex:sex,
+			age:$("#age").val()},
 			function(json){
 				//TODO:自动登陆，并跳转
 				//TODO:用短信验证功能，先注册，后验证，这样省钱
@@ -73,20 +74,19 @@
 	
 	$(document).ready(function(e){	
 		var firstcheck = true;
- 		$("#chk_agreement").change(function(e){
-			firstcheck = !firstcheck;
-			if(!firstcheck)
+ 		$("#chk_agreement").click(function(){
+			if("checked" == $("#chk_agreement").attr("checked"))
 			{
-				$("#btn_register").hide(600);
+				$("#btn_register").show(600);
 			}
 			else
 			{
-				$("#btn_register").show(600);
+				$("#btn_register").hide(600);
 			}
 		});
 				
 		$("#btn_register").click(function(e){		
-			if(!$("#reg_form").valid()) return;
+			if(!$("#form_register").valid()) return;
 			submit();
 		});
 		
@@ -108,9 +108,9 @@
 				return $("#nickname").val();
 			}}};	
 
-		$("#reg_form").validate({
+		$("#form_register").validate({
 			rules: {
-			   nickname: {required:true,minlength:2,maxlength:20,remote:nick_remote},
+			   nickname: {required:true,minlength:2,maxlength:10,remote:nick_remote},
 			   phone: {required: true,isPhone:true,remote:phone_remote},
 			   password:{required: true,minlength:6,maxlength:20}
 			   },
@@ -130,10 +130,11 @@
      QUnit.config.reorder = false;
      
      QUnit.test("init_value",function(assert){
-	expect(3);
+	expect(4);
 	assert.ok($("#chk_agreement").attr("checked"),"init value is check");
 	assert.ok($("#radio_male").attr("checked"),"init radio_male value is check");
 	assert.ok(!$("#radio_female").attr("checked"),"init radio_male value is check");
+	assert.equal($("#age").val(),24);
      });
      
      QUnit.asyncTest("check_nickname",function(assert){
@@ -151,12 +152,12 @@
 	assert.ok($("#nickname-error").text().indexOf("请填写该信息") != -1,"wrong msg");
 	
 	$("#nickname").focusin();
-	$("#nickname").val("123456789012345678901");
+	$("#nickname").val("12345678901");
 	$("#nickname").focusout();
-	assert.ok($("#nickname-error").text().indexOf("长度不能超过20个字") != -1,"wrong msg");
+	assert.ok($("#nickname-error").text().indexOf("长度不能超过10个字") != -1,"wrong msg");
 	
 	$("#nickname").focusin();
-	$("#nickname").val("12345678901234567890");
+	$("#nickname").val("姚舜姚舜姚舜姚舜姚舜");
 	$("#nickname").focusout();
 	
 	setTimeout(function() {
@@ -240,6 +241,7 @@
 	$("#nickname").val("test_ycat3");
 	$("#phone").val("13728975541");
 	$("#password").val("123456");
+	$("#age").val("21");
 	$("#radio_female").attr("checked",true);
 	$("#btn_register").click();
 	
@@ -256,7 +258,8 @@
 		{ 	nick: "test_ycat3", 
 			pass: "123456",
 			phone:"13728975541", 
-			sex:1},
+			sex:1,
+			birthdayYear:1993},
 			function(json){
 				r = json;
 		});
@@ -287,4 +290,4 @@
 	}, 700);
 	});
      </script>
-     %end
+%end

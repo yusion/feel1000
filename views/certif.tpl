@@ -2,20 +2,23 @@
 <script src="/js/all.fineuploader-5.0.8.min.js"></script>
 
 <style type="text/css">
-.infomation{
-	margin-top: 30px;
+.infomation >div{
+	margin-top: 20px;
 }
+	
 .infomation .text_last_info:after{
-	content: "请采用手机或相机拍摄后直接上传，用软件修改过的相片将不能通过认证"
+	content: "请采用手机或相机拍摄后直接原件上传，修改过的相片不能通过验证"
 }
-.upload_id .img_id{
-	width: 150px;
+
+.upload img{
+	width: 120px;
 	height: auto;
 }
-.upload_id .qq-upload-button-selector{
-	width: 150px;
-	margin-top: 15px;
-	margin-bottom: 15px;
+
+.upload .qq-upload-button-selector{
+	width: 120px;
+	height: auto;
+	margin-top: 10px;
 }
 	
 </style>
@@ -23,35 +26,35 @@
 	function init_fineuploader(elem,btnMsg){
 		$(elem).fineUploader({
 			request: {
-			  endpoint: 'action/upload_id'
+			  endpoint: 'action/upload_id_cerf'
 			},
-			multiple:false,
 			validation: {
-                                allowedExtensions: ["jpeg","jpg"],
-                                sizeLimit: 20 * 1024 * 1024,
-                                minSizeLimit: 1024*10
-                        },
-			messages: {
-                                typeError: "不支持{file}后缀文件，只支持{extensions}的后缀",
-                                sizeError: "{file}太大,最大文件为{sizeLimit}字节",
-                                minSizeError: "{file}太小，最小文件为{minSizeLimit}字节",
-                                emptyError: "{file}为空",
-                                noFilesError: "没有文件可以上传",
-                                tooManyItemsError: "太多文件，只有({netItems}) 可以上传. 最大文件数为{itemLimit}",
-                                maxHeightImageError: "图片太长",
-                                maxWidthImageError: "图片太宽",
-                                minHeightImageError: "图片不够长",
-                                minWidthImageError: "图片不够宽",
-                                retryFailTooManyItems: "重试失败",
-                                onLeave: "正在上传文件，如果您离开，将导致上传失败",
-                                unsupportedBrowserIos8Safari: "不支持iOS8 Safari浏览器，请使用iOS8 Chrome"
-                        },
+				allowedExtensions: ['jpeg', 'jpg'],
+				sizeLimit: 1024*1024*20, //20M,
+				minSizeLimit: 50*1024 //50K
+			},
 			text: {
 				formatProgress: "{percent}% / {total_size}",
 				failUpload: "上传失败",
 				waitingForResponse: "正在处理...",
 				paused: "暂停"
-				}
+			},
+			messages: {
+                                typeError: "'{file}'后缀名不正确，只支持{extensions}后缀的文件",
+                                sizeError: "'{file}'太大，最大只支持{sizeLimit}字节",
+                                minSizeError: "'{file}'太小, 最小文件长度为 {minSizeLimit}字节.",
+                                emptyError: "'{file}'为空文件",
+                                noFilesError: "没有文件上传",
+                                tooManyItemsError: "选择太多文件，最多可以选择 {itemLimit}个文件，将上传 ({netItems})",
+                                maxHeightImageError: "图片太高",
+                                maxWidthImageError: "图片太宽",
+                                minHeightImageError: "图片不够高",
+                                minWidthImageError: "图片不够宽",
+                                retryFailTooManyItems: "重试失败",
+                                onLeave: "文件正在上传，如果你退出将导致上传失败",
+                                unsupportedBrowserIos8Safari: "不支持iOS8 Safari，请使用iOS8 Chrome"
+                        },
+			multiple:false 
 		});
 		
 		$(elem).find(".qq-upload-button-selector > div").text(btnMsg);
@@ -71,25 +74,26 @@
 		<div class="row title">
 			<div>
 				<h3 class="text-cen1ter in_block"><i class="icon-nameplate"></i><strong>身份证</strong>验证</h3>
-				<span >我们仅仅想和有身份的人交朋友</span>
+				<span >仅仅想和有身份的人交朋友</span>
 			</div>
 		</div>
-		<div class="row upload_id">
-			<div class="col-md-4 col-md-offset-1">
-				<img class="img_id" src="res/unknownprofile.jpg"></img>
+		<div class="row upload">
+			<div class="col-md-3 col-md-offset-1">
+				<img class="in_block" src="res/unknownprofile.jpg"></img>
 				<div id="div_id_upload"></div>
 			</div>
-			<div class="col-md-5">
-				<span style="vertical-align: top">示例：<span><img class="in_block" src="res/id_certif_example.png"></img>
+			<div class="col-md-3 in_block">
+				示例相片
+				<img class="in_block" src="res/id_certif_example.png"></img>
 			</div>
 		</div>
 		<div class="row infomation">
 			<div class="small">
 				<p><i class="icon-lightbulb"></i>
-					1. 身份证验证仅用于确认您的真实有效身份信息，网站不会泄露您的任何个人资料
+					1. 身份证验证仅用于确认您的真实有效身份信息，我们承诺绝不会泄露您的身份证信息
 				</p>
 				<p><i class="icon-lightbulb"></i>
-					2. 如您的个人信息和身份证信息不相符，我们将以身份证信息为修改您的个人信息	
+					2. 如您的个人信息和身份证信息不相符，人工客服免费为您修改个人信息	
 				</p>
 				<p><i class="icon-lightbulb last"></i>
 					<span class="text_last_info">3. </span>
@@ -100,29 +104,30 @@
 		<div class="row title">
 			<div>
 				<h3 class="text-cen1ter in_block"><i class="icon-nameplate"></i><strong>公司</strong>验证</h3>
-				<span >我们仅仅想和有身份的人交朋友</span>
+				<span >通过公司认证能增加您的成功率喔</span>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-2 col-md-offset-1">
-				<label for="photo">公司名称</label>
-			</div>	
+				<label>公司名称：</label>
+			</div>
 			<div class="col-md-4">
-				<input type="text" class="form-control" placeholder="公司名称">
+				<input  class="form-control" placeholder="请输入公司名称"></input>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-2 col-md-offset-1">
-				<label for="photo">工卡或名片相片</label>
-			</div>	
-			<div class="col-md-4">
+				<label>工卡/名片相片：</label>
+			</div>
+			<div class="col-md-3">
 				<div id="div_company_upload"></div>
 			</div>
-		</div>
+		</div> 
+		
 		<div class="row infomation">
 			<div class="small">
 				<p><i class="icon-lightbulb"></i>
-					1. 公司证验证仅用于确认您的公司信息，网站不会泄露您的任何个人资料
+					1. 您可以上传工卡和名片相片信息来通过公司验证
 				</p>
 				<p><i class="icon-lightbulb last"></i>
 					<span class="text_last_info">2. </span>
@@ -140,7 +145,7 @@
       <span>把文件拖动到这里开始上传...</span>
     </div>
     <div class="qq-upload-button-selector btn btn-success">
-      <div>上传身份证相片</div>
+      <div>上传文件</div>
     </div>
     <span class="qq-drop-processing-selector qq-drop-processing">
       <span>正在处理拖动文件...</span>

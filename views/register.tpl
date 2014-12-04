@@ -5,24 +5,25 @@
 </style>
 <form id="form_register">
 	<div class="row">
-		<div class="col-md-7 small" style="padding-right: 0px">
+		<div class="col-md-12 small" style="padding-right: 0px;vertical-align: top">
 			性别：
 			<input type="radio" name="sex" id="radio_male" value="0" checked="checked" style="heigth:auto">
 				帅哥
 			<input type="radio" name="sex" id="radio_female" value="1" style="margin-left: 10px">
 				美女
-		</div>
-		<div class="col-md-5 pull-right small" style="padding: 0 0 0 0">
-			年龄：
-			<select id="age" name="age" class="form-control input-sm in_block" style="padding: 0 0 0 0;width:50px;height:24px">
-			%for a in range(18,41):
-				<option value="{{a}}"
-					%if a == 24:
-						selected="selected"
-					%end
-				>{{a}}岁</option>
-			%end
-			</select>
+		
+			<div style="float:right;padding-right: 15px">
+				年龄：
+				<select id="age" name="age" class="form-control input-sm in_block" style="vertical-align: top;padding: 0 0 0 0;width:50px;height:24px">
+				%for a in range(18,41):
+					<option value="{{a}}"
+						%if a == 24:
+							selected="selected"
+						%end
+					>{{a}}岁</option>
+				%end
+				</select>
+			</div>
 		</div>
 	</div>
 	<div class="row">

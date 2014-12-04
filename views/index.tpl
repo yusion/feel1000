@@ -10,7 +10,7 @@
 {{!page_head}}
 
 <style type="text/css">
-#div_login_container{
+#div_tag_container{
 	background-color: white;
 	padding: 10px 20px 10px 20px;
 	border: 1px solid #ddd;
@@ -96,7 +96,17 @@
 		//自动切换注册和登陆页面
 		$("#tab_login > li").mouseenter(function(){
 			$(this).children("a").click();
+			
+			if(get_browser_info().ie)
+			{
+				//ie这个东东，会显示焦点混乱 
+				setTimeout(function(){
+					var f = $("#div_tag_container .active").find(":text").first();
+					f.select().focus(); 
+				},100);	
+			}
 		});
+		 
 	});
 </script>
 
@@ -113,17 +123,17 @@
 	<div class="col-md-3">
 		<ul id="tab_login" class="nav nav-tabs">
 			<li class="active">
-			   <a href="#register" data-toggle="tab">免费注册</a>
+			   <a href="#div_register" data-toggle="tab">免费注册</a>
 			</li>
 			<li>
-			   <a href="#login" data-toggle="tab">快速登陆</a>
+			   <a href="#div_login" data-toggle="tab">快速登陆</a>
 			</li>
 		</ul>
-		<div id="div_login_container" class="tab-content">
-			<div class="tab-pane fade in active" id="register">
+		<div id="div_tag_container" class="tab-content">
+			<div class="tab-pane fade in active" id="div_register">
 			   {{!register}}
 			</div>
-			<div class="tab-pane fade" id="login">
+			<div class="tab-pane fade" id="div_login">
 			   {{!login}}
 			</div>
 		</div>

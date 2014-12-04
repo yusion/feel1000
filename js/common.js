@@ -60,7 +60,11 @@ function limit_max_input(item,event,maxLen) {
     return true;
 }
 
+//可设置max_len属性来自定义最大输入长度 
 $.fn.limitLength = function(len){
+  if ($(this).attr("max_len")) {
+    len = parseInt($(this).attr("max_len"));
+  }
   $(this).keypress(function (event) {
     return limit_max_input($(this),event,len);
   });
@@ -71,8 +75,8 @@ $.fn.onlyNum = function () {
 	    var eventObj = event || e;
 	    var keyCode = eventObj.keyCode || eventObj.which;
 	    if ((keyCode >= 48 && keyCode <= 57))
-		return limit_max_input($(this));
-	    else return false;
+		return true;
+            else return false;
 	}).focus(function () {
 	//禁用输入法
 	this.style.imeMode = 'disabled';

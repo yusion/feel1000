@@ -3,8 +3,6 @@
 	margin-bottom: 8px;
 }
 </style>
-
-<input type="hidden" id="result" value="unknown">
 <form id="form_register">
 	<div class="row">
 		<div class="col-md-7 small" style="padding-right: 0px">
@@ -29,7 +27,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<input type="text" class="form-control onlyNum limit_m input-sm" id="phone" name="phone" placeholder="手机号码">
+			<input type="text" class="form-control onlyNum limit_m input-sm" max_len="11" id="phone" name="phone" placeholder="手机号码">
 		</div>
 	</div>	
 	<div class="row">
@@ -52,7 +50,8 @@
 		<div class="col-md-12">
 			<button id="btn_register" type="button" class="btn btn-success form-control ">注&nbsp; 册</button>
 		</div>
-	</div> 
+	</div>
+	<input type="hidden" id="result" value="unknown">
 </form>
 
 <script type="text/javascript">

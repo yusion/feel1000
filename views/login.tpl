@@ -1,12 +1,12 @@
 <div id="div_login" style="margin-top: 20px">
 	<div class="row">
 		<div class="col-md-12">
-			<input type="text" name="nickname" class="form-control limit_m" id="nickname" maxLen="20" placeholder="êÇ³Æ/ÊÖ»úºÅÂë">
+			<input type="text" name="nickname" class="form-control limit_m" id="login_nickname" maxLen="20" placeholder="êÇ³Æ/ÊÖ»úºÅÂë">
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<input type="password" name="password" class="form-control limit_m" id="password" placeholder="ÃÜÂë">
+			<input type="password" name="password" class="form-control limit_m" id="login_password" placeholder="ÃÜÂë">
 		</div>
 	</div>  
 	<div class="row small">

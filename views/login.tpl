@@ -6,7 +6,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<input type="password" name="password" class="form-control limit_m" id="login_password" placeholder="ÃÜÂë">
+			<input type="password" name="password" class="form-control limit_m" id="login_password"  style="width:100%;height:34px" placeholder="ÃÜÂë">
 		</div>
 	</div>  
 	<div class="row small">

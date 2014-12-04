@@ -101,7 +101,7 @@
 			{
 				//ie这个东东，会显示焦点混乱 
 				setTimeout(function(){
-					var f = $("#div_tag_container .active").find(":text").first();
+					var f = $("#div_tag_container .active").find("button");
 					f.select().focus(); 
 				},100);	
 			}

@@ -3,8 +3,9 @@
    * 没有开花的树
    * http://blog.csdn.net/mycwq/
    * 2012/11/28 15:12
+   * 就是密码框要注意设置大小，要不然会跳变 
    */
-
+	
   var placeholderfriend = {
     focus: function(s) {
       s = $(s).hide().prev().show().focus();

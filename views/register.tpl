@@ -38,7 +38,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<input type="password" class="form-control limit_m input-sm" id="password" name="password" placeholder="ÃÜÂë">
+			<input type="password" class="form-control limit_m input-sm" style="width:100%" id="password" name="password" placeholder="ÃÜÂë">
 		</div>	
 	</div>
 	<div class="row">

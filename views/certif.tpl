@@ -1,9 +1,21 @@
-<link href="/css/fineuploader.css" rel="stylesheet">
+<link href="/css/fineuploader-5.0.8.min.css" rel="stylesheet">
 <script src="/js/all.fineuploader-5.0.8.min.js"></script>
 
 <style type="text/css">
+.infomation{
+	margin-top: 30px;
+}
 .infomation .text_last_info:after{
-	content: "3. 请采用手机或相机拍摄后直接上传，请勿用任何软件修改相片"
+	content: "请采用手机或相机拍摄后直接上传，用软件修改过的相片将不能通过认证"
+}
+.upload_id .img_id{
+	width: 150px;
+	height: auto;
+}
+.upload_id .qq-upload-button-selector{
+	width: 150px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 	
 </style>
@@ -11,9 +23,35 @@
 	function init_fineuploader(elem,btnMsg){
 		$(elem).fineUploader({
 			request: {
-			  endpoint: 'server/handleUploads'
+			  endpoint: 'action/upload_id'
 			},
-			multiple:false
+			multiple:false,
+			validation: {
+                                allowedExtensions: ["jpeg","jpg"],
+                                sizeLimit: 20 * 1024 * 1024,
+                                minSizeLimit: 1024*10
+                        },
+			messages: {
+                                typeError: "不支持{file}后缀文件，只支持{extensions}的后缀",
+                                sizeError: "{file}太大,最大文件为{sizeLimit}字节",
+                                minSizeError: "{file}太小，最小文件为{minSizeLimit}字节",
+                                emptyError: "{file}为空",
+                                noFilesError: "没有文件可以上传",
+                                tooManyItemsError: "太多文件，只有({netItems}) 可以上传. 最大文件数为{itemLimit}",
+                                maxHeightImageError: "图片太长",
+                                maxWidthImageError: "图片太宽",
+                                minHeightImageError: "图片不够长",
+                                minWidthImageError: "图片不够宽",
+                                retryFailTooManyItems: "重试失败",
+                                onLeave: "正在上传文件，如果您离开，将导致上传失败",
+                                unsupportedBrowserIos8Safari: "不支持iOS8 Safari浏览器，请使用iOS8 Chrome"
+                        },
+			text: {
+				formatProgress: "{percent}% / {total_size}",
+				failUpload: "上传失败",
+				waitingForResponse: "正在处理...",
+				paused: "暂停"
+				}
 		});
 		
 		$(elem).find(".qq-upload-button-selector > div").text(btnMsg);
@@ -22,10 +60,10 @@
 	$(document).ready(function(e){
 		$("#div_certif_container .title").children("div").addClass("col-md-8 col-md-offset-1");
 		$("#div_certif_container .infomation").children("div").addClass("col-md-8 col-md-offset-1");
-		//$("#div_certif_container .upload").children("div").addClass("col-md-2 col-md-offset-3");
 
 		$(".icon-lightbulb").css("color","orange");
-		init_fineuploader("#div_id_font_upload","上传身份证相片");
+		init_fineuploader("#div_id_upload","上传身份证相片");
+		init_fineuploader("#div_company_upload","上传相片");
 	});
 </script>
 <div id="div_certif_container">
@@ -36,13 +74,13 @@
 				<span >我们仅仅想和有身份的人交朋友</span>
 			</div>
 		</div>
-		<div class="row upload">
+		<div class="row upload_id">
 			<div class="col-md-4 col-md-offset-1">
-				<img src="res/id_certif_example.png"></img>
-				<div id="div_id_font_upload"></div>
+				<img class="img_id" src="res/unknownprofile.jpg"></img>
+				<div id="div_id_upload"></div>
 			</div>
-			<div class="col-md-4">
-				示例：<img class="in_block" src="res/id_certif_example.png"></img>
+			<div class="col-md-5">
+				<span style="vertical-align: top">示例：<span><img class="in_block" src="res/id_certif_example.png"></img>
 			</div>
 		</div>
 		<div class="row infomation">
@@ -54,111 +92,43 @@
 					2. 如您的个人信息和身份证信息不相符，我们将以身份证信息为修改您的个人信息	
 				</p>
 				<p><i class="icon-lightbulb last"></i>
-					<span class="text_last_info"></span>
+					<span class="text_last_info">3. </span>
 				</p>
 			</div>
 		</div>
 		<HR>
-
-		<div class="row">
+		<div class="row title">
 			<div>
-				<h3><i class="icon-temple-christianity-church"></i>房产认证</h3>
+				<h3 class="text-cen1ter in_block"><i class="icon-nameplate"></i><strong>公司</strong>验证</h3>
+				<span >我们仅仅想和有身份的人交朋友</span>
 			</div>
 		</div>
 		<div class="row">
-			<div>
-				<label for="photo">房产证相片</label>
-			</div>	
-			<div>
-				<div id="photo"  class="input-group">
-					<input type="text" class="form-control" placeholder="相片文件路径">
-					<span class="input-group-btn">
-					   <button class="btn btn-default" type="button">浏览</button>
-					</span>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-9 col-md-offset-1">
-				<p class="help-block"><i class="icon-lightbulb"></i>1、首先，此次身份信息核验是为了验证常用联系人身份信息的真实性，并不需要民众的参与，由12306网站自动完成。
-				<BR/>2、其次，在12306网站上使用二代居民身份证的注册用户和常用联系人身份信息经过身份验证将会产生三种结果：已通过、待核验和未通过。使用护照、港澳居民来往内地通行证、台湾居民来往大陆通行证的注册用户和常用联系人身份信息将有“已通过”“请报验”“预通过”“未通过”四种核验状态。
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2 col-md-offset-3">
-				<button type="submit" class="btn btn-success">上传认证信息</button>
-			</div>
-		</div>
-		
-		
-		
-		<div class="row">
-			<div>
-				<h3><i class="icon-car"></i>车子验证</h3>
-			</div>
-		</div>
-		<div class="row">
-			<div>
-				<label for="photo">相片</label>
-			</div>	
-			<div>
-				<div id="photo"  class="input-group">
-					<input type="text" class="form-control" placeholder="相片文件路径">
-					<span class="input-group-btn">
-					   <button class="btn btn-default" type="button">浏览</button>
-					</span>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-9 col-md-offset-1">
-				<p class="help-block"><i class="icon-lightbulb"></i>1、首先，此次身份信息核验是为了验证常用联系人身份信息的真实性，并不需要民众的参与，由12306网站自动完成。
-				<BR/>2、其次，在12306网站上使用二代居民身份证的注册用户和常用联系人身份信息经过身份验证将会产生三种结果：已通过、待核验和未通过。使用护照、港澳居民来往内地通行证、台湾居民来往大陆通行证的注册用户和常用联系人身份信息将有“已通过”“请报验”“预通过”“未通过”四种核验状态。
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2 col-md-offset-3">
-				<button type="submit" class="btn btn-success">上传认证信息</button>
-			</div>
-		</div>
-		
-		<div class="row">
-			<div>
-				<h3><i class="icon-car"></i>公司验证</h3>
-			</div>
-		</div>
-		<div class="row">
-			<div>
+			<div class="col-md-2 col-md-offset-1">
 				<label for="photo">公司名称</label>
 			</div>	
-			<div>
+			<div class="col-md-4">
 				<input type="text" class="form-control" placeholder="公司名称">
 			</div>
 		</div>
 		<div class="row">
-			<div>
-				<label for="photo"><strong>工卡/名片</strong>相片</label>
+			<div class="col-md-2 col-md-offset-1">
+				<label for="photo">工卡或名片相片</label>
 			</div>	
-			<div>
-				<div id="photo"  class="input-group">
-					<input type="text" class="form-control" placeholder="相片文件路径">
-					<span class="input-group-btn">
-					   <button class="btn btn-default" type="button">浏览</button>
-					</span>
-				</div>
+			<div class="col-md-4">
+				<div id="div_company_upload"></div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-9 col-md-offset-1">
-				<p class="help-block"><i class="icon-lightbulb"></i>1、首先，此次身份信息核验是为了验证常用联系人身份信息的真实性，并不需要民众的参与，由12306网站自动完成。
-				<BR/>2、其次，在12306网站上使用二代居民身份证的注册用户和常用联系人身份信息经过身份验证将会产生三种结果：已通过、待核验和未通过。使用护照、港澳居民来往内地通行证、台湾居民来往大陆通行证的注册用户和常用联系人身份信息将有“已通过”“请报验”“预通过”“未通过”四种核验状态。
+		<div class="row infomation">
+			<div class="small">
+				<p><i class="icon-lightbulb"></i>
+					1. 公司证验证仅用于确认您的公司信息，网站不会泄露您的任何个人资料
+				</p>
+				<p><i class="icon-lightbulb last"></i>
+					<span class="text_last_info">2. </span>
+				</p>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-2 col-md-offset-3">
-				<button type="submit" class="btn btn-success">上传认证信息</button>
-			</div>
-		</div>	 
 	</div>	     
 </div>
 

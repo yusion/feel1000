@@ -16,8 +16,8 @@ function is_test(){
 }
 
 //ie8 doesn't support indexOf
-if(!Array.prototype.indexOf){  
-        Array.prototype.indexOf = function(elt /*, from*/){  
+if(!Array.prototype.indexOf2){  
+        Array.prototype.indexOf2 = function(elt /*, from*/){  
         var len = this.length >>> 0;  
         var from = Number(arguments[1]) || 0;  
         from = (from < 0)  
@@ -36,8 +36,8 @@ if(!Array.prototype.indexOf){
 }
 
 //ie8 doesn't support trim
-if(!String.prototype.trim){
-  String.prototype.trim = $.trim; //using jquery trim
+if(!String.prototype.trim2){
+  String.prototype.trim2 = $.trim; //using jquery trim
 }
     
 // ----------------------------------------------------------------------
@@ -326,9 +326,9 @@ function create_img_div(left,top,width,height)
         var d = input.val().split(" ");
         for(var i=0;i<d.length;i++)
         {
-          var v = d[i].trim();
+          var v = d[i].trim2();
           if (v.length) {
-            if (selTags.indexOf(v) == -1) {
+            if (selTags.indexOf2(v) == -1) {
               selTags.push(v);
             }
           }
@@ -336,8 +336,8 @@ function create_img_div(left,top,width,height)
         var allTags = new Array();
         container.find("li").each(function(){
           var v =$(this).text();
-          if (selTags.indexOf(v) == -1) {
-              if (allTags.indexOf(v) == -1) {
+          if (selTags.indexOf2(v) == -1) {
+              if (allTags.indexOf2(v) == -1) {
                 allTags.push(v);
               }
           }
@@ -374,7 +374,7 @@ function create_img_div(left,top,width,height)
         
         function removeTags(tagElem){
             tagElem.remove();
-            var i = selTags.indexOf(tagElem.text());
+            var i = selTags.indexOf2(tagElem.text());
             if (i != -1) {
               selTags.splice(i,1);
               input.val(selTags.join(" "));
@@ -392,7 +392,7 @@ function create_img_div(left,top,width,height)
             editTag.empty();
             for(var i=0;i<allTags.length;i++)
             {
-              if (selTags.indexOf(allTags[i]) == -1) {
+              if (selTags.indexOf2(allTags[i]) == -1) {
                 editTag.append("<div class='tagItem tagItem_edit'>"+allTags[i]+"</div>");
               }
             } 
@@ -740,7 +740,7 @@ function pop_breadcrumb() {
 function get_breadcrumb(){
   var s = ""
   $("#my_breadcrumb li").each(function(){
-    s+= $(this).text().trim() + "/";
+    s+= $(this).text().trim2() + "/";
   });
   return s.slice(0,s.length-1);
 }

@@ -278,6 +278,16 @@ def url_upload():
 	mem.close()
 	return 0
 
+@bottle.post('/action/upload_id')
+def url_upload_id():
+	user = ctrl_profile.get()
+	upload = bottle.request.files.get('qqfile')
+	mem = io.BytesIO()
+	upload.save(mem)
+	mem.seek(0)
+	mem.close()
+	bottle.request.content_type = "text/plain"
+	return json.dumps({"success":"true"})	
 
 if __name__ == '__main__':
 	utility.run_tests("test_user_profile.py")

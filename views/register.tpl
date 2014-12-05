@@ -73,7 +73,6 @@
 	}   
 	
 	$(document).ready(function(e){	
-		var firstcheck = true;
  		$("#chk_agreement").click(function(){
 			if($("#chk_agreement").hasAttr("checked"))
 			{
@@ -122,7 +121,7 @@
 	});
     </script>
      
-     %if is_test:
+%if is_test:
      <script type="text/javascript">
  
      QUnit.module("register");

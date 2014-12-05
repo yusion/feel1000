@@ -154,6 +154,20 @@
 	       </div>
 	</div>
 </div>
+
+%if is_test:
+     <script type="text/javascript">
+     QUnit.module("index");
+     QUnit.config.reorder = false;
+     
+     QUnit.test("get_breadcrumb",function(assert){
+	expect(1);
+	assert.equal(get_breadcrumb(),"");
+     });
+
+  </script>
+%end
+ 
 {{!page_foot}}	
 </body>
 </html>

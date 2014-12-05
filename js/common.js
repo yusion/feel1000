@@ -53,11 +53,25 @@ function limit_max_input(item,event,maxLen) {
   if (event.keyCode == 67) return true; //del
   if (event.keyCode == 112) return true; //forward del
   
+  var sel = "";  
+  if (get_browser_info().ie) {
+    var o = document.selection.createRange();
+    if(o)
+      sel = o.text;
+  }
+  else{
+    sel = $(window).DOM().getSelection();
+  }
+  
+  if(sel != "" && item.val().indexOf(sel) != -1) {
+      return true;
+  }
+  
   parseInt(item.attr("maxLen"));
   if (item.val().length + 1 > maxLen) {
       return false;
-    }
-    return true;
+  }
+  return true;
 }
 
 //可设置max_len属性来自定义最大输入长度 
@@ -175,9 +189,13 @@ $.fn.check = function(){
   return false;
 }
 
-version=new Object();
+version=null;
 function get_browser_info()
 {
+  if (version) {
+    return version;
+  }
+  version = new Object();
     version.chrome = false;
     version.firefox = false;
     version.safari = false;
@@ -725,7 +743,6 @@ function set_imgtag(items,elem) {
 
 //breadcrumb navigator 
 function push_breadcrumb(name,url) {
- // $("#my_breadcrumb .active").removeClass("active");
   if (!url) {
     url = window.location.pathname;
   }
@@ -738,7 +755,6 @@ function pop_breadcrumb() {
     return;
   }
   $("#my_breadcrumb a:last-child").remove();
-  //$("#my_breadcrumb a:last-child").addClass("active");
 }
 
 function get_breadcrumb(){
@@ -890,14 +906,18 @@ IMYUAN || (IMYUAN = {});
 //增加jquery一些小功能  
 (function(a) {
     a.fn.extend({
+        DOM : function(){
+          //转成js的DOM元素 
+          return $(this)[0];
+        },
         outerHTML: function() {
           //取外部的html
-            return $(this)[0].outerHTML;
+            return $(this).DOM().outerHTML;
         },
         attrs: function(){
           //取所有属性 
           var a = new Object();
-          var t = $(this)[0].attributes;
+          var t = $(this).DOM().attributes;
           for(x in t)
           {
             if (!t[x].name) {

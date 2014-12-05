@@ -449,6 +449,7 @@
   padding-left: 5px;
 }
 /* 自定义的checkbox */
+div.checkbox_ctrl,
 span.checkbox_ctrl {
   padding-left: 30px;
   height: 22px;
@@ -457,6 +458,7 @@ span.checkbox_ctrl {
   cursor: pointer;
   background: url("/res/small_icon.png") no-repeat 0px -132px;
 }
+div.checkbox_ctrl[checked],
 span.checkbox_ctrl[checked] {
   background: url("/res/small_icon.png") no-repeat 0px -158px;
 }
@@ -538,4 +540,10 @@ span.checkbox_ctrl[checked] {
 }
 #div_carousel_ctrl .go.active {
   color: orange;
+}
+.pwd_placeholder_sm {
+  background: url('/res/small_icon.png') 0px -196px no-repeat;
+}
+.pwd_placeholder {
+  background: url('/res/small_icon.png') 0px -220px no-repeat;
 }

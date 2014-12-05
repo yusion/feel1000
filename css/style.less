@@ -541,7 +541,7 @@
 }
 
 /* 自定义的checkbox */
-span.checkbox_ctrl{
+div.checkbox_ctrl,span.checkbox_ctrl{
 	padding-left: 30px;
 	height: 22px;
 	width: auto;
@@ -550,7 +550,7 @@ span.checkbox_ctrl{
 	background:url("/res/small_icon.png") no-repeat 0px -132px;
 }
 
-span.checkbox_ctrl[checked]{
+div.checkbox_ctrl[checked],span.checkbox_ctrl[checked]{
 	background:url("/res/small_icon.png") no-repeat 0px -158px;
 }
 
@@ -642,4 +642,14 @@ span.checkbox_ctrl[checked]{
 		}
 	}
 }
+
+//让IE支持密码框的PlaceHolder,需定义pwd_placeholder_sm的class
+.pwd_placeholder_sm{
+	background: url('/res/small_icon.png') 0px -196px no-repeat;
+}
+
+.pwd_placeholder{
+	background: url('/res/small_icon.png') 0px -220px  no-repeat;
+}
+
 

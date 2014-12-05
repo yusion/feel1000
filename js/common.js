@@ -839,7 +839,7 @@ function data_format(elems) {
 
 //自定义的checkbox
 //html写法 <span class="checkbox_ctrl" checked="true">广东省</span>
-//可以通过属性checked来查看是否选中
+//注意用hasAttr来判断是否被选中，ie好象用attr("checked")查询不到 
 $.fn.checkbox_ctrl = function () {
   $(this).click(function(){
     if($(this).attr("checked"))
@@ -887,6 +887,87 @@ IMYUAN || (IMYUAN = {});
     })
 })(jQuery);
 
+//增加jquery一些小功能  
+(function(a) {
+    a.fn.extend({
+        outerHTML: function() {
+          //取外部的html
+            return $(this)[0].outerHTML;
+        },
+        attrs: function(){
+          //取所有属性 
+          var a = new Object();
+          var t = $(this)[0].attributes;
+          for(x in t)
+          {
+            if (!t[x].name) {
+              continue;
+            }
+            a[t[x].name] = t[x].value;
+          }
+          return a;
+        },
+        attrsStr:function(){
+          //把属性转成字符串 
+          var s = "";
+          var a = $(this).attrs();
+          for(k in a)
+          { 
+            s += k + "='" + a[k] + "'; ";
+          }
+          return s;
+        },
+        hasAttr:function(key){
+          var a = $(this).attrs();
+          for(k in a)
+          {
+            if (k == key) {
+              return true;
+            }
+          }
+          return false;
+        }
+    })
+})(jQuery);
+
+function placeholder_for_ie(){
+   if (get_browser_info().ie)
+   {
+      //让IE支持password的placeholder
+      $("input:password").each(function(){
+        if ($(this).hasAttr("placeholder")) {
+          if ($(this).hasClass("input-sm")) {
+             $(this).addClass("pwd_placeholder_sm");
+          }
+          else{
+             $(this).addClass("pwd_placeholder");
+          }
+          
+          $(this).focus(function(){
+            if ($(this).hasClass("pwd_placeholder_sm")) {
+              $(this).removeClass("pwd_placeholder_sm");
+            }
+            else{
+              $(this).removeClass("pwd_placeholder");
+            }
+          });
+        
+          $(this).blur(function(){
+              if ($(this).val()) {
+                return;
+              }
+              if ($(this).hasClass("input-sm")) {
+                $(this).addClass("pwd_placeholder_sm");
+              }
+              else{
+                $(this).addClass("pwd_placeholder");
+              }
+          });
+        }
+      });
+   }
+}
+
 function init_common()
 {
    $(".onlyNum").onlyNum();
@@ -908,6 +989,8 @@ function init_common()
     set_dropdown_hover($("div.dropdown-hover"));
     
     $(".checkbox_ctrl").checkbox_ctrl();
+    placeholder_for_ie();
+
 }
 
 $(document).ready(function(e){

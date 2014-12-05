@@ -65,7 +65,7 @@
       });
 
       //遍历所有密码框，添加placeholder模拟事件
-      var elementsPass = form.find("input[type='password'][placeholder]");
+   /*   var elementsPass = form.find("input[type='password'][placeholder]");
       elementsPass.each(function(i) {
         var s = $(this);
         var pValue = s.attr("placeholder");
@@ -75,9 +75,10 @@
             //DOM不支持type的修改，需要复制密码框属性，生成新的DOM
             var html = this.outerHTML || "";
             html = html.replace(/\s*type=(['"])?password\1/gi, " type=text placeholderfriend")
-              .replace(/\s*(?:value|on[a-z]+|name)(=(['"])?\S*\1)?/gi, " ")
+              .replace(/\s*(?:value|\son[a-z]+|name)(=(['"])?\S*\1)?/gi, " ")
               .replace(/\s*placeholderfriend/, " placeholderfriend value='" + pValue
               + "' " + "onfocus='placeholderfriendfocus(this);' ");
+      
             var idValue = s.attr("id");
             if (idValue) {
               s.attr("id", idValue + "placeholderfriend");
@@ -107,7 +108,7 @@
           s.hide().next().show();
         }
       });
-
+*/
     });
   }
   window.placeholderfriendfocus = placeholderfriend.focus;

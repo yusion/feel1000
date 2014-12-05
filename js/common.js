@@ -842,7 +842,7 @@ function data_format(elems) {
 //注意用hasAttr来判断是否被选中，ie好象用attr("checked")查询不到 
 $.fn.checkbox_ctrl = function () {
   $(this).click(function(){
-    if($(this).attr("checked"))
+    if($(this).hasAttr("checked"))
     {
       $(this).removeAttr("checked");
     }
@@ -951,7 +951,7 @@ function placeholder_for_ie(){
               $(this).removeClass("pwd_placeholder");
             }
           });
-        
+          
           $(this).blur(function(){
               if ($(this).val()) {
                 return;
@@ -990,7 +990,6 @@ function init_common()
     
     $(".checkbox_ctrl").checkbox_ctrl();
     placeholder_for_ie();
-
 }
 
 $(document).ready(function(e){

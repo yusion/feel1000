@@ -210,10 +210,8 @@
      QUnit.test("check_pass",function(assert){
 	assert.ok($("#password-error").text() == "", "error msg is hidden" );
 	$("#password").focusin();
-alert($("#passwordplaceholdfriend").parent().outerHTML());	
 	$("#password").val("12345");
 	$("#password").focusout();
- return;	
 	assert.ok($("#password-error").is(":visible"), "error msg is visibled");
 	assert.ok($("#password-error").text().indexOf("长度不能少于6个字") != -1,"wrong msg");
 
@@ -227,7 +225,7 @@ alert($("#passwordplaceholdfriend").parent().outerHTML());
 	$("#password").focusout();
 	assert.ok($("#password-error").text().indexOf("长度不能超过20个字") != -1,"wrong msg");
 	});
-/*      
+
      QUnit.asyncTest("check_phone_repeat",function(assert){
 	expect(1);
 	$("#phone").focusin();
@@ -293,6 +291,5 @@ alert($("#passwordplaceholdfriend").parent().outerHTML());
 		QUnit.start();
 	}, 700);
 	});
-*/	
      </script>
 %end

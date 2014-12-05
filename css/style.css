@@ -280,11 +280,12 @@
   margin: 0 0 0 0;
 }
 #my_breadcrumb a {
+  margin-left: 5px;
   text-decoration: none;
 }
-#my_breadcrumb > li + li:before {
+#my_breadcrumb > a + a:before {
   color: #CCCCCC;
-  content: ">";
+  content: " > ";
 }
 /* 共用页面设计 */
 #page_head_row {

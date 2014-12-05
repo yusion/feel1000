@@ -19,9 +19,9 @@
 		<div class="collapse navbar-collapse" id="my_navbar-collapse">
 		   <ul class="nav navbar-nav">
 			<li  class="active"><a href="index"><i class="icon-home"></i> 主页</a></li>
-			<li><a href=""><i class="icon-conversation"></i> 动态</a></li>
+			<li><a href="#"><i class="icon-conversation"></i> 动态</a></li>
 		        <li><a href="search"><i class="icon-search"></i> 查找</a></li>  
-			<li><a href="my_space"><i class="icon-user"></i> 我的主页</a></li>
+			<li><a href="my_space"><i class="icon-user"></i> 我的空间</a></li>
 		   </ul>
 		</div>
 	     </nav>
@@ -52,15 +52,15 @@
   </div>
   <div class="row"> 
 	<div class="col-md-8 col-md-offset-2">
-		<ol id="my_breadcrumb" class="breadcrumb">
-			<li><a href="index"><i class="icon-google-maps"></i>主页</a></li>
-		</ol>
+		<div id="my_breadcrumb">
+			<a href="index"><i class="icon-google-maps"></i>主页</a>
+		</div>
 	</div>
   </div>
 
 <script type="text/javascript">
 	$(document).ready(function(e){
-		$("#nav_main > li").removeClass("active");
+		$("#nav_main .active").removeClass("active");
 		$("#nav_main .navbar-nav a").each(function(){
 			//set active tab 
 			link = $(this).attr("href").toLowerCase();
@@ -68,12 +68,14 @@
 			if (url[0] == "/") {
 				url = url.substr(1);
 			}
+			if (url == "") {
+				url = "index";
+			}
 			if (link.indexOf(url) != -1){ 
 				$(this).parent().addClass("active");
-				push_breadcrumb($(this).text());
-			}
-			else{
-				$(this).parent().removeClass("active");
+				if (url != "index") {
+					push_breadcrumb($(this).text());
+				}
 			}
 		});
 	});

@@ -725,20 +725,20 @@ function set_imgtag(items,elem) {
 
 //breadcrumb navigator 
 function push_breadcrumb(name,url) {
-  $("#my_breadcrumb li").removeClass("active");
+ // $("#my_breadcrumb .active").removeClass("active");
   if (!url) {
     url = window.location.pathname;
   }
-  var link = $("<li><a class='active' href='" + url + "'>"+name+"</a></li>");
+  var link = $("<a href='" + url + "'>"+name+"</a>");
   $("#my_breadcrumb").append(link);
 }
 
 function pop_breadcrumb() {
-  if ($("#my_breadcrumb li").length == 2) {
+  if ($("#my_breadcrumb a").length == 2) {
     return;
   }
-  $("#my_breadcrumb li:last-child").remove();
-  $("#my_breadcrumb li:last-child").addClass("active");
+  $("#my_breadcrumb a:last-child").remove();
+  //$("#my_breadcrumb a:last-child").addClass("active");
 }
 
 function get_breadcrumb(){

@@ -123,10 +123,10 @@
 	<div class="col-md-3">
 		<ul id="tab_login" class="nav nav-tabs">
 			<li class="active">
-			   <a href="#div_register" data-toggle="tab">免费注册</a>
+			   <a id="link_register" href="#div_register" data-toggle="tab">免费注册</a>
 			</li>
 			<li>
-			   <a href="#div_login" data-toggle="tab">快速登陆</a>
+			   <a id="link_login" href="#div_login" data-toggle="tab">快速登陆</a>
 			</li>
 		</ul>
 		<div id="div_tag_container" class="tab-content">

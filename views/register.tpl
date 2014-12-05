@@ -127,8 +127,8 @@
      QUnit.module("register");
      $.getJSON("test/del_user");
      QUnit.config.reorder = false;
-     
      QUnit.test("init_value",function(assert){
+	$("#link_register").click();
 	expect(4);
 	assert.ok($("#chk_agreement").hasAttr("checked"),"init value is check");
 	assert.ok($("#radio_male").attr("checked"),"init radio_male value is check");
@@ -144,7 +144,7 @@
 	$("#nickname").focusin();
 	$("#nickname").val("a");
 	$("#nickname").focusout();
-	assert.ok($("#nickname-error").is(":visible"), "error msg is visibled");
+	assert.ok($("#nickname-error").visible(), "error msg is visibled");
 	assert.ok($("#nickname-error").text().indexOf("长度不能少于2个字") != -1,"wrong msg");
  
 	$("#nickname").focusin();
@@ -211,7 +211,7 @@
 	$("#password").focusin();
 	$("#password").val("12345");
 	$("#password").focusout();
-	assert.ok($("#password-error").is(":visible"), "error msg is visibled");
+	assert.ok($("#password-error").visible(), "error msg is visibled");
 	assert.ok($("#password-error").text().indexOf("长度不能少于6个字") != -1,"wrong msg");
 
 	$("#password").focusin();
@@ -285,7 +285,7 @@
 	$("#chk_agreement").click();
 		
 	setTimeout(function() {
-		assert.ok($("#btn_register").is(":visible"), "register button must be visibled" );
+		assert.ok($("#btn_register").visible(), "register button must be visibled" );
 		$.getJSON("test/del_user");
 		QUnit.start();
 	}, 700);

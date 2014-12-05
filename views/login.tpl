@@ -57,13 +57,22 @@
 %if is_test:
      <script type="text/javascript">
      QUnit.module("login");
-     
+     QUnit.asyncTest("start",function(assert){
+	$("#link_login").click();
+	assert.ok(true);
+	setTimeout(function() {
+		QUnit.start();
+	}, 300);
+     });
+	
      QUnit.test("check_pass",function(assert){
+	$("#link_login").click();
 	assert.ok($("#login_password-error").text() == "", "error msg is hidden" );
 	$("#login_password").focusin();
 	$("#login_password").val("12345");
 	$("#login_password").focusout();
-	assert.ok($("#login_password-error").is(":visible"), "error msg is visibled");
+	
+	assert.ok($("#login_password-error").visible(), "error msg is visibled");
 	assert.ok($("#login_password-error").text().indexOf("长度不能少于6个字") != -1,"wrong msg");
 
 	$("#login_password").focusin();
@@ -77,31 +86,31 @@
 	assert.ok($("#login_password-error").text().indexOf("长度不能超过20个字") != -1,"wrong msg");
 	});
      
-      QUnit.asyncTest("check_nickname",function(assert){
+      QUnit.asyncTest("check_nickname2",function(assert){
 	expect(6);
 	assert.ok($("#nickname-error").text() == "", "error msg is hidden" );
-	$("#nickname").focusin();
-	$("#nickname").val("a");
-	$("#nickname").focusout();
-	assert.ok($("#nickname-error").is(":visible"), "error msg is visibled");
-	assert.ok($("#nickname-error").text().indexOf("长度不能少于2个字") != -1,"wrong msg");
+	$("#login_nickname").focusin();
+	$("#login_nickname").val("a");
+	$("#login_nickname").focusout();
+	assert.ok($("#login_nickname-error").visible(), "error msg is visibled");
+	assert.ok($("#login_nickname-error").text().indexOf("长度不能少于2个字") != -1,"wrong msg");
  
-	$("#nickname").focusin();
-	$("#nickname").val("");
-	$("#nickname").focusout();
-	assert.ok($("#nickname-error").text().indexOf("请填写该信息") != -1,"wrong msg");
+	$("#login_nickname").focusin();
+	$("#login_nickname").val("");
+	$("#login_nickname").focusout();
+	assert.ok($("#login_nickname-error").text().indexOf("请填写该信息") != -1,"wrong msg");
 	
-	$("#nickname").focusin();
-	$("#nickname").val("123456789011");
-	$("#nickname").focusout();
-	assert.ok($("#nickname-error").text().indexOf("长度不能超过11个字") != -1,"wrong msg");
+	$("#login_nickname").focusin();
+	$("#login_nickname").val("123456789011");
+	$("#login_nickname").focusout();
+	assert.ok($("#login_nickname-error").text().indexOf("长度不能超过11个字") != -1,"wrong msg");
 	
-	$("#nickname").focusin();
-	$("#nickname").val("姚舜姚舜姚舜姚舜姚舜");
-	$("#nickname").focusout();
+	$("#login_nickname").focusin();
+	$("#login_nickname").val("姚舜姚舜姚舜姚舜姚舜");
+	$("#login_nickname").focusout();
 	
 	setTimeout(function() {
-		assert.ok($("#nickname-error").text() == "", "error msg is hidden" );	
+		assert.ok($("#login_nickname-error").text() == "", "error msg is hidden" );	
 		QUnit.start();
 	}, 300);
      });

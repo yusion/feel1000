@@ -39,6 +39,59 @@ if(!Array.prototype.indexOf2){
 if(!String.prototype.trim2){
   String.prototype.trim2 = $.trim; //using jquery trim
 }
+
+
+//增加jquery一些小功能  
+(function(a) {
+    a.fn.extend({
+        DOM : function(){
+          //转成js的DOM元素 
+          return $(this)[0];
+        },
+        outerHTML: function() {
+          //取外部的html
+          if(!$(this).DOM()) return "";
+          return $(this).DOM().outerHTML;
+        },
+        attrs: function(){
+          //取所有属性 
+          var a = new Object();
+          if(!$(this).DOM()) return a;
+          var t = $(this).DOM().attributes;
+          for(x in t)
+          {
+            if (!t[x].name) {
+              continue;
+            }
+            a[t[x].name] = t[x].value;
+          }
+          return a;
+        },
+        attrsStr:function(){
+          //把属性转成字符串 
+          var s = "";
+          var a = $(this).attrs();
+          for(k in a)
+          { 
+            s += k + "='" + a[k] + "'; ";
+          }
+          return s;
+        },
+        hasAttr:function(key){
+          var a = $(this).attrs();
+          for(k in a)
+          {
+            if (k == key) {
+              return true;
+            }
+          }
+          return false;
+        },
+        visible: function(){
+          return $(this).is(":visible");
+        }
+    })
+})(jQuery);
     
 // ----------------------------------------------------------------------
 // <summary>
@@ -47,40 +100,40 @@ if(!String.prototype.trim2){
 // ----------------------------------------------------------------------
 
 function limit_max_input(item,event,maxLen) {
-  //有三种限制长度 limit_s = 6, limit_m = 20, limit_l = 100
-  if (event.altKey) return true;
-  if (event.ctrlKey) return true;
-  if (event.keyCode == 67) return true; //del
-  if (event.keyCode == 112) return true; //forward del
-  
-  var sel = "";  
-  if (get_browser_info().ie) {
-    var o = document.selection.createRange();
-    if(o)
-      sel = o.text;
-  }
-  else{
-    sel = $(window).DOM().getSelection();
-  }
-  
-  if(sel != "" && item.val().indexOf(sel) != -1) {
-      return true;
-  }
-  
-  parseInt(item.attr("maxLen"));
-  if (item.val().length + 1 > maxLen) {
-      return false;
-  }
-  return true;
+    //有三种限制长度 limit_s = 6, limit_m = 20, limit_l = 100
+    if (event.altKey) return true;
+    if (event.ctrlKey) return true;
+    if (event.keyCode == 67) return true; //del
+    if (event.keyCode == 112) return true; //forward del
+    
+    var sel = "";  
+    if (get_browser_info().ie) {
+      var o = document.selection.createRange();
+      if(o) sel = o.text;
+    }
+    else{
+      sel = $(window).DOM().getSelection();
+    }
+    
+    if(sel != "" && item.val().indexOf(sel) != -1) {
+        return true;
+    } 
+    if (item.val().length + 1 > maxLen) {
+        return false;
+    }
+    return true;
 }
 
 //可设置max_len属性来自定义最大输入长度 
 $.fn.limitLength = function(len){
-  if ($(this).attr("max_len")) {
-    len = parseInt($(this).attr("max_len"));
-  }
-  $(this).keypress(function (event) {
-    return limit_max_input($(this),event,len);
+  $(this).each(function(){
+    var ll = len;
+      if ($(this).hasAttr("max_len")) {
+        ll = parseInt($(this).attr("max_len"));
+      }
+    $(this).keypress(function (event) {
+      return limit_max_input($(this),event,ll);
+    });
   });
 }
 
@@ -903,52 +956,6 @@ IMYUAN || (IMYUAN = {});
     })
 })(jQuery);
 
-//增加jquery一些小功能  
-(function(a) {
-    a.fn.extend({
-        DOM : function(){
-          //转成js的DOM元素 
-          return $(this)[0];
-        },
-        outerHTML: function() {
-          //取外部的html
-            return $(this).DOM().outerHTML;
-        },
-        attrs: function(){
-          //取所有属性 
-          var a = new Object();
-          var t = $(this).DOM().attributes;
-          for(x in t)
-          {
-            if (!t[x].name) {
-              continue;
-            }
-            a[t[x].name] = t[x].value;
-          }
-          return a;
-        },
-        attrsStr:function(){
-          //把属性转成字符串 
-          var s = "";
-          var a = $(this).attrs();
-          for(k in a)
-          { 
-            s += k + "='" + a[k] + "'; ";
-          }
-          return s;
-        },
-        hasAttr:function(key){
-          var a = $(this).attrs();
-          for(k in a)
-          {
-            if (k == key) {
-              return true;
-            }
-          }
-          return false;
-        }
-    })
-})(jQuery);
 
 function placeholder_for_ie(){
    if (get_browser_info().ie)

@@ -56,7 +56,6 @@ def url_register():
 		bottle.request.params["pass"],
 		bottle.request.params["sex"],
 		bottle.request.params["age"])
-		
 	if ret:
 		return json.dumps({"result":"true"})	
 	else:

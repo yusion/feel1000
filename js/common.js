@@ -89,6 +89,15 @@ if(!String.prototype.trim2){
         },
         visible: function(){
           return $(this).is(":visible");
+        },
+        is_enabled :function(){
+          return $(this).attr("disabled") != "disabled";
+        },
+        disabled : function(){
+          $(this).attr({"disabled":"disabled"});
+        },
+        enabled:function(){
+          $(this).removeAttr("disabled");
         }
     })
 })(jQuery);

@@ -263,6 +263,7 @@
 			birthdayYear:1993},
 			function(json){
 				r = json;
+				console.log(r);
 		});
 		 
 	setTimeout(function() {

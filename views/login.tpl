@@ -19,29 +19,38 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<button id="btn_login" type="submit" class="btn btn-success form-control"  style="margin-top: 10px">登&nbsp; 录</button>
+			<button id="btn_login" type="button" class="btn btn-success form-control"  style="margin-top: 10px">登&nbsp; 录</button>
+			<input type="hidden" id="login_result_msg" value="unknown">
+			<input type="hidden" id="login_result" value="unknown">
 		</div>
 	</div>
 </form>
 <script type="text/javascript">
 	function login_submit()
 	{
-		var sex = $('input:radio:checked').val();
-		$.getJSON("action/register", 
-		{ 	nick: $("#nickname").val(), 
-			pass: hex_md5("pwd" + $("#password").val()),
-			phone:$("#phone").val(), 
-			sex:sex,
-			age:$("#age").val()},
+		$("#btn_login").disabled();
+		$.getJSON("action/login", 
+		{ 	nick: $("#login_nickname").val(),
+			pass: hex_md5("pwd" + $("#login_password").val())},
 			function(json){
-				$("#result").val(json.result);
+				$("#login_result").val(json.result);
+				$("#login_result_msg").val(json.msg);
+				if (json.result == "true") {
+					$("#btn_login").enabled();
+				}
+				else{
+					$("#login_password").val("");
+					setTimeout(function(){
+						$("#btn_login").enabled();
+					},500);
+				}
 		});
 	}   
 	
 	$(document).ready(function(e){	
 		$("#btn_login").click(function(e){		
 			if(!$("#form_login").valid()) return;
-			submit();
+			login_submit();
 		});
 		 
 		$("#form_login").validate({
@@ -114,5 +123,20 @@
 		QUnit.start();
 	}, 300);
      });
+     
+      QUnit.asyncTest("login_failed",function(assert){
+	expect(5);
+	$("#login_nickname").val("ycat");
+	$("#login_password").val("wrongpass");
+	$("#btn_login").click();
+	assert.ok(!$("#btn_login").is_enabled());
+	setTimeout(function() {
+		assert.equal($("#login_result").val(),"false");
+		assert.equal($("#login_result_msg").val(),"用户名或密码不正确");
+		assert.equal($("#login_password").val(),"");
+		assert.ok($("#btn_login").is_enabled());
+		QUnit.start();
+	}, 600);
+      });
      </script>
 %end     

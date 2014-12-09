@@ -33,7 +33,8 @@ class timer:
 			self.sleepSec = 1
 	
 	def __del__(self):
-		self.stop()
+		#self.stop()
+		pass
 	
 	def setTimeout(self,func,timeoutMs,args=()):
 		#只调用一次func，返回timerID 

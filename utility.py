@@ -49,6 +49,13 @@ def set_is_test(value):
 	if not value:
 		__test_now = None
 
+def get_ip():
+	if is_test():
+	    return "unittest"
+	if bottle.request and bottle.request.remote_addr:
+		return bottle.request.remote_addr
+	return "unknown"
+
 def get_template_file(filename,keyword):
 	with open(filename,"r") as f:
 	    tpl = bottle.SimpleTemplate(f.read(),encoding='utf8')
@@ -142,10 +149,10 @@ def set_now(dateTime):
 	global __test_now
 	__test_now = dateTime
 
-def write_log(user_id,desc,logType,ip="",autoCommit = True):
+def write_log(user_id,desc,logType,autoCommit = True):
 	db = get_db()
 	db.execute("INSERT INTO r_log(LogTypeID,LogDesc,LogDate,UserID,IP)VALUES(?,?,?,?,?)",
-		(logType,desc,now_str(),user_id,ip))
+		(logType,desc,now_str(),user_id,get_ip()))
 	if autoCommit:
 		db.commit()
 
@@ -158,6 +165,9 @@ def check_log(user_id,desc,logType):
 	assert r[2] == logType
 
 #############################	unit test	###########################
+def test_set():
+    set_is_test(True)
+
 def test_get_tag_table():
 	d = {}
 	if "c_tag0" in __c_table:
@@ -168,7 +178,7 @@ def test_get_tag_table():
 	print(rr);
 	assert "c_tag0" in __c_table 
 	assert len(rr) > 8
-   
+
 	r = rr[0]
 	assert 2 == len(r)
 	assert r[0] == 1
@@ -225,12 +235,12 @@ def test_write_log():
 	db.commit()
 	msg = "test_系统创建啦<啦啦>'\"dfdfd"
 	msg2 = "test_系统创建啦<啦啦>'\"dfdfddsfdfsfdsf"
-	write_log(-1,msg,0,"127.0.0.1")
+	write_log(-1,msg,0)
 	check_log(-1,msg,0)
 	
 	set_now(datetime.datetime(2014,1,27,12,50,43))
 	now2 = now()
-	write_log(1001,msg2,1,"127.0.0.2")
+	write_log(1001,msg2,1)
 	check_log(1001,msg2,1)
 	
 	c = get_cursor()
@@ -240,12 +250,12 @@ def test_write_log():
 	assert r[0][1] == msg
 	assert r[0][2] == now1.strftime("%Y-%m-%d %H:%M:%S")
 	assert r[0][3] == -1
-	assert r[0][4] == "127.0.0.1"
+	assert r[0][4] == "unittest"
 	assert r[1][0] == 1
 	assert r[1][1] == msg2
 	assert r[1][2] == now2.strftime("%Y-%m-%d %H:%M:%S")
 	assert r[1][3] == 1001
-	assert r[1][4] == "127.0.0.2"
+	assert r[1][4] == "unittest"
 	
 	db.execute("DELETE FROM r_log WHERE LogDesc like 'test_%'")
 	db.commit()
@@ -313,6 +323,7 @@ def test_get_c_table():
 
 
 def run_tests(file):
+	set_is_test(True)
 	if sys.platform == "win32":
 		os.chdir(os.path.dirname(__file__))
 		print(os.path.dirname(__file__))
@@ -323,6 +334,7 @@ def run_tests(file):
 		pytest.main("-v -x " + os.path.basename(file))
 	
 def run_all_tests():
+	set_is_test(True)
 	if not is_test():
 	   return
 	

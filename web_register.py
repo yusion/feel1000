@@ -89,6 +89,7 @@ def clear_test_user2():
 		(
 		SELECT u_user.ID FROM u_user WHERE (Password like '%test%') OR  (nickname like 'test_%')
 		)""")
+	c.execute("DELETE FROM r_log WHERE ip =='unittest'")
 
 	c.execute("DELETE FROM u_user WHERE (Password like '%test%') OR  (nickname like 'test_%')")
 	c.execute("""DELETE FROM u_profile WHERE ID IN

@@ -27,11 +27,7 @@ def web_login(nickname,password):
 		g_loginFailedCountLock = threading.RLock()
 		utility.get_timer().setInterval(auto_del_timer,30*60*1000)
 	
-	ip = ""
-	if bottle.request and bottle.request.remote_addr:
-		ip = bottle.request.remote_addr
-	key = nickname	
-		
+	key = nickname			
 	if key:
 		g_loginFailedCountLock.acquire()
 		count = 0
@@ -39,7 +35,7 @@ def web_login(nickname,password):
 			count = g_loginFailedCount[key]
 		g_loginFailedCountLock.release() 
 		if count >= 20:
-			utility.write_log(-1,nickname+"登陆次数过多"+str(count),0,ip)
+			utility.write_log(-1,nickname+"登陆次数过多"+str(count),0)
 			return {"result":"false","msg":"登陆次数过多，请稍后再试"}		
 	
 	user = session.login(nickname,password)
@@ -65,6 +61,9 @@ def url_login():
 	
 
 #############################	unit test	###########################
+def test_set():
+    utility.set_is_test(True)
+
 def test_login_too_many():
 	clear_test_user2()
 	ctrl_user_manager.register("ycat3","17056464001","passwtest",sex_type.Female,35)	
@@ -98,7 +97,8 @@ def test_login_too_many():
 	utility.check_log(user.user_id,"登陆成功",1)
 	assert len(g_loginFailedCount) == 0
 	
-	clear_test_user2()	
+	clear_test_user2()
+	utility.get_timer().stop()
 		
 if __name__ == '__main__':
 	utility.run_tests(__file__)

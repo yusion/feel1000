@@ -36,16 +36,12 @@ def make_session_id():
 	_last_session_id += 1
 	return utility.scramble(_last_session_id)
 
-def login(loginName,password):
-	ip = ""
-	if bottle.request and bottle.request.remote_addr:
-		ip = bottle.request.remote_addr
-		
+def login(loginName,password):		
 	c = utility.get_cursor()
 	c.execute("SELECT ID,NickName,Sex,birthdayYear,certfState FROM u_user WHERE password=? AND (nickname=? OR phone=?)",(password,loginName,loginName))
 	rows = c.fetchall()
 	if len(rows) == 0:
-		utility.write_log(-1,"登陆失败",0,ip)
+		utility.write_log(-1,"登陆失败",0)
 		return None
 	r = rows[0]
 	user = session_data()
@@ -55,12 +51,12 @@ def login(loginName,password):
 	user.session_id = make_session_id()
 	user.age = utility.now().year - r[3]
 	user.certf_state = r[4]
-	user.ip = ip
+	user.ip = utility.get_ip()
 	
 	global g_session_data
 	g_session_data[user.session_id] = user
 	
-	utility.write_log(user.user_id,"登陆成功",1,ip)
+	utility.write_log(user.user_id,"登陆成功",1)
 	return user
 	
 def get():

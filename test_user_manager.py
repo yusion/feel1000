@@ -20,7 +20,9 @@ def test_register():
 	r = c.fetchone()
 	if r and r[0] != None:
 		max_id = r[0]
-	assert ctrl_user_manager.register("ycat22'22#2\"2","132974'26\"4666","546\"79'87979test",sex_type.Male,35)
+	u = ctrl_user_manager.register("ycat22'22#2\"2","132974'26\"4666","546\"79'87979test",sex_type.Male,35)
+	assert u
+	utility.check_log(u.user_id,"注册成功",1)
 	assert ctrl_user_manager.register("这是一个测试","13928979001","32212346dfADDFDtest",sex_type.Female,29)
 	c.execute("SELECT NickName,Phone,Password,CreateDate,Sex,birthdayYear,certfState from u_user WHERE ID > %d"%max_id)
 	rows = c.fetchall()
@@ -56,7 +58,9 @@ def test_login():
 	ctrl_user_manager.register("ycat","13956464001","passwtest",sex_type.Male,23)
 	ctrl_user_manager.register("ycat2","17056464001","passwtest",sex_type.Female,35)
 	assert not session.login("noexit","passwtest")
+	utility.check_log(-1,"登陆失败",0)
 	user = session.login("ycat","passwtest")
+	utility.check_log(user.user_id,"登陆成功",1)
 	utility.set_session_id(user.session_id)
 	assert user
 	assert user == session.get()

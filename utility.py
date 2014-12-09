@@ -2,7 +2,17 @@
 # ycat			 2014/09/28      create
 import sqlite3,bottle
 import sys,pytest,os
-import hashlib,datetime
+import hashlib,datetime 
+from common import timer
+
+g_timer = None
+def get_timer():
+    global g_timer
+    if not g_timer:
+        g_timer = timer.timer(3000)
+        g_timer.start()
+    return g_timer
+    
 
 def enum(**enums):
 	return type('Enum', (), enums)
@@ -146,7 +156,6 @@ def check_log(user_id,desc,logType):
 	assert r[0] == user_id
 	assert r[1] == desc
 	assert r[2] == logType
-	
 
 #############################	unit test	###########################
 def test_get_tag_table():

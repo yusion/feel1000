@@ -3,15 +3,21 @@
 import os,time,pytest,sys
 import threading
 import time
- 		
-class timer:
-	def _ticks():
-		return int(time.clock()*1000)
-	
+
+g_ticks = 0	
+def set_pass_ticks(ms):
+	global g_ticks	
+	g_ticks += ms
+
+def ticks():
+	global g_ticks		
+	return g_ticks + int(time.clock()*1000) 		
+
+class timer:	
 	class timer_info:
 		def __init__(self,func,ms,args,repeat):
 			self.func = func
-			self.timeout = timer._ticks() + ms
+			self.timeout = ticks() + ms
 			self.ms = ms
 			self.args = args
 			self.repeat = repeat
@@ -56,7 +62,7 @@ class timer:
 		while not self._exited:
 			removeList = []
 			callbackList = []
-			now = timer._ticks()
+			now = ticks()
 			self._lock.acquire()
 			for key in self._time_map:
 				value = self._time_map[key]

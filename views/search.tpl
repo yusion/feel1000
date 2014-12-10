@@ -16,7 +16,7 @@
 	}
 	
 	function set_dislike_it_btn(btn){
-		btn.html("<i class='icon-heart' style='color:black'></i><span class='sm_hide'>取消喜欢</span>");
+		btn.html("<i class='icon-heart' style='color:#FF60AF'></i><span class='sm_hide'>取消</span>");
 		btn.attr("cancel","true"); 
 	}	
 		
@@ -232,7 +232,7 @@
 	});
 </script>
 <p id="add_heart" class="icon-heart" style="position: absolute;color:red;z-index:100;display: none"> +1</p>
-<p id="del_heart" class="icon-heart" style="position: absolute;color:black;z-index:100;display: none"> -1</p>
+<p id="del_heart" class="icon-heart-empty" style="position: absolute;color:red;z-index:100;display: none"> -1</p>
 <div class="row">
 	<div id="div_search_cond" class="col-md-8 col-md-offset-2">
 	<dl class="dl-horizontal" style="margin: 0 0 0 0;padding-top: 10px">
@@ -527,12 +527,12 @@
 	expect(4);
 	var a = $($(".btn_like_it")[2]);
 	assert.ok(a.text().indexOf("喜欢")!=-1);
-	assert.ok(a.text().indexOf("取消喜欢")==-1);
+	assert.ok(a.text().indexOf("取消")==-1);
 	var count = parseInt(a.parent().find(".text_like_num").text());
 	a.click();
 	setTimeout(function() {
 		assert.equal(parseInt(a.parent().find(".text_like_num").text()),count+1);
-		assert.ok(a.text().indexOf("取消喜欢")!=-1); 
+		assert.ok(a.text().indexOf("取消")!=-1); 
 		QUnit.start();
 	}, 1000);
      });
@@ -541,12 +541,12 @@
 	//TODO:还需要加上后台互动
 	expect(4);
 	var a = $($(".btn_like_it")[2]);
-	assert.ok(a.text().indexOf("取消喜欢")!=-1);
+	assert.ok(a.text().indexOf("取消")!=-1);
 	var count = parseInt(a.parent().find(".text_like_num").text());
 	a.click();
 	setTimeout(function() {
 		assert.equal(parseInt(a.parent().find(".text_like_num").text()),count-1);
-		assert.ok(a.text().indexOf("取消喜欢")==-1);
+		assert.ok(a.text().indexOf("取消")==-1);
 		assert.ok(a.text().indexOf("喜欢")!=-1); 
 		QUnit.start();
 	}, 1000);

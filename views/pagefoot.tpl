@@ -1,6 +1,5 @@
 <!-- this is page foot begin-->
 <script src="js/test_common.js"></script>
-
 	%if is_test:
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2" >

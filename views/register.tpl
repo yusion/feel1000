@@ -1,20 +1,26 @@
 <style type="text/css">
 #form_register .row{
-	margin-bottom: 8px;
+	margin-bottom: 15px;
 }
 </style>
-<form id="form_register">
+<form id="form_register" class="form-horizontal">
 	<div class="row">
-		<div class="col-md-12 small" style="padding-right: 0px;vertical-align: top">
+		<div class="col-md-12" style="padding-right: 0px;vertical-align: top">
 			性别：
 			<input type="radio" name="sex" id="radio_male" value="0" checked="checked" style="heigth:auto">
 				帅哥
 			<input type="radio" name="sex" id="radio_female" value="1" style="margin-left: 10px">
 				美女
-		
-			<div style="float:right;padding-right: 15px">
-				年龄：
-				<select id="age" name="age" class="form-control input-sm in_block" style="vertical-align: top;padding: 0 0 0 0;width:50px;height:24px">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<input type="text" id="nickname" name="nickname" class="form-control limit_s input-lg" placeholder="昵称">
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<select id="age" name="age" class="form-control in_block input-lg">
 				%for a in range(18,41):
 					<option value="{{a}}"
 						%if a == 24:
@@ -23,33 +29,22 @@
 					>{{a}}岁</option>
 				%end
 				</select>
-			</div>
 		</div>
-	</div>
+	</div>		
 	<div class="row">
 		<div class="col-md-12">
-			<input type="text" class="form-control onlyNum limit_m input-sm" max_len="11" id="phone" name="phone" placeholder="手机号码">
-		</div>
-	</div>	
-	<div class="row">
-		<div class="col-md-12">
-			<input type="text" id="nickname" name="nickname" class="form-control limit_s input-sm" placeholder="昵称">
-		</div>		
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<input type="password" class="form-control limit_m input-sm" style="width:100%" id="password" name="password" placeholder="密码">
+			<input type="password" class="form-control limit_m input-lg" style="width:100%" id="password" name="password" placeholder="密码">
 		</div>	
 	</div>
 	<div class="row">
-		<div class="col-md-12 small">
-			<span id="chk_agreement" checked="checked" class="checkbox_ctrl text-left">我已阅读并同意</span>
+		<div class="col-md-12">
+			<span id="chk_agreement" checked="checked" class="checkbox_ctrl">我已阅读并同意</span>
 			<a href="/agreement" target="_blank">《用户服务协议》</a>
 		</div>
 	</div>
 	<div class="row" style="margin-bottom: 4px">
 		<div class="col-md-12">
-			<button id="btn_register" type="button" class="btn btn-success form-control ">注&nbsp; 册</button>
+			<button id="btn_register" type="button" style="width:100%" class="btn btn-success btn-lg">注&nbsp; 册</button>
 		</div>
 	</div>
 	<input type="hidden" id="result" value="unknown">

@@ -1,12 +1,17 @@
+<style type="text/css">
+#form_login .row{
+	margin-bottom: 15px;
+}
+</style>
 <form id="form_login" style="margin-top: 20px">
-	<div class="row">
+	<div class="row" style="padding-top: 17px">
 		<div class="col-md-12">
-			<input type="text" name="login_nickname" class="form-control limit_m" id="login_nickname" maxLen="11" placeholder="昵称/手机号码">
+			<input type="text" name="login_nickname" class="form-control limit_m input-lg" id="login_nickname" maxLen="11" placeholder="昵称">
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<input type="password"  name="login_password" class="form-control limit_m" id="login_password"  style="width:100%;height:34px" placeholder="密码">
+			<input type="password"  name="login_password" class="form-control limit_m input-lg" id="login_password"  placeholder="密码">
 		</div>
 	</div>  
 	<div class="row small">
@@ -14,12 +19,12 @@
 		   <span class="checkbox_ctrl text-left" >下次自动登录</span>
 		</div>
 		<div class="pull-right col-md-4">
-		   <a href="reset_pwd.html" target="_blank">忘记密码？</a>
+		   <a href="reset_pwd.html" target="_blank" style="color:gray">忘记密码？</a>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<button id="btn_login" type="button" class="btn btn-success form-control"  style="margin-top: 10px">登&nbsp; 录</button>
+			<button id="btn_login" type="button" style="width:100%" class="btn btn-success btn-lg">登&nbsp; 录</button>
 			<input type="hidden" id="login_result_msg" value="unknown">
 			<input type="hidden" id="login_result" value="unknown">
 		</div>

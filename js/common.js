@@ -975,6 +975,9 @@ function placeholder_for_ie(){
           if ($(this).hasClass("input-sm")) {
              $(this).addClass("pwd_placeholder_sm");
           }
+          else if ($(this).hasClass("input-lg")) {
+             $(this).addClass("pwd_placeholder_lg");
+          }
           else{
              $(this).addClass("pwd_placeholder");
           }
@@ -982,6 +985,9 @@ function placeholder_for_ie(){
           $(this).focus(function(){
             if ($(this).hasClass("pwd_placeholder_sm")) {
               $(this).removeClass("pwd_placeholder_sm");
+            }
+            else if ($(this).hasClass("pwd_placeholder_lg")) {
+              $(this).removeClass("pwd_placeholder_lg");
             }
             else{
               $(this).removeClass("pwd_placeholder");
@@ -995,6 +1001,9 @@ function placeholder_for_ie(){
               if ($(this).hasClass("input-sm")) {
                 $(this).addClass("pwd_placeholder_sm");
               }
+              else if ($(this).hasClass("input-lg")) {
+                $(this).addClass("pwd_placeholder_lg");
+              }
               else{
                 $(this).addClass("pwd_placeholder");
               }
@@ -1005,8 +1014,8 @@ function placeholder_for_ie(){
 }
 
 function init_common()
-{
-   $(".onlyNum").onlyNum();
+{ 
+    $(".onlyNum").onlyNum();
     $(".onlyAlpha").onlyAlpha();
     $(".onlyNumAlpha").onlyNumAlpha();
     $(".limit_s").limitLength(10);
@@ -1023,7 +1032,7 @@ function init_common()
 
     set_select_hover($("select.hover"))
     set_dropdown_hover($("div.dropdown-hover"));
-    
+     
     $(".checkbox_ctrl").checkbox_ctrl();
     placeholder_for_ie();
 }

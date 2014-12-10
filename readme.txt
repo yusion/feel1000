@@ -57,10 +57,7 @@ http://www.jq22.com/jquery-info247
 
 模式对话框
 http://www.jq22.com/jquery-info258
-
-
-云适配js
-http://www2.yunshipei.com/price.html
+ 
 
 【今日推荐】10大流行的 Metro UI 风格的 Bootstrap 主题和模板
 http://www.cnblogs.com/lhb25/archive/2013/04/11/10-metro-bootstraps-ui-templates.html
@@ -80,12 +77,7 @@ http://www.iteye.com/news/15831-masonry-jquery
 jQUery 中masonry与infinitescroll结合 实现瀑布流，下拉加载
 http://blog.csdn.net/kof820/article/details/8764715
  
-
-
-
-
-
-
+ 
 
 
 
@@ -98,61 +90,8 @@ http://www.yixieshi.com/pd/12350.html
 
 过亿App的前100万用户怎么来的？
 http://www.yixieshi.com/pd/19243.html
-
-弹出层，半透明蒙层提示的实现办法
-http://www.cnblogs.com/long_/archive/2010/09/08/1821751.html
-
-<script language="javascript" type="text/javascript">
- $(function(){
-  $("#ele1").click(function(ev){
-     var evs= ev || window.event; 
-     var XYposition=mousePosition(evs);
-     var X=XYposition.x;
-     var Y=XYposition.y; 
-     $('#blk1').css("opacity","0").css("left",''+X+'px').css("top",''+Y+'px');
-     $('#blk1').animate({width:"200px",height:"200px",opacity:"1"},3000);
-   })
-  $("#close1").click(function(){
-     $('#blk1').stop().animate({width:"0px",height:"0px",opacity:"0",left:"0px",top:"0px"},300);
-    })
  
- });
- 
- //鼠标位置
-function mousePosition(ev){
-    if(ev.pageX || ev.pageY){
-    return {x:ev.pageX, y:ev.pageY};
-    }
-    return {
-    x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
-    y:ev.clientY + document.body.scrollTop - document.body.clientTop
-    };
-  } 
- 
- </script>
-
-
-
-
-
-  <!--script type="text/javascript">
-  QUnit.module( "group a" );
-QUnit.test( "a basic test example", function( assert ) {
-  assert.ok( true, "this test is fine" );
-});
-QUnit.test( "a basic test example 2", function( assert ) {
-  assert.ok( true, "this test is fine" );
-});
- 
-QUnit.module( "group b" );
-QUnit.test( "a basic test example 3", function( assert ) {
-  assert.ok( true, "this test is fine" );
-});
-QUnit.test( "a basic test example 4", function( assert ) {
-  assert.ok( true, "this test is fine" );
-});
-  </script-->
-
+  
 free website builder
 http://www.wix.com/
 

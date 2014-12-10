@@ -14,15 +14,14 @@
 	padding: 10px 20px 10px 20px;
 	border: 1px solid #ddd;
 	border-top-width: 0px;
-}
-#div_tag_container>div{
-	/*width:400px;*/
-	height:310px
-}
+	height:330px;
+} 
 #index_container{
 	background-color: gray;
 }
-
+#tab_login > li > a{
+	cursor: pointer
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(e){
@@ -70,12 +69,7 @@
 					<img src="/res/title_logo.png"></img>
 				</div>
 			</div>
-			<div class="row visible-md visible-lg">
-				<div class="col-md-4 col-md-offset-4">
-					<div style="height: 50px;width:100%"></div>
-				</div>
-			</div>
-			<div class="row">
+			<div class="row" style="margin-top: 20px">
 				<div class="col-md-4 col-md-offset-4">
 					<ul id="tab_login" class="nav nav-tabs">
 						<li class="active">

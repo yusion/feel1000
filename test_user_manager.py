@@ -80,7 +80,8 @@ def test_login():
 	assert user == session.get()
 	assert 23 == user.age
 	assert user.certf_state == 0
-	session.g_session_data.clear();
+	assert user == session.get()
+	ycatID = user.session_id
 	
 	user = session.login("ycat2","passwtest")
 	utility.set_session_id(user.session_id)
@@ -90,6 +91,11 @@ def test_login():
 	assert user.user_id != 0
 	assert user.certf_state == 0
 	assert user == session.get()
+	assert 2 == len(session.g_session_data)
+	session.logout()
+	assert not session.get()
+	assert 1 == len(session.g_session_data)
+	assert session.g_session_data[ycatID].session_id == ycatID
 	
 	assert 35 == user.age
 	session.g_session_data.clear();

@@ -58,16 +58,24 @@ def login(loginName,password):
 	
 	utility.write_log(user.user_id,"登陆成功",1)
 	return user
-	
+
 def get():
-	global g_session_data 
-	return g_session_data[utility.get_session_id()]
+	global g_session_data
+	id = utility.get_session_id()
+	if id in g_session_data:
+		return g_session_data[id]
+	return None
 	
 def set(session_id,data):
 	''' for test only '''
 	global g_session_data
 	g_session_data[session_id] = data
-		
+
+def logout():
+	user = get()
+	if not user:
+		return
+	del g_session_data[user.session_id]		
 #############################	unit test	###########################		
 
 		

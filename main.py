@@ -35,9 +35,9 @@ def get_file(path):
 def url_index():
 	# response.add_header('Set-Cookie', 'name2=value2')
 	d = utility.get_dist()
-	user = session.login("ycat2","123456")
-	bottle.response.set_header('Set-Cookie', 'session=%s'%user.session_id)
-	d["session"] = user.session_id
+	#user = session.login("ycat2","123456")
+	#bottle.response.set_header('Set-Cookie', 'session=%s'%user.session_id) #, secret='654321'
+	#d["session"] = user.session_id
 	d["register"] = utility.get_template_file("views/register.tpl",d)
 	d["login"] = utility.get_template_file("views/login.tpl",d)
 	return d

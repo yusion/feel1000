@@ -27,7 +27,7 @@ class ctrl_user_manager:
 			user = session.login(nick,pwd)
 			
 			c.execute("INSERT INTO u_profile(ID,EditDate)VALUES(?,?)",(user.user_id,now))
-			utility.write_log(user.user_id,"注册成功",1,user.ip,False)
+			utility.write_log(user.user_id,"注册成功",1,False)
 			db.commit()
 			return user
 			

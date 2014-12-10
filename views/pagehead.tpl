@@ -43,7 +43,7 @@
 			   </li>
 			   <li role="presentation" class="divider"></li>
 			   <li role="presentation">
-			      <a role="menuitem" tabindex="-1" href="#">ÍË³öµÇÂ½</a>
+			      <a id="link_logout" role="menuitem" tabindex="-1" href="/action/logout">ÍË³öµÇÂ½</a>
 			   </li>
 			</ul>
 	     </div>

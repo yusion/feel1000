@@ -10,10 +10,10 @@
 		</div>
 	</div>  
 	<div class="row small">
-		<div class="col-md-6">
-		   <span class="checkbox_ctrl text-left" >请记密码</span>
+		<div class="col-md-8">
+		   <span class="checkbox_ctrl text-left" >下次自动登录</span>
 		</div>
-		<div class="pull-right col-md-6">
+		<div class="pull-right col-md-4">
 		   <a href="reset_pwd.html" target="_blank">忘记密码？</a>
 		</div>
 	</div>
@@ -37,6 +37,8 @@
 				$("#login_result_msg").val(json.msg);
 				if (json.result == "true") {
 					$("#btn_login").enabled();
+					$("#session").val(json.session);
+					document.cookie="session="+json.session; 
 				}
 				else{
 					$("#login_password").val("");
@@ -136,7 +138,36 @@
 		assert.equal($("#login_password").val(),"");
 		assert.ok($("#btn_login").is_enabled());
 		QUnit.start();
-	}, 600);
+	}, 1000);
       });
+      
+      QUnit.asyncTest("login_success",function(assert){
+	expect(7);
+	$("#nickname").val("test_ycat3");
+	$("#phone").val("13728975541");
+	$("#password").val("123456");
+	$("#age").val("21");
+	$("#radio_female").attr("checked",true);
+	$("#btn_register").click();
+	
+	setTimeout(function() {
+		$("#login_nickname").val("test_ycat3");
+		$("#login_password").val("123456");
+		$("#btn_login").click();
+		assert.ok(!$("#btn_login").is_enabled());
+		assert.equal($("#session").val(),"-1");
+		setTimeout(function() {
+			assert.equal($("#login_result").val(),"true");
+			assert.equal($("#login_result_msg").val(),"test_ycat3, 欢迎您回来");
+			assert.ok($("#btn_login").is_enabled());
+			assert.ok($("#session").val() != "");
+			assert.ok(document.cookie.indexOf($("#session").val()) != -1);
+			$.getJSON("test/del_user");
+			QUnit.start();
+		}, 800);
+	}, 400);
+	
+      });
+      
      </script>
 %end     

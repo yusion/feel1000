@@ -130,10 +130,10 @@
 			</li>
 		</ul>
 		<div id="div_tag_container" class="tab-content">
-			<div class="tab-pane fade in active" id="div_register">
+			<div class="tab-pane active" id="div_register">
 			   {{!register}}
 			</div>
-			<div class="tab-pane fade" id="div_login">
+			<div class="tab-pane" id="div_login">
 			   {{!login}}
 			</div>
 		</div>

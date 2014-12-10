@@ -36,7 +36,7 @@ def web_login(nickname,password):
 		g_loginFailedCountLock.release() 
 		if count >= 20:
 			utility.write_log(-1,nickname+"登陆次数过多"+str(count),0)
-			return {"result":"false","msg":"登陆次数过多，请稍后再试"}		
+			return {"result":"false","msg":"登陆次数过多，请30分钟后重试"}		
 	
 	user = session.login(nickname,password)
 	 
@@ -59,6 +59,10 @@ def web_login(nickname,password):
 def url_login():
 	return json.dumps(web_login(bottle.request.params["nick"],bottle.request.params["pass"]))
 	
+@bottle.route('/action/logout')	
+def url_logout():
+	session.logout()
+	return ""
 
 #############################	unit test	###########################
 def test_set():
@@ -81,11 +85,11 @@ def test_login_too_many():
 	assert len(g_loginFailedCount) == 1
 	
 	r = web_login("ycat3","wrongpassword20")
-	assert r ==  {"result":"false","msg":"登陆次数过多，请稍后再试"}
+	assert r ==  {"result":"false","msg":"登陆次数过多，请30分钟后重试"}
 	r = web_login("ycat3","passwtest")
-	assert r ==  {"result":"false","msg":"登陆次数过多，请稍后再试"}
+	assert r ==  {"result":"false","msg":"登陆次数过多，请30分钟后重试"}
 	r = web_login("ycat3","passwtest")
-	assert r ==  {"result":"false","msg":"登陆次数过多，请稍后再试"}
+	assert r ==  {"result":"false","msg":"登陆次数过多，请30分钟后重试"}
 
 	common.timer.set_pass_ticks(30*60*1000 + 5000)
 	time.sleep(3)

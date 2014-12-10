@@ -10,7 +10,7 @@ def get_timer():
     global g_timer
     if not g_timer:
         g_timer = timer.timer(3000)
-        g_timer.start()
+#TODO：这里打开影响调试        g_timer.start()
     return g_timer
     
 

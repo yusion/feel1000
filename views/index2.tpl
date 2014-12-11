@@ -28,14 +28,20 @@
 	height: 100%
 }
 
-#div_new_member1 img{
-	width:200px;
-	height:200px;
-	border: solid 4px white;
-}
-#div_new_member .carousel{
-	width: 200px;
-	height:400px;
+#div_recommand_member p{
+	z-index:1000;
+	width:60px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	opacity: 0.8;
+	background-color:gray;
+	cursor:pointer;
+	color:white;
+	font-size: 40px;
+	font-family: Arial, sans-serif;
+	padding-top:170px;
+	text-align: center;
 }
 
 </style>
@@ -78,34 +84,34 @@
 		//http://www.gmarwaha.com/jquery/jcarousellite/demo.php
 		//图片读取 http://imagesloaded.desandro.com/
 		setTimeout(function(){
-			$("#section5").show();		
-			$('#div_new_member').imagesLoaded( function() {
-				//因为carousel会闪现，所以这时才显示  
-				$("#div_new_member .carousel").jCarouselLite({
-					btnNext: "#div_new_member .prev",
-					btnPrev: "#div_new_member .next",
+			$("#section5").show();	//因为carousel会闪现，所以这时才显示  	
+			$('#div_recommand_member').imagesLoaded( function() {
+				$("#div_recommand_member .carousel").jCarouselLite({
+					btnNext: "#div_recommand_member .prev",
+					btnPrev: "#div_recommand_member .next",
 					//auto: 3000,
-					//speed: 2000,
-					//scroll: 3,
+					speed: 2000,
+					scroll: 4,
 					//mouseWheel: false,
 					//circular:true,
 					visible:10
 				});
 			}); 
 		},600);
-		
-		
-		
-		$("#div_new_member").children("p").hide();
+		 
+		$("#div_recommand_member").find("p").hide();
 			
-		$("#div_new_member").mouseenter(function(){
+		$("#div_recommand_member").mouseenter(function(){
+			$("#div_recommand_member .prev").height($(this).height()).show();
+			$("#div_recommand_member .next").height($(this).height()).show(); 
+			
+			var left = $("body").width() - $("#div_recommand_member .next").width();
+			$("#div_recommand_member .next").css("left",""+left+"px");
 			$(this).children("p").show();
-		//	$("#div_new_member .carousel").AutoCarouselLite("false");
 		});
 		
-		$("#div_new_member").mouseleave(function(){
-			$(this).children("p").hide();
-		//	$("#div_new_member .carousel").AutoCarouselLite("true");
+		$("#div_recommand_member").mouseleave(function(){
+			$(this).find("p").hide();
 		});
 		
 
@@ -172,6 +178,7 @@
 			<div class="intro" style="left: 0%;">
 				<h1>多重审核保障真实性</h1>
 				<h3>客服美眉根据个人审美观淘汰部份刚注册会员</h3>
+				<h3>建立个人评价体系，防止酒托和婚托</h3>
 				<h3>需进行身份证和相片审核，才能正常使用网站功能</h3>
 			</div>
 		</div>
@@ -186,11 +193,11 @@
 	</div>
 	<div class="section pp-section pp-table" id="section5" data-anchor="page5" style="z-index: 6; background-color: rgb(44, 62, 80)">
 		<div class="pp-tableCell">
-			<H1 style="color:white">不用寻找，推荐你喜欢的人给你</H1>  
-			<div id="div_new_member">
+			<H1 style="color:white">精选会员等着您</H1>  
+			<div id="div_recommand_member">
 				<div class="carousel">
-				    <p class="prev"></p>
-				      <p class="next"></p>
+				    <p class="prev">&lt;</p>
+				      <p class="next">&gt;</p>
 				    <ul>
 				     %for i in range(20):
 					<li>

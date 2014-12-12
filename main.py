@@ -54,7 +54,7 @@ if __name__ == '__main__':
 	os.chdir(os.path.dirname(__file__))
 	
 	#if utility.is_test():
-	#	utility.run_all_tests()
+	utility.run_all_tests()
 	
 	bottle.run(host='', port=80,reloader=True,debug=True)
 	get_timer().stop()

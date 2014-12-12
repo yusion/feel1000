@@ -70,13 +70,14 @@ def test_set():
 
 def test_login_too_many():
 	clear_test_user2()
-	ctrl_user_manager.register("ycat3","17056464001","passwtest",sex_type.Female,35)	
+	user = ctrl_user_manager.register("ycat3","passwtest",sex_type.Female,35)
+	utility.check_log(user.user_id,"注册成功",1,0)
 	r = web_login("ycat3","passwtest")
 	assert r["result"] == "true"  
 	assert r["msg"] == "ycat3, 欢迎您回来"
 	utility.set_session_id(r["session"])
 	user = session.get()
-	utility.check_log(user.user_id,"登陆成功",1)
+	utility.check_log(user.user_id,"登陆成功",1,1)
 	
 	for i in range(20):
 		r = web_login("ycat3","wrongpassword_" +str(i))

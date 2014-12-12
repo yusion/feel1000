@@ -96,14 +96,8 @@ class user_profile:
 		db = utility.get_db()
 		c = db.cursor()
 		now = utility.now_str()
-		if lowKey == "age":
-			y = utility.now().year
-			c.execute("UPDATE u_profile SET %s=?,EditDate=?,AgeBegin=? WHERE ID=?"%key,
-				  (value,now,y,self.user_id))
-			setattr(self,"agebegin",y)
-		else:
-			c.execute("UPDATE u_profile SET %s=?,EditDate=? WHERE ID=?"%key,(value,now,self.user_id))
-		utility.write_log(self.user_id,user_profile.get_log_desc(column,oldValue,value),1,self.ip,False)
+		c.execute("UPDATE u_profile SET %s=?,EditDate=? WHERE ID=?"%key,(value,now,self.user_id))
+		utility.write_log(self.user_id,user_profile.get_log_desc(column,oldValue,value),1,False)
 		db.commit()
 		return True
 	
@@ -150,12 +144,6 @@ class ctrl_profile:
 		for col in c.description:
 			setattr(user,col[0].lower(),r[i])
 			i+=1
-			
-		if user.age != -1 and user.agebegin != None:
-			#increase user age every year 
-			diff = utility.now().year - user.agebegin
-			if diff > 0:
-				user.age += diff
 		return user
 
 	@staticmethod

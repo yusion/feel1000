@@ -149,7 +149,7 @@
 						<div class="tab-pane" id="div_login">
 						   {{!login}}
 						</div>
-						<a href="" class="small">不注册，直接逛逛</a><BR>
+						<a href="index" class="small">不注册，直接逛逛</a><BR>
 					</div>
 					
 				</div>

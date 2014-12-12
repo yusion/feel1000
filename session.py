@@ -18,6 +18,7 @@ class session_data:
 		self.certf_state = 0 
 		self.nickname = ""
 		self.session_id = ""
+		self.pwd = ""
 		self.login_date = datetime.datetime.now()
 	
 	@property
@@ -36,9 +37,21 @@ def make_session_id():
 	_last_session_id += 1
 	return utility.scramble(_last_session_id)
 
-def login(loginName,password):		
+def _is_repeat_login(loginName,password):
+	global g_session_data
+	for key in g_session_data:
+		u = g_session_data[key]
+		if u.pwd == password and u.nickname == loginName:
+			return u
+	return None 
+
+def login(loginName,password):
+	user = _is_repeat_login(loginName,password)
+	if user:
+		return user
+	
 	c = utility.get_cursor()
-	c.execute("SELECT ID,NickName,Sex,birthdayYear,certfState FROM u_user WHERE password=? AND (nickname=? OR phone=?)",(password,loginName,loginName))
+	c.execute("SELECT ID,NickName,Sex,birthdayYear,certfState,Password FROM u_user WHERE password=? AND nickname=?",(password,loginName))
 	rows = c.fetchall()
 	if len(rows) == 0:
 		utility.write_log(-1,"登陆失败",0)
@@ -51,6 +64,7 @@ def login(loginName,password):
 	user.session_id = make_session_id()
 	user.age = utility.now().year - r[3]
 	user.certf_state = r[4]
+	user.pwd = r[5]
 	user.ip = utility.get_ip()
 	
 	global g_session_data
@@ -70,6 +84,10 @@ def set(session_id,data):
 	''' for test only '''
 	global g_session_data
 	g_session_data[session_id] = data
+
+def clear():
+	global g_session_data
+	g_session_data.clear()
 
 def logout():
 	user = get()

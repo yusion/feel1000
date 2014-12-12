@@ -10,7 +10,7 @@ def get_timer():
     global g_timer
     if not g_timer:
         g_timer = timer.timer(3000)
-#TODO：这里打开影响调试        g_timer.start()
+#TODO：这里打开影响调试     g_timer.start()
     return g_timer
     
 
@@ -156,12 +156,13 @@ def write_log(user_id,desc,logType,autoCommit = True):
 	if autoCommit:
 		db.commit()
 
-def check_log(user_id,desc,logType):
+def check_log(user_id,desc,logType,index=0):
 	#for unit test to check user log
 	c = get_cursor()
-	r = c.execute("select UserID,LogDesc,logTypeID from r_log WHERE logTypeID=? ORDER BY LogID Desc",(logType,)).fetchone()
-	assert r[0] == user_id
+	r = c.execute("select UserID,LogDesc,logTypeID from r_log WHERE logTypeID=? ORDER BY LogID Desc",(logType,)).fetchall()
+	r = r[index]
 	assert r[1] == desc
+	assert r[0] == user_id
 	assert r[2] == logType
 
 #############################	unit test	###########################

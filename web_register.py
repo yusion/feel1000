@@ -14,24 +14,25 @@ sex_type = utility.enum(Male=1,Female=0)
 
 class ctrl_user_manager:
 	@staticmethod
-	def register(nick,phone,pwd,sex,age):
+	def register(nick,pwd,sex,age):
 		assert int(sex) <= 1
 		age = int(age)
 		try:
 			now = utility.now()
 			db = utility.get_db()
 			c = db.cursor()
-			c.execute("INSERT INTO u_user (NickName,Sex,Phone,Password,CreateDate,BirthdayYear,CertfState)VALUES(?,?,?,?,?,?,?)", 
-				(nick,int(sex),phone,pwd,now.strftime("%Y-%m-%d %H:%M:%S"),now.year - age,0))			
-			db.commit()
-			user = session.login(nick,pwd)
+			c.execute("INSERT INTO u_user (NickName,Sex,Password,CreateDate,BirthdayYear,CertfState)VALUES(?,?,?,?,?,?)", 
+				(nick,int(sex),pwd,now.strftime("%Y-%m-%d %H:%M:%S"),now.year - age,0))			
+			db.commit() #不这样做取不到user_id 
 			
+			user = session.login(nick,pwd) 
 			c.execute("INSERT INTO u_profile(ID,EditDate)VALUES(?,?)",(user.user_id,now))
 			utility.write_log(user.user_id,"注册成功",1,False)
 			db.commit()
 			return user
 			
 		except Exception as err:
+			utility.write_log(-1,nick+"注册失败",0)
 			traceback.print_exc()
 			return None;
 
@@ -53,7 +54,6 @@ def url_show_agreement():
 @route('/action/register')	
 def url_register():
 	ret = ctrl_user_manager.register(bottle.request.params["nick"],
-		bottle.request.params["phone"],
 		bottle.request.params["pass"],
 		bottle.request.params["sex"],
 		bottle.request.params["age"])
@@ -61,10 +61,6 @@ def url_register():
 		return json.dumps({"result":"true"})	
 	else:
 		return json.dumps({"result":"false"})	
-
-@route('/action/is_repeat_phone')	
-def url_is_repeat_phone():
-	return str(not ctrl_user_manager.is_repeat("phone",bottle.request.params["phone"])).lower()
 
 @route('/action/is_repeat_nickname')	
 def url_is_repeat_nickname():
@@ -75,14 +71,15 @@ def url_is_repeat_nickname():
 
 @route('/test/check_user')	
 def url_test_check_user():
-	sql = "SELECT COUNT(*) FROM u_user WHERE nickname='%s' and password='%s' and phone='%s' and sex=%d and birthdayYear=%d" %	(bottle.request.params["nick"],
-		utility.md5("pwd"+bottle.request.params["pass"]),bottle.request.params["phone"],int(bottle.request.params["sex"])
+	sql = "SELECT COUNT(*) FROM u_user WHERE nickname='%s' and password='%s' and sex=%d and birthdayYear=%d" %	(bottle.request.params["nick"],
+		utility.md5("pwd"+bottle.request.params["pass"]),int(bottle.request.params["sex"])
 		,int(bottle.request.params["birthdayYear"]))	
 	
 	r = utility.get_cursor().execute(sql)
 	return str(r.fetchone()[0]) 
 
 def clear_test_user2():
+	session.clear()
 	db = utility.get_db()
 	c = db.cursor()
 	c.execute("""DELETE FROM r_log WHERE userID IN

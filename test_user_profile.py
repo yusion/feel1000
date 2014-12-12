@@ -39,12 +39,6 @@ def test_profile_columns():
 	assert profile_column_type.Changable == c.type
 	assert c.get_value_desc("113595@qq.com") == "113595@qq.com"
 	
-	c = profile_columns.get("AgeBegin")
-	assert c.column == "AgeBegin"
-	assert c.columnName == "年龄开始年份"
-	assert profile_column_type.Readonly == c.type
-	assert c.get_value_desc(2014) == 2014
-	
 	c = profile_columns.get("Realname")
 	assert c.column == "RealName"
 	assert c.columnName == "真实姓名"
@@ -66,29 +60,19 @@ def test_profile_columns():
 	
 def test_user_age():
 	test_user_manager.clear_test_user()
-	s = web_register.ctrl_user_manager.register("ycattest","13912546654","123test",web_register.sex_type.Male)
-	utility.set_session_id(s.session_id)
-	now = datetime.datetime(2010,5,27,12,50,43)
+	now = datetime.datetime(2014,5,27,12,50,43)
 	utility.set_now(now)
 	assert utility.now() == now
 	
-	u = ctrl_profile.get()
-	assert not u.update("none",1)
-	assert not u.update("none","abc")
+	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male,35)
+	utility.set_session_id(s.session_id)
+	assert session.get().age == 35
+	session.logout()
 	
-	set_attri(u,"age",29,50)
-	assert 50 == u.age
-	assert 2010 == u.agebegin
-	
-	utility.set_now(datetime.datetime(2014,5,27,12,50,43))
-	u2 = ctrl_profile.get_by_userid(u.id)
-	assert 54 == u2.age
-	assert 2010 == u2.agebegin
-	
-	utility.set_now(datetime.datetime(2024,5,27,12,50,43))
-	u2 = ctrl_profile.get_by_userid(u.id)
-	assert 64 == u2.age
-	assert 2010 == u2.agebegin
+	utility.set_now(datetime.datetime(2015,5,27,12,50,43))
+	s = session.login("ycattest","123test")
+	assert s.age == 36
+
 	test_user_manager.clear_test_user()
 	utility.set_now(None)
 
@@ -109,19 +93,17 @@ def set_attri(u,key,value1,value2):
 
 def test_update():
 	test_user_manager.clear_test_user()
-	s = web_register.ctrl_user_manager.register("ycattest","13912546654","123test",web_register.sex_type.Male)
+	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male,35)
 	utility.set_session_id(s.session_id)
 	u = ctrl_profile.get()
+	assert s.age == 35
 	assert not u.update("none",1)
 	assert not u.update("none","abc")
 	
-	set_attri(u,"age",20,18)
 	set_attri(u,"height",168,180)
 	set_attri(u,"weight",50,80)
 	set_attri(u,"realname","ycat1","姚舜")
-	set_attri(u,"qq","13597556","3135478797456")
 	set_attri(u,"email","13597556","3135478797456")
-	set_attri(u,"blogid","1359<BR>7556","3135478797456")
 	set_attri(u,"address","13597556","31354787'9<7>456")
 	
 	set_attri(u,"career","IT工程师","不知道'9<7>456")
@@ -137,7 +119,7 @@ def test_update():
 	
 def test_get_user():
 	test_user_manager.clear_test_user()
-	s = web_register.ctrl_user_manager.register("ycattest","13912546654","123test",web_register.sex_type.Male)
+	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male)
 	assert s
 	utility.set_session_id(s.session_id)
 	
@@ -150,7 +132,7 @@ def test_get_user():
 	test_user_manager.clear_test_user()
 
 def test_set_photo_url():
-	s = web_register.ctrl_user_manager.register("ycattest","13912546654","123test",web_register.sex_type.Male)
+	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male)
 	utility.set_session_id(s.session_id)
 	u = ctrl_profile.get()
 	assert u.hasphoto == 0

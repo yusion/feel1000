@@ -16,8 +16,9 @@
 	padding: 10px 20px 10px 20px;
 	border: 1px solid #ddd;
 	border-top-width: 0px;
-	height:360px;
-} 
+	height:340px;
+}
+
 #index_container{
 	background-color: gray;
 }
@@ -44,10 +45,25 @@
 	text-align: center;
 }
 
+.nav-tabs>li>a {
+	background-color: rgba(0,0,0,0.3);
+	color:white;
+}
+
+#div_anonymity > img{
+	width:100%;
+	margin-top:20px;
+}
+
+#div_anonymity > button{
+	width:100%;
+	margin-top:10px;
+}
+
 </style>
 <script type="text/javascript">
 	$(document).ready(function(e){
-		$("#section5").hide(); //因为carousel会闪现，所以先隐藏  
+		$("#section3").hide(); //因为carousel会闪现，所以先隐藏  
 		
 		//自动切换注册和登陆页面
 		$("#tab_login > li").mouseenter(function(){
@@ -70,10 +86,10 @@
                                 textColor: "#000",
                                 bulletsColor: "#000",
                                 position: "right",
-                                tooltips: ["首页", "第2页", "第3页", "第4页", "第5页"]
+                                tooltips: ["首页", "第2页", "第3页"]
                         },
-	    		anchors: ['page1', 'page2', 'page3', 'page4', 'page5'],
-			    sectionsColor: ['gray', '#2ebe21', '#2ebe21', 'lightblue',, 'yellow', 'white'],
+	    		anchors: ['page1', 'page2', 'page3'],
+			    sectionsColor: ['gray', '#2ebe21', '#2ebe21'],
 			    onLeave: null,
 			    afterRender: null,
 			    afterLoad: null
@@ -84,7 +100,7 @@
 		//http://www.gmarwaha.com/jquery/jcarousellite/demo.php
 		//图片读取 http://imagesloaded.desandro.com/
 		setTimeout(function(){
-			$("#section5").show();	//因为carousel会闪现，所以这时才显示  	
+			$("#section3").show();	//因为carousel会闪现，所以这时才显示  	
 			$('#div_recommand_member').imagesLoaded( function() {
 				$("#div_recommand_member .carousel").jCarouselLite({
 					btnNext: "#div_recommand_member .prev",
@@ -113,16 +129,12 @@
 		$("#div_recommand_member").mouseleave(function(){
 			$(this).find("p").hide();
 		});
-		
-
 	});
 </script>	
 <ul id="page_menu">
 	<li data-menuanchor="page1" class="active"><a href="/index2#page1">首页</a></li>
 	<li data-menuanchor="page2" class=""><a href="/index2#page2">第2页</a></li>
-	<li data-menuanchor="page3" class=""><a href="/index2#page3">第3页</a></li>
-	<li data-menuanchor="page4" class=""><a href="/index2#page4">第4页</a></li>
-	<li data-menuanchor="page5" class=""><a href="/index2#page5">第5页</a></li>
+	<li data-menuanchor="page3" class=""><a href="/index2#page3">第3页</a></li> 
 </ul>
 <div id="pagepiling" style="overflow: hidden;">
 	<div class="section pp-section pp-table pp-easing active" id="section1" data-anchor="page1" style1="z-index: 10; background-color: rgb(191, 218, 0); -webkit-transform: translate3d(0px, -100%, 0px);">
@@ -141,6 +153,9 @@
 						<li>
 						   <a id="link_login" href="#div_login" data-toggle="tab">快速登陆</a>
 						</li>
+						<li>
+						   <a id="link_login" href="#div_anonymity" data-toggle="tab">直接访问</a>
+						</li>
 					</ul>
 					<div id="div_tag_container" class="tab-content">
 						<div class="tab-pane active" id="div_register">
@@ -149,7 +164,22 @@
 						<div class="tab-pane" id="div_login">
 						   {{!login}}
 						</div>
-						<a href="index" class="small">不注册，直接逛逛</a><BR>
+						<div class="tab-pane" id="div_anonymity">
+							<div class="row">
+								<div class="col-xs-6">
+									<a href="/index?sex=0">
+									<img src="/res/boy.jpg" style="width:100%;margin-top:20px"></img>
+									<button type="button" class="btn btn-info" style="width:100%;margin-top:10px">我是男生</button>
+									</a>
+								</div>
+								<div class="col-xs-6">
+									<a href="/index?sex=1">
+									<img src="/res/girl.jpg" style="width:100%;margin-top:20px"></img>
+									<button type="button" class="btn btn-danger" style="width:100%;margin-top:10px">我是女生</button>
+									</a>
+								</div>
+							</div>
+						</div>
 					</div>
 					
 				</div>
@@ -164,34 +194,24 @@
 	</div>
 	<div class="section pp-section pp-table pp-easing" id="section2" data-anchor="page2" style="z-index: 9; background-color: rgb(46, 190, 33); -webkit-transform: translate3d(0px, -100%, 0px);">
 		<div class="pp-tableCell">
-			<div class="intro" style="left: 0%;">
-				<h1>怛心被人骚扰？</h1>
-				<h3>个人<strong>联系信息</strong>无需要告诉我们</h3>
-				<h3>采用先进的<strong>加密技术</strong>，保障您的个人数据安全</h3>
-				<h3>承诺不会主动投放广告邮件和短信</h3>
-				<h3>一键注销个人信息和相片功能，让您隐私无后顾无优</h3>
-			</div>
-		</div>
-	</div>
-	<div class="section pp-section pp-table pp-easing" id="section3" data-anchor="page3" style="z-index: 8; background-color: rgb(46, 190, 33); -webkit-transform: translate3d(0px, -100%, 0px);">
-		<div class="pp-tableCell">
-			<div class="intro" style="left: 0%;">
-				<h1>多重审核保障真实性</h1>
-				<h3>客服美眉根据个人审美观淘汰部份刚注册会员</h3>
-				<h3>建立个人评价体系，防止酒托和婚托</h3>
-				<h3>需进行身份证和相片审核，才能正常使用网站功能</h3>
-			</div>
-		</div>
-	</div>
-	<div class="section pp-section pp-table pp-easing" id="section4" data-anchor="page4" style="z-index: 7; background-color: rgb(46, 190, 33); -webkit-transform: translate3d(0px, -100%, 0px);">
-		<div class="pp-tableCell">
-			<div class="intro" style="left: 0%;">
+			<div class="intro" >
+				<h1>无骚扰风险</h1>
+				<h4>无需登记您的<strong>手机号</strong>或<strong>QQ号</strong></h4>
+				<h4><strong>一键注销</strong>个人信息功能，让您隐私无后顾无优</h4>
+				<h4>采用<strong>先进加密</strong>技术，保障数据安全</h4>
+				
+				<h1>多重审核</h1>
+				<h4>美女客服会审核刚注册会员，<strong>确保会员质量</strong></h4>
+				<h4>建立<strong>个人评价系统</strong>，防止各种酒托、婚托和一夜情</h4>
+				<h4>通过身份证和相片审核，<strong>保障真实性</strong></h4>
+				<h4>会员都是通过朋友介绍，无虚假会员</h4>
+				
 				<h1>终身会员制度</h1>
-				<h3>只要成功通过审核，就可以终身使用网站的全部功能，无任何附加费用</h3>
+				<h4>只要成功通过审核，就可以使用网站的全部功能，<strong>无附加费用</strong></h4>
 			</div>
 		</div>
 	</div>
-	<div class="section pp-section pp-table" id="section5" data-anchor="page5" style="z-index: 6; background-color: rgb(44, 62, 80)">
+	<div class="section pp-section pp-table" id="section3" data-anchor="page3" style="z-index: 6; background-color: rgb(44, 62, 80)">
 		<div class="pp-tableCell">
 			<H1 style="color:white">精选会员等着您</H1>  
 			<div id="div_recommand_member">

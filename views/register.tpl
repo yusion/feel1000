@@ -6,11 +6,10 @@
 <form id="form_register" class="form-horizontal">
 	<div class="row">
 		<div class="col-md-12" style="padding-right: 0px;vertical-align: top">
-			性别：
-			<input type="radio" name="sex" id="radio_male" value="0" checked="checked" style="heigth:auto">
-				帅哥
-			<input type="radio" name="sex" id="radio_female" value="1" style="margin-left: 10px">
-				美女
+			<ul id="sex" class="radio_ctrl" value="0">
+				<li id="li_male" value="0" checked="checked">帅哥</li>
+				<li id="li_female" value="1">美女</li>
+			</ul>
 		</div>
 	</div>
 	<div class="row">
@@ -38,7 +37,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<span id="chk_agreement" checked="checked" class="checkbox_ctrl">我已阅读并同意</span>
+			<div id="chk_agreement" checked="checked" class="checkbox_ctrl">我已阅读并同意</div>
 			<a href="/agreement" target="_blank">《用户服务协议》</a>
 		</div>
 	</div>
@@ -53,12 +52,11 @@
 <script type="text/javascript">
 	function submit()
 	{
-		var sex = $('input:radio:checked').val();
 		$.getJSON("action/register", 
 		{ 	nick: $("#nickname").val(), 
 			pass: hex_md5("pwd" + $("#password").val()),
 			phone:$("#phone").val(), 
-			sex:sex,
+			sex:$("#sex").val(), 
 			age:$("#age").val()},
 			function(json){
 				//TODO:自动登陆，并跳转
@@ -124,13 +122,14 @@
      QUnit.config.reorder = false;
      QUnit.test("init_value",function(assert){
 	$("#link_register").click();
-	expect(4);
+	expect(6);
 	assert.ok($("#chk_agreement").hasAttr("checked"),"init value is check");
-	assert.ok($("#radio_male").attr("checked"),"init radio_male value is check");
-	assert.ok(!$("#radio_female").attr("checked"),"init radio_male value is check");
+	assert.equal($("#sex").val(),"1");
+	assert.ok($("#li_male").attr("checked"),"init radio_male value is check");
+	assert.ok(!$("#li_female").attr("checked"),"init radio_male value is check");
 	assert.equal($("#age").val(),24);
 	//assert.equal($("#phone").val(),""); ie的placeHolder会破坏 
-	//assert.equal($("#password").val(),""); ie的placeHolder会破坏 
+	assert.equal($("#password").val(),""); ie的placeHolder会破坏 
      });
 
      QUnit.asyncTest("check_nickname",function(assert){
@@ -254,7 +253,7 @@
 		{ 	nick: "test_ycat3", 
 			pass: "123456",
 			phone:"13728975541", 
-			sex:1,
+			sex:"1",
 			birthdayYear:1993},
 			function(json){
 				r = json;

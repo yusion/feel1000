@@ -16,7 +16,7 @@
 	</div>  
 	<div class="row small">
 		<div class="col-md-8">
-		   <span class="checkbox_ctrl text-left" >下次自动登录</span>
+		   <div class="checkbox_ctrl text-left" >下次自动登录</div>
 		</div>
 		<div class="pull-right col-md-4">
 		   <a href="reset_pwd.html" target="_blank" style="color:gray">忘记密码？</a>

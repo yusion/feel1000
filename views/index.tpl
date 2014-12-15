@@ -17,7 +17,6 @@
 	border-top-width: 0px;
 }
 
-
 </style>
 <script type="text/javascript">
 	$(document).ready(function(e){

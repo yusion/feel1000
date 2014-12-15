@@ -931,6 +931,28 @@ $.fn.checkbox_ctrl = function () {
    });
 };
 
+/*自定义的Radio ctrl
+<ul class="radio_ctrl" value="1">
+  <li value="1" checked="checked">帅哥</li>
+  <li value="0">美女</li>
+</ul>
+取值方法，取ul的value属性 
+*/
+$.fn.radio_ctrl = function () {
+  $(this).children("li").click(function(){
+    if($(this).hasAttr("checked"))
+    {
+      return;
+    }
+    else
+    {
+      $(this).parent().attr("value",$(this).val());
+      $(this).siblings().removeAttr("checked")
+      $(this).attr("checked","checked");
+    }
+   });
+};
+
 //自动回到顶端的小火箭
 //html： <a class="visible-md visible-lg" id="returnTop" href="javascript:;">回到顶部</a>
 var IMYUAN;
@@ -1034,6 +1056,7 @@ function init_common()
     set_dropdown_hover($("div.dropdown-hover"));
      
     $(".checkbox_ctrl").checkbox_ctrl();
+    $(".radio_ctrl").radio_ctrl();
     placeholder_for_ie();
 }
 

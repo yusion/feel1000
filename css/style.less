@@ -554,6 +554,28 @@ div.checkbox_ctrl[checked],span.checkbox_ctrl[checked]{
 	background:url("/res/small_icon.png") no-repeat 0px -158px;
 }
 
+/*自定义的radio ctrl */
+ul.radio_ctrl{
+	display: block;
+	cursor: pointer;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	li{
+		display: inline-block;
+		margin-right: 15px;
+		padding: 5px 20px 5px 10px;
+		border: 2px solid transparent;
+		border-radius: 5px;
+		background-color:#E0E0E0;
+		&[checked]{
+			border-color: @active_link_color;
+		}
+		&:hover{
+			border-color: @hover_link_color;
+		}
+	}
+}
+
 /* 自动回到顶端的小火箭 */
 #returnTop {
 	position:fixed;

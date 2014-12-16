@@ -43,7 +43,7 @@
 	</div>
 	<div class="row" style="margin-bottom: 4px">
 		<div class="col-md-12">
-			<button id="btn_register" type="button" style="width:100%" class="btn btn-success btn-lg">зЂ&nbsp; Вс</button>
+			<button id="btn_register" type="button" style="width:100%" class="btn btn-success btn-lg">зЂ&nbsp; Вс&nbsp;<i class="icon-note" style="color:mediumorchid"></i></button>
 		</div>
 	</div>
 	<input type="hidden" id="result" value="unknown">

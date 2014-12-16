@@ -24,7 +24,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<button id="btn_login" type="button" style="width:100%" class="btn btn-success btn-lg">µÇ&nbsp; Â¼</button>
+			<button id="btn_login" type="button" style="width:100%" class="btn btn-success btn-lg">µÇ&nbsp; Â¼&nbsp;<i class="icon-music" style="color:mediumorchid"></i></button>
 			<input type="hidden" id="login_result_msg" value="unknown">
 			<input type="hidden" id="login_result" value="unknown">
 		</div>

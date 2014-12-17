@@ -10,7 +10,7 @@
 </head>
 <body>
 <style type="text/css">
-
+/*标签页设计 */
 #div_tag_container{
 	background-color: #faf3e3;
 	padding: 10px 20px 10px 20px;
@@ -18,14 +18,16 @@
 	border-bottom-width: 15px;
 	height:360px;
 	margin-top: -1px;
+	box-shadow: 4px 10px 5px #888888;
 }
 
 #div_border{
 	height: 18px;
 	width: 100%;
-	background-image: url("/res/bottom_border.jpg");
+	background-image: url("/res/border1.jpg");
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
+	box-shadow: 4px 10px 5px #888888;
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
@@ -56,22 +58,49 @@
 	cursor: pointer
 }
 
-#div_recommand_member p{
+/* 推荐会员 */
+#div_recommand_member{
+	background-color: #f9e3cb;
+}
+
+#div_recommand_top_border,#div_recommand_bottom_border{
+	background: url("/res/border2.jpg");
+	height: 20px;
+	width:100%;
+}
+
+#div_recommand_member .prev, #div_recommand_member .next{
 	z-index:1000;
-	width:60px;
+	width:50px;
 	position: absolute;
 	top: 0px;
 	left: 0px;
 	opacity: 0.8;
 	background-color:gray;
 	cursor:pointer;
-	color:white;
-	font-size: 40px;
-	font-family: Arial, sans-serif;
 	padding-top:170px;
-	text-align: center;
 }
 
+#div_recommand_member .prev>div,#div_recommand_member .next>div{
+	width:31px;
+	height:48px;
+	z-index: 1000;
+	margin-top:20px;
+	margin-left: 8px;
+	margin-right: 5px;
+	background: url('/res/small_icon.png') no-repeat -328px -45px;
+}
+
+#div_recommand_member .next>div{
+	margin-left: 5px;
+	background: url('/res/small_icon.png') no-repeat -365px -45px;
+}
+
+#div_recommand_member li > div > img{
+	margin: 15px 10px 10px 10px;
+}
+
+/* 介绍页设计  */
 H1{
 	color: #535353;
 	font-size: 46px;
@@ -122,7 +151,7 @@ H2{
 			}); 
 		},600);
 		 
-		$("#div_recommand_member").find("p").hide();
+		$("#div_recommand_member").find(".prev,.next").hide();
 			
 		$("#div_recommand_member").mouseenter(function(){
 			$("#div_recommand_member .prev").height($(this).height()).show();
@@ -130,11 +159,11 @@ H2{
 			
 			var left = $("body").width() - $("#div_recommand_member .next").width();
 			$("#div_recommand_member .next").css("left",""+left+"px");
-			$(this).children("p").show();
+			$(this).children(".prev,.next").show();
 		});
 		
 		$("#div_recommand_member").mouseleave(function(){
-			$(this).find("p").hide();
+			$(this).find(".prev,.next").hide();
 		});
 		
 		set_background_img("res/index_background.jpg")
@@ -189,7 +218,7 @@ H2{
 			<div id="div_border"></div>
 		</div>
 		<div class="col-md-4">
-			<img src="res/index-right.png" style="position: relative;top:-80px;left:-50px"></img>
+			<img src="res/index-right.png" style="position: relative;top:-80px;left:-50px;"></img>
 		</div>
 	</div>
 	<div class="row">
@@ -216,11 +245,17 @@ H2{
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<H1 style="color:white">精选会员等着您</H1>  
+			<H1 style="color:white">精选会员等着您</H1>
+			<img src="/res/bird.png" style="position:relative;top:15px;left:30px"></img>
 			<div id="div_recommand_member">
+				<div id="div_recommand_top_border"></div>
 				<div class="carousel">
-				    <p class="prev">&lt;</p>
-				      <p class="next">&gt;</p>
+				    <div class="prev">
+					<div></div>
+				    </div>
+				    <div class="next">
+					<div></div>
+				    </div>
 				    <ul>
 				     %for i in range(20):
 					<li>
@@ -232,7 +267,10 @@ H2{
 				     %end
 				    </ul>
 				</div>
+				<div id="div_recommand_bottom_border">
+				</div>
 			</div>
+			<img src="/res/email.png" style="position:relative;top:-60px;right:40px;float:right;z-index:100"></img>
 		</div>
 	</div>
 	<div class="row" style="background-color:#F4F6F7;padding: 16px 0;text-align: center;margin: 0 0 0 0;padding: 0 0 0 0">

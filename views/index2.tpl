@@ -16,7 +16,7 @@
 	padding: 10px 20px 10px 20px;
 	border: 3px solid #d58aad;
 	border-bottom-width: 15px;
-	height:360px;
+	min-height: 370px;
 	margin-top: -1px;
 	box-shadow: 4px 10px 5px #888888;
 }
@@ -228,19 +228,23 @@ H2{
 	</div>
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<h1>无骚扰风险</h1>
+			<div>
+				<h1>无骚扰风险</h1>
 				<H2>无需登记您的<strong>手机号</strong>或<strong>QQ号</strong></H2>
 				<H2><strong>一键注销</strong>个人信息功能，让您隐私无后顾无优</H2>
 				<H2>采用<strong>先进加密</strong>技术，保障数据安全</H2>
-				
+			</div>
+			<div>
 				<h1>多重审核</h1>
 				<H2>美女客服会审核刚注册会员，<strong>确保会员质量</strong></H2>
 				<H2>建立<strong>个人评价系统</strong>，防止各种酒托、婚托和一夜情</H2>
 				<H2>通过身份证和相片审核，<strong>保障真实性</strong></H2>
 				<H2>会员都是通过朋友介绍，无虚假会员</H2>
-				
+			</div>
+			<div>
 				<h1>终身会员制度</h1>
 				<H2>只要成功通过审核，就可以使用网站的全部功能，<strong>无附加费用</strong></H2>
+			</div>	
 		</div>
 	</div>
 	<div class="row">

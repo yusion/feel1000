@@ -11,6 +11,26 @@
 {{!page_head}}
 
 <style type="text/css">
+.img_profile_lg{
+	width:200px;
+	height:auto;
+	border: solid 1px #f597af;
+	border-radius: 5px;
+}
+
+.div_img_profile{
+	width:224px;
+	padding: 10px 10px 34px 10px;
+	background-color: #fdf9f3;
+	border: solid 2px #f597af;
+	border-bottom-width: 5px;
+	
+	border-radius: 5px;
+	box-shadow: 4px 10px 6px #e6aec0;
+	
+	float:right;
+}
+
 </style>
 <script type="text/javascript">
 	function init_raty(readonlyVal)
@@ -48,6 +68,8 @@
 		$("#tagSelector").tag_selector({edit_mode:false});
 		$("#desc").hide();
 		$("#first_nav_tag").click();
+		
+		set_background_img("res/personal_bg.jpg",$("#my_space_head"));
 	});
 	
 	function click_edit()
@@ -78,15 +100,20 @@
      <div class="col-md-8 col-md-offset-2" >
 	<div class="row">
 		<div class="col-md-4">
-			<img class="img_profile_lg hot_tag" src="res/test/a (11).jpg"></img>
-			<p class="detail_css text-center">
+			<div class="div_img_profile small">
+				<img class="img_profile_lg" src="res/test/a (11).jpg"></img>
+				<i class="icon-heart"></i><span class="text_like_num">221</span>喜欢&nbsp;&nbsp;|
 				<i class="icon-eye-open num_format">1000</i>次&nbsp;&nbsp;|
 				&nbsp;&nbsp;<i class="icon-picture num_format">111</i>张
+			</div>
+			<p class="detail_css text-center">
+				
 			</p>
 		</div>
 		<div class="col-md-8">
+			<img src="/res/border3.gif"></img><BR>
 			<h4 class="in_block"><strong>姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚</strong></h4>
-			<p class="text_like in_block" style="margin-left: 10px"><span class="text_like_num">221256</span>人喜欢<i class="icon-heart"></i></p>
+			<p class="text_like in_block" style="margin-left: 10px"></p>
 			<BR>
 			<p class="text_profile_info1 in_block">
 				<strong>广东广州 | </strong><strong>21岁 | 178cm | 50kg</strong>
@@ -164,6 +191,11 @@
 						</ul>
 					</div>
 			</div>
+			<img src="/res/border4.gif"></img>
+			<BR>
+			<button type="button " class="btn btn-success icon-edit">编辑</button>
+			<button type="button " class="btn btn-danger icon-heart">喜欢</button>
+			<button type="button " class="btn btn-info icon-envelope">私信</button>
 		</div>
 	</div>
      </div>

@@ -75,8 +75,8 @@
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	opacity: 0.8;
-	background-color:gray;
+	opacity: 0.6;
+	background-color:white;
 	cursor:pointer;
 	padding-top:170px;
 }

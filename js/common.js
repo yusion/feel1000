@@ -352,8 +352,8 @@ function set_background_img(url,object)
       //var win_height = object.height();
       $("#main_bg > img").attr({width:win_width,height:"auto"});
     }	
-            
-    object.after("<div id='main_bg' style='position: absolute; top: 0px; left: 0px; z-index: -1000'/>");
+    object.after("<div id='main_bg' style='position: absolute; top: "
+                 + object.offset().top+"px; left: "+object.offset().left+"px; z-index: -1000'/>");
     $("#main_bg").append("<img src='" + url + "'>");
     cover();
     

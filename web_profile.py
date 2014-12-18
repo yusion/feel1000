@@ -196,6 +196,7 @@ class ctrl_profile:
 @bottle.view('my_space')	
 def url_show_space():
 	d = utility.get_dist()
+	d["friend"] = utility.get_template_file("views/friend.tpl",{})
 	return d
 
 @bottle.route('/ta_request')	

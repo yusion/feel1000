@@ -195,13 +195,15 @@
 			<BR>
 			<button type="button " class="btn btn-success icon-edit">编辑</button>
 			<button type="button " class="btn btn-danger icon-heart">喜欢</button>
+			<button type="button " class="btn btn-primary icon-heart">交友</button>
 			<button type="button " class="btn btn-info icon-envelope">私信</button>
+			<button type="button " class="btn btn-info icon-envelope">举报</button>
 		</div>
 	</div>
      </div>
 </div>
 <div class="row">
-	<div class="col-md-8 col-md-offset-2" >
+	<div class="col-md-7 col-md-offset-2" >
 		<div class="row" style="margin-bottom: 0px;" >
 			<div class="col-md-12" >
 			<nav id="nav_my_space" class="navbar navbar-default" role="navigation">
@@ -217,11 +219,10 @@
 				<div class="collapse navbar-collapse" id="space-navbar-collapse" style="padding-left: 0px">
 				   <ul class="nav navbar-nav">
 				      <li><a href="#" data="album" class="icon-envelope"><span>我的动态</span><span class="badge">20</span></a></li>
-				      <li><a href="#" class="icon-group"><span>我的好友</span></a></li>
 				      <li><a href="#" data="profile" class="icon-user"><span>我的资料</span></a></li>
 				      <li  id="first_nav_tag"><a href="#" data="certif" class="icon-certificate"><span>我的认证</span></a></li>
 				      <li><a href="#" data="record" class="icon-book-open"><span>个人喜好</span></a></li>
-				      <li><a href="#" data="ta_request" class="icon-star"><span>对方要求</span></a></li>
+				      <li><a href="#" data="ta_request" class="icon-star"><span>我的要求</span></a></li>
 				   </ul>
 				</div>
 			</nav>
@@ -233,6 +234,9 @@
 				</div>
 			</div>
 		</div>	
+	</div>
+	<div class="col-md-2">
+		{{!friend}}
 	</div>
 </div>
      

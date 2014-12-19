@@ -27,9 +27,41 @@
 	
 	border-radius: 5px;
 	box-shadow: 4px 10px 6px #e6aec0;
-	
 	float:right;
 }
+
+#div_profile{
+	border-radius: 10px;
+	border: 1px solid gray;
+	border-right: 5px double gray;
+	border-bottom: 5px double gray;
+	box-shadow: 4px 10px 6px #998165;
+}
+
+#div_top_border{
+	background: url("/res/border5.gif") repeat-x;
+	height: 40px;
+	width: 98%;
+	position: relative;
+	top: 30px;
+	z-index: 1;
+	margin-left: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+/*
+#test{
+	position: absolute;
+	top: 100px;
+	left: -20px;
+	width:40px;
+	height:120px;
+	z-index: -1;
+	box-shadow: 4px 10px 6px #998165;
+	background: url("/res/tag1.gif") no-repeat;
+}
+*/
+
 
 </style>
 <script type="text/javascript">
@@ -100,7 +132,9 @@
      <div class="col-md-8 col-md-offset-2" >
 	<div class="row">
 		<div class="col-md-4">
+			<!-- div style="background:url('/res/border6.gif') repeat-x;width:224px;height:25px;float:right"></div -->
 			<div class="div_img_profile small">
+				
 				<img class="img_profile_lg" src="res/test/a (11).jpg"></img>
 				<i class="icon-heart"></i><span class="text_like_num">221</span>喜欢&nbsp;&nbsp;|
 				<i class="icon-eye-open num_format">1000</i>次&nbsp;&nbsp;|
@@ -193,11 +227,11 @@
 			</div>
 			<img src="/res/border4.gif"></img>
 			<BR>
-			<button type="button " class="btn btn-success icon-edit">编辑</button>
-			<button type="button " class="btn btn-danger icon-heart">喜欢</button>
-			<button type="button " class="btn btn-primary icon-heart">交友</button>
-			<button type="button " class="btn btn-info icon-envelope">私信</button>
-			<button type="button " class="btn btn-info icon-envelope">举报</button>
+			<button type="button " class="green_btn"><i class="icon-edit"></i>编辑</button>
+			<button type="button " class="purple_btn"><i class="icon-heart"></i>喜欢</button>
+			<button type="button " class="yellow_btn"><i class="icon-coffe-cup"></i>交友</button>
+			<button type="button " class="blue_btn"><i class="icon-envelope"></i>私信</button>
+			<button type="button " class="gray_btn"><i class="icon-bell"></i>举报</button>
 		</div>
 	</div>
      </div>
@@ -229,7 +263,8 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12" >
+			<div id="div_profile_container" class="col-md-12 in_block" >
+				<div id="div_top_border"></div>
 				<div id="div_profile"> 
 				</div>
 			</div>

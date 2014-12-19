@@ -40,13 +40,8 @@
 }
 
 #div_friend button{
-	background-color:#ffbabb;
-	background: -webkit-linear-gradient(#ff6363, #ffbabb); /* Safari 5.1 - 6.0 */
-	background: -o-linear-gradient(#ff6363, #ffbabb); /* Opera 11.1 - 12.0 */
-	background: -moz-linear-gradient(#ff6363, #ffbabb); /* Firefox 3.6 - 15 */
-	background: linear-gradient(#ff6363, #ffbabb); /* 标准的语法 */
-	font-weight: 800;color:white;width:100%;
-	border-style: double;
+	width:100%;
+	font-weight: 800;  
 }
 
 </style>
@@ -54,9 +49,8 @@
 	<div class="div_click in_block" style="left: 30px;"></div>
 	<div class="div_click in_block" style="right: 30px;"></div>
 	<div style="padding: 10px 20px 10px 20px">
-	<button type="button" class="btn btn-default">
-		<span class="icon-camera" style="font-size: 24px;color:white;margin-bottom: 0;margin-right:10px;vertical-align: middle"></span>
-		<div class="in_block" style="vertical-align: middle;">发表相片</div>
+	<button type="button" class="blue_btn">
+		<i class="icon-camera"></i>发表相片
 	</button>
 	</div>
 	<div id="div_friend_list">

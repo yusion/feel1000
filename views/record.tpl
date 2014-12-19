@@ -21,10 +21,10 @@
 	
 		<div class="form-group" >
 			<div class="col-md-2 col-md-offset-2">
-				<button class="form-control  btn btn-success"><i class="icon-ok-2"> 保存</i></button>
+				<button class="form-control  green_btn"><i class="icon-ok-2"> 保存</i></button>
 			</div>
 			<div class="col-md-2">
-				<button class="form-control  btn btn-danger"><i class="icon-remove-2"> 取消</i></button>	
+				<button class="form-control  gray_btn"><i class="icon-remove-2"> 取消</i></button>	
 			</div>
 		</div>	
 	</div>

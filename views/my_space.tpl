@@ -37,31 +37,70 @@
 	border-bottom: 5px double gray;
 	box-shadow: 4px 10px 6px #998165;
 }
-
 #div_top_border{
 	background: url("/res/border5.gif") repeat-x;
 	height: 40px;
-	width: 98%;
-	position: relative;
-	top: 30px;
+	width: 92%;
+	position: absolute;
+	top: -8px;
+	left:20px;
 	z-index: 1;
-	margin-left: 10px;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 }
-/*
-#test{
-	position: absolute;
-	top: 100px;
-	left: -20px;
-	width:40px;
-	height:120px;
-	z-index: -1;
-	box-shadow: 4px 10px 6px #998165;
-	background: url("/res/tag1.gif") no-repeat;
-}
-*/
 
+/*左边导航栏设计*/
+#div_left_nav{
+	width:120px;
+	height:auto;
+	position: absolute;
+	top: 40px;
+	left: -60px; 
+	z-index: 1;
+	background-color:lightblue;
+}
+
+#div_left_nav > ul{
+	list-style-type:none;
+	position: absolute;
+	left: -65px; 
+}
+
+#div_left_nav > ul > li{ 
+	width: 120px;
+	cursor: pointer; 
+	margin-bottom: 5px;
+	padding: 8px 10px;
+	border-radius: 10px;
+	position: relative;
+	left: 0;
+	background-color: #f6fbff;
+	border: solid 3px #cc99cc;
+	box-shadow: 4px 4px 4px transparent;
+}
+
+#div_left_nav > ul > li:hover, #div_left_nav > ul > li.active{
+	width: 160px;
+	position: relative;
+	left: -45px;
+	box-shadow: 2px 2px 2px #330033;
+}
+
+#div_left_nav > ul > li.active>a{
+	color: dimgray;
+}
+
+#div_left_nav >ul>li>a{
+	text-decoration: none;
+	cursor: pointer;
+	font-weight: bold;
+	color: lightslategray;
+}
+
+#div_left_nav >ul>li>a>i{
+	margin-right: 5px;
+	font-size: 18px;
+}
 
 </style>
 <script type="text/javascript">
@@ -81,7 +120,9 @@
 	$(document).ready(function(e){
 		init_raty(true);
 		var isFirst = true;
-		$("#nav_my_space .navbar-nav").children("li").click(function(){
+		$("#div_left_nav ul").append($("#nav_my_space .navbar-nav >li").clone());
+		
+		$("#nav_my_space,#div_left_nav").find("li").click(function(){
 			var text = $(this).find("span:first").text();
 			var u = $(this).children().attr("data");
 			$(this).parent().children("li").removeClass("active");
@@ -96,6 +137,8 @@
 			      });
 			
 		});
+		
+		
 		
 		$("#tagSelector").tag_selector({edit_mode:false});
 		$("#desc").hide();
@@ -134,12 +177,12 @@
 		<div class="col-md-4">
 			<!-- div style="background:url('/res/border6.gif') repeat-x;width:224px;height:25px;float:right"></div -->
 			<div class="div_img_profile small">
-				
 				<img class="img_profile_lg" src="res/test/a (11).jpg"></img>
 				<i class="icon-heart"></i><span class="text_like_num">221</span>喜欢&nbsp;&nbsp;|
 				<i class="icon-eye-open num_format">1000</i>次&nbsp;&nbsp;|
 				&nbsp;&nbsp;<i class="icon-picture num_format">111</i>张
 			</div>
+			<img src="/res/cat.gif" style="z-index: -1;position: absolute;left:1px;bottom:40px"></img>
 			<p class="detail_css text-center">
 				
 			</p>
@@ -238,7 +281,7 @@
 </div>
 <div class="row">
 	<div class="col-md-7 col-md-offset-2" >
-		<div class="row" style="margin-bottom: 0px;" >
+		<div class="row hidden-md hidden-lg" style="margin-bottom: 0px;" >
 			<div class="col-md-12" >
 			<nav id="nav_my_space" class="navbar navbar-default" role="navigation">
 				<div class="navbar-header">
@@ -250,20 +293,23 @@
 				      <span class="icon-bar"></span>
 				   </button>
 				</div>
-				<div class="collapse navbar-collapse" id="space-navbar-collapse" style="padding-left: 0px">
-				   <ul class="nav navbar-nav">
-				      <li><a href="#" data="album" class="icon-envelope"><span>我的动态</span><span class="badge">20</span></a></li>
-				      <li><a href="#" data="profile" class="icon-user"><span>我的资料</span></a></li>
-				      <li  id="first_nav_tag"><a href="#" data="certif" class="icon-certificate"><span>我的认证</span></a></li>
-				      <li><a href="#" data="record" class="icon-book-open"><span>个人喜好</span></a></li>
-				      <li><a href="#" data="ta_request" class="icon-star"><span>我的要求</span></a></li>
+				<div class="collapse navbar-collapse clearfix " id="space-navbar-collapse" style="padding-left: 0px">
+				   <ul class="nav navbar-nav"> 
+				      <li><a href="#" data="album" class="text-center"><i class="icon-envelope" style="color:orange"></i><span>我的动态</span></a></li>
+				      <li><a href="#" data="profile" class="text-center"><i class="icon-user" style="color:lime"></i>我的资料</span></a></li>
+				      <li  id="first_nav_tag"><a href="#" data="certif" class="text-center"><i class="icon-certificate"  style="color:goldenrod"></i><span>我的认证</span></a></li>
+				      <li><a href="#" data="record"><i  class="icon-book-open" class="text-center" style="color:orchid"></i><span>个人喜好</span></a></li>
+				      <li><a href="#" data="ta_request"><i class="icon-star" class="text-center" style="color:deepskyblue"></i><span>我的要求</span></a></li>
 				   </ul>
 				</div>
 			</nav>
 			</div>
 		</div>
 		<div class="row">
-			<div id="div_profile_container" class="col-md-12 in_block" >
+			<div id="div_left_nav" class="hidden-xs hidden-sm">
+				<ul></ul>
+			</div>
+			<div id="div_profile_container" class="col-md-12 in_block" style="z-index: 2;" >
 				<div id="div_top_border"></div>
 				<div id="div_profile"> 
 				</div>

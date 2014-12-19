@@ -69,7 +69,7 @@
 		init_fineuploader("#div_company_upload","上传相片");
 	});
 </script>
-<div id="div_certif_container">
+<div id="div_certif_container" style="background-color:white;">
 	<div id="div_certif_container">
 		<div class="row title">
 			<div>

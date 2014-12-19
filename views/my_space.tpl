@@ -30,12 +30,23 @@
 	float:right;
 }
 
+#div_cat{
+	z-index: -1;position: absolute;left:1px;bottom:40px;
+	background: url("/res/small_icon.png") no-repeat -496px 0;
+	width: 54px;height:74px;
+}
+
+/* 个人信息 */
 #div_profile{
 	border-radius: 10px;
 	border: 1px solid gray;
 	border-right: 5px double gray;
 	border-bottom: 5px double gray;
 	box-shadow: 4px 10px 6px #998165;
+	
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background-color: #fb96b0;
 }
 #div_top_border{
 	background: url("/res/border5.gif") repeat-x;
@@ -55,7 +66,7 @@
 	height:auto;
 	position: absolute;
 	top: 40px;
-	left: -60px; 
+	left: -70px; 
 	z-index: 1;
 	background-color:lightblue;
 }
@@ -75,14 +86,15 @@
 	position: relative;
 	left: 0;
 	background-color: #f6fbff;
-	border: solid 3px #cc99cc;
+	border: solid 4px #fb96b0;
+	border-left-width: 12px;
 	box-shadow: 4px 4px 4px transparent;
 }
 
 #div_left_nav > ul > li:hover, #div_left_nav > ul > li.active{
-	width: 160px;
+	width: 150px;
 	position: relative;
-	left: -45px;
+	left: -25px;
 	box-shadow: 2px 2px 2px #330033;
 }
 
@@ -126,7 +138,7 @@
 			var text = $(this).find("span:first").text();
 			var u = $(this).children().attr("data");
 			$(this).parent().children("li").removeClass("active");
-			$(this).addClass("active");
+			$(this).addClass("active"); 
 			$("#div_profile").load(u,function(responseTxt,statusTxt,xhr){
 				if(statusTxt!="success")
 					$("#div_profile").text("Error: "+xhr.status+": "+xhr.statusText);
@@ -134,6 +146,8 @@
 				if(!isFirst) pop_breadcrumb();
 				push_breadcrumb(text,u);
 				isFirst=false;
+				
+				$("#div_profile").prepend("<H3 class='text-center' style='color:white;font-weight:800'>"+ text +"</H3> ");
 			      });
 			
 		});
@@ -182,7 +196,7 @@
 				<i class="icon-eye-open num_format">1000</i>次&nbsp;&nbsp;|
 				&nbsp;&nbsp;<i class="icon-picture num_format">111</i>张
 			</div>
-			<img src="/res/cat.gif" style="z-index: -1;position: absolute;left:1px;bottom:40px"></img>
+			<div id="div_cat"></div>
 			<p class="detail_css text-center">
 				
 			</p>
@@ -296,7 +310,7 @@
 				<div class="collapse navbar-collapse clearfix " id="space-navbar-collapse" style="padding-left: 0px">
 				   <ul class="nav navbar-nav"> 
 				      <li><a href="#" data="album" class="text-center"><i class="icon-envelope" style="color:orange"></i><span>我的动态</span></a></li>
-				      <li><a href="#" data="profile" class="text-center"><i class="icon-user" style="color:lime"></i>我的资料</span></a></li>
+				      <li><a href="#" data="profile" class="text-center"><i class="icon-user" style="color:limegreen"></i>我的资料</span></a></li>
 				      <li  id="first_nav_tag"><a href="#" data="certif" class="text-center"><i class="icon-certificate"  style="color:goldenrod"></i><span>我的认证</span></a></li>
 				      <li><a href="#" data="record"><i  class="icon-book-open" class="text-center" style="color:orchid"></i><span>个人喜好</span></a></li>
 				      <li><a href="#" data="ta_request"><i class="icon-star" class="text-center" style="color:deepskyblue"></i><span>我的要求</span></a></li>
@@ -309,9 +323,9 @@
 			<div id="div_left_nav" class="hidden-xs hidden-sm">
 				<ul></ul>
 			</div>
-			<div id="div_profile_container" class="col-md-12 in_block" style="z-index: 2;" >
+			<div id="div_profile_container" class="col-md-12 in_block" style="z-index: 2;padding-right: 0" >
 				<div id="div_top_border"></div>
-				<div id="div_profile"> 
+				<div id="div_profile">
 				</div>
 			</div>
 		</div>	

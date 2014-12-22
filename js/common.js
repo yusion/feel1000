@@ -973,7 +973,7 @@ IMYUAN || (IMYUAN = {});
                     var ie6=!-[1,]&&!window.XMLHttpRequest;
                     var d = a(document).scrollTop(),
                     e = a(window).height();
-                    0 < d ? b.css("bottom", "200px") : b.css("bottom", "-200px");
+                    0 < d ? b.css("bottom", "100px") : b.css("bottom", "-100px");
                     ie6 && (b.hide(), clearTimeout(c), c = setTimeout(function() {
                         b.show();
                         clearTimeout(c)

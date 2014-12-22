@@ -455,7 +455,7 @@
 </div> 
 %end
 </div>
-<a class="visible-md visible-lg" id="returnTop" href="javascript:;">回到顶部</a>
+<a class="visible-md visible-lg" id="returnTop" href="javascript:;">回到<BR>顶部</a>
 %if is_test:
 <span id="span_test"></span>
 <script type="text/javascript">

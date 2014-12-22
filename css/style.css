@@ -795,14 +795,17 @@ ul.radio_ctrl li[checked] {
 ul.radio_ctrl li:hover {
   border-color: #ff3333;
 }
-/* 自动回到顶端的小火箭 */
+/* 自动回到顶端的小火箭
+ * <a class="visible-md visible-lg" id="returnTop" href="javascript:;">回到顶部</a>
+ */
 #returnTop {
   position: fixed;
   z-index: 999;
   right: 15px;
-  bottom: -200px;
+  bottom: -100px;
   width: 30px;
-  height: 65px;
+  height: 165px;
+ 
   text-indent: -999px;
   overflow: hidden;
   background-image: url('/res/small_icon.png');

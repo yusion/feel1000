@@ -3,7 +3,7 @@
 	
 <style type="text/css">
 #form_profile{
-	background-color: transparent;
+	background-color: white;
 }
 
 #form_profile .form-group{
@@ -13,6 +13,7 @@
 #form_profile .control-label{
     padding-right: 0px;
     color: gray;
+    text-align: left;
 }
 
 #form_profile H3{
@@ -28,16 +29,21 @@
 }
 
 .div_save_group{
-	margin-bottom: 20px;
-	border-width: 1px;
-	border-style: solid;
-	border-color: transparent;
+	margin-bottom: 20px; 
 }
 
-.div_save_group:hover{
-	border-color: orange;
+#form_profile .title{
+	background-color: #fee0e0;
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-bottom: 20px;
 }
 
+#img_girl{
+	position: absolute;
+	right: 40px;
+	bottom: 100px;
+}
 </style>
 <script type="text/javascript">
 	function show_edit(p)
@@ -45,6 +51,7 @@
 		p.find(".p_readonly").hide();
 		p.find(".form-control").show();
 		p.find(".input-group").show();
+		p.find("#div_edit_button").hide();
 		p.find("#div_save_button").show();
 	}
 		
@@ -52,8 +59,9 @@
 	{
 		p.find(".form-control").hide();
 		p.find(".input-group").hide();
-		p.find("#div_save_button").hide();
 		p.find(".p_readonly").show();
+		p.find("#div_edit_button").show();
+		p.find("#div_save_button").hide();
 	}
 	
 	function init_edit()
@@ -78,11 +86,9 @@
 			$(this).addClass("hover");
 			add_p($(this),$(this).find("option:selected").text());
 		});
-		
-		$("#form_profile .div_save_group").append($("#div_save_button"));
-		
+			
 		//toggle edit mode and read mode
-		$("#form_profile H4").click(function(){
+		$("#div_edit_button > button").click(function(){
 			var p = $(this).parents(".div_save_group");
 			p.toggleClass("in_edit_mode");
 			if (p.hasClass("in_edit_mode")) {
@@ -98,9 +104,9 @@
 	}
 	
 	$(document).ready(function(e){
-		$("#form_profile label").addClass("col-md-2");
+		$("#form_profile label").addClass("col-md-2 col-md-offset-2");
 		$("#form_profile .form-group>div").addClass("col-md-5");
-		$("#form_profile H3").parent().addClass("col-md-6 col-md-offset-1");
+		$("#form_profile H3").parent().addClass("col-md-6 col-md-offset-2");
 
 		//$("#form_profile label").wrap("<small></small>");
 		//$("#form_profile input").addClass("input-sm");
@@ -109,22 +115,12 @@
 		var c = new Vcity.CitySelector({input:'city'});
 	});
 </script>
-
-<div id="div_save_button" class="form-group edit_button" style="display: none">
-	<div class="col-md-2 col-md-offset-2">
-		<button class="form-control  btn btn-success"><i class="icon-ok-2">保存</i></button>
-	</div>
-	<div class="col-md-2">
-		<button class="form-control  btn btn-danger"><i class="icon-remove-2"> 取消</i></button>	
-	</div>
-</div>
-		
+	
 <form id="form_profile" class="form-horizontal" role="form">
 	<div class="div_save_group">
-		<div class="row">
+		<div class="row title">
 			<div>
 				<H3>联系信息    <small><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></small></H3>
-				<H4><i class="icon-edit">编辑资料</i></H4>
 			</div>
 		</div>	
 		<div class="form-group">
@@ -135,21 +131,9 @@
 			
 		</div>
 		<div class="form-group">
-			<label class="control-label" for="qq">QQ</label>
-			<div>
-				<input class="txt_input onlyNum form-control" id="qq" value="{{!qq}}" />
-			</div>
-		</div>
-		<div class="form-group">
 			<label class="control-label" for="email">邮件</label>
 			<div>
 				<input class="txt_input onlyEmail form-control" id="email" value="{{!email}}" />
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label" for="blogid">微博</label>
-			<div>
-				<input class="txt_input form-control" id="blogid" value="{{!blogid}}" />
 			</div>
 		</div>
 		<div class="form-group">
@@ -167,10 +151,9 @@
 	</div> 
 	
 	<div class="div_save_group">
-		<div class="row">
+		<div class="row title">
 			<div>
 				<H3>生活信息    <small><i class="icon-star"></i><i class="icon-star"></i></small></H3>
-				<H4><i class="icon-edit">编辑资料</i></H4>	
 			</div>
 		</div>	
 		<div class="form-group">
@@ -230,18 +213,11 @@
 	</div>
 	
 	<div class="div_save_group">
-		<div class="row">
+		<div class="row title">
 			<div>
 				<H3>特征信息</H3>
-				<H4><i class="icon-edit">编辑资料</i></H4>
 			</div>
 		</div>	
-		<div class="form-group">
-			<label class="control-label" for="age">年龄</label>
-			<div>
-				<input class="txt_input onlyNum  form-control" id="age"  value="{{!age}}" />
-			</div>
-		</div>
 			<div class="form-group">
 				<label class="control-label" for="star">星座</label>
 				<div style="height:34px">
@@ -274,6 +250,21 @@
 					</div>
 				</div>
 			</div>
+	</div>
+	<img src="/res/girl2.gif" id="img_girl" class="hidden-sm hidden-xs"></img>
+	<div class="row" style="padding-bottom: 20px">
+		<div id="div_edit_button" class="col-md-2 col-md-offset-2">
+			<button class="green_btn"><i class="icon-edit">开始编辑</i></button>
+		</div>	
+		
+		<div id="div_save_button" class="form-group">
+			<div class="col-md-2 col-md-offset-3">
+				<button class="green_btn"><i class="icon-ok-2">保存</i></button>
+			</div>
+			<div class="col-md-2">
+				<button class="gray_btn"><i class="icon-remove-2"> 取消</i></button>	
+			</div>
+		</div>
 	</div>
 </form>
 

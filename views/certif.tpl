@@ -4,6 +4,7 @@
 <style type="text/css">
 .infomation >div{
 	margin-top: 20px;
+	color:gray;
 }
 	
 .infomation .text_last_info:after{
@@ -19,6 +20,13 @@
 	width: 120px;
 	height: auto;
 	margin-top: 10px;
+}
+
+.title{
+	background-color: #fee0e0;
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-bottom: 20px;
 }
 	
 </style>
@@ -61,8 +69,8 @@
 	}
 	
 	$(document).ready(function(e){
-		$("#div_certif_container .title").children("div").addClass("col-md-8 col-md-offset-1");
-		$("#div_certif_container .infomation").children("div").addClass("col-md-8 col-md-offset-1");
+		$("#div_certif_container .title").children("div").addClass("col-md-8 col-md-offset-2");
+		$("#div_certif_container .infomation").children("div").addClass("col-md-8 col-md-offset-2");
 
 		$(".icon-lightbulb").css("color","orange");
 		init_fineuploader("#div_id_upload","上传身份证相片");
@@ -78,13 +86,13 @@
 			</div>
 		</div>
 		<div class="row upload">
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-3 col-md-offset-2">
 				<img class="in_block" src="res/unknownprofile.jpg"></img>
-				<div id="div_id_upload"></div>
+				<div id="div_id_upload" style="height:50px"></div>
 			</div>
 			<div class="col-md-3 in_block">
-				示例相片
-				<img class="in_block" src="res/id_certif_example.png"></img>
+				<img src="res/id_certif_example.jpg"></img><BR>
+				<p style="margin-top: 10px;">示例相片</p>
 			</div>
 		</div>
 		<div class="row infomation">
@@ -100,7 +108,6 @@
 				</p>
 			</div>
 		</div>
-		<HR>
 		<div class="row title">
 			<div>
 				<h3 class="text-cen1ter in_block"><i class="icon-nameplate"></i><strong>公司</strong>验证</h3>
@@ -108,7 +115,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-2 col-md-offset-1">
+			<div class="col-md-3 col-md-offset-2">
 				<label>公司名称：</label>
 			</div>
 			<div class="col-md-4">
@@ -116,7 +123,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-2 col-md-offset-1">
+			<div class="col-md-3 col-md-offset-2">
 				<label>工卡/名片相片：</label>
 			</div>
 			<div class="col-md-3">
@@ -144,7 +151,7 @@
     <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
       <span>把文件拖动到这里开始上传...</span>
     </div>
-    <div class="qq-upload-button-selector btn btn-success">
+    <div class="qq-upload-button-selector green_btn">
       <div>上传文件</div>
     </div>
     <span class="qq-drop-processing-selector qq-drop-processing">

@@ -35,8 +35,14 @@ def get_file(path):
 def url_index():
 	# response.add_header('Set-Cookie', 'name2=value2')
 	d = utility.get_dist()
+	
+	u = session.login("ycat2","123456")
+	bottle.response.add_header('Set-Cookie', 'session='+str(u.session_id))
+	d["session"] = u.session_id
+	
 	d["register"] = utility.get_template_file("views/register.tpl",d)
 	d["login"] = utility.get_template_file("views/login.tpl",d)
+	d["session"] = u.session_id
 	return d
 
 @bottle.route('/index2')	

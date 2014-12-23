@@ -8,6 +8,16 @@
 %import random
 
 <style type="text/css">
+#tab_cond > li > a{
+	cursor: pointer
+}
+	
+#div_tag_container{
+	border: 1px solid #ddd;
+	border-top-width: 0px;
+	min-height: 210px;
+}
+	
 </style>
 <script type="text/javascript">
 	function set_like_it_btn(btn){
@@ -79,25 +89,6 @@
 	}
 	
 	$(document).ready(function(){
-		//show and hide condition panel
-		function hideSearchPanel(timeout){
-			if (timeout == null) timeout = 500;
-			$("#dt_cond_area").nextAll().fadeOut(timeout);
-			$("#link_hide_cond").hide();
-			$("#link_show_cond").show();
-		}
-		
-		function showSearchPanel(timeout){
-			if (timeout == null) timeout = 500;
-			$("#dt_cond_area").nextAll().fadeIn(timeout);
-			$("#link_show_cond").hide();
-			$("#link_hide_cond").show();
-		}
-		
-		$("#link_hide_cond").click(hideSearchPanel);
-		$("#link_show_cond").click(showSearchPanel);
-		hideSearchPanel(0);
-				
 		//设置排序指示图标
 		function add_order_mark(elem)
 		{
@@ -145,6 +136,13 @@
 		$("#del_heart").hide();
 
 		set_like_it_btn($(".btn_like_it"));
+		
+		
+		//自动切换条件选择页面
+		$("#tab_cond > li").mouseenter(function(){
+			$(this).children("a").click(); 
+		});
+				
 			
 		//列表显示切换效果
 		$("#div_display_ctrl > button").click(function(){
@@ -226,7 +224,7 @@
 					c.append(match[i]);
 					addContainer(c,2);
 				}
-			} 
+			}
 			init_common();
 		});
 	});
@@ -235,101 +233,113 @@
 <p id="del_heart" class="icon-heart-empty" style="position: absolute;color:red;z-index:100;display: none"> -1</p>
 <div class="row">
 	<div id="div_search_cond" class="col-md-8 col-md-offset-2">
-	<dl class="dl-horizontal" style="margin: 0 0 0 0;padding-top: 10px">
-		<dt>地区</dt>
-		<dd  id="dt_cond_area">
-			<ul class="list-inline">
-			<li><a href="#">广东<span class="badge">111</span></a></li>
-			%for i in range(1):
-				<li>广州<span class="badge">1</span></li>
-			%end
-			<li>切换城市</li>
-			<li style="float: right">
-				<button id="link_hide_cond" class="btn btn-link"><i class="icon-collapse-top"></i>折叠</button>
+		<ul id="tab_cond" class="nav nav-tabs">
+			<li class="active">
+			   <a href="#div_cond1" data-toggle="tab">基本条件</a>
 			</li>
-			<li style="float: right">
-				共有<strong>99</strong>位女士
-				<button id="link_show_cond" class="btn btn-link"><i class="icon-expand"></i>更多</button>
+			<li>
+			   <a href="#div_cond2" data-toggle="tab">生活条件</a>
 			</li>
-			</ul>
-		</dd>
-		
-		<hr/>
-		<dt>年龄</dt>
-		<dd>
-			<ul class="list-inline">
-			%for i in range(18,35):
-				<li>{{i}}<span class="badge">{{i}}</span></li>
-			%end 
-			</ul>
-		</dd>
-		<dt>身高(cm)</dt>
-		<dd>
-			<ul class="list-inline">
-
-			%for i in range(0,7):
-				<li>{{i*5+150}}-{{i*5+155}}<span class="badge">{{i}}</span></li>
-			%end 
-			</ul>
-		</dd>
-		<dt>体重(kg)</dt>
-		<dd>
-			<ul class="list-inline">
-			%for i in range(0,7):
-				<li>{{i*5+45}}-{{i*5+50}}<span class="badge">{{i}}</span></li>
-			%end 
-			</ul>
-		</dd>
-		<hr/>
-		
-		<dt>学历</dt>
-		<dd>
-			<ul class="list-inline">
-			%for x in c_degree:
-				<li value="{{x[0]}}">{{x[1]}}<span class="badge">1</span></li>
-			%end
-			</ul>
-		</dd>
-		<dt>条件</dt>
-		<dd>
-			<ul class="list-inline">
-				<li>无住房<span class="badge">2</span></li>
-				<li>无车<span class="badge">2</span></li>
-				<li>有房<span class="badge">2</span></li>
-				<li>有车<span class="badge">2</span></li>
-			</ul>
-		</dd>	
-		<dt>收入</dt>
-		<dd>
-			<ul class="list-inline">
-			%for x in c_income:
-				<li value="{{x[0]}}">{{x[1]}}<span class="badge">1</span></li>
-			%end
-			</ul>
-		</dd>
-		<hr/>
-		%for s in c_score:
-			<dt>{{s[1]}}</dt>
-			<dd>
-				<ul class="list-inline">
-					%for t in s[2].split("、"):
-						<li>{{t}}<span class="badge">1</span></li>
-					%end
-				</ul>
-			</dd>
-		%end
-		<hr/>
-		<dt>标签</dt>
-		<dd>
-			<ul class="list-inline tag_readOnly">
-			%for t in c_tag:
-				<li>{{t[1]}}<span class="badge">{{random.randint(1,300)}}</span></li>
-			%end 
-			</ul>
-		</dd>
-	</dl>
+			<li>
+			   <a href="#div_cond3" data-toggle="tab">自评条件</a>
+			</li>
+			<li style="vertical-align: bottom;float:right;padding-top: 10px">
+				共有<strong>99</strong>位女生
+			</li>
+		</ul>
+		<div id="div_tag_container" class="tab-content">
+			<div class="tab-pane active" id="div_cond1">
+				<dl class="dl-horizontal" style="margin: 0 0 0 0;padding-top: 10px">
+					<dt>地区</dt>
+					<dd  id="dt_cond_area">
+						<ul class="list-inline">
+						<li><a href="#">广东<span class="badge">111</span></a></li>
+						%for i in range(1):
+							<li>广州<span class="badge">1</span></li>
+						%end
+						<li>切换城市</li>
+						</ul>
+					</dd> 
+					<dt>年龄</dt>
+					<dd>
+						<ul class="list-inline">
+						%for i in range(18,35):
+							<li>{{i}}<span class="badge">{{i}}</span></li>
+						%end 
+						</ul>
+					</dd>
+					<dt>身高(cm)</dt>
+					<dd>
+						<ul class="list-inline">
+			
+						%for i in range(0,7):
+							<li>{{i*5+150}}-{{i*5+155}}<span class="badge">{{i}}</span></li>
+						%end 
+						</ul>
+					</dd>
+					<dt>体重(kg)</dt>
+					<dd>
+						<ul class="list-inline">
+						%for i in range(0,7):
+							<li>{{i*5+45}}-{{i*5+50}}<span class="badge">{{i}}</span></li>
+						%end 
+						</ul>
+					</dd> 
+				</dl>
+			</div>
+			<div class="tab-pane" id="div_cond2">
+				<dl class="dl-horizontal" style="margin: 0 0 0 0;padding-top: 10px">	 
+					<dt>学历</dt>
+					<dd>
+						<ul class="list-inline">
+						%for x in c_degree:
+							<li value="{{x[0]}}">{{x[1]}}<span class="badge">1</span></li>
+						%end
+						</ul>
+					</dd>
+					<dt>条件</dt>
+					<dd>
+						<ul class="list-inline">
+							<li>无住房<span class="badge">2</span></li>
+							<li>无车<span class="badge">2</span></li>
+							<li>有房<span class="badge">2</span></li>
+							<li>有车<span class="badge">2</span></li>
+						</ul>
+					</dd>	
+					<dt>收入</dt>
+					<dd>
+						<ul class="list-inline">
+						%for x in c_income:
+							<li value="{{x[0]}}">{{x[1]}}<span class="badge">1</span></li>
+						%end
+						</ul>
+					</dd> 
+				</dl>
+			</div>
+			<div class="tab-pane" id="div_cond3">
+				<dl class="dl-horizontal" style="margin: 0 0 0 0;padding-top: 10px">	 
+					%for s in c_score:
+						<dt>{{s[1]}}</dt>
+						<dd>
+							<ul class="list-inline">
+								%for t in s[2].split("、"):
+									<li>{{t}}<span class="badge">1</span></li>
+								%end
+							</ul>
+						</dd>
+					%end 
+					<dt>标签</dt>
+					<dd>
+						<ul class="list-inline tag_readOnly">
+						%for t in c_tag:
+							<li>{{t[1]}}<span class="badge">{{random.randint(1,300)}}</span></li>
+						%end 
+						</ul>
+					</dd> 
+				</dl>
+			</div>
+		</div>
 	</div>
-	
 </div>
 <div class="row" id="div_display_ctrl">
 	<div class="col-md-8 col-md-offset-2" >
@@ -499,29 +509,6 @@
 	assert.equal($("#span_test").text(),"0");
 	$("#span_test").hide();
      });
-      
-     QUnit.asyncTest("hide_condition_panel",function(assert){
-	expect(5);
-	assert.ok(!$("#link_hide_cond").is(":visible"));
-	assert.ok($("#link_show_cond").is(":visible"));
-	$("#link_hide_cond").click();
-	setTimeout(function() {
-		assert.ok($("#link_show_cond").is(":visible"));
-		assert.ok(!$("#link_hide_cond").is(":visible"));
-		assert.equal($("#div_search_cond dl").children(":visible").length,2);
-		QUnit.start();
-	}, 500);
-     });
-     
-     QUnit.asyncTest("show_condition_panel",function(assert){
-	expect(3); 
-	$("#link_show_cond").click();
-	setTimeout(function() {
-		assert.ok(!$("#link_show_cond").is(":visible"));
-		assert.ok($("#link_hide_cond").is(":visible"));
-		assert.ok($("#div_search_cond dl").children().length > 8);
-		QUnit.start();
-	}, 300);
 	
      QUnit.asyncTest("like_it1",function(assert){
 	//TODO:还需要加上后台互动

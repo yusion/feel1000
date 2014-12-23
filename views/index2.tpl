@@ -203,17 +203,17 @@ H2{
 						<div class="col-xs-6">
 							<a href="/index?sex=0">
 							<img src="/res/boy.jpg" style="width:100%;margin-top:20px"></img>
-							<button type="button" class="btn btn-info icon-male" style="width:100%;margin-top:10px;text-decoration: none">我是男生</button>
+							<button type="button" class="blue_btn icon-male" style="width:100%;margin-top:10px;text-decoration: none">我是男生</button>
 							</a>
 						</div>
 						<div class="col-xs-6">
 							<a href="/index?sex=1">
 							<img src="/res/girl.jpg" style="width:100%;margin-top:20px"></img>
-							<button type="button" class="btn btn-danger icon-female" style="width:100%;margin-top:10px;text-decoration: none">我是女生</button>
+							<button type="button" class="red_btn icon-female" style="width:100%;margin-top:10px;text-decoration: none">我是女生</button>
 							</a>
 						</div>
 					</div>
-					<p class="small" style="float:right;color:gray">选择性别，直接访问</p>
+					<p class="small" style="float:right;color:gray">选择性别，可以直接访问喔</p>
 				</div>
 			</div>
 			<div id="div_border"></div>
@@ -280,15 +280,14 @@ H2{
 	</div>
 	<div class="row" style="background-color:#F4F6F7;padding: 16px 0;text-align: center;margin: 0 0 0 0;padding: 0 0 0 0">
 		<div class="col-md-12" style="padding: 0 0 0 0">
-			<H2>上花田，轻松找对象</H2>
-			<a href="#" class="btn btn-info in_block" style="margin-top:10px;text-decoration: none;width:120px">注册</a>
-			<a href="#" class="btn btn-success in_block" style="margin-top:10px;margin-left:20px;text-decoration: none;width:120px">登录</a>
+			<H2>上<span style="color:purple;font-weight: 800">loveCC</span>，轻松找对象</H2>
+			<a href="#" class="green_btn in_block" style="margin-top:10px;text-decoration: none;width:120px">注册</a>
+			<a href="#" class="orange_btn in_block" style="margin-top:10px;margin-left:20px;text-decoration: none;width:120px">登录</a>
 			<P style="margin-top: 10px">关注花田：  花田易信号：huatian</P>
 			<P>iPhone用户客服邮箱：ihuatianiphone@163.com       Android用户客服邮箱：ihuatianandroid@163.com</P>
 			<div style="background-color:#E3E6EE;padding: 16px 0;text-align: center;">
 				<P>公司简介 - 联系方法 - 招聘信息 - 使用条款 - 花田动态 - 友情链接 - 网站地图 - 花田意见反馈</P>
-				<P>网易公司版权所有</P>
-				<P>©2014-2024</P>
+				<P>Copyright ©自由软件</P>
 			</div>
 		</div>
 	</div>

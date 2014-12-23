@@ -14,7 +14,7 @@
 			<input type="password"  name="login_password" class="form-control limit_m input-lg" id="login_password"  placeholder="ÃÜÂë">
 		</div>
 	</div>  
-	<div class="row small">
+	<div class="row ">
 		<div class="col-md-8">
 		   <div class="checkbox_ctrl text-left" >ÏÂ´Î×Ô¶¯µÇÂ¼</div>
 		</div>
@@ -24,7 +24,9 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<button id="btn_login" type="button" style="width:100%" class="btn btn-success btn-lg">µÇ&nbsp; Â¼&nbsp;<i class="icon-music" style="color:mediumorchid"></i></button>
+			<button id="btn_login" type="button" style="width:100%;font-size: 18px;height:45px" class="orange_btn">
+				µÇ&nbsp; Â¼&nbsp;<i class="icon-music" style="color:mediumorchid"></i>
+			</button>
 			<input type="hidden" id="login_result_msg" value="unknown">
 			<input type="hidden" id="login_result" value="unknown">
 		</div>

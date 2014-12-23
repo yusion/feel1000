@@ -7,8 +7,8 @@
 	<div class="row">
 		<div class="col-md-12" style="padding-right: 0px;vertical-align: top">
 			<ul id="sex" class="radio_ctrl" value="0">
-				<li id="li_male" value="0" checked="checked">帅哥</li>
-				<li id="li_female" value="1">美女</li>
+				<li id="li_male" value="0" checked="checked"><i class="icon-male" style="color:#326a9d"></i>帅哥</li>
+				<li id="li_female" value="1"><i class="icon-female" style="color:red"></i>美女</li>
 			</ul>
 		</div>
 	</div>
@@ -43,7 +43,7 @@
 	</div>
 	<div class="row" style="margin-bottom: 4px">
 		<div class="col-md-12">
-			<button id="btn_register" type="button" style="width:100%" class="btn btn-success btn-lg">注&nbsp; 册&nbsp;<i class="icon-note" style="color:mediumorchid"></i></button>
+			<button id="btn_register" type="button" style="width:100%;font-size: 18px;height:45px" class="green_btn">注&nbsp; 册&nbsp;<i class="icon-note" style="color:mediumorchid"></i></button>
 		</div>
 	</div>
 	<input type="hidden" id="result" value="unknown">

@@ -640,14 +640,15 @@ ul.radio_ctrl{
 		display: inline-block;
 		margin-right: 15px;
 		padding: 5px 20px 5px 10px;
-		border: 2px solid transparent;
+		border: 2px solid #E0E0E0;
 		border-radius: 5px;
-		background-color:#E0E0E0;
+		//background-color:#E0E0E0;
 		&[checked]{
-			border-color: @active_link_color;
+			background: url("/res/small_icon.png") no-repeat right -120px;
+			border-color: #d588ac;
 		}
 		&:hover{
-			border-color: @hover_link_color;
+			border-color: #d588ac;
 		}
 	}
 }

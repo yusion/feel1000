@@ -2,13 +2,18 @@
 <script src="js/select_city.js"></script>
 	
 <style type="text/css">
+#img_boy{
+	position: absolute;
+	right: 40px;
+	bottom: 100px;
+}	
 </style>
 
 <script type="text/javascript">
  	$(document).ready(function(e){
-		$("#form_ta_request label").addClass("col-md-2");
+		$("#form_ta_request label").addClass("col-md-2 col-md-offset-1");
 		$("#form_ta_request .form-group>div").addClass("col-md-5");
-		$("#form_ta_request H3").parent().addClass("col-md-6 col-md-offset-1");
+		$("#form_ta_request H3").parent().addClass("col-md-6 col-md-offset-3");
 				
 		//设置星星评价
 		$("#star_ta_appearance").raty({ start:2,inline_width:68});
@@ -65,7 +70,7 @@
 	});
 </script>
  
-<form id="form_ta_request" class="form-horizontal" role="form" style="padding-top: 30px;padding-bottom: 20px">
+<form id="form_ta_request" class="form-horizontal" role="form" style="padding-top: 30px;padding-bottom: 20px;background-color:white">
 	<div>
 		<div class="form-group">
 			<label class="control-label">地点</label>
@@ -161,13 +166,13 @@
 			</div>		
 		</div>
 	</div>
-	
+	<img src="/res/boy2.gif" id="img_boy" class="hidden-sm hidden-xs"></img>
 	 <div class="form-group" >
-		<div class="col-md-2 col-md-offset-2">
-			<button class="form-control  btn btn-success"><i class="icon-ok-2">保存</i></button>
+		<div class="col-md-2 col-md-offset-3">
+			<button class="form-control  green_btn"><i class="icon-ok-2">保存</i></button>
 		</div>
 		<div class="col-md-2">
-			<button class="form-control  btn btn-danger"><i class="icon-remove-2"> 取消</i></button>	
+			<button class="form-control  gray_btn"><i class="icon-remove-2"> 取消</i></button>	
 		</div>
 	</div>
 </form>

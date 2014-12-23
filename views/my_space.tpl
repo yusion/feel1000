@@ -162,7 +162,8 @@
 		
 		$("#tagSelector").tag_selector({edit_mode:false});
 		$("#desc").hide();
-		$("#first_nav_tag").click();
+		
+		$("#first_nav_tag").click().addClass("active");;
 		
 		set_background_img("res/personal_bg.jpg",$("#my_space_head"));
 	});
@@ -316,10 +317,10 @@
 				<div class="collapse navbar-collapse clearfix " id="space-navbar-collapse" style="padding-left: 0px">
 				   <ul class="nav navbar-nav"> 
 				      <li><a href="#" data="album" class="text-center"><i class="icon-envelope" style="color:orange"></i><span>我的动态</span></a></li>
-				      <li  id="first_nav_tag"><a href="#" data="profile" class="text-center"><i class="icon-user" style="color:limegreen"></i><span>我的资料</span></a></li>
+				      <li><a href="#" data="profile" class="text-center"><i class="icon-user" style="color:limegreen"></i><span>我的资料</span></a></li>
 				      <li><a href="#" data="certif" class="text-center"><i class="icon-certificate"  style="color:goldenrod"></i><span>我的认证</span></a></li>
 				      <li><a href="#" data="record"><i  class="icon-book-open" class="text-center" style="color:orchid"></i><span>个人喜好</span></a></li>
-				      <li><a href="#" data="ta_request"><i class="icon-star" class="text-center" style="color:deepskyblue"></i><span>我的要求</span></a></li>
+				      <li  id="first_nav_tag"><a href="#" data="ta_request"><i class="icon-star" class="text-center" style="color:deepskyblue"></i><span>我的要求</span></a></li>
 				   </ul>
 				</div>
 			</nav>

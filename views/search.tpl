@@ -430,16 +430,16 @@
 				<div class="div_btn">
 					<div class="visible-md visible-lg div_space sm_hide lg_hide" style="width:10px;height: 10px"></div>
 					<p class="text_like text-center  sm_hide lg_hide visible-md visible-lg" ><span class="text_like_num">221256</span>人喜欢<i class="icon-heart"></i></p>
-					<button class="btn btn-primary btn_send_msg">
-						<i class="icon-envelope"></i><span class="sm_hide">发信息</span>
+					<button class="blue_btn btn_send_msg">
+						<i class="icon-envelope"></i><span class="sm_hide">私信</span>
 					</button>
 					
-					<button class="btn btn-success btn_like_it" onclick="click_like_it($(this))">
+					<button class="red_btn btn_like_it" onclick="click_like_it($(this))">
 						<!--i class="icon-heart-empty"></i>喜欢-->
 					</button>
 					
-					<div class="btn_dislike_it btn-group dropdown-hover" >
-						<button type="button" class="btn btn-warning dropdown-toggle"  data-toggle="dropdown" style="width:100%">
+					<div class=" btn-group dropdown-hover" >
+						<button type="button" class="gray_btn dropdown-toggle"  data-toggle="dropdown" style="width:100%">
 						   <i class="icon-remove-2"></i><span class="sm_hide">不喜欢<span><span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
@@ -452,7 +452,8 @@
 			</div>
 		</div>	
 	</div>		
-</div> 
+</div>
+
 %end
 </div>
 <a class="visible-md visible-lg" id="returnTop" href="javascript:;">回到<BR>顶部</a>

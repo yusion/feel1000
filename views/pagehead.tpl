@@ -29,6 +29,7 @@
      <div class="col-md-3 col-md-pull-1 visible-md visible-lg">
 	<div style="float: right;color:white">
 		<div class="dropdown dropdown-hover">
+			µÇÂ½|×¢²á
 			<img src="res/test/a (5).jpg" style="width:30px;heigth:auto"></img>
 			<button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" style="color:white">
 				ÌìÌì°®¿áÅÜ

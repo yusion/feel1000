@@ -188,7 +188,7 @@ H2{
 				   <a id="link_login" href="#div_login" data-toggle="tab">快速登陆</a>
 				</li>
 				<li>
-				   <a id="link_login" href="#div_anonymity" data-toggle="tab">直接访问</a>
+				   <a id="link_login" href="#div_anonymity" data-toggle="tab">游客访问</a>
 				</li>
 			</ul>
 			<div id="div_tag_container" class="tab-content">

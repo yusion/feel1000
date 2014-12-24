@@ -30,29 +30,22 @@ def get_file(path):
 	return bottle.static_file(path,"./jquery-easyui-1.3.2")
 
 @bottle.route('/')
-@bottle.route('/index')	
-@bottle.view('index')
+@bottle.route('/index')	 
 def url_index():
-	# response.add_header('Set-Cookie', 'name2=value2')
-	d = utility.get_dist()
-	
-	u = session.login("ycat2","123456")
-	bottle.response.add_header('Set-Cookie', 'session='+str(u.session_id))
-	d["session"] = u.session_id
-	
+	d = session.get_dist2()
 	d["register"] = utility.get_template_file("views/register.tpl",d)
 	d["login"] = utility.get_template_file("views/login.tpl",d)
-	d["session"] = u.session_id
-	return d
+	return bottle.template('index', d)
 
-@bottle.route('/index2')	
-@bottle.view('index2')
+@bottle.route('/index2')	 
 def url_index():
-	# response.add_header('Set-Cookie', 'name2=value2')
-	d = utility.get_dist()
-	d["register"] = utility.get_template_file("views/register.tpl",d)
-	d["login"] = utility.get_template_file("views/login.tpl",d)
-	return d
+	if bottle.request.query.session:
+		s = session.get(bottle.request.query.session)
+		if s:
+			bottle.response.add_header('Set-Cookie', 'session='+ s.session_id)
+			d = session.get_dist(s)
+			return bottle.template('index2', d)
+	bottle.redirect("/index")
 
 if __name__ == '__main__':
 	print("python " + platform.python_version())
@@ -65,8 +58,3 @@ if __name__ == '__main__':
 	bottle.run(host='', port=80,reloader=True,debug=True)
 	get_timer().stop()
 
-	
-
-	
-
-	

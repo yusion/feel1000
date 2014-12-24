@@ -127,12 +127,7 @@ class user_profile:
 		
 class ctrl_profile:
 	@staticmethod
-	def get():
-		s = session.get()
-		return ctrl_profile.get_by_userid(s.user_id)
-		
-	@staticmethod
-	def get_by_userid(user_id):
+	def get(user_id):
 		user = user_profile()
 		sql = """SELECT * FROM u_user as u LEFT JOIN u_profile as u1 ON u.ID=u1.ID WHERE u.ID=""" + str(user_id)
 		c = utility.get_cursor()
@@ -195,15 +190,15 @@ class ctrl_profile:
 @bottle.route('/my_space')	
 @bottle.view('my_space')	
 def url_show_space():
-	d = utility.get_dist()
+	d = session.get_dist()
 	d["friend"] = utility.get_template_file("views/friend.tpl",{})
 	return d
 
 @bottle.route('/ta_request')	
 @bottle.view('ta_request')	
 def url_show_ta_request():
-	d = utility.get_dist()
-	u = ctrl_profile.get()
+	d = session.get_dist()
+	u = ctrl_profile.get(session.get().user_id)
 	d["photo_url"] = u.photo_url
 	d["normal_photo_url"] = u.normal_photo_url
 	d.update(u.get_dict())
@@ -216,7 +211,7 @@ def url_show_ta_request():
 @bottle.route('/record')	
 @bottle.view('record')	
 def url_show_record():
-	d = utility.get_dist()
+	d = session.get_dist()
 	utility.update_c_table(d,"c_record")
 	return d
 
@@ -224,8 +219,8 @@ def url_show_record():
 @bottle.route('/profile')	
 @bottle.view('profile')	
 def url_show_profile():
-	d = utility.get_dist()
-	u = ctrl_profile.get()
+	d = session.get_dist()
+	u = ctrl_profile.get(session.get().user_id)
 	d["photo_url"] = u.photo_url
 	d["normal_photo_url"] = u.normal_photo_url
 	d.update(u.get_dict())
@@ -237,7 +232,7 @@ def url_show_profile():
 
 @bottle.route('/action/update_profile')	
 def url_update_profile():
-	u = ctrl_profile.get()
+	u = ctrl_profile.get(session.get().user_id)
 	id = bottle.request.params.key
 	v = bottle.request.params.value
 	ret = u.update(id,v)
@@ -258,7 +253,7 @@ def get_profile_file(path):
 
 @bottle.post('/action/upload_profile_photo')
 def url_upload():
-	user = ctrl_profile.get()
+	user = ctrl_profile.get(session.get().user_id)
 	upload = bottle.request.files.get('Filedata')
 	mem = io.BytesIO()
 	upload.save(mem)
@@ -270,7 +265,7 @@ def url_upload():
 
 @bottle.post('/action/upload_id_cerf')
 def url_upload_id_cerf():
-	user = ctrl_profile.get()
+	user = ctrl_profile.get(session.get().user_id)
 	upload = bottle.request.files.get('qqfile')
 	mem = io.BytesIO()
 	upload.save(mem)

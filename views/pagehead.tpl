@@ -11,14 +11,14 @@
 		      <span class="icon-bar"></span>
 		      <span class="icon-bar"></span>
 		   </button>
-		   <a class="navbar-brand" href="index" style="padding: 0 20px 0 0px">
+		   <a class="navbar-brand" href="index2" style="padding: 0 20px 0 0px">
 		    <img alt="logo" src="res/logo.gif" style="width:50px;height:auto"></img>
 		    <span style="font-weight:900;font-size: 20px;vertical-align: middle;color: yellow">LoveCC</span>
 		   </a>
 		</div>
 		<div class="collapse navbar-collapse" id="my_navbar-collapse">
 		   <ul class="nav navbar-nav">
-			<li  class="active"><a href="index"><i class="icon-home"></i> 主页</a></li>
+			<li  class="active"><a href="index2"><i class="icon-home"></i> 主页</a></li>
 			<li><a href="#"><i class="icon-conversation"></i> 动态</a></li>
 		        <li><a href="search"><i class="icon-search"></i> 查找</a></li>  
 			<li><a href="my_space"><i class="icon-user"></i> 我的空间</a></li>
@@ -30,9 +30,9 @@
 	<div style="float: right;color:white">
 		<div class="dropdown dropdown-hover">
 			登陆|注册
-			<img src="res/test/a (5).jpg" style="width:30px;heigth:auto"></img>
+			<img src="{{photo_url}}" style="width:30px;heigth:auto"></img>
 			<button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" style="color:white">
-				天天爱酷跑
+				{{name}}
 			   <span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu pull-right small" role="menu" >
@@ -70,11 +70,11 @@
 				url = url.substr(1);
 			}
 			if (url == "") {
-				url = "index";
+				url = "index2";
 			}
 			if (link.indexOf(url) != -1){ 
 				$(this).parent().addClass("active");
-				if (url != "index") {
+				if (url != "index2") {
 					push_breadcrumb($(this).text());
 				}
 			}

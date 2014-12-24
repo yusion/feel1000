@@ -43,9 +43,9 @@
 				$("#login_result").val(json.result);
 				$("#login_result_msg").val(json.msg);
 				if (json.result == "true") {
-					$("#btn_login").enabled();
-					$("#session").val(json.session);
-					document.cookie="session="+json.session; 
+					var url = "index2?session="+json.session;
+					jump_to(url);
+					//TODO:保存用户名和密码
 				}
 				else{
 					$("#login_password").val("");

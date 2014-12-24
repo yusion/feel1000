@@ -55,13 +55,14 @@
 		$.getJSON("action/register", 
 		{ 	nick: $("#nickname").val(), 
 			pass: hex_md5("pwd" + $("#password").val()),
-			phone:$("#phone").val(), 
-			sex:$("#sex").val(), 
+			sex:$("#sex").attr("value"), 
 			age:$("#age").val()},
 			function(json){
 				//TODO:自动登陆，并跳转
-				//TODO:用短信验证功能，先注册，后验证，这样省钱
 				$("#result").val(json.result);
+				if (json.result == "true") {
+					jump_to("index2?session="+json.session);	
+				}
 		});
 	}   
 	
@@ -81,15 +82,6 @@
 			if(!$("#form_register").valid()) return;
 			submit();
 		});
-		
-		var phone_remote = {
-			url: "action/is_repeat_phone",      
-			type: "get",                
-			dataType: "json",           
-			data: {                      
-			phone: function() {
-				return $("#phone").val();
-			}}};
 			
 		var nick_remote = {
 			url: "action/is_repeat_nickname",      
@@ -103,12 +95,10 @@
 		$("#form_register").validate({
 			rules: {
 			   nickname: {required:true,minlength:2,maxlength:10,remote:nick_remote},
-			   phone: {required: true,isPhone:true,remote:phone_remote},
 			   password:{required: true,minlength:6,maxlength:20}
 			   },
 			messages:{
 				nickname:{remote:"该昵称已经注册"},
-				phone:{remote:"该号码已经注册"},
 			}
 			});
 	});
@@ -124,7 +114,7 @@
 	$("#link_register").click();
 	expect(6);
 	assert.ok($("#chk_agreement").hasAttr("checked"),"init value is check");
-	assert.equal($("#sex").val(),"1");
+	assert.equal($("#sex").attr("value"),"1");
 	assert.ok($("#li_male").attr("checked"),"init radio_male value is check");
 	assert.ok(!$("#li_female").attr("checked"),"init radio_male value is check");
 	assert.equal($("#age").val(),24);
@@ -160,34 +150,7 @@
 		QUnit.start();
 	}, 300);
      });
-     
-     QUnit.asyncTest("check_phone",function(assert){
-	expect(4);
-	$("#phone").focusin();
-	$("#phone").val("139289790011");
-	$("#phone").focusout();
-	assert.ok($("#phone-error").text().indexOf("请填写正确的手机号码") != -1,"wrong msg");
-	
-	$("#phone").focusin();
-	$("#phone").val("");
-	$("#phone").focusout();
-	assert.ok($("#phone-error").text().indexOf("请填写该信息") != -1,"wrong msg");
-	
-	$("#phone").focusin();
-	$("#phone").val("1392897901");
-	$("#phone").focusout();
-	assert.ok($("#phone-error").text().indexOf("请填写正确的手机号码") != -1,"wrong msg");
-	
-	$("#phone").focusin();
-	$("#phone").val("13259790114");
-	$("#phone").focusout();
-	
-	setTimeout(function() {
-		assert.ok($("#phone-error").text()=="","wrong msg");
-		QUnit.start();
-	}, 500);
-     });
-     
+      
      QUnit.asyncTest("check_nickname_repeat",function(assert){
 	expect(1);
 	$("#nickname").focusin();
@@ -219,22 +182,10 @@
 	assert.ok($("#password-error").text().indexOf("长度不能超过20个字") != -1,"wrong msg");
 	});
 
-     QUnit.asyncTest("check_phone_repeat",function(assert){
-	expect(1);
-	$("#phone").focusin();
-	$("#phone").val("13928979001");
-	$("#phone").focusout();
-	
-	setTimeout(function() {
-		assert.ok($("#phone-error").text().indexOf("该号码已经注册") != -1,"wrong msg");
-		QUnit.start();
-	}, 500);
-     });
-	     
+     
      QUnit.asyncTest("register", function( assert ){
 	expect(1);
-	$("#nickname").val("test_ycat3");
-	$("#phone").val("13728975541");
+	$("#nickname").val("test_ycat3"); 
 	$("#password").val("123456");
 	$("#age").val("21");
 	$("#radio_female").attr("checked",true);
@@ -251,8 +202,7 @@
 	
 	$.getJSON("test/check_user", 
 		{ 	nick: "test_ycat3", 
-			pass: "123456",
-			phone:"13728975541", 
+			pass: "123456", 
 			sex:"1",
 			birthdayYear:1993},
 			function(json){

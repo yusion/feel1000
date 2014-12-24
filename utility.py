@@ -23,6 +23,10 @@ g_test_id = None
 __c_table = {}
 g_version = "0.0.1"
 
+def get_version():
+    global g_version
+    return g_version
+
 def set_session_id(id):
 	''' for test only '''
 	global g_test_id
@@ -49,28 +53,17 @@ def set_is_test(value):
 	if not value:
 		__test_now = None
 
+def get_template_file(filename,keyword):
+	with open(filename,"r") as f:
+	    tpl = bottle.SimpleTemplate(f.read(),encoding='utf8')
+	    return tpl.render(keyword)
+
 def get_ip():
 	if is_test():
 	    return "unittest"
 	if bottle.request and bottle.request.remote_addr:
 		return bottle.request.remote_addr
 	return "unknown"
-
-def get_template_file(filename,keyword):
-	with open(filename,"r") as f:
-	    tpl = bottle.SimpleTemplate(f.read(),encoding='utf8')
-	    return tpl.render(keyword)
-
-def get_dist():
-	session_id = get_session_id()
-	d = {}
-	d["version"] = g_version;
-	d["is_test"] = _is_test
-	d["session"] = str(session_id)
-	d["web_head"] = get_template_file("views/head.tpl",d)
-	d["page_head"] = get_template_file("views/pagehead.tpl",d)
-	d["page_foot"] = get_template_file("views/pagefoot.tpl",d)
-	return d
 
 def get_db():
 	global g_db

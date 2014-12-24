@@ -9,7 +9,7 @@ from web_register import clear_test_user2,ctrl_user_manager,sex_type
 @bottle.route('/login')	
 @bottle.view('login')	
 def url_show_login():
-	return utility.get_dist()
+	return session.get_dist()
 
 #用于冷却登陆次数，防止暴力破解
 g_loginFailedCount = {}

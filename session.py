@@ -1,6 +1,7 @@
 #coding=utf-8 
 # ycat			 2014/09/28      create
 import sqlite3
+import web_profile
 import os,time,datetime
 import utility,bottle
 		
@@ -34,7 +35,7 @@ _last_session_id = int(time.time())
 
 def make_session_id():
 	global _last_session_id
-	_last_session_id += 1
+	_last_session_id += 1 
 	return utility.scramble(_last_session_id)
 
 def _is_repeat_login(loginName,password):
@@ -73,9 +74,10 @@ def login(loginName,password):
 	utility.write_log(user.user_id,"登陆成功",1)
 	return user
 
-def get():
+def get(id = None):
 	global g_session_data
-	id = utility.get_session_id()
+	if not id:
+		id = utility.get_session_id()
 	if id in g_session_data:
 		return g_session_data[id]
 	return None
@@ -93,7 +95,45 @@ def logout():
 	user = get()
 	if not user:
 		return
-	del g_session_data[user.session_id]		
+	del g_session_data[user.session_id]
+
+def get_dist2():
+	d = {}
+	d["version"] = utility.get_version()
+	d["is_test"] = utility.is_test()
+	d["web_head"] = utility.get_template_file("views/head.tpl",d)
+	return d
+
+def _get_profile_dist(d,s):	
+	d["name"] = "游客"
+	d["photo_url"] = "/res/unknownprofile.jpg"
+	d["session"] = "-1"
+	if not s:
+		return
+	d["session"] = s.session_id		
+	if "-1" == s.session_id:
+		d["name"] = "神秘的帅哥"
+		d["photo_url"] = "/res/boy.jpg"
+	elif "-2" == s.session_id:
+		d["name"] = "神秘的美女"
+		d["photo_url"] = "/res/girl.jpg"
+	else:
+		user = web_profile.ctrl_profile.get(s.user_id)
+		if not user:
+			return
+		d["name"] = user.nickname
+		d["photo_url"] = user.small_photo_url
+
+def get_dist(session = None):
+	d = get_dist2()
+	if session == None:
+		session = get() 
+
+	_get_profile_dist(d,session) 
+	d["page_head"] = utility.get_template_file("views/pagehead.tpl",d)
+	d["page_foot"] = utility.get_template_file("views/pagefoot.tpl",d)
+	return d
+
 #############################	unit test	###########################		
 
 		

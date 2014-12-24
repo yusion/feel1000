@@ -41,15 +41,10 @@ class ctrl_user_manager:
 		r = utility.get_cursor().execute(sql,(nick,))
 		return r.fetchone()[0] > 0
 		
-@route('/register')	
-@view('register')	
-def url_show_register():
-	return utility.get_dist()
-
 @route('/agreement')	
 @view('agreement')	
 def url_show_agreement():
-	return utility.get_dist()
+	return session.get_dist2()
 
 @route('/action/register')	
 def url_register():
@@ -58,7 +53,7 @@ def url_register():
 		bottle.request.params["sex"],
 		bottle.request.params["age"])
 	if ret:
-		return json.dumps({"result":"true"})	
+		return json.dumps({"result":"true","session":res.session_id})	
 	else:
 		return json.dumps({"result":"false"})	
 

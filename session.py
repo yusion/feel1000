@@ -141,8 +141,7 @@ def _get_profile_dist(d,s):
 		return
 	
 	d["session"] = s.session_id
-	if s.is_visit:
-		print(s.sex,type(s.sex))
+	if s.is_visit: 
 		if 0 == s.sex:
 			d["name"] = "神秘的帅哥"
 			d["photo_url"] = "/res/boy.jpg"

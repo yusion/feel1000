@@ -53,9 +53,9 @@ def url_register():
 		bottle.request.params["sex"],
 		bottle.request.params["age"])
 	if ret:
-		return json.dumps({"result":"true","session":res.session_id})	
+		return json.dumps({"result":"true","session":ret.session_id})	
 	else:
-		return json.dumps({"result":"false"})	
+		return json.dumps({"result":"false","msg":"注册失败"})	
 
 @route('/action/is_repeat_nickname')	
 def url_is_repeat_nickname():

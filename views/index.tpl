@@ -201,15 +201,15 @@ H2{
 				<div class="tab-pane" id="div_anonymity">
 					<div class="row">
 						<div class="col-xs-6">
-							<a href="/index?sex=0">
+							<a href="/index2?sex=0">
 							<img src="/res/boy.jpg" style="width:100%;margin-top:20px"></img>
-							<button type="button" class="blue_btn icon-male" style="width:100%;margin-top:10px;text-decoration: none">我是男生</button>
+							<p class="blue_btn icon-male" style="width:100%;margin-top:10px;text-decoration: none">我是男生</p>
 							</a>
 						</div>
 						<div class="col-xs-6">
-							<a href="/index?sex=1">
+							<a href="/index2?sex=1">
 							<img src="/res/girl.jpg" style="width:100%;margin-top:20px"></img>
-							<button type="button" class="red_btn icon-female" style="width:100%;margin-top:10px;text-decoration: none">我是女生</button>
+							<p class="red_btn icon-female" style="width:100%;margin-top:10px;text-decoration: none">我是女生</p>
 							</a>
 						</div>
 					</div>

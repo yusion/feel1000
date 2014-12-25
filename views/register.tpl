@@ -43,7 +43,7 @@
 	</div>
 	<div class="row" style="margin-bottom: 4px">
 		<div class="col-md-12">
-			<button id="btn_register" type="button" style="width:100%;font-size: 18px;height:45px" class="green_btn">×¢&nbsp; ²á&nbsp;<i class="icon-note" style="color:mediumorchid"></i></button>
+			<button id="btn_register" type="submit" style="width:100%;font-size: 18px;height:45px" class="green_btn">×¢&nbsp; ²á&nbsp;<i class="icon-note" style="color:mediumorchid"></i></button>
 		</div>
 	</div>
 	<input type="hidden" id="result" value="unknown">
@@ -61,7 +61,11 @@
 				//TODO:×Ô¶¯µÇÂ½£¬²¢Ìø×ª
 				$("#result").val(json.result);
 				if (json.result == "true") {
-					jump_to("index2?session="+json.session);	
+					alert("index2?session="+json.session);
+					jump_to("index2?session="+json.session);
+				}
+				else{
+					alert("×¢²áÊ§°Ü");
 				}
 		});
 	}   

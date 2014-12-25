@@ -24,7 +24,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<button id="btn_login" type="button" style="width:100%;font-size: 18px;height:45px" class="orange_btn">
+			<button id="btn_login" type="submit" style="width:100%;font-size: 18px;height:45px" class="orange_btn">
 				µÇ&nbsp; Â¼&nbsp;<i class="icon-music" style="color:mediumorchid"></i>
 			</button>
 			<input type="hidden" id="login_result_msg" value="unknown">
@@ -49,9 +49,7 @@
 				}
 				else{
 					$("#login_password").val("");
-					setTimeout(function(){
-						$("#btn_login").enabled();
-					},500);
+					alert("µÇÂ½Ê§°Ü£º"+json.msg);
 				}
 		});
 	}   
@@ -61,7 +59,7 @@
 			if(!$("#form_login").valid()) return;
 			login_submit();
 		});
-		 
+		
 		$("#form_login").validate({
 			rules: {
 			   login_nickname: {required:true,minlength:2,maxlength:11},

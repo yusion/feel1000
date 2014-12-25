@@ -142,6 +142,7 @@ def set_now(dateTime):
 	global __test_now
 	__test_now = dateTime
 
+#logType:1用户日志，0是系统日志 
 def write_log(user_id,desc,logType,autoCommit = True):
 	db = get_db()
 	db.execute("INSERT INTO r_log(LogTypeID,LogDesc,LogDate,UserID,IP)VALUES(?,?,?,?,?)",

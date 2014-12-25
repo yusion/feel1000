@@ -57,7 +57,7 @@ def get_search_result(condition,page,page_size):
 @bottle.view('search')	
 def url_search():
 	emptyName = "未填写"
-	d = utility.get_dist();
+	d = session.get_dist();
 	utility.update_c_table(d,"c_degree",None,emptyName)
 	utility.update_c_table(d,"c_income",None,emptyName)
 	utility.get_tag_table(d,1) #session.get().target_sex)

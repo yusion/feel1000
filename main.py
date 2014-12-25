@@ -39,13 +39,22 @@ def url_index():
 
 @bottle.route('/index2')	 
 def url_index():
-	if bottle.request.query.session:
+	s = None
+	if bottle.request.query.sex:
+		i = int(bottle.request.query.sex)
+		if i != 1 and i != 0:
+			i = 0
+		s = session.visit(i)
+		
+	elif bottle.request.query.session:
 		s = session.get(bottle.request.query.session)
-		if s:
-			bottle.response.add_header('Set-Cookie', 'session='+ s.session_id)
-			d = session.get_dist(s)
-			return bottle.template('index2', d)
-	bottle.redirect("/index")
+	
+	if not s:
+		bottle.redirect("/index")
+		
+	bottle.response.add_header('Set-Cookie', 'session='+ s.session_id)
+	d = session.get_dist(s)
+	return bottle.template('index2', d)
 
 if __name__ == '__main__':
 	print("python " + platform.python_version())

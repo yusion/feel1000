@@ -5,17 +5,16 @@ import web_profile
 import os,time,datetime
 import utility,bottle
 		
-#TODO过期和删除session  		
+#TODO过期和删除session, 访客的session要短一些,session过期需返回index 	
 class session_data:
 	def __init__(self):
 		self.user_id = 0
 		self.sex = -1
 		self.ip = ""
 		self.age = 0
-		#0 代表未通过手机认证
-		#1 已经通过手机认证
-		#2 已经通过身份证认证
-		#3 已经通过公司认证 
+		#0 代表未通过任何认证
+		#1 已经通过身份证认证
+		#2 已经通过公司认证 
 		self.certf_state = 0 
 		self.nickname = ""
 		self.session_id = ""
@@ -29,9 +28,20 @@ class session_data:
 		if self.sex == 1:
 			return 0
 		return -1
+	
+	@property
+	def is_visit(self):
+		return len(self.session_id) < 8
+	
 
 g_session_data = {} 
 _last_session_id = int(time.time())
+_visit_id = 0
+
+def make_visit_id():
+	global _visit_id
+	_visit_id -= 1
+	return _visit_id
 
 def make_session_id():
 	global _last_session_id
@@ -74,6 +84,25 @@ def login(loginName,password):
 	utility.write_log(user.user_id,"登陆成功",1)
 	return user
 
+def visit(sex):
+	user = session_data()
+	user.user_id = make_visit_id()
+	user.nickname = ""
+	user.sex = sex
+	user.session_id = str(user.user_id)
+	user.age = 0
+	user.certf_state = 0
+	user.ip = utility.get_ip()
+	
+	if sex == 0:
+		utility.write_log(user.user_id,"男游客访问",1)
+	else:
+		utility.write_log(user.user_id,"女游客访问",1)
+		
+	global g_session_data
+	g_session_data[user.session_id] = user
+	return user
+		
 def get(id = None):
 	global g_session_data
 	if not id:
@@ -110,13 +139,16 @@ def _get_profile_dist(d,s):
 	d["session"] = "-1"
 	if not s:
 		return
-	d["session"] = s.session_id		
-	if "-1" == s.session_id:
-		d["name"] = "神秘的帅哥"
-		d["photo_url"] = "/res/boy.jpg"
-	elif "-2" == s.session_id:
-		d["name"] = "神秘的美女"
-		d["photo_url"] = "/res/girl.jpg"
+	
+	d["session"] = s.session_id
+	if s.is_visit:
+		print(s.sex,type(s.sex))
+		if 0 == s.sex:
+			d["name"] = "神秘的帅哥"
+			d["photo_url"] = "/res/boy.jpg"
+		else:
+			d["name"] = "神秘的美女"
+			d["photo_url"] = "/res/girl.jpg"
 	else:
 		user = web_profile.ctrl_profile.get(s.user_id)
 		if not user:
@@ -135,7 +167,8 @@ def get_dist(session = None):
 	return d
 
 #############################	unit test	###########################		
-
+def test_visit():
+	pass
 		
 if __name__ == '__main__':
 	run_tests(__file__)		

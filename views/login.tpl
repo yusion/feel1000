@@ -45,11 +45,14 @@
 				if (json.result == "true") {
 					var url = "index2?session="+json.session;
 					jump_to(url);
+					$("#btn_login").enabled();
 					//TODO:保存用户名和密码
 				}
 				else{
 					$("#login_password").val("");
 					alert("登陆失败："+json.msg);
+					$("#btn_login").enabled();
+					$("#login_password").set_focus();
 				}
 		});
 	}   
@@ -71,16 +74,17 @@
 
 
 %if is_test:
-     <script type="text/javascript">
+<script type="text/javascript">
+     jump_url = "";
      QUnit.module("login");
-     QUnit.asyncTest("start",function(assert){
+       QUnit.asyncTest("start",function(assert){
 	$("#link_login").click();
 	assert.ok(true);
 	setTimeout(function() {
 		QUnit.start();
 	}, 300);
      });
-	
+	 
      QUnit.test("check_pass",function(assert){
 	$("#link_login").click();
 	assert.ok($("#login_password-error").text() == "", "error msg is hidden" );
@@ -130,9 +134,10 @@
 		QUnit.start();
 	}, 300);
      });
-     
+
       QUnit.asyncTest("login_failed",function(assert){
-	expect(5);
+	expect(6);
+	jump_url = "";
 	$("#login_nickname").val("ycat");
 	$("#login_password").val("wrongpass");
 	$("#btn_login").click();
@@ -142,37 +147,39 @@
 		assert.equal($("#login_result_msg").val(),"用户名或密码不正确");
 		assert.equal($("#login_password").val(),"");
 		assert.ok($("#btn_login").is_enabled());
+		assert.equal(jump_url,"");
 		QUnit.start();
 	}, 1000);
-      });
-      
-      QUnit.asyncTest("login_success",function(assert){
-	expect(7);
-	$("#nickname").val("test_ycat3");
-	$("#phone").val("13728975541");
-	$("#password").val("123456");
-	$("#age").val("21");
-	$("#radio_female").attr("checked",true);
-	$("#btn_register").click();
-	
-	setTimeout(function() {
-		$("#login_nickname").val("test_ycat3");
-		$("#login_password").val("123456");
-		$("#btn_login").click();
-		assert.ok(!$("#btn_login").is_enabled());
-		assert.equal($("#session").val(),"-1");
-		setTimeout(function() {
-			assert.equal($("#login_result").val(),"true");
-			assert.equal($("#login_result_msg").val(),"test_ycat3, 欢迎您回来");
-			assert.ok($("#btn_login").is_enabled());
-			assert.ok($("#session").val() != "");
-			assert.ok(document.cookie.indexOf($("#session").val()) != -1);
-			$.getJSON("test/del_user");
+      });  
+
+      QUnit.asyncTest("login_success_part1",function(assert){
+	expect(1);
+	$.getJSON("action/register", 
+		{nick: "test_ycat3", 
+		pass: hex_md5("pwdabcd123"),
+		sex:"1"	, 
+		age:"21"},
+		function(json){
+			assert.equal(json.result,"true");
 			QUnit.start();
-		}, 800);
-	}, 400);
-	
-      });
+		});
+       });
       
-     </script>
+      QUnit.asyncTest("login_success_part2",function(assert){
+	expect(5);
+	jump_url = "";
+	$("#login_nickname").val("test_ycat3");
+	$("#login_password").val("abcd123");
+	$("#btn_login").click();
+	assert.ok(!$("#btn_login").is_enabled());
+	setTimeout(function() {
+		assert.equal($("#login_result").val(),"true");
+		assert.equal($("#login_result_msg").val(),"test_ycat3, 欢迎您回来");
+		assert.ok($("#btn_login").is_enabled());
+		assert.ok(jump_url.indexOf("index2?session=")!=-1);
+		$.getJSON("test/del_user");
+		QUnit.start();
+	}, 800);
+       });  
+</script>
 %end     

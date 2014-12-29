@@ -291,6 +291,15 @@ H2{
 			</div>
 		</div>
 	</div>
+	
+	%if is_test:
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2" >
+			<div id="qunit"></div>
+			<div id="qunit-fixture"></div>
+		</div>
+	</div>
+	%end
 </div>
 <!--[if !IE]><!-->
 <script>

@@ -6,9 +6,9 @@
 <form id="form_register" class="form-horizontal">
 	<div class="row">
 		<div class="col-md-12" style="padding-right: 0px;vertical-align: top">
-			<ul id="sex" class="radio_ctrl" value="0">
-				<li id="li_male" value="0" checked="checked"><i class="icon-male" style="color:#326a9d"></i>帅哥</li>
-				<li id="li_female" value="1"><i class="icon-female" style="color:red"></i>美女</li>
+			<ul id="sex" class="radio_ctrl">
+				<li value="0" checked="checked"><i class="icon-male" style="color:#326a9d"></i>帅哥</li>
+				<li value="1"><i class="icon-female" style="color:red"></i>美女</li>
 			</ul>
 		</div>
 	</div>
@@ -47,6 +47,7 @@
 		</div>
 	</div>
 	<input type="hidden" id="result" value="unknown">
+	<input type="hidden" id="session" value="unknown">
 </form>
 
 <script type="text/javascript">
@@ -55,13 +56,14 @@
 		$.getJSON("action/register", 
 		{ 	nick: $("#nickname").val(), 
 			pass: hex_md5("pwd" + $("#password").val()),
-			sex:$("#sex").attr("value"), 
+			sex:$("#sex").get_radio_val(), 
 			age:$("#age").val()},
 			function(json){
 				//TODO:自动登陆，并跳转
 				$("#result").val(json.result);
 				if (json.result == "true") {
 					jump_to("index2?session="+json.session);
+					$("#session").val(json.session);
 				}
 				else{
 					alert("注册失败");
@@ -116,13 +118,26 @@
      QUnit.test("init_value",function(assert){
 	$("#link_register").click();
 	expect(6);
-	assert.ok($("#chk_agreement").hasAttr("checked"),"init value is check");
-	assert.equal($("#sex").attr("value"),"1");
-	assert.ok($("#li_male").attr("checked"),"init radio_male value is check");
+ 	assert.ok($("#chk_agreement").hasAttr("checked"),"init value is check");
+	assert.equal($("#sex").get_radio_val(),"0");
+	assert.ok($("#sex>li:first").hasAttr("checked"),"init radio_male value is check");
 	assert.ok(!$("#li_female").attr("checked"),"init radio_male value is check");
 	assert.equal($("#age").val(),24);
 	//assert.equal($("#phone").val(),""); ie的placeHolder会破坏 
-	assert.equal($("#password").val(),""); ie的placeHolder会破坏 
+	assert.equal($("#password").val(),""); //ie的placeHolder会破坏 
+     });
+     
+      QUnit.test("radio_ctrl",function(assert){
+	expect(4);
+	$("#sex").set_radio_val("1");
+	assert.equal($("#sex").get_radio_val(),"1");
+	$("#sex").set_radio_val("0");
+	assert.equal($("#sex").get_radio_val(),"0");
+
+	$("#sex>li:first").click();
+	assert.equal($("#sex").get_radio_val(),"0");
+	$("#sex>li:nth-child(2)").click();
+	assert.equal($("#sex").get_radio_val(),"1");
      });
 
      QUnit.asyncTest("check_nickname",function(assert){
@@ -187,30 +202,31 @@
 
      
      QUnit.asyncTest("register", function( assert ){
-	expect(1);
+	expect(2);
+	$("#session").val("");
 	$("#nickname").val("test_ycat3"); 
 	$("#password").val("123456");
 	$("#age").val("21");
-	$("#radio_female").attr("checked",true);
+ 	$("#radio_female").attr("checked",true);
 	$("#btn_register").click();
 	
 	setTimeout(function() {
-		assert.ok($("#result").val() == "true", "register success" );	
+		assert.ok($("#result").val() == "true", "register success" );
+		assert.equal(jump_url,"index2?session="+$("#session").val());
 		QUnit.start();
 	}, 400);
      });
      var r;
       QUnit.asyncTest("check_exist", function( assert ){
 	expect(1);
-	
+	var y = new Date().getFullYear() - 21;
 	$.getJSON("test/check_user", 
 		{ 	nick: "test_ycat3", 
 			pass: "123456", 
 			sex:"1",
-			birthdayYear:1993},
+			birthdayYear:y},
 			function(json){
-				r = json;
-				console.log(r);
+				r = json; 
 		});
 		 
 	setTimeout(function() {

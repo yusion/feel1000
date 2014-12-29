@@ -98,7 +98,7 @@
 	box-shadow: 1px 1px 2px transparent;
 }
 
-.btn_ctrl_func(@c1, @c2,@c3,@c4) {
+.btn_ctrl_func(@c1,@c2,@c3,@c4) {
 	.btn_ctrl;
 	background-color: @c2;
 	background: -webkit-linear-gradient(@c1,@c2,@c3); /* Safari 5.1 - 6.0 */
@@ -109,11 +109,24 @@
 	border-left-color: @c1;
 	border-bottom-color: @c4;
 	border-right-color: @c4;
-	
-	&:hover{
+	 
+	&:enabled{
+		&:hover{
 		.btn_ctrl_hover;
 		border-top-color: @c4;
 		border-left-color: @c4;
+		}
+	}
+	
+	&:disabled{
+		color:gray;
+		@b1:#ebebeb;
+		@b2:#d9d9d9;
+		@b3:#c7c7c7;
+		background: -webkit-linear-gradient(@b1,@b2,@b3); /* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(@b1,@b2,@b3); /* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(@b1,@b2,@b3); /* Firefox 3.6 - 15 */
+		background: linear-gradient(@b1,@b2,@b3); /* 标准的语法 */
 	}
 	
 	>i{
@@ -759,7 +772,7 @@ ul.radio_ctrl{
 }
 
 .pwd_placeholder_lg{
-	background: url('/res/small_icon.png') 10px -242px no-repeat;
+	background: url('/res/small_icon.png') -4px -242px no-repeat;
 }
 
 /* 首页的paging处理*/

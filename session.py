@@ -65,7 +65,8 @@ def login(loginName,password):
 	c.execute("SELECT ID,NickName,Sex,birthdayYear,certfState,Password FROM u_user WHERE password=? AND nickname=?",(password,loginName))
 	rows = c.fetchall()
 	if len(rows) == 0:
-		utility.write_log(-1,"登陆失败",0)
+		print("SELECT ID,NickName,Sex,birthdayYear,certfState,Password FROM u_user WHERE password='%s' AND nickname='%s'"%(password,loginName))
+		utility.write_log(-1,loginName+"登陆失败",0)
 		return None
 	r = rows[0]
 	user = session_data()

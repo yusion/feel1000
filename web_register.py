@@ -69,7 +69,7 @@ def url_test_check_user():
 	sql = "SELECT COUNT(*) FROM u_user WHERE nickname='%s' and password='%s' and sex=%d and birthdayYear=%d" %	(bottle.request.params["nick"],
 		utility.md5("pwd"+bottle.request.params["pass"]),int(bottle.request.params["sex"])
 		,int(bottle.request.params["birthdayYear"]))	
-	
+	print(sql)
 	r = utility.get_cursor().execute(sql)
 	return str(r.fetchone()[0]) 
 

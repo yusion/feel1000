@@ -59,7 +59,7 @@ def test_login():
 	utility.check_log(user.user_id,"登陆成功",1,1)
 	assert 2 == len(session.g_session_data)
 	assert not session.login("noexit","passwtest")
-	utility.check_log(-1,"登陆失败",0)
+	utility.check_log(-1,"noexit登陆失败",0)
 	user = session.login("ycat","passwtest")
 	#utility.check_log(user.user_id,"登陆成功",1)
 	ycatID = user.session_id

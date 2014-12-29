@@ -98,6 +98,9 @@ if(!String.prototype.trim2){
         },
         enabled:function(){
           $(this).removeAttr("disabled");
+        },
+        set_focus: function(){
+          $(this).focus().select();  
         }
     })
 })(jQuery);
@@ -935,7 +938,8 @@ $.fn.checkbox_ctrl = function () {
   <li value="1" checked="checked">帅哥</li>
   <li value="0">美女</li>
 </ul>
-取值方法，取ul的value属性 
+取值方法，取li的有checked属性的item
+例如 $("ul>li[checked]")
 */
 $.fn.radio_ctrl = function () {
   $(this).children("li").click(function(){
@@ -945,12 +949,25 @@ $.fn.radio_ctrl = function () {
     }
     else
     {
-      $(this).parent().attr("value",$(this).val());
       $(this).siblings().removeAttr("checked")
       $(this).attr("checked","checked");
     }
    });
 };
+
+$.fn.set_radio_val= function(value){
+  $(this).children("li").removeAttr("checked");
+  $(this).children("li").each(function(){
+    if ($(this).val() == value) {
+      $(this).attr("checked","checked");
+    }
+  });
+};
+
+$.fn.get_radio_val = function(){
+  return $(this).children("li[checked]").val();
+};
+
 
 //自动回到顶端的小火箭
 //html： <a class="visible-md visible-lg" id="returnTop" href="javascript:;">回到顶部</a>
@@ -1074,7 +1091,6 @@ var jump_url = "";
 
 function jump_to(url)
 {//跳转到某一页面
-  alert(is_test());
   if (!is_test()) {
     location.href=url;
   }

@@ -45,11 +45,12 @@
 /*按钮设计*/
 .btn_ctrl {
   position: inherit;
+  height: 38px;
   font-size: 14px;
   border-radius: 10px;
-  box-shadow: 3px 3px 3px gray;
+  box-shadow: 1px 1px 2px gray;
   border: 1px solid white;
-  border-bottom-width: 3px;
+  border-bottom-width: 2px;
   cursor: pointer;
   vertical-align: middle;
   text-align: center;
@@ -63,17 +64,17 @@
   position: relative;
   top: 1px;
   left: 2px;
-  border-bottom-width: 2px;
-  margin-bottom: 2px;
-  box-shadow: 2px 2px 2px transparent;
+  border-bottom-width: 1px;
+  box-shadow: 1px 1px 2px transparent;
 }
 .green_btn {
   position: inherit;
+  height: 38px;
   font-size: 14px;
   border-radius: 10px;
-  box-shadow: 3px 3px 3px gray;
+  box-shadow: 1px 1px 2px gray;
   border: 1px solid white;
-  border-bottom-width: 3px;
+  border-bottom-width: 2px;
   cursor: pointer;
   vertical-align: middle;
   text-align: center;
@@ -96,26 +97,37 @@
   border-bottom-color: #518208;
   border-right-color: #518208;
 }
-.green_btn:hover {
+.green_btn:enabled:hover {
   position: relative;
   top: 1px;
   left: 2px;
-  border-bottom-width: 2px;
-  margin-bottom: 2px;
-  box-shadow: 2px 2px 2px transparent;
+  border-bottom-width: 1px;
+  box-shadow: 1px 1px 2px transparent;
   border-top-color: #518208;
   border-left-color: #518208;
+}
+.green_btn:disabled {
+  color: gray;
+  background: -webkit-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* 标准的语法 */
 }
 .green_btn > i {
   margin-right: 4px;
 }
 .blue_btn {
   position: inherit;
+  height: 38px;
   font-size: 14px;
   border-radius: 10px;
-  box-shadow: 3px 3px 3px gray;
+  box-shadow: 1px 1px 2px gray;
   border: 1px solid white;
-  border-bottom-width: 3px;
+  border-bottom-width: 2px;
   cursor: pointer;
   vertical-align: middle;
   text-align: center;
@@ -138,26 +150,37 @@
   border-bottom-color: #326a9d;
   border-right-color: #326a9d;
 }
-.blue_btn:hover {
+.blue_btn:enabled:hover {
   position: relative;
   top: 1px;
   left: 2px;
-  border-bottom-width: 2px;
-  margin-bottom: 2px;
-  box-shadow: 2px 2px 2px transparent;
+  border-bottom-width: 1px;
+  box-shadow: 1px 1px 2px transparent;
   border-top-color: #326a9d;
   border-left-color: #326a9d;
+}
+.blue_btn:disabled {
+  color: gray;
+  background: -webkit-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* 标准的语法 */
 }
 .blue_btn > i {
   margin-right: 4px;
 }
 .red_btn {
   position: inherit;
+  height: 38px;
   font-size: 14px;
   border-radius: 10px;
-  box-shadow: 3px 3px 3px gray;
+  box-shadow: 1px 1px 2px gray;
   border: 1px solid white;
-  border-bottom-width: 3px;
+  border-bottom-width: 2px;
   cursor: pointer;
   vertical-align: middle;
   text-align: center;
@@ -180,26 +203,37 @@
   border-bottom-color: #b6134a;
   border-right-color: #b6134a;
 }
-.red_btn:hover {
+.red_btn:enabled:hover {
   position: relative;
   top: 1px;
   left: 2px;
-  border-bottom-width: 2px;
-  margin-bottom: 2px;
-  box-shadow: 2px 2px 2px transparent;
+  border-bottom-width: 1px;
+  box-shadow: 1px 1px 2px transparent;
   border-top-color: #b6134a;
   border-left-color: #b6134a;
+}
+.red_btn:disabled {
+  color: gray;
+  background: -webkit-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* 标准的语法 */
 }
 .red_btn > i {
   margin-right: 4px;
 }
 .gray_btn {
   position: inherit;
+  height: 38px;
   font-size: 14px;
   border-radius: 10px;
-  box-shadow: 3px 3px 3px gray;
+  box-shadow: 1px 1px 2px gray;
   border: 1px solid white;
-  border-bottom-width: 3px;
+  border-bottom-width: 2px;
   cursor: pointer;
   vertical-align: middle;
   text-align: center;
@@ -222,26 +256,37 @@
   border-bottom-color: #717171;
   border-right-color: #717171;
 }
-.gray_btn:hover {
+.gray_btn:enabled:hover {
   position: relative;
   top: 1px;
   left: 2px;
-  border-bottom-width: 2px;
-  margin-bottom: 2px;
-  box-shadow: 2px 2px 2px transparent;
+  border-bottom-width: 1px;
+  box-shadow: 1px 1px 2px transparent;
   border-top-color: #717171;
   border-left-color: #717171;
+}
+.gray_btn:disabled {
+  color: gray;
+  background: -webkit-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* 标准的语法 */
 }
 .gray_btn > i {
   margin-right: 4px;
 }
 .orange_btn {
   position: inherit;
+  height: 38px;
   font-size: 14px;
   border-radius: 10px;
-  box-shadow: 3px 3px 3px gray;
+  box-shadow: 1px 1px 2px gray;
   border: 1px solid white;
-  border-bottom-width: 3px;
+  border-bottom-width: 2px;
   cursor: pointer;
   vertical-align: middle;
   text-align: center;
@@ -264,26 +309,37 @@
   border-bottom-color: #a96500;
   border-right-color: #a96500;
 }
-.orange_btn:hover {
+.orange_btn:enabled:hover {
   position: relative;
   top: 1px;
   left: 2px;
-  border-bottom-width: 2px;
-  margin-bottom: 2px;
-  box-shadow: 2px 2px 2px transparent;
+  border-bottom-width: 1px;
+  box-shadow: 1px 1px 2px transparent;
   border-top-color: #a96500;
   border-left-color: #a96500;
+}
+.orange_btn:disabled {
+  color: gray;
+  background: -webkit-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* 标准的语法 */
 }
 .orange_btn > i {
   margin-right: 4px;
 }
 .yellow_btn {
   position: inherit;
+  height: 38px;
   font-size: 14px;
   border-radius: 10px;
-  box-shadow: 3px 3px 3px gray;
+  box-shadow: 1px 1px 2px gray;
   border: 1px solid white;
-  border-bottom-width: 3px;
+  border-bottom-width: 2px;
   cursor: pointer;
   vertical-align: middle;
   text-align: center;
@@ -293,39 +349,50 @@
   display: inline-block;
   font-weight: bold;
   background-color: #ffff99;
-  background: -webkit-linear-gradient(#ffffcc, #ffff99, #ffff66);
+  background: -webkit-linear-gradient(#ffffcc, #ffff99, #e4e530);
   /* Safari 5.1 - 6.0 */
-  background: -o-linear-gradient(#ffffcc, #ffff99, #ffff66);
+  background: -o-linear-gradient(#ffffcc, #ffff99, #e4e530);
   /* Opera 11.1 - 12.0 */
-  background: -moz-linear-gradient(#ffffcc, #ffff99, #ffff66);
+  background: -moz-linear-gradient(#ffffcc, #ffff99, #e4e530);
   /* Firefox 3.6 - 15 */
-  background: linear-gradient(#ffffcc, #ffff99, #ffff66);
+  background: linear-gradient(#ffffcc, #ffff99, #e4e530);
   /* 标准的语法 */
-  color: #ff9900;
+  color: #cc6600;
   border-left-color: #ffffcc;
-  border-bottom-color: #ff9900;
-  border-right-color: #ff9900;
+  border-bottom-color: #cc6600;
+  border-right-color: #cc6600;
 }
-.yellow_btn:hover {
+.yellow_btn:enabled:hover {
   position: relative;
   top: 1px;
   left: 2px;
-  border-bottom-width: 2px;
-  margin-bottom: 2px;
-  box-shadow: 2px 2px 2px transparent;
-  border-top-color: #ff9900;
-  border-left-color: #ff9900;
+  border-bottom-width: 1px;
+  box-shadow: 1px 1px 2px transparent;
+  border-top-color: #cc6600;
+  border-left-color: #cc6600;
+}
+.yellow_btn:disabled {
+  color: gray;
+  background: -webkit-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* 标准的语法 */
 }
 .yellow_btn > i {
   margin-right: 4px;
 }
 .purple_btn {
   position: inherit;
+  height: 38px;
   font-size: 14px;
   border-radius: 10px;
-  box-shadow: 3px 3px 3px gray;
+  box-shadow: 1px 1px 2px gray;
   border: 1px solid white;
-  border-bottom-width: 3px;
+  border-bottom-width: 2px;
   cursor: pointer;
   vertical-align: middle;
   text-align: center;
@@ -348,15 +415,25 @@
   border-bottom-color: #782c7b;
   border-right-color: #782c7b;
 }
-.purple_btn:hover {
+.purple_btn:enabled:hover {
   position: relative;
   top: 1px;
   left: 2px;
-  border-bottom-width: 2px;
-  margin-bottom: 2px;
-  box-shadow: 2px 2px 2px transparent;
+  border-bottom-width: 1px;
+  box-shadow: 1px 1px 2px transparent;
   border-top-color: #782c7b;
   border-left-color: #782c7b;
+}
+.purple_btn:disabled {
+  color: gray;
+  background: -webkit-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(#ebebeb, #d9d9d9, #c7c7c7);
+  /* 标准的语法 */
 }
 .purple_btn > i {
   margin-right: 4px;
@@ -785,39 +862,41 @@ ul.radio_ctrl li {
   display: inline-block;
   margin-right: 15px;
   padding: 5px 20px 5px 10px;
-  border: 2px solid transparent;
+  border: 2px solid #E0E0E0;
   border-radius: 5px;
-  background-color: #E0E0E0;
+  background-color: white;
 }
 ul.radio_ctrl li[checked] {
-  border-color: orange;
+  background: url("/res/small_icon.png") no-repeat right -120px;
+  border-color: #d588ac;
 }
 ul.radio_ctrl li:hover {
-  border-color: #ff3333;
+  border-color: #d588ac;
 }
-/* 自动回到顶端的小火箭
- * <a class="visible-md visible-lg" id="returnTop" href="javascript:;">回到顶部</a>
- */
+/* 自动回到顶端的小火箭 */
 #returnTop {
   position: fixed;
   z-index: 999;
-  right: 15px;
-  bottom: -100px;
-  width: 30px;
-  height: 165px;
- 
-  text-indent: -999px;
+  right: 130px;
+  bottom: -50px;
+  width: 39px;
+  height: 100px;
   overflow: hidden;
   background-image: url('/res/small_icon.png');
   background-repeat: no-repeat;
-  background-position: -122px 0px;
+  background-position: -160px -103px;
   transition: bottom 0.9s;
   -webkit-transition: bottom 0.9s;
   -moz-transition: bottom 0.9s;
   -o-transition: bottom 0.9s;
+  color: black;
+  font-size: small;
+  text-decoration: none;
+  padding-top: 67px;
+  padding-left: 4px;
 }
 #returnTop:hover {
-  background-position: -122px -65px;
+  background-position: -207px -103px;
 }
 /*主页的新成员展示CSS */
 #div_new_member .carousel {
@@ -884,7 +963,7 @@ ul.radio_ctrl li:hover {
   background: url('/res/small_icon.png') 0px -220px no-repeat;
 }
 .pwd_placeholder_lg {
-  background: url('/res/small_icon.png') 10px -242px no-repeat;
+  background: url('/res/small_icon.png') -4px -242px no-repeat;
 }
 /* 首页的paging处理*/
 #page_menu li {

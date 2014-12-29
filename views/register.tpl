@@ -61,7 +61,6 @@
 				//TODO:自动登陆，并跳转
 				$("#result").val(json.result);
 				if (json.result == "true") {
-					alert("index2?session="+json.session);
 					jump_to("index2?session="+json.session);
 				}
 				else{

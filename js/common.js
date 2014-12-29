@@ -1070,9 +1070,17 @@ function delCookie(name)
         document.cookie= name + "="+cval+";expires="+exp.toGMTString();
 }
 
+var jump_url = "";
+
 function jump_to(url)
-{//跳转到某一页面 
-  location.href=url;
+{//跳转到某一页面
+  alert(is_test());
+  if (!is_test()) {
+    location.href=url;
+  }
+  else {
+    jump_url = url;  
+  }
 }
 
 function init_common()

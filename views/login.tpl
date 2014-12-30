@@ -16,9 +16,10 @@
 	</div>  
 	<div class="row ">
 		<div class="col-md-8">
-		   <div class="checkbox_ctrl text-left" >下次自动登录</div>
+		   <div id="div_autologin" class="checkbox_ctrl text-left" >下次自动登录</div>
 		</div>
 		<div class="pull-right col-md-4">
+		   <!-- TODO: 自动发送密码到邮箱中，需经过身份认证 -->
 		   <a href="reset_pwd.html" target="_blank" style="color:gray">忘记密码？</a>
 		</div>
 	</div>
@@ -43,10 +44,12 @@
 				$("#login_result").val(json.result);
 				$("#login_result_msg").val(json.msg);
 				if (json.result == "true") {
-					var url = "index2?session="+json.session;
-					jump_to(url);
+					var params = {"session":json.session};
+					if ($("#div_autologin").is_check()) {
+						params.save = "1";
+					}
+					jump_to("index2",params);
 					$("#btn_login").enabled();
-					//TODO:保存用户名和密码
 				}
 				else{
 					$("#login_password").val("");
@@ -72,7 +75,6 @@
 	});
 </script>
 
-
 %if is_test:
 <script type="text/javascript">
      jump_url = "";
@@ -85,6 +87,19 @@
 	}, 300);
      });
 	 
+     QUnit.test("checkbox",function(assert){
+	expect(5);
+	assert.ok(!$("#div_autologin").is_check());
+	$("#div_autologin").set_check(true);
+	assert.ok($("#div_autologin").is_check());
+	$("#div_autologin").set_check(false);
+	assert.ok(!$("#div_autologin").is_check());
+	$("#div_autologin").click();
+	assert.ok($("#div_autologin").is_check());
+	$("#div_autologin").click();
+	assert.ok(!$("#div_autologin").is_check());
+     });
+     
      QUnit.test("check_pass",function(assert){
 	$("#link_login").click();
 	assert.ok($("#login_password-error").text() == "", "error msg is hidden" );
@@ -166,17 +181,41 @@
        });
       
       QUnit.asyncTest("login_success_part2",function(assert){
-	expect(5);
+	expect(7);
 	jump_url = "";
+	jump_param = null;
 	$("#login_nickname").val("test_ycat3");
 	$("#login_password").val("abcd123");
 	$("#btn_login").click();
+	$("#div_autologin").set_check(false);
 	assert.ok(!$("#btn_login").is_enabled());
 	setTimeout(function() {
 		assert.equal($("#login_result").val(),"true");
 		assert.equal($("#login_result_msg").val(),"test_ycat3, 欢迎您回来");
 		assert.ok($("#btn_login").is_enabled());
-		assert.ok(jump_url.indexOf("index2?session=")!=-1);
+		assert.equal(jump_url,"index2");
+		assert.ok(jump_param["session"]);
+		assert.ok(!jump_param["save"]); 
+		QUnit.start();
+	}, 800);
+       });
+      
+       QUnit.asyncTest("login_success_part2",function(assert){
+	expect(7);
+	jump_url = "";
+	jump_param = null;
+	$("#login_nickname").val("test_ycat3");
+	$("#login_password").val("abcd123");
+	$("#btn_login").click();
+	$("#div_autologin").set_check(true);
+	assert.ok(!$("#btn_login").is_enabled());
+	setTimeout(function() {
+		assert.equal($("#login_result").val(),"true");
+		assert.equal($("#login_result_msg").val(),"test_ycat3, 欢迎您回来");
+		assert.ok($("#btn_login").is_enabled());
+		assert.equal(jump_url,"index2");
+		assert.ok(jump_param["session"]);
+		assert.ok(jump_param["save"]); 
 		$.getJSON("test/del_user");
 		QUnit.start();
 	}, 800);

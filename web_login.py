@@ -3,7 +3,7 @@
 import pytest,threading
 import sys,os,bottle,json
 import session,utility
-import common.timer,time
+import common.timer,time,datetime
 from web_register import clear_test_user2,ctrl_user_manager,sex_type
 
 @bottle.route('/login')	
@@ -55,14 +55,72 @@ def web_login(nickname,password):
 		g_loginFailedCountLock.release()
 		return {"result":"false","msg":"用户名或密码不正确"}
 
+#TODO: 注册URL和登陆的URL可能被复制。。。需要根据时间进行，，加解密，或者增加另一个字符串，，，
 @bottle.route('/action/login')	
 def url_login():
 	return json.dumps(web_login(bottle.request.params["nick"],bottle.request.params["pass"]))
 	
-@bottle.route('/action/logout')	
+@bottle.route('/logout')	
 def url_logout():
 	session.logout()
-	return ""
+	bottle.response.delete_cookie("uname")
+	bottle.response.delete_cookie("pwd")
+	bottle.response.delete_cookie("session") 
+	bottle.redirect("/index")
+
+@bottle.route('/')
+@bottle.route('/index')	 
+def url_index():
+	nick = bottle.request.get_cookie("uname",secret="abc123")
+	pwd = bottle.request.get_cookie("pwd",secret="abc123")
+	if nick and pwd:
+		#保存了cookies
+		user = session.login(nick,pwd)
+		if user:
+			bottle.response.set_cookie('session',user.session_id)
+			bottle.redirect("/index2")
+			return
+	
+	d = session.get_dist2()
+	d["register"] = utility.get_template_file("views/register.tpl",d)
+	d["login"] = utility.get_template_file("views/login.tpl",d)
+	return bottle.template('index', d)
+
+@bottle.route('/index2',method='GET')
+@bottle.route('/index2',method='POST')
+def url_index2():
+	s = None
+	save = False
+	if bottle.request.query.sex:
+		#直接访问 
+		i = int(bottle.request.query.sex)
+		if i != 1 and i != 0:
+			i = 0
+		s = session.visit(i)
+		
+	elif bottle.request.forms.session:
+		#注册用户访问 
+		s = session.get(bottle.request.forms.session) 
+		if bottle.request.forms.save:
+			save = True
+	else:
+		#从保存cookies的index页面中直接redirect过来的情况   
+		session_id = utility.get_session_id()
+		if session_id != "-1":
+			s = session.get(session_id) 
+
+	if not s:
+		bottle.redirect("/")
+
+	timeout = utility.now() + datetime.timedelta(days = 365)		
+	if save:
+		bottle.response.set_cookie("uname",s.nickname,secret="abc123",expires=timeout)
+		bottle.response.set_cookie("pwd",s.pwd,secret="abc123",expires=timeout) 
+	
+	bottle.response.set_cookie("loginstate","yes",expires=timeout) #标识用户已经登陆过  
+	bottle.response.set_cookie('session',s.session_id)
+	d = session.get_dist(s)
+	return bottle.template('index2', d)
 
 #############################	unit test	###########################
 def test_set():

@@ -43,7 +43,7 @@
 	</div>
 	<div class="row" style="margin-bottom: 4px">
 		<div class="col-md-12">
-			<button id="btn_register" type="submit" style="width:100%;font-size: 18px;height:45px" class="green_btn">×¢&nbsp; ²á&nbsp;<i class="icon-note" style="color:mediumorchid"></i></button>
+			<button id="btn_register" type="button" style="width:100%;font-size: 18px;height:45px" class="green_btn">×¢&nbsp; ²á&nbsp;<i class="icon-note" style="color:mediumorchid"></i></button>
 		</div>
 	</div>
 	<input type="hidden" id="result" value="unknown">
@@ -59,10 +59,10 @@
 			sex:$("#sex").get_radio_val(), 
 			age:$("#age").val()},
 			function(json){
-				//TODO:×Ô¶¯µÇÂ½£¬²¢Ìø×ª
 				$("#result").val(json.result);
 				if (json.result == "true") {
-					jump_to("index2?session="+json.session);
+					var params = {"session":json.session};
+					jump_to("index2",params);
 					$("#session").val(json.session);
 				}
 				else{
@@ -202,17 +202,20 @@
 
      
      QUnit.asyncTest("register", function( assert ){
-	expect(2);
+	expect(3);
 	$("#session").val("");
 	$("#nickname").val("test_ycat3"); 
 	$("#password").val("123456");
 	$("#age").val("21");
  	$("#radio_female").attr("checked",true);
 	$("#btn_register").click();
+	jump_url = "";
+	jump_params = null;
 	
 	setTimeout(function() {
 		assert.ok($("#result").val() == "true", "register success" );
-		assert.equal(jump_url,"index2?session="+$("#session").val());
+		assert.equal(jump_url,"index2");
+		assert.equal(jump_params["session"],$("#session").val());
 		QUnit.start();
 	}, 400);
      });

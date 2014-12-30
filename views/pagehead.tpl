@@ -29,7 +29,10 @@
      <div class="col-md-3 col-md-pull-1 visible-md visible-lg">
 	<div style="float: right;color:white">
 		<div class="dropdown dropdown-hover">
-			µÇÂ½|×¢²á
+		 	<div id="div_visit">
+				<a href="/index?register">×¢²á</a>
+				<a href="/index?login">µÇÂ½</a>
+			</div>
 			<img src="{{photo_url}}" style="width:30px;heigth:auto"></img>
 			<button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" style="color:white">
 				{{name}}
@@ -44,7 +47,7 @@
 			   </li>
 			   <li role="presentation" class="divider"></li>
 			   <li role="presentation">
-			      <a id="link_logout" role="menuitem" tabindex="-1" href="/action/logout">ÍË³öµÇÂ½</a>
+			      <a id="link_logout" role="menuitem" tabindex="-1" href="/logout">ÍË³öµÇÂ½</a>
 			   </li>
 			</ul>
 	     </div>

@@ -167,6 +167,10 @@ H2{
 		});
 		
 		set_background_img("res/index_background.jpg")
+		
+		if (getCookie("loginstate")) {
+			$("#link_login").click();
+		}
 	});
 </script>	
 <div id="index_container" class="container" style="width:100%;padding: 0 0 0 0">

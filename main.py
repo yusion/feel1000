@@ -29,36 +29,9 @@ def get_js_file(path):
 def get_file(path):
 	return bottle.static_file(path,"./jquery-easyui-1.3.2")
 
-@bottle.route('/')
-@bottle.route('/index')	 
-def url_index():
-	d = session.get_dist2()
-	d["register"] = utility.get_template_file("views/register.tpl",d)
-	d["login"] = utility.get_template_file("views/login.tpl",d)
-	return bottle.template('index', d)
-
-@bottle.route('/index2')	 
-def url_index():
-	s = None
-	if bottle.request.query.sex:
-		i = int(bottle.request.query.sex)
-		if i != 1 and i != 0:
-			i = 0
-		s = session.visit(i)
-		
-	elif bottle.request.query.session:
-		s = session.get(bottle.request.query.session)
-	
-	if not s:
-		bottle.redirect("/index")
-		
-	bottle.response.add_header('Set-Cookie', 'session='+ s.session_id)
-	d = session.get_dist(s)
-	return bottle.template('index2', d)
-
 if __name__ == '__main__':
 	print("python " + platform.python_version())
-	utility.set_is_test(True);
+	#utility.set_is_test(True);
 	os.chdir(os.path.dirname(__file__))
 	
 	#if utility.is_test():

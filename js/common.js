@@ -919,17 +919,23 @@ function data_format(elems) {
 
 //自定义的checkbox
 //html写法 <span class="checkbox_ctrl" checked="true">广东省</span>
-//注意用hasAttr来判断是否被选中，ie好象用attr("checked")查询不到 
+//注意用is_check来判断是否被选中
+$.fn.set_check = function (value) {
+  if(value) {
+    $(this).attr("checked","true");
+  }
+  else{
+    $(this).removeAttr("checked");
+  }
+};
+
+$.fn.is_check = function () {
+  return $(this).hasAttr("checked"); //ie好象用attr("checked")查询不到  
+};
+
 $.fn.checkbox_ctrl = function () {
   $(this).click(function(){
-    if($(this).hasAttr("checked"))
-    {
-      $(this).removeAttr("checked");
-    }
-    else
-    {
-      $(this).attr("checked","true");
-    }
+    $(this).set_check(!$(this).is_check());
    });
 };
 
@@ -1088,14 +1094,33 @@ function delCookie(name)
 }
 
 var jump_url = "";
+var jump_param = null;
 
-function jump_to(url)
+function jump_to(url,params)
 {//跳转到某一页面
-  if (!is_test()) {
-    location.href=url;
-  }
-  else {
+  if (is_test()) {
+    jump_param = params;
     jump_url = url;  
+  }
+  if (!params) {
+    location.href=url;
+    return;
+  }
+  else{
+      //构造表单对象，产生post请求 
+      var postForm = document.createElement("form");
+      postForm.method="post";   
+      postForm.action = url;   
+      for (p in params)
+      {
+        var input = document.createElement("input");
+        input.setAttribute("name", p) ;   
+        input.setAttribute("value", params[p]);
+        postForm.appendChild(input);   
+      }
+      document.body.appendChild(postForm);   
+      postForm.submit() ;   
+      document.body.removeChild(postForm);
   }
 }
 

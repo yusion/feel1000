@@ -1093,6 +1093,11 @@ function delCookie(name)
         document.cookie= name + "="+cval+";expires="+exp.toGMTString();
 }
 
+function is_visit()
+{
+  return $("#session").val().length < 8;
+}
+
 var jump_url = "";
 var jump_param = null;
 

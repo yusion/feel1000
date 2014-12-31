@@ -573,29 +573,32 @@
 .div_album_user{
 	text-align: center;
 	padding: 24px 10px 0px 5px;
-	margin-right: -10px;
-	button{
-		width:100%;
-		margin-bottom:10px;
-	}
+	margin-right: -10px; 
 }
 
-#div_album_container{
-	background-color: white;
+#div_album_container{ 
 	.row{
-		margin-bottom: 15px;
-		>HR{
-			border:1px solid gray;
-			margin: 20px 15px 20px 15px;
-		}
+		margin-bottom: 0px;
 	}
 }
 
 .div_album_detail{
-	padding-top: 24px;
-	padding-right: 20px;
+	background-color: white;
+	margin: 20px 0px 20px 0px;
+	padding: 20px 20px 0px 20px;
+	HR{
+		margin: 10px 0 10px 0;
+	}
+	
+	.div_arrow{
+		width:25px;height:30px;
+		position: absolute;
+		left:0px;
+		top: 30px;
+		background: url("/res/small_icon.png") no-repeat -252px -113px;
+	}
+	
 	.div_album_detail_text{
-		padding-top: 10px;
 		min-height: 100px;	
 	}
 	.div_album_detail_img{
@@ -607,7 +610,6 @@
 	}
 	.likeit_list{
 		padding-top: 10px;
-		padding-left: 20px;
 	}
 }
 

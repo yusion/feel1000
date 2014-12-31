@@ -71,7 +71,7 @@ class user_profile:
 		if self.hasphoto:
 			return self.normal_photo_url
 		else:
-			return "res/man_unknown.gif"
+			return "res/unknownprofile.jpg"
 	
 	def update(self,key,value):
 		lowKey = key.lower()

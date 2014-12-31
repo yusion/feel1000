@@ -154,7 +154,7 @@ def _get_profile_dist(d,s):
 		if not user:
 			return
 		d["name"] = user.nickname
-		d["photo_url"] = user.small_photo_url
+		d["photo_url"] = user.photo_url
 
 def get_dist(session = None):
 	d = get_dist2()

@@ -19,34 +19,34 @@
 		<div class="collapse navbar-collapse" id="my_navbar-collapse">
 		   <ul class="nav navbar-nav">
 			<li  class="active"><a href="index2"><i class="icon-home"></i> 主页</a></li>
-			<li><a href="#"><i class="icon-conversation"></i> 动态</a></li>
+			<li><a href="all_space"><i class="icon-conversation"></i> 动态</a></li>
 		        <li><a href="search"><i class="icon-search"></i> 查找</a></li>  
 			<li><a href="my_space"><i class="icon-user"></i> 我的空间</a></li>
 		   </ul>
 		</div>
 	     </nav>
      </div>
-     <div class="col-md-3 col-md-pull-1 visible-md visible-lg">
-	<div style="float: right;color:white">
-		<div class="dropdown dropdown-hover">
-		 	<div id="div_visit">
-				<a href="/index?register">注册</a>
-				<a href="/index?login">登陆</a>
-			</div>
-			<img src="{{photo_url}}" style="width:30px;heigth:auto"></img>
+     <div class="col-md-3 col-md-pull-1">
+	<div style="float: right;color:white;vertical-align: middle">
+		<div id="div_visit" class="in_block">
+			<a href="/index?register"  style="color:white">注册</a>
+			<a href="/index?login"  style="color:white">登陆</a>
+		</div>
+		<img src="{{photo_url}}" style="width:30px;heigth:auto" class="in_block"></img>
+		<div id="div_user_menu" class="dropdown dropdown-hover in_block">
 			<button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" style="color:white">
 				{{name}}
 			   <span class="caret"></span>
 			</button>
-			<ul class="dropdown-menu pull-right small" role="menu" >
-			   <li role="presentation">
+			<ul class="dropdown-menu pull-right1" role="menu" >
+			   <li role="presentation"  class="small">
 			      <a role="menuitem" tabindex="-1" href="#">我的好友</a>
 			   </li>
-			   <li role="presentation">
+			   <li role="presentation"  class="small">
 			      <a role="menuitem" tabindex="-1" href="#">帐号设置</a>
 			   </li>
 			   <li role="presentation" class="divider"></li>
-			   <li role="presentation">
+			   <li role="presentation" class="small">
 			      <a id="link_logout" role="menuitem" tabindex="-1" href="/logout">退出登陆</a>
 			   </li>
 			</ul>
@@ -64,6 +64,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function(e){
+		if (!is_visit()) {
+			$("#div_visit").hide();
+		}
+		
 		$("#nav_main .active").removeClass("active");
 		$("#nav_main .navbar-nav a").each(function(){
 			//set active tab 
@@ -83,5 +87,10 @@
 			}
 		});
 	});
-</script>	
+</script>
+<style type="text/css">
+#div_user_menu ul{
+	min-width: 100px;
+}
+</style>	
 <!-- this is page head end -->

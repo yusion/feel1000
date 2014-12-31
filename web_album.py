@@ -15,3 +15,11 @@ def url_show_album():
 @view('certif')	
 def url_show_certif():
 	return session.get_dist()
+
+@route('/all_space')
+@view('all_space')
+def url_show_all_space():
+	d = session.get_dist()
+	d["show_all"] = "true"
+	d["album"] = utility.get_template_file("views/album2.tpl",d)
+	return d

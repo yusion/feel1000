@@ -15,19 +15,6 @@
 	margin-bottom: 10px;
 }
 
-
-.link_show_reply{
-	padding: 10px 10px 0px 10px;
-	margin-right: 10px;
-}
-
-.div_show_reply{
-	width:auto;
-	margin-top: 33px;
-	float:right;
-	vertical-align: bottom;
-}
-
 .div_album_title{
 	height: 30px;
 	width:100%;
@@ -40,6 +27,7 @@
 	//展开收起回复按钮
 	function link_show_reply(item)
 	{
+		return;
 		var c = item.parents(".div_album_detail").find(".div_reply_container");
 		var i = c.find(".div_reply_one_container").length;
 		if (c.hasClass("reply_expand")) {
@@ -162,10 +150,8 @@
 		<div> <!-- col div -->
 			<div class="div_album_user">
 				<img src="res/test/a (7).jpg" class="img_profile_sm {{onlineState}}"></img>
-				<strong>气候暖</strong>
-				<i class="icon-heart"></i><span class="text_like_num">221</span>喜欢&nbsp;&nbsp;|
 				<div class="div_likeit">
-					<a>喜欢</a>
+					<a><i class="icon-heart"></i>喜欢</a>
 					<div class=" btn-group dropdown-hover" style="float:right">
 						<a  class="dropdown-toggle"  data-toggle="dropdown">
 						   不喜欢
@@ -182,13 +168,12 @@
 		<div> <!-- col div -->
 			<div class="div_album_detail">
 				<div class="div_arrow"></div>
-				<strong>气候暖</strong> 发表了一篇日志  <span>2013-7-21&nbsp;10:35</span>
-				
+				<strong>气候暖</strong>发表了一篇日志  <span>2013-7-21&nbsp;10:35</span>
 				<div class="small1" style="float:right;color:gray">
 					广州|21岁|178cm|大专|
 					<i class="icon-picture">相片(5)</i>|
 					<i class="icon-eye-open">浏览(58)</i>
-				</div>
+				</div>	
 				<HR>
 				<div class="div_album_detail_text">
 					报道称，国际能源署在一年一度的《世界能源展望》报告中预测，全球能源需求到2040年将增长37%，从去年的每天9000万桶，上升至每天1亿400万桶。尽管气候暖化问题受到关注，但石化燃料仍将是主要的能源来源。
@@ -199,57 +184,56 @@
 						<img src="res/test/a ({{random.randint(1,15)}}).jpg"></img>
 					%end					
 				</div>
-				<div sytle="width:100%">
-					<ul class="list-inline likeit_list in_block" style="width:80%">
+				<HR>
+				<div sytle="width:100%;">
+					<ul class="list-inline likeit_list in_block" style="width:100%">
 						%for m in range(5):
-						<li><img class="thumbnail_profile" src="res/test/a (1).jpg" title="姚姚"></img></li>
+						<li><img class="thumbnail_profile" src="res/test/a ({{m+1}}).jpg" title="姚姚"></img></li>
 						%end
-						<li style="vertical-align: bottom" class="small">
-							等<span class="text_likeit_num">40</span>个人点了赞
+						<li style="vertical-align: bottom;" class="smal1l">
+							<span class="link_span" style="margin-right: 10px" onclick="like_it($(this))">
+								<i class="icon-thumbs-up" style="margin-right: 6px"></i>赞(<span class="text_likeit_num">40</span>)
+							</span>
 						</li>
 					</ul>
-					<div class="div_show_reply in_block">
-						<span class="link_span" style="margin-right: 10px" onclick="like_it($(this))">点赞</span>|
-						<span class="link_span link_show_reply" onclick="link_show_reply($(this))" >收起回复</span>
-					</div>
 				</div>
-				<div class="div_reply_container reply_expand">
-					%for a in range(0):
-					<div class="div_reply_one_container">
-						<div class="div_reply_user">
-							<img class="thumbnail_profile" src="res/test/a (1).jpg"></img>
-						</div>
-						<div class="div_reply_content">
-							<strong>某某</strong>回复<strong>某某</strong>：	
-								张继科有几项比较突出的技术值的学习： </dd>
-							<div style="width:100%">
-								<div class="div_reply_ctrl small" style="float:right;margin-top:10px">
-									<div class="dropdown small in_block">
-									   <a href="#" class="dropdown-toggle icon-bell" data-toggle="dropdown">
-									      举报
-									      <span class="caret"></span>
-									   </a>
-									   <ul class="dropdown-menu" role="menu">
-										<li><a role="menuitem" tabindex="-1" href="#">个人攻击</a></li>
-										<li><a role="menuitem" tabindex="-1" href="#">个人攻击</a></li>
-										<li><a role="menuitem" tabindex="-1" href="#">个人攻击</a></li>
-									   </ul>
-									</div>
-									<span>2013-7-21&nbsp;10:35</span>&nbsp;
-									<span class="link_span" >回复</span>
-								</div>
-							</div>			
-						</div>
-						<HR>
-					</div>
-					%end
-					<div  class="in_block div_reply_more text-center" style="height:25px;width: 100%;margin-bottom: 15px">
-						还有<span class="text_reply_count">5</span>条回复，<span class="link_span" onclick="show_all_reply($(this))">请点击查看</span>
-					</div>
+				<div class="div_reply_container">
+					<table style="width:100%">
+						<tbody style="margin-top: 10px">
+						%for a in range(10):
+						<tr style="height:100%">
+							<td>
+								<img class="thumbnail_profile in_block" src="res/test/a ({{a+1}}).jpg" style="margin-right: 15px"></img>
+							</td>
+							<td style="width:auto">
+								<a class="strong">某某某某某某</a>回复<a class="strong">某某</a>：
+								%for d in range(random.randint(1,3)):
+								张继科有几项比较突出的技术值的学习，啦啦队,张继科有
+								%end
+							</td>
+						</tr>
+						%end
+						</tbody>
+					</table>
+					<!-- ul class="list-unstyled">
+						%for a in range(10):
+						<li>
+							<div class="in_block red_div">
+								<img class="thumbnail_profile" src="res/test/a ({{a+1}}).jpg"></img>
+								<strong>某某</strong>回复<strong>某某</strong>：
+							</div>	
+							<div class="in_block blue_div" style="width:100px;">
+							%for d in range(random.randint(1,3)):
+							张继科有几项比较突出的技术值的学习，啦啦队,张继科有
+							%end
+							</div>
+						</li>
+						%end
+					</ul -->
 					<div class="div_reply_edit" style="padding-bottom: 20px" >
 						<textarea class="form-control" rows="1" onfocus="show_edit_ctrl($(this));" onblur="hide_edit_ctrl($(this));" placeholder="我也说一句"></textarea>
 						<button class="btn btn-primary in_block btn-sm icon-comments" style="display: none;margin-top: 10px;padding: 4px 10px 4px 10px;float:right">
-							发表
+							回复
 						</button>
 					</div>
 				</div>
@@ -259,3 +243,19 @@
 	%end
 </div>
 
+<div class="div_alarm">						
+	<div>
+		<div class="div_reply_ctrl small" style="float:right;margin-top:10px">
+			<div class="dropdown small in_block">
+				<a href="#" class="dropdown-toggle icon-bell" data-toggle="dropdown" style="text-decoration: none">
+				举报<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a role="menuitem" tabindex="-1" href="#">个人攻击</a></li>
+					<li><a role="menuitem" tabindex="-1" href="#">个人攻击</a></li>
+					<li><a role="menuitem" tabindex="-1" href="#">个人攻击</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>			
+</div>

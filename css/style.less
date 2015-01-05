@@ -548,9 +548,6 @@
 
 /*我的主页->回复列表*/
 .div_reply_container{
-	margin-right: 20px;
-	background-color : 	#F0F0F0;
-	padding: 20px 20px 0px 20px;
 	HR{
 		border-style: dotted;
 		border-color: #3C3C3C;
@@ -558,16 +555,22 @@
 		margin-bottom: 20px;
 	}
 	
-	.div_reply_user{
-		width: 50px;
-		float: left;
-		padding-top: 6px;
+	a{
+		text-decoration: none;
+	}
+	tr{
+		padding-top: 10px;
+		&>td{
+			vertical-align: text-top;
+			padding-bottom: 10px;
+		}
 	}
 	
-	.div_reply_content{
-		margin-left: 60px;
-		padding: 6px 1px 1px 6px; 
-	} 
+	background-color:#fafafa;
+	margin-left: -20px;
+	padding-left: 20px;
+	margin-right: -20px;
+	padding-right: 20px;
 }
 
 .div_album_user{
@@ -576,7 +579,8 @@
 	margin-right: -10px; 
 }
 
-#div_album_container{ 
+#div_album_container{
+	padding-bottom: 20px;
 	.row{
 		margin-bottom: 0px;
 	}
@@ -584,7 +588,7 @@
 
 .div_album_detail{
 	background-color: white;
-	margin: 20px 0px 20px 0px;
+	margin: 20px 0px 0px 0px;
 	padding: 20px 20px 0px 20px;
 	HR{
 		margin: 10px 0 10px 0;
@@ -599,7 +603,7 @@
 	}
 	
 	.div_album_detail_text{
-		min-height: 100px;	
+		min-height: 80px;	
 	}
 	.div_album_detail_img{
 		img{
@@ -607,9 +611,6 @@
 			height: auto;
 			.in_block;	
 		}
-	}
-	.likeit_list{
-		padding-top: 10px;
 	}
 }
 

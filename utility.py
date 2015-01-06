@@ -54,7 +54,7 @@ def set_is_test(value):
 		__test_now = None
 
 def get_template_file(filename,keyword):
-	with open(filename,"r") as f:
+	with open(filename,"r",encoding='utf-8') as f:
 	    tpl = bottle.SimpleTemplate(f.read(),encoding='utf8')
 	    return tpl.render(keyword)
 

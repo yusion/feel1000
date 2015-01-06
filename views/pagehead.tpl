@@ -6,7 +6,7 @@
 	<nav id="nav_main" class="navbar navbar-inverse" role="navigation">
  		<div class="navbar-header">
 		   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#my_navbar-collapse">
-		      <span class="sr-only">ÇĞ»»µ¼º½</span>
+		      <span class="sr-only">åˆ‡æ¢å¯¼èˆª</span>
 		      <span class="icon-bar"></span>
 		      <span class="icon-bar"></span>
 		      <span class="icon-bar"></span>
@@ -18,21 +18,21 @@
 		</div>
 		<div class="collapse navbar-collapse" id="my_navbar-collapse">
 		   <ul class="nav navbar-nav">
-			<li  class="active"><a href="index2"><i class="icon-home"></i> Ö÷Ò³</a></li>
-			<li><a href="all_space"><i class="icon-conversation"></i> ¶¯Ì¬</a></li>
-		        <li><a href="search"><i class="icon-search"></i> ²éÕÒ</a></li>  
-			<li><a href="my_space"><i class="icon-user"></i> ÎÒµÄ¿Õ¼ä</a></li>
+			<li  class="active"><a href="index2"><i class="icon-home"></i> ä¸»é¡µ</a></li>
+			<li><a href="all_space"><i class="icon-conversation"></i> åŠ¨æ€</a></li>
+		        <li><a href="search"><i class="icon-search"></i> æŸ¥æ‰¾</a></li>  
+			<li id="li_my_space"><a href="my_space"><i class="icon-user"></i> æˆ‘çš„ç©ºé—´</a></li>
 		   </ul>
 		</div>
 	     </nav>
      </div>
      <div class="col-md-3 col-md-pull-1">
 	<div style="float: right;color:white;vertical-align: middle">
-		<div id="div_visit" class="in_block">
-			<a href="/index?register"  style="color:white">×¢²á</a>
-			<a href="/index?login"  style="color:white">µÇÂ½</a>
-		</div>
 		<img src="{{photo_url}}" style="width:30px;heigth:auto" class="in_block"></img>
+		<div id="div_visit" class="in_block">
+			<a href="/index?register"  style="color:white;margin-right: 10px">æ³¨å†Œ</a>
+			<a href="/index?login"  style="color:white">ç™»é™†</a>
+		</div>
 		<div id="div_user_menu" class="dropdown dropdown-hover in_block">
 			<button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" style="color:white">
 				{{name}}
@@ -40,14 +40,14 @@
 			</button>
 			<ul class="dropdown-menu pull-right1" role="menu" >
 			   <li role="presentation"  class="small">
-			      <a role="menuitem" tabindex="-1" href="#">ÎÒµÄºÃÓÑ</a>
+			      <a role="menuitem" tabindex="-1" href="#">æˆ‘çš„å¥½å‹</a>
 			   </li>
 			   <li role="presentation"  class="small">
-			      <a role="menuitem" tabindex="-1" href="#">ÕÊºÅÉèÖÃ</a>
+			      <a role="menuitem" tabindex="-1" href="#">å¸å·è®¾ç½®</a>
 			   </li>
 			   <li role="presentation" class="divider"></li>
 			   <li role="presentation" class="small">
-			      <a id="link_logout" role="menuitem" tabindex="-1" href="/logout">ÍË³öµÇÂ½</a>
+			      <a id="link_logout" role="menuitem" tabindex="-1" href="/logout">é€€å‡ºç™»é™†</a>
 			   </li>
 			</ul>
 	     </div>
@@ -57,7 +57,7 @@
   <div class="row"> 
 	<div class="col-md-8 col-md-offset-2">
 		<div id="my_breadcrumb">
-			<a href="index"><i class="icon-google-maps"></i>Ö÷Ò³</a>
+			<a href="index"><i class="icon-google-maps"></i>ä¸»é¡µ</a>
 		</div>
 	</div>
   </div>
@@ -66,6 +66,11 @@
 	$(document).ready(function(e){
 		if (!is_visit()) {
 			$("#div_visit").hide();
+		}
+		else{
+			//è®¿å®¢ 
+			$("#li_my_space").hide();
+			$("#div_user_menu").hide();
 		}
 		
 		$("#nav_main .active").removeClass("active");

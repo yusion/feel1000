@@ -11,6 +11,13 @@ from bottle import route, template,install,view,request,get,post,SimpleTemplate
 def url_show_album():
 	return session.get_dist()
 
+@route('/album2')	
+@view('album2')	
+def url_show_album2():
+	d = session.get_dist()
+	d["show_all"] = False
+	return d
+
 @route('/certif')	
 @view('certif')	
 def url_show_certif():
@@ -20,6 +27,6 @@ def url_show_certif():
 @view('all_space')
 def url_show_all_space():
 	d = session.get_dist()
-	d["show_all"] = "true"
+	d["show_all"] = True
 	d["album"] = utility.get_template_file("views/album2.tpl",d)
 	return d

@@ -6,27 +6,27 @@
 <form id="form_login" style="margin-top: 20px">
 	<div class="row" style="padding-top: 17px">
 		<div class="col-md-12">
-			<input type="text" name="login_nickname" class="form-control limit_m input-lg" id="login_nickname" maxLen="11" placeholder="êÇ³Æ">
+			<input type="text" name="login_nickname" class="form-control limit_m input-lg" id="login_nickname" maxLen="11" placeholder="æ˜µç§°">
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<input type="password"  name="login_password" class="form-control limit_m input-lg" id="login_password"  placeholder="ÃÜÂë">
+			<input type="password"  name="login_password" class="form-control limit_m input-lg" id="login_password"  placeholder="å¯†ç ">
 		</div>
 	</div>  
 	<div class="row ">
 		<div class="col-md-8">
-		   <div id="div_autologin" class="checkbox_ctrl text-left" >ÏÂ´Î×Ô¶¯µÇÂ¼</div>
+		   <div id="div_autologin" class="checkbox_ctrl text-left" >ä¸‹æ¬¡è‡ªåŠ¨ç™»å½•</div>
 		</div>
 		<div class="pull-right col-md-4">
-		   <!-- TODO: ×Ô¶¯·¢ËÍÃÜÂëµ½ÓÊÏäÖĞ£¬Ğè¾­¹ıÉí·İÈÏÖ¤ -->
-		   <a href="reset_pwd.html" target="_blank" style="color:gray">Íü¼ÇÃÜÂë£¿</a>
+		   <!-- TODO: è‡ªåŠ¨å‘é€å¯†ç åˆ°é‚®ç®±ä¸­ï¼Œéœ€ç»è¿‡èº«ä»½è®¤è¯ -->
+		   <a href="reset_pwd.html" target="_blank" style="color:gray">å¿˜è®°å¯†ç ï¼Ÿ</a>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<button id="btn_login" type="submit" style="width:100%;font-size: 18px;height:45px" class="orange_btn">
-				µÇ&nbsp; Â¼&nbsp;<i class="icon-music" style="color:mediumorchid"></i>
+				ç™»&nbsp; å½•&nbsp;<i class="icon-music" style="color:mediumorchid"></i>
 			</button>
 			<input type="hidden" id="login_result_msg" value="unknown">
 			<input type="hidden" id="login_result" value="unknown">
@@ -53,7 +53,7 @@
 				}
 				else{
 					$("#login_password").val("");
-					alert("µÇÂ½Ê§°Ü£º"+json.msg);
+					alert("ç™»é™†å¤±è´¥ï¼š"+json.msg);
 					$("#btn_login").enabled();
 					$("#login_password").set_focus();
 				}
@@ -108,17 +108,17 @@
 	$("#login_password").focusout();
 	
 	assert.ok($("#login_password-error").visible(), "error msg is visibled");
-	assert.ok($("#login_password-error").text().indexOf("³¤¶È²»ÄÜÉÙÓÚ6¸ö×Ö") != -1,"wrong msg");
+	assert.ok($("#login_password-error").text().indexOf("é•¿åº¦ä¸èƒ½å°‘äº6ä¸ªå­—") != -1,"wrong msg");
 
 	$("#login_password").focusin();
 	$("#login_password").val("");
 	$("#login_password").focusout();
-	assert.ok($("#login_password-error").text().indexOf("ÇëÌîĞ´¸ÃĞÅÏ¢") != -1,"wrong msg");
+	assert.ok($("#login_password-error").text().indexOf("è¯·å¡«å†™è¯¥ä¿¡æ¯") != -1,"wrong msg");
 	
 	$("#login_password").focusin();
 	$("#login_password").val("12345678901234567890x");
 	$("#login_password").focusout();
-	assert.ok($("#login_password-error").text().indexOf("³¤¶È²»ÄÜ³¬¹ı20¸ö×Ö") != -1,"wrong msg");
+	assert.ok($("#login_password-error").text().indexOf("é•¿åº¦ä¸èƒ½è¶…è¿‡20ä¸ªå­—") != -1,"wrong msg");
 	});
      
       QUnit.asyncTest("check_nickname2",function(assert){
@@ -128,20 +128,20 @@
 	$("#login_nickname").val("a");
 	$("#login_nickname").focusout();
 	assert.ok($("#login_nickname-error").visible(), "error msg is visibled");
-	assert.ok($("#login_nickname-error").text().indexOf("³¤¶È²»ÄÜÉÙÓÚ2¸ö×Ö") != -1,"wrong msg");
+	assert.ok($("#login_nickname-error").text().indexOf("é•¿åº¦ä¸èƒ½å°‘äº2ä¸ªå­—") != -1,"wrong msg");
  
 	$("#login_nickname").focusin();
 	$("#login_nickname").val("");
 	$("#login_nickname").focusout();
-	assert.ok($("#login_nickname-error").text().indexOf("ÇëÌîĞ´¸ÃĞÅÏ¢") != -1,"wrong msg");
+	assert.ok($("#login_nickname-error").text().indexOf("è¯·å¡«å†™è¯¥ä¿¡æ¯") != -1,"wrong msg");
 	
 	$("#login_nickname").focusin();
 	$("#login_nickname").val("123456789011");
 	$("#login_nickname").focusout();
-	assert.ok($("#login_nickname-error").text().indexOf("³¤¶È²»ÄÜ³¬¹ı11¸ö×Ö") != -1,"wrong msg");
+	assert.ok($("#login_nickname-error").text().indexOf("é•¿åº¦ä¸èƒ½è¶…è¿‡11ä¸ªå­—") != -1,"wrong msg");
 	
 	$("#login_nickname").focusin();
-	$("#login_nickname").val("Ò¦Ë´Ò¦Ë´Ò¦Ë´Ò¦Ë´Ò¦Ë´");
+	$("#login_nickname").val("å§šèˆœå§šèˆœå§šèˆœå§šèˆœå§šèˆœ");
 	$("#login_nickname").focusout();
 	
 	setTimeout(function() {
@@ -159,7 +159,7 @@
 	assert.ok(!$("#btn_login").is_enabled());
 	setTimeout(function() {
 		assert.equal($("#login_result").val(),"false");
-		assert.equal($("#login_result_msg").val(),"ÓÃ»§Ãû»òÃÜÂë²»ÕıÈ·");
+		assert.equal($("#login_result_msg").val(),"ç”¨æˆ·åæˆ–å¯†ç ä¸æ­£ç¡®");
 		assert.equal($("#login_password").val(),"");
 		assert.ok($("#btn_login").is_enabled());
 		assert.equal(jump_url,"");
@@ -191,7 +191,7 @@
 	assert.ok(!$("#btn_login").is_enabled());
 	setTimeout(function() {
 		assert.equal($("#login_result").val(),"true");
-		assert.equal($("#login_result_msg").val(),"test_ycat3, »¶Ó­Äú»ØÀ´");
+		assert.equal($("#login_result_msg").val(),"test_ycat3, æ¬¢è¿æ‚¨å›æ¥");
 		assert.ok($("#btn_login").is_enabled());
 		assert.equal(jump_url,"index2");
 		assert.ok(jump_param["session"]);
@@ -211,7 +211,7 @@
 	assert.ok(!$("#btn_login").is_enabled());
 	setTimeout(function() {
 		assert.equal($("#login_result").val(),"true");
-		assert.equal($("#login_result_msg").val(),"test_ycat3, »¶Ó­Äú»ØÀ´");
+		assert.equal($("#login_result_msg").val(),"test_ycat3, æ¬¢è¿æ‚¨å›æ¥");
 		assert.ok($("#btn_login").is_enabled());
 		assert.equal(jump_url,"index2");
 		assert.ok(jump_param["session"]);

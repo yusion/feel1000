@@ -4,7 +4,7 @@
 	cursor: pointer;
 }
  
-/*   ÏÂÃæÊÇ¾ÉµÄ   */
+/*   ä¸‹é¢æ˜¯æ—§çš„   */
 
 .div_album_reply{
 	margin-left: 40px;
@@ -24,7 +24,7 @@
  
 </style>
 <script type="text/javascript">
-	//Õ¹¿ªÊÕÆğ»Ø¸´°´Å¥
+	//å±•å¼€æ”¶èµ·å›å¤æŒ‰é’®
 	function link_show_reply(item)
 	{
 		return;
@@ -32,14 +32,14 @@
 		var i = c.find(".div_reply_one_container").length;
 		if (c.hasClass("reply_expand")) {
 			if (i==0) {
-				//Ã»ÓĞ»Ø¸´£¬ÔòÖ±½ÓÏÔÊ¾»Ø¸´¿ò 
-				item.text("»Ø¸´");
+				//æ²¡æœ‰å›å¤ï¼Œåˆ™ç›´æ¥æ˜¾ç¤ºå›å¤æ¡† 
+				item.text("å›å¤");
 				c.find(".div_reply_more").hide();
 			}
 			else
 			{
 				c.find(".div_reply_more").show();
-				item.text("»Ø¸´(" +i+")");				
+				item.text("å›å¤(" +i+")");				
 			}
 		}
 		else
@@ -47,14 +47,14 @@
 			if (i == 0) {
 				c.find(".div_reply_more").hide();
 			}
-			item.text("ÊÕÆğ»Ø¸´");	
+			item.text("æ”¶èµ·å›å¤");	
 		}
 		
 		c.fadeToggle();
 		c.toggleClass("reply_expand");
 	}
 	
-	//ÏÔÊ¾ËùÓĞµÄ»Ø¸´
+	//æ˜¾ç¤ºæ‰€æœ‰çš„å›å¤
 	function show_all_reply(item) {
 		var c = item.parents(".div_reply_container");
 		c.addClass("show_all");
@@ -62,7 +62,7 @@
 		c.find(".div_reply_more").hide();
 	}
 	
-	//×Ô¶¯ÊÕ²Ø¶àÓàµÄ»Ø¸´ 
+	//è‡ªåŠ¨æ”¶è—å¤šä½™çš„å›å¤ 
 	function hide_more_reply(container,num){
 		container.each(function(){
 			if($(this).hasClass("show_all"))
@@ -82,22 +82,22 @@
 			$(this).parent().find(".text_reply_count").text(""+r);
 			
 			if (c.length == 0) {
-				//Èç¹ûÃ»ÓĞ»Ø¸´ÌõÄ¿£¬¾ÍÊÕÆğ»Ø¸´ 
+				//å¦‚æœæ²¡æœ‰å›å¤æ¡ç›®ï¼Œå°±æ”¶èµ·å›å¤ 
  				$(this).parent().find(".link_show_reply").click();
  			}
 		});
 	}
 	 
-	//µãÔŞÎÄÕÂ°´Å¥
+	//ç‚¹èµæ–‡ç« æŒ‰é’®
 	function like_it(item){
 		var t = item.parent().parent().find(".text_likeit_num");
 		t.text("" + (parseInt(t.text()) + 1));
-		item.html("ÒÑÔŞ");
+		item.html("å·²èµ");
 		item.removeAttr("onclick");
 		item.removeClass("link_span");
 	}
 	
-	//ÏÔÊ¾À©´óµÄ»Ø¸´¶Ô»°¿ò
+	//æ˜¾ç¤ºæ‰©å¤§çš„å›å¤å¯¹è¯æ¡†
 	function show_edit_ctrl(item){//;" onblur="hide_edit_ctrl($(this));"
 		item.attr("rows","3");
 		item.nextAll().show();
@@ -111,8 +111,12 @@
 	}
 	
 	$(document).ready(function(e){
+%if show_all:
 		$(".div_album_user").parent().addClass("col-md-2");
 		$(".div_album_detail").parent().addClass("col-md-10");
+%else:
+		$(".div_album_detail").parent().addClass("col-md-12");
+%end		
 		
 		$(".dropdown-menu li").addClass("small");
 		hide_more_reply($(".div_reply_container"),5);
@@ -124,11 +128,11 @@
 <div class="row" style="margin-bottom: 0px"> 
 	<div class="col-md-10 col-md-offset-2">
 		<ul class="list-inline" style="margin-top: 10px;margin-bottom: 10px">
-			<li><span class="checkbox_ctrl">È«²¿<span class="badge">10</span></span></li>
-			<li><span class="checkbox_ctrl">ºÃÓÑÈÕÖ¾<span class="badge">10</span></span></li>
-			<li><span class="checkbox_ctrl">ÎÒµÄÈÕÖ¾<span class="badge">10</span></span></li>
-			<li><span class="checkbox_ctrl">ÁôÑÔ<span class="badge">10</span></span></li>
-			<li><span class="checkbox_ctrl">ÏµÍ³<span class="badge">10</span></span></li>
+			<li><span class="checkbox_ctrl">å…¨éƒ¨<span class="badge">10</span></span></li>
+			<li><span class="checkbox_ctrl">å¥½å‹æ—¥å¿—<span class="badge">10</span></span></li>
+			<li><span class="checkbox_ctrl">æˆ‘çš„æ—¥å¿—<span class="badge">10</span></span></li>
+			<li><span class="checkbox_ctrl">ç•™è¨€<span class="badge">10</span></span></li>
+			<li><span class="checkbox_ctrl">ç³»ç»Ÿ<span class="badge">10</span></span></li>
 		</ul>
 	</div>
 </div>
@@ -147,36 +151,55 @@
 	%end
 	%onlineState="offline"
 	<div class="row">
+%if show_all:		
 		<div> <!-- col div -->
-			<div class="div_album_user">
+			<div class="div_album_user visible-md-inline-block visible-lg-inline-block">
 				<img src="res/test/a (7).jpg" class="img_profile_sm {{onlineState}}"></img>
 				<div class="div_likeit">
-					<a><i class="icon-heart"></i>Ï²»¶</a>
+					<a><i class="icon-heart"></i>å–œæ¬¢</a>
 					<div class=" btn-group dropdown-hover" style="float:right">
 						<a  class="dropdown-toggle"  data-toggle="dropdown">
-						   ²»Ï²»¶
+						   ä¸å–œæ¬¢
 						</a>
 						<ul class="dropdown-menu" role="menu">
-						   <li><a href="#" onclick="click_dislike_it($(this))">Íâ±í²»Ï²»¶</a></li>
-						   <li><a href="#" onclick="click_dislike_it($(this))">PSºÛ¼£ÑÏÖØ</a></li>
-						   <li><a href="#" onclick="click_dislike_it($(this))">¸Ğ¾õ²»ºÃ</a></li>
+						   <li><a href="#" onclick="click_dislike_it($(this))">å¤–è¡¨ä¸å–œæ¬¢</a></li>
+						   <li><a href="#" onclick="click_dislike_it($(this))">PSç—•è¿¹ä¸¥é‡</a></li>
+						   <li><a href="#" onclick="click_dislike_it($(this))">æ„Ÿè§‰ä¸å¥½</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
+%end	
 		<div> <!-- col div -->
 			<div class="div_album_detail">
-				<div class="div_arrow"></div>
-				<strong>ÆøºòÅ¯</strong>·¢±íÁËÒ»ÆªÈÕÖ¾  <span>2013-7-21&nbsp;10:35</span>
-				<div class="small1" style="float:right;color:gray">
-					¹ãÖİ|21Ëê|178cm|´ó×¨|
-					<i class="icon-picture">ÏàÆ¬(5)</i>|
-					<i class="icon-eye-open">ä¯ÀÀ(58)</i>
-				</div>	
-				<HR>
+%if show_all:				
+				<div class="div_arrow visible-md-inline-block visible-lg-inline-block"></div>
+%end					
+				<img src="res/test/a (7).jpg" class="thumbnail_profile {{onlineState}} visible-xs-inline-block visible-sm-inline-block" style="display: inline-block;"></img>
+				<strong>æ°”å€™æš–</strong>å‘è¡¨äº†ä¸€ç¯‡æ—¥å¿—  <span>2013-7-21&nbsp;10:35</span>
+				<div class="small" style="float:right;color:gray">
+					å¹¿å·|21å²|178cm|å¤§ä¸“|
+					<i class="icon-picture">ç›¸ç‰‡(5)</i>|
+					<i class="icon-eye-open">æµè§ˆ(58)</i>
+					
+					<div class="div_likeit visible-xs-inline-block visible-sm-inline-block in_blockt small">
+						<a><i class="icon-heart"></i>å–œæ¬¢</a>
+						<div class="btn-group dropdown-hover">
+							<a  class="dropdown-toggle"  data-toggle="dropdown">
+							   ä¸å–œæ¬¢
+							</a>
+							<ul class="dropdown-menu pull-right" role="menu">
+							   <li><a href="#" onclick="click_dislike_it($(this))">å¤–è¡¨ä¸å–œæ¬¢</a></li>
+							   <li><a href="#" onclick="click_dislike_it($(this))">PSç—•è¿¹ä¸¥é‡</a></li>
+							   <li><a href="#" onclick="click_dislike_it($(this))">æ„Ÿè§‰ä¸å¥½</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<HR  style="clear: both">
 				<div class="div_album_detail_text">
-					±¨µÀ³Æ£¬¹ú¼ÊÄÜÔ´ÊğÔÚÒ»ÄêÒ»¶ÈµÄ¡¶ÊÀ½çÄÜÔ´Õ¹Íû¡·±¨¸æÖĞÔ¤²â£¬È«ÇòÄÜÔ´ĞèÇóµ½2040Äê½«Ôö³¤37%£¬´ÓÈ¥ÄêµÄÃ¿Ìì9000ÍòÍ°£¬ÉÏÉıÖÁÃ¿Ìì1ÒÚ400ÍòÍ°¡£¾¡¹ÜÆøºòÅ¯»¯ÎÊÌâÊÜµ½¹Ø×¢£¬µ«Ê¯»¯È¼ÁÏÈÔ½«ÊÇÖ÷ÒªµÄÄÜÔ´À´Ô´¡£
+					æŠ¥é“ç§°ï¼Œå›½é™…èƒ½æºç½²åœ¨ä¸€å¹´ä¸€åº¦çš„ã€Šä¸–ç•Œèƒ½æºå±•æœ›ã€‹æŠ¥å‘Šä¸­é¢„æµ‹ï¼Œå…¨çƒèƒ½æºéœ€æ±‚åˆ°2040å¹´å°†å¢é•¿37%ï¼Œä»å»å¹´çš„æ¯å¤©9000ä¸‡æ¡¶ï¼Œä¸Šå‡è‡³æ¯å¤©1äº¿400ä¸‡æ¡¶ã€‚å°½ç®¡æ°”å€™æš–åŒ–é—®é¢˜å—åˆ°å…³æ³¨ï¼Œä½†çŸ³åŒ–ç‡ƒæ–™ä»å°†æ˜¯ä¸»è¦çš„èƒ½æºæ¥æºã€‚
 				</div>
 				<div class="div_album_detail_img" style="">
 					%ll = random.randint(1,8)
@@ -184,15 +207,15 @@
 						<img src="res/test/a ({{random.randint(1,15)}}).jpg"></img>
 					%end					
 				</div>
-				<HR>
+				<HR  style="clear: both">
 				<div sytle="width:100%;">
 					<ul class="list-inline likeit_list in_block" style="width:100%">
 						%for m in range(5):
-						<li><img class="thumbnail_profile" src="res/test/a ({{m+1}}).jpg" title="Ò¦Ò¦"></img></li>
+						<li><img class="thumbnail_profile" src="res/test/a ({{m+1}}).jpg" title="å§šå§š"></img></li>
 						%end
 						<li style="vertical-align: bottom;" class="smal1l">
 							<span class="link_span" style="margin-right: 10px" onclick="like_it($(this))">
-								<i class="icon-thumbs-up" style="margin-right: 6px"></i>ÔŞ(<span class="text_likeit_num">40</span>)
+								<i class="icon-thumbs-up" style="margin-right: 6px"></i>èµ(<span class="text_likeit_num">40</span>)
 							</span>
 						</li>
 					</ul>
@@ -200,40 +223,25 @@
 				<div class="div_reply_container">
 					<table style="width:100%">
 						<tbody style="margin-top: 10px">
-						%for a in range(10):
-						<tr style="height:100%">
-							<td>
-								<img class="thumbnail_profile in_block" src="res/test/a ({{a+1}}).jpg" style="margin-right: 15px"></img>
-							</td>
-							<td style="width:auto">
-								<a class="strong">Ä³Ä³Ä³Ä³Ä³Ä³</a>»Ø¸´<a class="strong">Ä³Ä³</a>£º
-								%for d in range(random.randint(1,3)):
-								ÕÅ¼Ì¿ÆÓĞ¼¸Ïî±È½ÏÍ»³öµÄ¼¼ÊõÖµµÄÑ§Ï°£¬À²À²¶Ó,ÕÅ¼Ì¿ÆÓĞ
-								%end
-							</td>
-						</tr>
-						%end
+							%for a in range(10):
+							<tr style="height:100%">
+								<td>
+									<img class="thumbnail_profile in_block" src="res/test/a ({{a+1}}).jpg" style="margin-right: 15px"></img>
+								</td>
+								<td style="width:auto">
+									<a class="strong">æŸæŸæŸæŸæŸæŸ</a>å›å¤<a class="strong">æŸæŸ</a>ï¼š
+									%for d in range(random.randint(1,3)):
+									å¼ ç»§ç§‘æœ‰å‡ é¡¹æ¯”è¾ƒçªå‡ºçš„æŠ€æœ¯å€¼çš„å­¦ä¹ ï¼Œå•¦å•¦é˜Ÿ,å¼ ç»§ç§‘æœ‰
+									%end
+								</td>
+							</tr>
+							%end
 						</tbody>
 					</table>
-					<!-- ul class="list-unstyled">
-						%for a in range(10):
-						<li>
-							<div class="in_block red_div">
-								<img class="thumbnail_profile" src="res/test/a ({{a+1}}).jpg"></img>
-								<strong>Ä³Ä³</strong>»Ø¸´<strong>Ä³Ä³</strong>£º
-							</div>	
-							<div class="in_block blue_div" style="width:100px;">
-							%for d in range(random.randint(1,3)):
-							ÕÅ¼Ì¿ÆÓĞ¼¸Ïî±È½ÏÍ»³öµÄ¼¼ÊõÖµµÄÑ§Ï°£¬À²À²¶Ó,ÕÅ¼Ì¿ÆÓĞ
-							%end
-							</div>
-						</li>
-						%end
-					</ul -->
 					<div class="div_reply_edit" style="padding-bottom: 20px" >
-						<textarea class="form-control" rows="1" onfocus="show_edit_ctrl($(this));" onblur="hide_edit_ctrl($(this));" placeholder="ÎÒÒ²ËµÒ»¾ä"></textarea>
+						<textarea class="form-control" rows="1" onfocus="show_edit_ctrl($(this));" onblur="hide_edit_ctrl($(this));" placeholder="æˆ‘ä¹Ÿè¯´ä¸€å¥"></textarea>
 						<button class="btn btn-primary in_block btn-sm icon-comments" style="display: none;margin-top: 10px;padding: 4px 10px 4px 10px;float:right">
-							»Ø¸´
+							å›å¤
 						</button>
 					</div>
 				</div>
@@ -248,12 +256,12 @@
 		<div class="div_reply_ctrl small" style="float:right;margin-top:10px">
 			<div class="dropdown small in_block">
 				<a href="#" class="dropdown-toggle icon-bell" data-toggle="dropdown" style="text-decoration: none">
-				¾Ù±¨<span class="caret"></span>
+				ä¸¾æŠ¥<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu" role="menu">
-					<li><a role="menuitem" tabindex="-1" href="#">¸öÈË¹¥»÷</a></li>
-					<li><a role="menuitem" tabindex="-1" href="#">¸öÈË¹¥»÷</a></li>
-					<li><a role="menuitem" tabindex="-1" href="#">¸öÈË¹¥»÷</a></li>
+					<li><a role="menuitem" tabindex="-1" href="#">ä¸ªäººæ”»å‡»</a></li>
+					<li><a role="menuitem" tabindex="-1" href="#">ä¸ªäººæ”»å‡»</a></li>
+					<li><a role="menuitem" tabindex="-1" href="#">ä¸ªäººæ”»å‡»</a></li>
 				</ul>
 			</div>
 		</div>

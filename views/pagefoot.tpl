@@ -12,11 +12,11 @@
 	<div id="page_foot_row" class="row">
 	    <div class="col-md-8 col-md-offset-4" >
 		<small>
-		ºÏ×÷ÍøÕ¾£ºÐÂÎÅ¿Í»§¶Ë  ÍøÒ×ÔÆÔÄ¶Á  ÍøÒ×Å®ÈË  ÓÐµÀ´ÊµäÍøÒ×ÂÛÌ³  ÍøÒ×Ó¦ÓÃ  ÍøÒ×ÉÌ³Ç°®ÅÄ  ÍøÒ×±£½¡Æ·  ÍøÒ×ÔÆÒôÀÖ  ÍøÒ×¿Æ¼¼  ²é¿´¸ü¶à>><BR>
-		..¹«Ë¾°æÈ¨ËùÓÐ<BR>°æ±¾ºÅ {{version}}
+		åˆä½œç½‘ç«™ï¼šæ–°é—»å®¢æˆ·ç«¯  ç½‘æ˜“äº‘é˜…è¯»  ç½‘æ˜“å¥³äºº  æœ‰é“è¯å…¸ç½‘æ˜“è®ºå›  ç½‘æ˜“åº”ç”¨  ç½‘æ˜“å•†åŸŽçˆ±æ‹  ç½‘æ˜“ä¿å¥å“  ç½‘æ˜“äº‘éŸ³ä¹  ç½‘æ˜“ç§‘æŠ€  æŸ¥çœ‹æ›´å¤š>><BR>
+		..å…¬å¸ç‰ˆæƒæ‰€æœ‰<BR>ç‰ˆæœ¬å· {{version}}
 		
 		<p id="browser_version"></p>
-		Copyright 360.CN  ¾©ICP±¸08010314ºÅ-19  ¾©¹«Íø°²±¸110000000006ºÅ
+		Copyright 360.CN  äº¬ICPå¤‡08010314å·-19  äº¬å…¬ç½‘å®‰å¤‡110000000006å·
 		</small>
 	    </div>
 	</div>

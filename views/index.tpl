@@ -168,7 +168,13 @@ H2{
 		
 		set_background_img("res/index_background.jpg")
 		
-		if (getCookie("loginstate")) {
+		if (location.href.indexOf("register") != -1) {
+			$("#link_register").click();
+		}
+		else if(location.href.indexOf("login") != -1) {
+			$("#link_login").click();
+		}
+		else if (getCookie("loginstate")) {
 			$("#link_login").click();
 		}
 	});

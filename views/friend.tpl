@@ -50,17 +50,17 @@
 	<div class="div_click in_block" style="right: 30px;"></div>
 	<div style="padding: 10px 20px 10px 20px">
 	<button type="button" class="blue_btn">
-		<i class="icon-camera"></i>������Ƭ
+		<i class="icon-camera"></i>发表相片
 	</button>
 	</div>
 	<div id="div_friend_list">
 		<hr>
-		<H4 style="color:gray;margin-left: 20px">�ҵĺ���(1/50)</H4>
+		<H4 style="color:gray;margin-left: 20px">我的好友(1/50)</H4>
 		<ul class="list-unstyled">
 			%for i in range(10):
 			<hr>
 			<li>
-				<img src="res/test/a ({{i%9+1}}).jpg" class="thumbnail_profile" >ͬʱ���ְ�ťͬ
+				<img src="res/test/a ({{i%9+1}}).jpg" class="thumbnail_profile" >同时保持按钮同
 			</li>		
 			%end
 		</ul>

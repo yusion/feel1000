@@ -1,7 +1,7 @@
 #coding=utf-8 
 # ycat			 2014/09/28      create
 import pytest
-import sqlite3
+import sqlite3,collections
 import sys,os,io,datetime
 import utility,json
 import bottle,session
@@ -57,6 +57,8 @@ class profile_columns:
 class user_profile:
 	def __init__(self):
 		self.ip = "127.0.0.8"
+		self._scores = None
+		self._tags = None
 	
 	@property
 	def small_photo_url(self):
@@ -118,12 +120,77 @@ class user_profile:
 	def get_dict(self):
 		d = {}
 		for k in self.__dict__:
-			v = self.__dict__[k]
+			v = self.__dict__[k] 
 			if v == None or v == -1:
-				d[k] = ""
+				if k != "mydesc":
+					d[k] = "未知"
+				else:
+					d[k] = ""
 			else:
 				d[k] = v
 		return d
+	
+	@property
+	def scores(self):
+		if not self._scores:
+			r = utility.get_cursor().execute("SELECT scoreID,score FROM u_score WHERE userID=?",
+				(self.user_id,)).fetchone()
+			if r:
+				self._scores = {}
+				for k,v in zip(r[0].split(","),r[1].split(",")):
+					self._scores[k] = v
+			else:
+				self._scores = {"1":"0","2":"0","3":"0","4":"0"} #4个选项
+		return self._scores
+	
+	def save_scores(self,scores):
+		db = utility.get_db()
+		c = db.cursor()
+		o = collections.OrderedDict(sorted(scores.items(), key=lambda scores: scores[0]))
+		values = ",".join([str(x) for x in o.values()])
+		keys = ",".join([str(x) for x in o.keys()])
+		if self.scores["1"] != "0": #如果有设置，就不可能等于0
+			c.execute("UPDATE u_score SET score=?,scoreID=? WHERE userID=?",
+				(values,keys,self.user_id))
+		else:
+			c.execute("INSERT INTO u_score(score,scoreID,userID)VALUES(?,?,?)",
+				(values,keys,self.user_id))
+		
+		self._scores = scores	
+		utility.write_log(self.user_id,"修改了评分信息",1,False)
+		db.commit()
+		
+	def save_desc(self,desc):
+		db = utility.get_db()
+		c = db.cursor()
+		c.execute("UPDATE u_profile SET MyDesc=? WHERE ID=?",(desc,self.user_id))
+		self.mydesc = desc
+		utility.write_log(self.user_id,"修改描述`"+desc+"`",1,False)
+		db.commit()
+		
+	@property	
+	def tags(self):
+		if not self._tags:
+			r = utility.get_cursor().execute("SELECT tags FROM u_tags WHERE userID=%d"%self.user_id).fetchone()
+			if r and len(r[0]):
+				self._tags = r[0].split("@@")
+			else:
+				self._tags = []
+		return self._tags
+		
+	def save_tags(self,tags):
+		s = set(tags) #clear repeat 
+		v = "@@".join([x for x in s])
+		db = utility.get_db()
+		c = db.cursor()
+		if self.tags:
+			c.execute("UPDATE u_tags SET tags=? WHERE userID=?",(v,self.user_id))
+		else:
+			c.execute("INSERT INTO u_tags(userID,tags)VALUES(?,?)",(self.user_id,v))
+		self._tags = tags
+		utility.write_log(self.user_id,"修改tags`"+v+"`",1,False)
+		db.commit()
+		
 		
 class ctrl_profile:
 	@staticmethod
@@ -190,7 +257,16 @@ class ctrl_profile:
 @bottle.route('/my_space')	
 @bottle.view('my_space')	
 def url_show_space():
-	d = session.get_dist()
+	s = session.get()
+	utility.check(s,401)
+	d = session.get_dist() 
+	d.update(s.profile.get_dict())
+	d["scores"] = s.profile.scores
+	d["tags"] = s.profile.tags
+	d["my"] = True 
+	d["age"] = s.age
+	utility.get_tags_table(d,s.sex)
+	utility.get_score_table(d,s.sex)
 	d["friend"] = utility.get_template_file("views/friend.tpl",{})
 	return d
 
@@ -260,7 +336,6 @@ def url_upload():
 	mem.seek(0)
 	#ctrl_profile.handle_profile_img(mem,user)
 	mem.close()
-	print(mem.readlines().count);
 	return 0
 
 @bottle.post('/action/upload_id_cerf')

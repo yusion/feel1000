@@ -77,10 +77,14 @@ def clear_test_user2():
 	session.clear()
 	db = utility.get_db()
 	c = db.cursor()
-	c.execute("""DELETE FROM r_log WHERE userID IN
-		(
-		SELECT u_user.ID FROM u_user WHERE (Password like '%test%') OR  (nickname like 'test_%')
-		)""")
+	
+	tables = ["r_log","u_score","u_tags"]
+	for t in tables:
+		c.execute("""DELETE FROM """ +t+""" WHERE userID IN
+			(
+			SELECT u_user.ID FROM u_user WHERE (Password like '%test%') OR  (nickname like 'test_%')
+			)""")
+		
 	c.execute("DELETE FROM r_log WHERE ip =='unittest'")
 
 	c.execute("DELETE FROM u_user WHERE (Password like '%test%') OR  (nickname like 'test_%')")

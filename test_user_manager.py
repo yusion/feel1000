@@ -32,14 +32,14 @@ def test_register():
 	assert rows[0][1] == "546\"79'87979test"
 	assert datetime.datetime.strptime(rows[0][2],"%Y-%m-%d %H:%M:%S") - datetime.datetime.now() < datetime.timedelta(minutes=1)
 	assert rows[0][3] == 1
-	assert rows[0][4] == 1979
+	assert rows[0][4] == 1979 + datetime.datetime.now().year - 2014 #因为35岁,79年是2014的数据  
 	assert rows[0][5] == 0
 
 	assert rows[1][0] == "这是一个测试"	
 	assert rows[1][1] == "32212346dfADDFDtest"
 	assert datetime.datetime.strptime(rows[1][2],"%Y-%m-%d %H:%M:%S") - datetime.datetime.now() < datetime.timedelta(minutes=1)
 	assert rows[1][3] == 0
-	assert rows[1][4] == 1985
+	assert rows[1][4] == 1985 + datetime.datetime.now().year - 2014
 	assert rows[1][5] == 0
 	
 	assert not ctrl_user_manager.is_repeat("NickName","noexist")	

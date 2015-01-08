@@ -46,6 +46,13 @@ def is_test():
 	global _is_test
 	return _is_test
 
+#TODO：错误页面还未自定义  
+def check(value,errorCode,msg=None):
+    if not value:
+        if errorCode == 401 and not msg:
+            msg = "用户未登陆" 
+        bottle.abort(errorCode,msg) 
+
 def set_is_test(value):
 	global _is_test
 	global __test_now
@@ -82,15 +89,15 @@ def md5(value):
 def scramble(value):
 	return md5(str(value) + "ycat")
 
-def get_tag_table(dict1,sex):
+def get_tags_table(dict1,sex):
 	global __c_table
-	name = "c_tag"+str(sex) 
+	name = "c_tags"+str(sex) 
 	if name in __c_table:
 		rr = __c_table[name]
 	else:
-		rr = get_cursor().execute("SELECT TagID,TagName FROM c_tag WHERE Sex=-1 OR  Sex=?",(sex,)).fetchall()
+		rr = get_cursor().execute("SELECT TagID,TagName FROM c_tags WHERE Sex=-1 OR  Sex=?",(sex,)).fetchall()
 		__c_table[name] = rr
-	dict1["c_tag"] = rr
+	dict1["c_tags"] = rr
 	return rr
 	
 def get_score_table(dict1,sex):
@@ -159,19 +166,28 @@ def check_log(user_id,desc,logType,index=0):
 	assert r[0] == user_id
 	assert r[2] == logType
 
+def assert_dict(d1,d2):
+	assert d1
+	assert d2
+	assert len(d1) == len(d2)
+	for k in d1:
+	    assert k in d2
+	    assert d1[k] == d2[k]
+
+
 #############################	unit test	###########################
 def test_set():
     set_is_test(True)
 
 def test_get_tag_table():
 	d = {}
-	if "c_tag0" in __c_table:
-		del __c_table["c_tag0"]
-	if "c_tag1" in __c_table:
-		del __c_table["c_tag1"]
-	rr = get_tag_table(d,0);
+	if "c_tags0" in __c_table:
+		del __c_table["c_tags0"]
+	if "c_tags1" in __c_table:
+		del __c_table["c_tags1"]
+	rr = get_tags_table(d,0);
 	print(rr);
-	assert "c_tag0" in __c_table 
+	assert "c_tags0" in __c_table 
 	assert len(rr) > 8
 
 	r = rr[0]
@@ -182,10 +198,10 @@ def test_get_tag_table():
 	assert 2 == len(r)
 	assert r[0] == 3
 	assert r[1] == "高学历"
-	assert rr == d["c_tag"]
+	assert rr == d["c_tags"]
 	
-	rr = get_tag_table(d,1);
-	assert "c_tag1" in __c_table 
+	rr = get_tags_table(d,1);
+	assert "c_tags1" in __c_table 
 	assert len(rr) > 8
 	r = rr[0]
 	assert 2 == len(r)
@@ -195,7 +211,7 @@ def test_get_tag_table():
 	assert 2 == len(r)
 	assert r[0] == 3
 	assert r[1] == "高学历"
-	assert rr == d["c_tag"]
+	assert rr == d["c_tags"]
 	
 def test_get_score_table():
 	d = {}
@@ -209,7 +225,7 @@ def test_get_score_table():
 	r = rr[0]
 	assert r[0] == 1
 	assert r[1] == "长相"
-	assert r[2] == "玉树临风、英俊潇洒、顺眼、路人丙、非常一般"
+	assert r[2] == "玉树临风,英俊潇洒,顺眼,路人丙,非常一般"
 	assert "c_score0" in __c_table
 	
 	rr = get_score_table(d,1);
@@ -218,7 +234,7 @@ def test_get_score_table():
 	r = rr[0]
 	assert r[0] == 1
 	assert r[1] == "长相"
-	assert r[2] == "倾城佳人、天生丽质、容貌姣好、路人甲、非常一般"
+	assert r[2] == "倾城佳人,天生丽质,容貌姣好,路人甲,非常一般"
 	assert "c_score0" in __c_table
 
 def test_write_log():
@@ -257,22 +273,6 @@ def test_write_log():
 	
 	set_now(None)
 
-def test_get_dict():
-	global _is_test
-	set_session_id(3300)
-	assert get_template_file("views/pagehead.tpl",{"session":1000}).find('value="1000"') != -1
-	set_is_test(True)
-	assert _is_test
-	assert is_test()
-	print(get_dist()["page_foot"])
-	assert get_dist()["page_foot"].find('qunit-fixture') != -1
-	assert get_dist()["page_head"].find('value="3300"') != -1
-	set_is_test(False)
-	assert not _is_test
-	assert not is_test()
-	assert get_dist()["page_foot"].find('qunit-fixture') == -1
-	assert get_dist()["page_head"].find('value="3300"') != -1
-	
 def test_md5():
 	assert md5("abcd") == "e2fc714c4727ee9395f324cd2e7f331f"
 	assert md5("123456") == "e10adc3949ba59abbe56e057f20f883e"
@@ -316,6 +316,21 @@ def test_get_c_table():
 	assert r[10][0] == 10
 	assert r[10][1] == "摩羯座 12.22─01.19"
 
+def test_get_dict():
+	global _is_test
+	set_session_id(3300)
+	assert get_template_file("views/pagehead.tpl",{"session":1000}).find('value="1000"') != -1
+	set_is_test(True)
+	assert _is_test
+	assert is_test()
+	print(get_dist()["page_foot"])
+	assert get_dist()["page_foot"].find('qunit-fixture') != -1
+	assert get_dist()["page_head"].find('value="3300"') != -1
+	set_is_test(False)
+	assert not _is_test
+	assert not is_test()
+	assert get_dist()["page_foot"].find('qunit-fixture') == -1
+	assert get_dist()["page_head"].find('value="3300"') != -1
 
 def run_tests(file):
 	set_is_test(True)

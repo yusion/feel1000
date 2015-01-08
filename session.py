@@ -20,6 +20,7 @@ class session_data:
 		self.session_id = ""
 		self.pwd = ""
 		self.login_date = datetime.datetime.now()
+		self._profile = None
 	
 	@property
 	def target_sex(self):
@@ -33,6 +34,11 @@ class session_data:
 	def is_visit(self):
 		return len(self.session_id) < 8
 	
+	@property
+	def profile(self):
+		if not self._profile:
+			self._profile = web_profile.ctrl_profile.get(self.user_id)
+		return self._profile
 
 g_session_data = {} 
 _last_session_id = int(time.time())
@@ -150,7 +156,7 @@ def _get_profile_dist(d,s):
 			d["name"] = "神秘的美女"
 			d["photo_url"] = "/res/girl.jpg"
 	else:
-		user = web_profile.ctrl_profile.get(s.user_id)
+		user = s.profile
 		if not user:
 			return
 		d["name"] = user.nickname

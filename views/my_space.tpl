@@ -27,11 +27,11 @@
 	
 	border-radius: 5px;
 	box-shadow: 4px 10px 6px #e6aec0;
-	float:right;
+	/*float:right;*/
 }
 
 #div_cat{
-	z-index: -1;position: absolute;left:1px;bottom:40px;
+	z-index: -1;position: absolute;left:-35px;bottom:40px;
 	background: url("/res/small_icon.png") no-repeat -496px 0;
 	width: 54px;height:74px;
 }
@@ -124,15 +124,46 @@
 <script type="text/javascript">
 	function init_raty(readonlyVal)
 	{
-		$("#star_appearance").empty();
-		$("#star_figure").empty();
-		$("#star_character").empty();
-		$("#star_attitude").empty();
-				  
-		$("#star_appearance").raty({ start:3,inline_width:38,readOnly:readonlyVal});
-		$("#star_figure").raty({ start:3,inline_width:68,readOnly:readonlyVal});
-		$("#star_character").raty({ start:3,inline_width:68,readOnly:readonlyVal});
-		$("#star_attitude").raty({ start:3,inline_width:68,readOnly:readonlyVal});
+		function set_text(item,score,needUpdate)
+		{
+			while(!item.hasClass("div_raty")){
+				item = item.parent();
+			}
+			var hints = item.attr("textList").split(",").reverse();
+			if (!score) {
+				score = item.attr("star");
+			}
+			else{
+				if (needUpdate) {
+					item.attr("star",score);
+				}
+			}
+			score = parseInt(score);
+			if (score != 0) {
+				item.next("span").text(hints[score-1]);
+			}
+			else{
+				item.next("span").text("");
+			}
+		}
+		
+		$(".div_raty").each(function(){
+			var hints = $(this).attr("textList").split(",").reverse();
+			$(this).empty();
+			$(this).raty({ start:$(this).attr("star"),inline_width:38,readOnly:readonlyVal,
+			hintList:hints,
+			onClick: function (score,s){
+				set_text(s,score,true);
+			},
+			onEnter: function (score,s){
+				set_text(s,score,false);
+			},
+			onLeave: function (s){
+				set_text(s);
+			}
+			});
+			set_text($(this));
+		});
 	}
 	
 	$(document).ready(function(e){
@@ -157,9 +188,7 @@
 			      });
 			
 		});
-		
-		
-		
+		 
 		$("#tagSelector").tag_selector({edit_mode:false});
 		$("#desc").hide();
 		
@@ -168,23 +197,23 @@
 		set_background_img("res/personal_bg.jpg",$("#my_space_head"));
 	});
 	
-	function click_edit()
+	function click_edit(item)
 	{
-		if ("True" == $(this).attr("edit_mode")) {
-			$(this).attr("edit_mode","False");
+		if ("True" == item.attr("edit_mode")) {
+			item.attr("edit_mode","False");
 			$("#tagSelector").tag_selector({edit_mode:false});
 			$("#desc").hide();
 			$("#head_save_button").hide();
-			
+			item.text("编辑资料");
 			init_raty(true);
 		}
 		else
 		{
-			$(this).attr("edit_mode","True");
+			item.attr("edit_mode","True");
 			$("#tagSelector").tag_selector({edit_mode:true});
 			$("#desc").show();
 			$("#head_save_button").show();
-		
+			item.text("取消编辑");
 			init_raty(false);
 		}
 	}
@@ -198,23 +227,23 @@
 		<div class="col-md-4">
 			<!-- div style="background:url('/res/border6.gif') repeat-x;width:224px;height:25px;float:right"></div -->
 			<div class="div_img_profile small">
-				<img class="img_profile_lg" src="res/test/a (11).jpg"></img>
+				<img class="img_profile_lg" src="{{photo_url}}"></img>
 				<i class="icon-heart"></i><span class="text_like_num">221</span>喜欢&nbsp;&nbsp;|
 				<i class="icon-eye-open num_format">1000</i>次&nbsp;&nbsp;|
 				&nbsp;&nbsp;<i class="icon-picture num_format">111</i>张
 			</div>
-			<div id="div_cat"></div>
-			<p class="detail_css text-center">
-				
-			</p>
+			<div id="div_cat"></div> 
 		</div>
-		<div class="col-md-8">
-			<img src="/res/border3.gif"></img><BR>
-			<h4 class="in_block"><strong>姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚姚</strong></h4>
-			<p class="text_like in_block" style="margin-left: 10px"></p>
+		<div class="col-md-5">
+			<img src="/res/border3.gif" style="clear: both"></img><BR>
+			<h4 class="in_block"><strong>{{nickname}}</strong></h4>
+			<h5 class="in_block icon-edit readonly_hide" style="float: right;vertical-align: top;cursor:pointer" edit_mode="False" onclick="click_edit($(this))">
+				编辑资料
+			</h5>
 			<BR>
+%if not my:				
 			<p class="text_profile_info1 in_block">
-				<strong>广东广州 | </strong><strong>21岁 | 178cm | 50kg</strong>
+				<strong>{{city}} | </strong><strong>{{age}}岁 | {{height}}cm | {{weight}}kg</strong>
 			</p>
 			<div style="margin-left: 20px" class="in_block">
 				<i class="icon-iphone" title="手机认证******79001"></i>&nbsp;<i class="icon-nameplate" title="身份认证"></i>&nbsp;
@@ -222,51 +251,38 @@
 				<i class="icon-temple-christianity-church" title="有房认证"></i>
 			</div>
 			<p>
-				 本科 | 10k-15k | 租房 | 有车
+				本科 | 10k-15k | 租房 | 有车
 			</p>
-			<div class="in_block" > 
-				<div style="margin-bottom: 5px">
-					<span>长相：</span><div id="star_appearance" class="in_block"></div><span class="small">英俊潇洒</span><BR/>
+%else:
+			<div style="width:10px;height:20px"></div>
+%end			
+			<div class="in_block" style="width:100%">
+%				for s in c_score:
+				<div style="margin-bottom: 5px;width:100%">
+					<span>{{s[1]}}：</span>
+					<div id="div_star_{{s[0]}}" class="in_block div_raty" textList="{{s[2]}}" star="{{scores[str(s[0])]}}"></div>
+					<span class="small1" style="margin-left: -15px"></span><BR/>
 				</div>
-				<div style="margin-bottom: 5px">
-					<span>身材：</span><div id="star_figure" class="in_block"></div><span class="small">英俊潇洒</span><BR/>
-				</div>
-				<div style="margin-bottom: 5px">
-					<span>性格：</span><div id="star_character" class="in_block"></div><span class="small">英俊潇洒</span><BR/>
-				</div>
-				<div style="margin-bottom: 5px">
-					<span>态度：</span><div id="star_attitude" class="in_block"></div><span class="small">英俊潇洒</span><BR/>
-				</div>
+%				end				
 			</div>
-			<h5 class="in_block icon-edit readonly_hide" style="margin-left: 50px;margin-top: 0px;vertical-align: top;cursor:pointer" edit_mode="False" onclick="click_edit()">
-				编辑资料
-			</h5>
 			<BR>
 			<div id="tagSelector" style="margin-bottom: 8px">
 				<span>标签：</span>
 				<input id="input_tagSelector" type="hidden" ></input>
 				<ul>
-					<li>C</li>
-					<li>C++</li>
-					<li>天下无敌</li>
-					<li>PHP</li>
-					<li>Python</li>
-					<li>C</li>
-					<li>C++</li>
-					<li>JAVA</li>
-					<li>PHP</li>
-					<li>Python</li>
-					<li>C</li> 
+%					for t in c_tags:
+					<li value="{{t[0]}}">{{t[1]}}</li>
+%					end					
 				</ul>
 			</div>
 			<div>
 				<span>描述：</span>
-				<textarea id="desc" class="form-control" rows="3" cols="10" placeholder="自我描述"></textarea>
+				<textarea id="desc" class="form-control limit_l" maxlength="100" rows="3" cols="10" placeholder="自我描述">{{mydesc}}</textarea>
 			</div>
 			
-			<div id="head_save_button" class="readonly_hide" style="margin-top: 10px;display: none">
-				<button class="btn btn-success" style="margin-right: 20px"><i class="icon-ok-2">保存</i></button>
-				<button class="btn btn-danger"><i class="icon-remove-2"> 取消</i></button>	
+			<div id="head_save_button" class="readonly_hide text-center" style="margin-top: 10px;display: none">
+				<button class="green_btn" style="margin-right: 20px"><i class="icon-ok-2">保存</i></button>
+				<button class="gray_btn"><i class="icon-remove-2"> 取消</i></button>	
 			</div>
 			
 			<div class="div_btn edit_hide" style="margin-top: 10px">
@@ -291,11 +307,12 @@
 			</div>
 			<img src="/res/border4.gif"></img>
 			<BR>
-			<button type="button " class="green_btn"><i class="icon-edit"></i>编辑</button>
+%if not my:			
 			<button type="button " class="purple_btn"><i class="icon-heart"></i>喜欢</button>
 			<button type="button " class="yellow_btn"><i class="icon-coffe-cup"></i>交友</button>
 			<button type="button " class="blue_btn"><i class="icon-envelope"></i>私信</button>
 			<button type="button " class="gray_btn"><i class="icon-bell"></i>举报</button>
+%end			
 		</div>
 	</div>
      </div>
@@ -317,10 +334,10 @@
 				<div class="collapse navbar-collapse clearfix " id="space-navbar-collapse" style="padding-left: 0px">
 				   <ul class="nav navbar-nav"> 
 				      <li><a href="#" data="album2" class="text-center"><i class="icon-envelope" style="color:orange"></i><span>我的动态</span></a></li>
-				      <li><a href="#" data="profile" class="text-center"><i class="icon-user" style="color:limegreen"></i><span>我的资料</span></a></li>
+				      <li id="first_nav_tag"><a href="#" data="profile" class="text-center"><i class="icon-user" style="color:limegreen"></i><span>我的资料</span></a></li>
 				      <li><a href="#" data="certif" class="text-center"><i class="icon-certificate"  style="color:goldenrod"></i><span>我的认证</span></a></li>
 				      <li><a href="#" data="record"><i  class="icon-book-open" class="text-center" style="color:orchid"></i><span>个人喜好</span></a></li>
-				      <li  id="first_nav_tag"><a href="#" data="ta_request"><i class="icon-star" class="text-center" style="color:deepskyblue"></i><span>我的要求</span></a></li>
+				      <li><a href="#" data="ta_request"><i class="icon-star" class="text-center" style="color:deepskyblue"></i><span>我的要求</span></a></li>
 				   </ul>
 				</div>
 			</nav>

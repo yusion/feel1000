@@ -5,7 +5,7 @@ import web_register,session
 import test_user_manager
 from web_profile import *
 from PIL import Image
-
+	
 def test_get_log_desc():
 	c = profile_columns.get("height")
 	assert "修改身高信息，从<span class='strong'>168厘米</span>改为<span class='strong'>180厘米</span>" == user_profile.get_log_desc(c,168,180)
@@ -202,12 +202,99 @@ def check_img(p,name,result):
 		assert b == d
 	os.remove(temp_name)
 	print(name,result)
+
+def test_score():
+	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male,35)
+	utility.set_session_id(s.session_id)
+	u = ctrl_profile.get(s.user_id)
+	c = {"1":"0","2":"0","3":"0","4":"0"}
+	utility.assert_dict(c,u.scores)
 	
+	c = {"1":"5","2":"4","3":"2","4":"1"}
+	u.save_scores(c)
+	utility.check_log(u.user_id,"修改了评分信息",1)
+	
+	db = utility.get_db()
+	cc = db.cursor()
+	r = db.execute("SELECT score,scoreID FROM u_score WHERE userID=%d"%u.user_id).fetchone()
+	assert r
+	assert r[1] == "1,2,3,4"
+	assert r[0] == "5,4,2,1"
+	
+	utility.assert_dict(c,u.scores)
+	u._scores = None
+	utility.assert_dict(c,u.scores)
+	
+	c = {"1":"3","2":"2","3":"1","4":"5"}
+	u.save_scores(c)
+	utility.assert_dict(c,u.scores)
+	u._scores = None
+	utility.assert_dict(c,u.scores)
+	test_user_manager.clear_test_user()
+		
+def test_save_desc():
+	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male,35)
+	utility.set_session_id(s.session_id)
+	u = ctrl_profile.get(s.user_id)
+	
+	for i in range(3):
+		v = """
+		fsdfsdfdsf'dfsf<FADFSDF><BR>"\n\r\tdsfadfsf
+		"""
+		v += str(i)
+		if i ==0:
+			v =""
+		u.save_desc(v)
+		assert u.mydesc == v
+		cc = utility.get_cursor()
+		rr = cc.execute("SELECT mydesc FROM u_profile WHERE id=?",(u.user_id,)).fetchall()
+		assert len(rr) == 1
+		assert rr[0][0] == v
+		utility.check_log(u.user_id,"修改描述`"+v+"`",1)
+	
+	test_user_manager.clear_test_user()
+
+def test_save_tags():
+	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male,35)
+	utility.set_session_id(s.session_id)
+	u = ctrl_profile.get(s.user_id)
+	t = ["聪明通威的","长腿欧巴","运动健将","风趣幽默"]
+	oo = "长腿欧巴@@聪明通威的@@运动健将@@风趣幽默"	
+	u.save_tags(t)
+	assert u.tags == t
+	cc = utility.get_cursor()
+	rr = cc.execute("SELECT tags FROM u_tags WHERE userid=?",(u.user_id,)).fetchall()
+	assert len(rr) == 1
+	assert rr[0][0] == oo
+	utility.check_log(u.user_id,"修改tags`"+oo+"`",1)
+	
+	t = ["聪明通威的1","长腿欧巴1","运动健将1","长腿欧巴1","风趣幽默1","风趣幽默1"]
+	oo = "长腿欧巴1@@风趣幽默1@@聪明通威的1@@运动健将1"
+	u.save_tags(t)
+	assert u.tags == t
+	cc = utility.get_cursor()
+	rr = cc.execute("SELECT tags FROM u_tags WHERE userid=?",(u.user_id,)).fetchall()
+	assert len(rr) == 1
+	assert rr[0][0] == oo
+	utility.check_log(u.user_id,"修改tags`"+oo+"`",1)
+	
+	t = []
+	oo = ""
+	u.save_tags(t)
+	assert u.tags == t
+	cc = utility.get_cursor()
+	rr = cc.execute("SELECT tags FROM u_tags WHERE userid=?",(u.user_id,)).fetchall()
+	assert len(rr) == 1
+	assert rr[0][0] == oo
+	utility.check_log(u.user_id,"修改tags`"+oo+"`",1)
+	
+	test_user_manager.clear_test_user()
+		
 def test_auto_rotate():	
 	check_img("test/","2.gif","2.gif")
 	check_img("test/","0.jpg","0result.jpg")
 	check_img("test/","6.jpg","6result.jpg")
-	check_img("test/","8.jpg","8result.jpg")
+	check_img("test/","8.jpg","8result.jpg")	
 
 if __name__ == '__main__':
 	utility.run_tests(__file__)

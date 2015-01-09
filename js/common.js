@@ -1,7 +1,12 @@
 
 function assert(value,msg) {
   if (!value) {
-    alert(msg);
+    if (msg) {
+      alert(msg);
+    }
+    else{
+      alert("unknow error");  
+    }
   }
 }
 
@@ -15,29 +20,21 @@ function is_test(){
   return g_test;
 }
 
-//ie8 doesn't support indexOf
-if(!Array.prototype.indexOf2){  
-        Array.prototype.indexOf2 = function(elt /*, from*/){  
-        var len = this.length >>> 0;  
-        var from = Number(arguments[1]) || 0;  
-        from = (from < 0)  
-             ? Math.ceil(from)  
-             : Math.floor(from);  
-        if (from < 0)  
-          from += len;  
-        for (; from < len; from++)  
-        {  
-          if (from in this &&  
-              this[from] === elt)  
-            return from;  
-        }  
-        return -1;  
-      };  
+//ie8 doesn't support indexOf 
+function indexOfArray(array,elem){
+  for(var i=0;i<array.length;i++){
+    if (array[i] == elem) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 //ie8 doesn't support trim
 if(!String.prototype.trim2){
-  String.prototype.trim2 = $.trim; //using jquery trim
+  String.prototype.trim2 = function(){
+    return $.trim(this); //using jquery trim
+  }
 }
 
 
@@ -104,6 +101,25 @@ if(!String.prototype.trim2){
         }
     })
 })(jQuery);
+    
+//对HTML进行转义 
+function html2Escape(sHtml) {
+ var s = sHtml.replace(/[<>&'"]/g,function(c){return {"'":'&apos;','<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];});
+ return s.replace(/\s/ig, '&nbsp;');
+}
+ 
+//把转义后的字符反转 
+function escape2Html(str) {
+ var arrEntities={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"','apos':"'"};
+ var s = str.replace(/&(lt|gt|nbsp|amp|quot|apos);/ig,function(all,t){return arrEntities[t];});
+ var arrEntities = {'nbsp' : ' '};
+ return s.replace(/&(nbsp);/ig, function(all, t){return arrEntities[t]})
+}
+
+//回车转为br标签
+function return2Br(str) {
+ return str.replace(/\r?\n/g,"<br />");
+}
     
 // ----------------------------------------------------------------------
 // <summary>
@@ -381,7 +397,7 @@ function create_img_div(left,top,width,height)
       return i;
 }
 
-//jquery ctrl, tag selector
+//基于标签的设置器 jquery ctrl, tag selector
 (function ($) {
   /* example html
   <div>
@@ -393,15 +409,20 @@ function create_img_div(left,top,width,height)
           <li>PHP</li>
           <li>Python</li>
     </ul>
-  </div>*/   
+  </div>
+  
+  编辑状态切换的方法，调用两次 
+  $("#tagSelector").tag_selector({edit_mode:false});
+  $("#tagSelector").tag_selector({edit_mode:true});
+*/   
     $.fn.tag_selector = function(options){
         if (0 == $(this).find("ul").length) {
-          alert("tag_selector:wrong html,no ul");
+          assert(false,"tag_selector:wrong html,no ul");
           return;
         }
         var input = $(this).find("input:hidden");
         if (0 == input.length) {
-          alert("tag_selector:wrong html,no hidden input");
+          assert(false,"tag_selector:wrong html,no hidden input");
           return;
         }
         $(this).find("ul").hide();
@@ -410,11 +431,10 @@ function create_img_div(left,top,width,height)
         var container = $(this);
         var selTags = new Array();
         var d = input.val().split(" ");
-        for(var i=0;i<d.length;i++)
-        {
+        for(var i=0;i<d.length;i++){
           var v = d[i].trim2();
           if (v.length) {
-            if (selTags.indexOf2(v) == -1) {
+            if (indexOfArray(selTags,v) == -1) {
               selTags.push(v);
             }
           }
@@ -422,105 +442,107 @@ function create_img_div(left,top,width,height)
         var allTags = new Array();
         container.find("li").each(function(){
           var v =$(this).text();
-          if (selTags.indexOf2(v) == -1) {
-              if (allTags.indexOf2(v) == -1) {
+          if (indexOfArray(selTags,v) == -1) {
+              if (indexOfArray(allTags,v) == -1) {
                 allTags.push(v);
               }
           }
         });
         
-        container.find(".tagItem, .linkTagNew, .divTagNew").remove();
-        
-        for(var i=0;i<selTags.length;i++)
-        {
-          container.append("<div class='tagItem tagItem_edit'>"+selTags[i]+"</div>");
-        }
-        if (!options.edit_mode) {
-            container.find(".tagItem_edit").removeClass("tagItem_edit");
+        container.find(".tagItem, .divTagNew, .divSelTags .link_show").remove(); //因为可能重复初始化
+        var selContainer = $("<div class='divSelTags in_block'></div>");
+        container.append(selContainer);
+
+        if (!options.edit_mode){
+            updateDiv();
+            selContainer.find(".tagItem_edit").removeClass("tagItem_edit");
             return;
         }
-        var link = $("<a class='linkTagNew'><i class='icon-tag'></i>添加标签</a>");
-        container.append(link);
         
-        var editTag = $("<div class='divTagNew'></div>");
-        editTag.hide();
-        link.after(editTag);
-        
-        function addTags(text) {
-           link.before("<div class='tagItem tagItem_edit'>"+text+"</div>");
-           selTags.push(text);
-           input.val(selTags.join(" "));
-           if (selTags.length == allTags.length) {
-              link.hide();
+        var editTag = $("<div class='divTagNew'><input /><a class='link_add icon-tag'>贴上</a><a class='link_close icon-remove-2'>关闭</a><HR><div class='divTagNewContant'></div></div>");
+        container.append(editTag);
+        editTag.children("input").limitLength(6);
+        var editContainer = editTag.children(".divTagNewContant");
+        updateDiv();
+
+        function addTags(text) { 
+           if (indexOfArray(selTags,text) != -1) {
+              return;
            }
-            container.children(".tagItem").click(function(){
-              removeTags($(this));
-            });
+           selTags.push(text);
+           updateDiv();
+           updateEditDiv();
         }
         
         function removeTags(tagElem){
             tagElem.remove();
-            var i = selTags.indexOf2(tagElem.text());
+            var i = indexOfArray(selTags,html2Escape(tagElem.text()));
             if (i != -1) {
-              selTags.splice(i,1);
-              input.val(selTags.join(" "));
-              if (selTags.length != allTags.length) {
-                  link.show();
-              }
+              selTags.splice(i,1); //删除元素 
+            }
+            updateDiv();
+            updateEditDiv();
+        }
+        
+        function updateDiv() {
+            selContainer.empty();
+            for (var s in selTags) {
+              selContainer.append("<div class='tagItem tagItem_edit'>"+selTags[s]+"</div>");
+            }
+            input.val(selTags.join(" "));
+            selContainer.children(".tagItem").click(function(){
+              removeTags($(this));
+            });
+             
+            if(options.edit_mode && !container.find(".divTagNew").visible()) {
+               var linkShow = $("<nobr><a class='link_show icon-tag' style='cursor: pointer;text-decoration: none;margin-left:10px'>添加</a></nobr>");
+                selContainer.append(linkShow);
+                linkShow.click(function(){
+                  editTag.show();
+                });
             }
         }
+        
+        function updateEditDiv(){
+            editContainer.empty();
+            var showHR = false;
+            for(var i=0;i<allTags.length;i++){
+              if (indexOfArray(selTags,allTags[i]) == -1) {
+                editContainer.append("<div class='tagItem tagItem_edit'>"+allTags[i]+"</div>");
+                showHR = true;
+              }
+            }
+            if (showHR) {
+              editTag.find("HR").show();
+            }
+            else{
+              editTag.find("HR").hide();
+            }
+            editContainer.find(".tagItem").click(function(){
+                addTags($(this).text());
+            });
+        }
+        
+        editTag.children(".link_add").click(function(){
+          //添加自定义标签 
+            var v = editTag.children("input").val();
+            v = html2Escape(v.trim2());
+            if (v.length) {
+              addTags(v); 
+            }
+        });
+        
+        editTag.children(".link_close").click(function(){
+          editTag.hide();
+          updateDiv();
+        });
+        
+        updateEditDiv();
         
         container.children(".tagItem").click(function(){
           removeTags($(this));
         });
         
-        function showEditDiv(){
-            editTag.empty();
-            for(var i=0;i<allTags.length;i++)
-            {
-              if (selTags.indexOf2(allTags[i]) == -1) {
-                editTag.append("<div class='tagItem tagItem_edit'>"+allTags[i]+"</div>");
-              }
-            } 
-            
-            editTag.css("top",link.position().top + link.height() +10);
-            editTag.css("left",link.position().left);
-            
-            editTag.find(".tagItem").click(function(){
-                addTags($(this).text());
-                hideEditDiv();
-            });
-            
-            editTag.show();
-        }
-        var timerID1,timerID2;
-        function hideEditDiv(){
-          editTag.hide();
-        }
-        
-        link.mouseenter(function(){
-          clearTimeout(timerID1);
-          clearTimeout(timerID2);
-          showEditDiv();
-        });
-        
-        link.mouseleave(function(){
-          timerID1 = setTimeout(hideEditDiv,300);
-        });
-        
-        editTag.mouseenter(function(){
-          clearTimeout(timerID1);
-          clearTimeout(timerID2);
-          showEditDiv();
-        });
-        
-        editTag.mouseleave(function(){
-            timerID2 = setTimeout(hideEditDiv,300);
-        });
-        
-        link.click(function(){
-          showEditDiv();
-        });
     }
 })(jQuery); 
 

@@ -454,40 +454,32 @@
 }
 
 /*自定义标签控件 */
-/*jquery ctrl: for tag selector */
+/* 正常显示的标签 */
 .tagItem{
-	min-width: 50px;
+	min-width: 30px;
 	display: inline-block;
 	color: black;
-	margin: 0px 10px 5px 0px;
-	padding: 2px 10px 2px 15px;
-	background-image: url('/res/small_icon.png');
-	background-position: -0px -58px;
-	border-bottom: solid 2px transparent;
+	margin: 0px 20px 5px 0px;
+	padding: 2px 2px 2px 2px;
+	
+	background-color: #def2fe;
+	border: solid 1px #92e2fd;
+	border-radius: 4px;
 }
+
+/* 已经添加，处理编辑状态的标签 */
 .tagItem_edit{
 	cursor: pointer;
-}
-
-.tagItem_edit:hover{
-	border-bottom: solid 2px @hover_link_color;
-}
-
-.linkTagNew{
-	cursor:pointer;
-	//color:#faae7d;
-	color:black;
-}
-
-.linkTagNew:hover{
-	cursor:pointer;
-	//color:#f68e51;
-	color:black;
-	text-decoration:none;
+	&:hover{
+		margin-right: 10px;
+		&:after{
+			content: "  x ";	
+		}
+	}	
 }
 
 .divTagNew{
-	position: absolute;
+	//position: absolute;
 	color: black;
 	background-color: #ffffe1;
 	padding: 10px 10px 10px 10px;
@@ -501,6 +493,23 @@
 	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
 	/* For IE 5.5 - 7 */
 	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+	
+	.tagItem_edit:hover{
+		margin-right: 8px;
+		&:after{
+			content: " √ ";	
+		}
+	}
+	hr{
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	a{
+		cursor: pointer;
+		text-decoration: none;
+		margin-left: 5px;
+		margin-right: 15px;
+	}
 }
 
 /*my album page css */

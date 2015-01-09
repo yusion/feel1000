@@ -226,7 +226,7 @@
 	<div class="row">
 		<div class="col-md-4">
 			<!-- div style="background:url('/res/border6.gif') repeat-x;width:224px;height:25px;float:right"></div -->
-			<div class="div_img_profile small">
+			<div class="div_img_profile small text-center">
 				<img class="img_profile_lg" src="{{photo_url}}"></img>
 				<i class="icon-heart"></i><span class="text_like_num">221</span>喜欢&nbsp;&nbsp;|
 				<i class="icon-eye-open num_format">1000</i>次&nbsp;&nbsp;|
@@ -255,7 +255,7 @@
 			</p>
 %else:
 			<div style="width:10px;height:20px"></div>
-%end			
+%end 
 			<div class="in_block" style="width:100%">
 %				for s in c_score:
 				<div style="margin-bottom: 5px;width:100%">
@@ -266,6 +266,10 @@
 %				end				
 			</div>
 			<BR>
+			<div>
+				<span>描述：</span>
+				<textarea id="desc" class="form-control limit_l" maxlength="100" rows="3" cols="10" placeholder="自我描述">{{mydesc}}</textarea>
+			</div>
 			<div id="tagSelector" style="margin-bottom: 8px">
 				<span>标签：</span>
 				<input id="input_tagSelector" type="hidden" ></input>
@@ -274,17 +278,11 @@
 					<li value="{{t[0]}}">{{t[1]}}</li>
 %					end					
 				</ul>
-			</div>
-			<div>
-				<span>描述：</span>
-				<textarea id="desc" class="form-control limit_l" maxlength="100" rows="3" cols="10" placeholder="自我描述">{{mydesc}}</textarea>
-			</div>
-			
+			</div>			
 			<div id="head_save_button" class="readonly_hide text-center" style="margin-top: 10px;display: none">
 				<button class="green_btn" style="margin-right: 20px"><i class="icon-ok-2">保存</i></button>
 				<button class="gray_btn"><i class="icon-remove-2"> 取消</i></button>	
-			</div>
-			
+			</div> 
 			<div class="div_btn edit_hide" style="margin-top: 10px">
 					<button class="btn btn-primary btn_send_msg">
 						<i class="icon-envelope"></i><span class="sm_hide">发信息</span>

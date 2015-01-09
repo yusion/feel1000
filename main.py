@@ -31,7 +31,7 @@ def get_file(path):
 
 if __name__ == '__main__':
 	print("python " + platform.python_version())
-	#utility.set_is_test(True);
+	utility.set_is_test(True);
 	os.chdir(os.path.dirname(__file__))
 	
 	#if utility.is_test():

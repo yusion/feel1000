@@ -39,6 +39,49 @@ QUnit.test("secToStr",function(assert){
 	assert.equal(p.secToStr(m*12*10+6546),"10年");
 });
 
+QUnit.test("trim",function(assert){
+	expect(6);
+	assert.equal("   a   ".trim2(),"a");
+	assert.equal("\t \t\t  bbb \t  ".trim2(),"bbb");
+	assert.equal("   bbb".trim2(),"bbb");
+	assert.equal(" \t   bbb\t".trim2(),"bbb");
+	assert.equal(" \t   \t".trim2(),"");
+	assert.equal("    ".trim2(),"");
+});
+
+QUnit.test("indexOfArray",function(assert){
+	expect(8);
+	var a = ["aaa","bbb","ccc"];
+	assert.equal(indexOfArray(a,"aaa"),0);
+	assert.equal(indexOfArray(a,"bbb"),1);
+	assert.equal(indexOfArray(a,"ccc"),2);
+	assert.equal(indexOfArray(a,"ccc1"),-1);
+	assert.equal(indexOfArray(a,"a"),-1);
+	assert.equal(indexOfArray(a,""),-1);
+	assert.equal(indexOfArray([],""),-1);
+	assert.equal(indexOfArray([],"a"),-1);
+});
+
+QUnit.test("html2Escape",function(assert){
+	expect(11);
+	assert.equal(html2Escape("'"),"&apos;");
+	var a = "<&'> \"";
+	var b = "&lt;&amp;&apos;&gt;&nbsp;&quot;";
+	assert.equal(html2Escape(a),b);
+	assert.equal(a,escape2Html(b));
+	assert.equal(a,escape2Html(html2Escape(a)));
+	assert.equal(b,html2Escape(escape2Html(b)));
+	
+	assert.equal("",escape2Html(""));
+	assert.equal("",html2Escape(""));
+	
+	assert.equal("aaaaaaaaaaafdfdfsdfsf",escape2Html("aaaaaaaaaaafdfdfsdfsf"));
+	assert.equal("aaaaaaaaaaafdfdfsdfsf",html2Escape("aaaaaaaaaaafdfdfsdfsf"));
+	
+	a = "<BR>  ";
+	assert.equal("&lt;BR&gt;&nbsp;&nbsp;",html2Escape(a));
+	assert.equal(a,escape2Html(html2Escape(a)));
+});
 
 
 

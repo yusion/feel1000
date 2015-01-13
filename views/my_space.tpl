@@ -197,8 +197,7 @@
 		set_background_img("res/personal_bg.jpg",$("#my_space_head"));
 	});
 	
-	function click_edit(item)
-	{
+	function click_edit(item){
 		if ("True" == item.attr("edit_mode")) {
 			item.attr("edit_mode","False");
 			$("#tagSelector").tag_selector({edit_mode:false});
@@ -216,6 +215,10 @@
 			item.text("取消编辑");
 			init_raty(false);
 		}
+	}
+	
+	function save_edit(){
+		
 	}
 </script>	
 <!-- div_space_readonly代表别人访问时的只读属性
@@ -237,7 +240,7 @@
 		<div class="col-md-5">
 			<img src="/res/border3.gif" style="clear: both"></img><BR>
 			<h4 class="in_block"><strong>{{nickname}}</strong></h4>
-			<h5 class="in_block icon-edit readonly_hide" style="float: right;vertical-align: top;cursor:pointer" edit_mode="False" onclick="click_edit($(this))">
+			<h5 id="text_edit" class="in_block icon-edit readonly_hide" style="float: right;vertical-align: top;cursor:pointer" edit_mode="False" onclick="click_edit($(this))">
 				编辑资料
 			</h5>
 			<BR>
@@ -267,11 +270,11 @@
 			</div>
 			<BR>
 			<div>
-				<span>描述：</span>
-				<textarea id="desc" class="form-control limit_l" maxlength="100" rows="3" cols="10" placeholder="自我描述">{{mydesc}}</textarea>
+				<span class="in_block" style="margin-bottom: 5px">描述：</span>
+				<textarea id="desc" class="form-control limit_l" maxlength="100" rows="3" cols="10" placeholder="自我描述">{{desc}}</textarea>
 			</div>
 			<div id="tagSelector" style="margin-bottom: 8px">
-				<span>标签：</span>
+				<span class="in_block" style="margin-bottom: 5px">标签：</span>
 				<input id="input_tagSelector" type="hidden" ></input>
 				<ul>
 %					for t in c_tags:
@@ -281,7 +284,7 @@
 			</div>			
 			<div id="head_save_button" class="readonly_hide text-center" style="margin-top: 10px;display: none">
 				<button class="green_btn" style="margin-right: 20px"><i class="icon-ok-2">保存</i></button>
-				<button class="gray_btn"><i class="icon-remove-2"> 取消</i></button>	
+				<button class="gray_btn" onclick="click_edit($('#text_edit'));"><i class="icon-remove-2"> 取消</i></button>	
 			</div> 
 			<div class="div_btn edit_hide" style="margin-top: 10px">
 					<button class="btn btn-primary btn_send_msg">
@@ -303,6 +306,7 @@
 						</ul>
 					</div>
 			</div>
+			<BR>
 			<img src="/res/border4.gif"></img>
 			<BR>
 %if not my:			

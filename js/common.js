@@ -490,11 +490,15 @@ function create_img_div(left,top,width,height)
               selContainer.append("<div class='tagItem tagItem_edit'>"+selTags[s]+"</div>");
             }
             input.val(selTags.join(" "));
+            if (!options.edit_mode) {
+              return;
+            }
+            
             selContainer.children(".tagItem").click(function(){
               removeTags($(this));
             });
              
-            if(options.edit_mode && !container.find(".divTagNew").visible()) {
+            if(!container.find(".divTagNew").visible()) {
                var linkShow = $("<nobr><a class='link_show icon-tag' style='cursor: pointer;text-decoration: none;margin-left:10px'>添加</a></nobr>");
                 selContainer.append(linkShow);
                 linkShow.click(function(){
@@ -504,6 +508,9 @@ function create_img_div(left,top,width,height)
         }
         
         function updateEditDiv(){
+            if (!editContainer) {
+              return;
+            }
             editContainer.empty();
             var showHR = false;
             for(var i=0;i<allTags.length;i++){

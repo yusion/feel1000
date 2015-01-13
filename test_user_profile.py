@@ -141,7 +141,7 @@ def test_set_photo_url():
 	test_user_manager.clear_test_user()
 
 def test_handle_profile_img():
-	user = user_profile()
+	user = user_profile(1001)
 	user.id = 978897112
 	user.hasphoto = True
 	mem = io.BytesIO()
@@ -211,12 +211,12 @@ def test_score():
 	utility.assert_dict(c,u.scores)
 	
 	c = {"1":"5","2":"4","3":"2","4":"1"}
-	u.save_scores(c)
-	utility.check_log(u.user_id,"修改了评分信息",1)
+	u.save_tags(None,c,None)
+	utility.check_log(u.user_id,"修改了评分信息`5,4,2,1`",1)
 	
 	db = utility.get_db()
 	cc = db.cursor()
-	r = db.execute("SELECT score,scoreID FROM u_score WHERE userID=%d"%u.user_id).fetchone()
+	r = db.execute("SELECT score,scoreID FROM u_tags WHERE userID=%d"%u.user_id).fetchone()
 	assert r
 	assert r[1] == "1,2,3,4"
 	assert r[0] == "5,4,2,1"
@@ -226,7 +226,7 @@ def test_score():
 	utility.assert_dict(c,u.scores)
 	
 	c = {"1":"3","2":"2","3":"1","4":"5"}
-	u.save_scores(c)
+	u.save_tags(None,c,None)
 	utility.assert_dict(c,u.scores)
 	u._scores = None
 	utility.assert_dict(c,u.scores)
@@ -237,22 +237,26 @@ def test_save_desc():
 	utility.set_session_id(s.session_id)
 	u = ctrl_profile.get(s.user_id)
 	
-	for i in range(3):
+	for i in range(4):
 		v = """
 		fsdfsdfdsf'dfsf<FADFSDF><BR>"\n\r\tdsfadfsf
 		"""
 		v += str(i)
-		if i ==0:
+		if i ==1:
 			v =""
-		u.save_desc(v)
-		assert u.mydesc == v
+		u.save_tags(None,None,v)
+		if i ==1:
+			assert u.desc == ""
+		else:
+			assert u.desc == v
+			
 		cc = utility.get_cursor()
-		rr = cc.execute("SELECT mydesc FROM u_profile WHERE id=?",(u.user_id,)).fetchall()
+		rr = cc.execute("SELECT desc FROM u_tags WHERE userid=?",(u.user_id,)).fetchall()
 		assert len(rr) == 1
 		assert rr[0][0] == v
 		utility.check_log(u.user_id,"修改描述`"+v+"`",1)
 	
-	test_user_manager.clear_test_user()
+	#test_user_manager.clear_test_user()
 
 def test_save_tags():
 	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male,35)
@@ -260,7 +264,7 @@ def test_save_tags():
 	u = ctrl_profile.get(s.user_id)
 	t = ["聪明通威的","长腿欧巴","运动健将","风趣幽默"]
 	oo = "长腿欧巴@@聪明通威的@@运动健将@@风趣幽默"	
-	u.save_tags(t)
+	u.save_tags(t,None,None)
 	assert u.tags == t
 	cc = utility.get_cursor()
 	rr = cc.execute("SELECT tags FROM u_tags WHERE userid=?",(u.user_id,)).fetchall()
@@ -270,7 +274,7 @@ def test_save_tags():
 	
 	t = ["聪明通威的1","长腿欧巴1","运动健将1","长腿欧巴1","风趣幽默1","风趣幽默1"]
 	oo = "长腿欧巴1@@风趣幽默1@@聪明通威的1@@运动健将1"
-	u.save_tags(t)
+	u.save_tags(t,None,None)
 	assert u.tags == t
 	cc = utility.get_cursor()
 	rr = cc.execute("SELECT tags FROM u_tags WHERE userid=?",(u.user_id,)).fetchall()
@@ -280,13 +284,62 @@ def test_save_tags():
 	
 	t = []
 	oo = ""
-	u.save_tags(t)
+	u.save_tags(t,None,None)
 	assert u.tags == t
 	cc = utility.get_cursor()
 	rr = cc.execute("SELECT tags FROM u_tags WHERE userid=?",(u.user_id,)).fetchall()
 	assert len(rr) == 1
 	assert rr[0][0] == oo
 	utility.check_log(u.user_id,"修改tags`"+oo+"`",1)
+	test_user_manager.clear_test_user()
+	
+def test_save_tags2():
+	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male,35)
+	utility.set_session_id(s.session_id)
+	u = ctrl_profile.get(s.user_id)
+	t = ["聪明通威的","长腿欧巴","运动健将","风趣幽默"]
+	c = {"1":"0","2":"0","3":"0","4":"0"}
+	d = "lalalala"
+	u.save_tags(t,None,d)
+	
+	u2 = ctrl_profile.get(s.user_id)
+	assert u2.desc == d
+	assert u.desc == d
+	
+	assert u.scores == c
+	assert u2.scores == c
+	
+	utility.assert_array_noorder(u.tags,t)
+	utility.assert_array_noorder(u2.tags,t)
+	
+	d = "asgfasfgw532534sd"
+	c = {"1":"5","2":"4","3":"2","4":"2"}
+	u.save_tags(t,c,d)
+	u2 = ctrl_profile.get(s.user_id)
+	assert u2.desc == d
+	assert u.desc == d
+	
+	assert u.scores == c
+	assert u2.scores == c
+	
+	utility.assert_array_noorder(u.tags,t)
+	utility.assert_array_noorder(u2.tags,t)
+	
+	utility.assert_array_noorder(u.tags,t)
+	utility.assert_array_noorder(u2.tags,t)
+	
+	d = "asgfasfgw532534sd"
+	c = {"1":"5","2":"4","3":"3","4":"2"}
+	u.save_tags(None,c,d)
+	u2 = ctrl_profile.get(s.user_id)
+	assert u2.desc == d
+	assert u.desc == d
+	
+	assert u.scores == c
+	assert u2.scores == c
+	
+	utility.assert_array_noorder(u.tags,t)
+	utility.assert_array_noorder(u2.tags,t)
 	
 	test_user_manager.clear_test_user()
 		

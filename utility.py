@@ -173,6 +173,18 @@ def assert_dict(d1,d2):
 	for k in d1:
 	    assert k in d2
 	    assert d1[k] == d2[k]
+	    
+def assert_array_noorder(a1,a2):
+    #不管顺序的数组比较
+    assert a1
+    assert a2
+    assert len(a1) == len(a2)
+    s1 = a1[:]
+    s2 = a2[:]
+    s1.sort()
+    s2.sort()
+    assert s1 == s2
+        
 
 
 #############################	unit test	###########################

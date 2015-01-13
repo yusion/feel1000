@@ -78,7 +78,7 @@ def clear_test_user2():
 	db = utility.get_db()
 	c = db.cursor()
 	
-	tables = ["r_log","u_score","u_tags"]
+	tables = ["r_log","u_tags"]
 	for t in tables:
 		c.execute("""DELETE FROM """ +t+""" WHERE userID IN
 			(

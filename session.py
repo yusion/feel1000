@@ -145,6 +145,7 @@ def _get_profile_dist(d,s):
 	d["photo_url"] = "/res/unknownprofile.jpg"
 	d["session"] = "-1"
 	if not s:
+		utility.check(session,401)
 		return
 	
 	d["session"] = s.session_id
@@ -165,7 +166,8 @@ def _get_profile_dist(d,s):
 def get_dist(session = None):
 	d = get_dist2()
 	if session == None:
-		session = get() 
+		session = get()
+		utility.check(session,401)
 
 	_get_profile_dist(d,session) 
 	d["page_head"] = utility.get_template_file("views/pagehead.tpl",d)

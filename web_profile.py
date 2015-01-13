@@ -55,18 +55,40 @@ class profile_columns:
 		return None
 
 class user_profile:
-	def __init__(self):
+	def __init__(self,id):
+		self.user_id = id
 		self.ip = "127.0.0.8"
-		self._scores = None
-		self._tags = None
+		self.scores = {"1":"0","2":"0","3":"0","4":"0"} #4个选项
+		self.tags = []
+		self.desc = ""
+		self._has_tag = False #是否已经存在u_tags表 
+		self._read_tags()
+	
+	def _read_tags(self):
+		c = utility.get_cursor()
+		r = c.execute("SELECT tags,scoreID,score,desc FROM u_tags WHERE userID=%d"%self.user_id).fetchone()
+		if not r:
+			return
+		
+		if r[0] and len(r[0]):
+			self.tags = r[0].split("@@")
+
+		if r[1]	and r[2]:
+			self.scores.clear()
+			for k,v in zip(r[1].split(","),r[2].split(",")):
+				self.scores[k] = v
+		
+		if r[3]:
+			self.desc = r[3]
+		self._has_tag = True 
 	
 	@property
 	def small_photo_url(self):
-		return "user_images/" + utility.scramble(self.id) + "_small.jpg"
+		return "user_images/" + utility.scramble(self.user_id) + "_small.jpg"
 	
 	@property
 	def normal_photo_url(self):
-		return "user_images/" + utility.scramble(self.id) + ".jpg"
+		return "user_images/" + utility.scramble(self.user_id) + ".jpg"
 		
 	@property
 	def photo_url(self):
@@ -75,6 +97,81 @@ class user_profile:
 		else:
 			return "res/unknownprofile.jpg"
 	
+	@staticmethod	
+	def __get_value_desc(column,value):
+		return "<span class='strong'>" + str(column.get_value_desc(value)) + column.unit + "</span>"
+	
+	@staticmethod	
+	def get_log_desc(column,oldValue,newValue):
+		if column.column == "HasPhoto":
+			return "修改了" + column.columnName + "信息"
+		
+		if oldValue == "" or oldValue == -1 or oldValue == None:
+			return "设置" + column.columnName + "信息为" + user_profile.__get_value_desc(column,newValue)
+		else:
+			return "修改" + column.columnName + "信息，从" + user_profile.__get_value_desc(column,oldValue) + "改为" + user_profile.__get_value_desc(column,newValue)
+
+	def get_dict(self):
+		d = {}
+		for k in self.__dict__:
+			v = self.__dict__[k] 
+			if v == None or v == -1:
+				d[k] = "未知"
+			else:
+				d[k] = v
+		return d
+		
+	def save_tags(self,tags,scores,desc):
+		if None == tags and None == desc and not scores :
+			return
+		
+		db = utility.get_db()
+		c = db.cursor()
+		need = False
+		
+		cols = []
+		vals = []
+		
+		if tags != None:
+			s = set(tags) #清除重复的 
+			val = "@@".join([x for x in s])
+			utility.write_log(self.user_id,"修改tags`"+val+"`",1,False)
+			cols.append("tags")
+			vals.append(val)
+			self.tags = tags
+			
+		if scores:
+			o = collections.OrderedDict(sorted(scores.items(), key=lambda scores: scores[0]))
+			val = ",".join([str(x) for x in o.values()])
+			key = ",".join([str(x) for x in o.keys()])
+			utility.write_log(self.user_id,"修改了评分信息`"+val+"`",1,False)
+			cols.append("score")
+			cols.append("scoreID")
+			vals.append(val)
+			vals.append(key)
+			self.scores = scores
+			
+		if desc != None:
+			cols.append("desc")
+			vals.append(desc)
+			utility.write_log(self.user_id,"修改描述`"+desc+"`",1,False)
+			self.desc = desc	
+		
+		sql = ""
+		if not self._has_tag:
+			self._has_tag = True
+			t = "?,"*len(cols)
+			sql = "INSERT INTO u_tags(userID," + ",".join(cols) + ")VALUES(" +str(self.user_id)+"," + t[:-1] + ")"
+		else:
+			t = ""
+			for x in cols:
+				t += (x + "=?,")
+			sql = "UPDATE u_tags SET " + t[:-1]
+			sql += " WHERE userID=%d"%self.user_id
+		print(sql,vals)
+		c.execute(sql, vals)
+		db.commit()
+
 	def update(self,key,value):
 		lowKey = key.lower()
 		column = profile_columns.get(lowKey)
@@ -103,99 +200,10 @@ class user_profile:
 		db.commit()
 		return True
 	
-	@staticmethod	
-	def __get_value_desc(column,value):
-		return "<span class='strong'>" + str(column.get_value_desc(value)) + column.unit + "</span>"
-	
-	@staticmethod	
-	def get_log_desc(column,oldValue,newValue):
-		if column.column == "HasPhoto":
-			return "修改了" + column.columnName + "信息"
-		
-		if oldValue == "" or oldValue == -1 or oldValue == None:
-			return "设置" + column.columnName + "信息为" + user_profile.__get_value_desc(column,newValue)
-		else:
-			return "修改" + column.columnName + "信息，从" + user_profile.__get_value_desc(column,oldValue) + "改为" + user_profile.__get_value_desc(column,newValue)
-
-	def get_dict(self):
-		d = {}
-		for k in self.__dict__:
-			v = self.__dict__[k] 
-			if v == None or v == -1:
-				if k != "mydesc":
-					d[k] = "未知"
-				else:
-					d[k] = ""
-			else:
-				d[k] = v
-		return d
-	
-	@property
-	def scores(self):
-		if not self._scores:
-			r = utility.get_cursor().execute("SELECT scoreID,score FROM u_score WHERE userID=?",
-				(self.user_id,)).fetchone()
-			if r:
-				self._scores = {}
-				for k,v in zip(r[0].split(","),r[1].split(",")):
-					self._scores[k] = v
-			else:
-				self._scores = {"1":"0","2":"0","3":"0","4":"0"} #4个选项
-		return self._scores
-	
-	def save_scores(self,scores):
-		db = utility.get_db()
-		c = db.cursor()
-		o = collections.OrderedDict(sorted(scores.items(), key=lambda scores: scores[0]))
-		values = ",".join([str(x) for x in o.values()])
-		keys = ",".join([str(x) for x in o.keys()])
-		if self.scores["1"] != "0": #如果有设置，就不可能等于0
-			c.execute("UPDATE u_score SET score=?,scoreID=? WHERE userID=?",
-				(values,keys,self.user_id))
-		else:
-			c.execute("INSERT INTO u_score(score,scoreID,userID)VALUES(?,?,?)",
-				(values,keys,self.user_id))
-		
-		self._scores = scores	
-		utility.write_log(self.user_id,"修改了评分信息",1,False)
-		db.commit()
-		
-	def save_desc(self,desc):
-		db = utility.get_db()
-		c = db.cursor()
-		c.execute("UPDATE u_profile SET MyDesc=? WHERE ID=?",(desc,self.user_id))
-		self.mydesc = desc
-		utility.write_log(self.user_id,"修改描述`"+desc+"`",1,False)
-		db.commit()
-		
-	@property	
-	def tags(self):
-		if not self._tags:
-			r = utility.get_cursor().execute("SELECT tags FROM u_tags WHERE userID=%d"%self.user_id).fetchone()
-			if r and len(r[0]):
-				self._tags = r[0].split("@@")
-			else:
-				self._tags = []
-		return self._tags
-		
-	def save_tags(self,tags):
-		s = set(tags) #clear repeat 
-		v = "@@".join([x for x in s])
-		db = utility.get_db()
-		c = db.cursor()
-		if self.tags:
-			c.execute("UPDATE u_tags SET tags=? WHERE userID=?",(v,self.user_id))
-		else:
-			c.execute("INSERT INTO u_tags(userID,tags)VALUES(?,?)",(self.user_id,v))
-		self._tags = tags
-		utility.write_log(self.user_id,"修改tags`"+v+"`",1,False)
-		db.commit()
-		
-		
 class ctrl_profile:
 	@staticmethod
 	def get(user_id):
-		user = user_profile()
+		user = user_profile(user_id)
 		sql = """SELECT * FROM u_user as u LEFT JOIN u_profile as u1 ON u.ID=u1.ID WHERE u.ID=""" + str(user_id)
 		c = utility.get_cursor()
 		r = c.execute(sql).fetchone()
@@ -265,10 +273,20 @@ def url_show_space():
 	d["tags"] = s.profile.tags
 	d["my"] = True 
 	d["age"] = s.age
+	d["desc"] = s.desc
 	utility.get_tags_table(d,s.sex)
 	utility.get_score_table(d,s.sex)
 	d["friend"] = utility.get_template_file("views/friend.tpl",{})
 	return d
+
+@bottle.route('/action/update_profile')	
+def url_update_desc():
+	u = ctrl_profile.get(session.get().user_id)
+	tags = bottle.request.params.tags #list 
+	scores = bottle.request.params.scores #dict 
+	desc = bottle.request.params.desc 
+	u.save_tags(tags,scores,desc)
+	return json.dumps({"result":"success"})		
 
 @bottle.route('/ta_request')	
 @bottle.view('ta_request')	
@@ -305,8 +323,8 @@ def url_show_profile():
 	utility.update_c_table(d,"c_degree",u.degree)
 	utility.update_c_table(d,"c_career",u.career)
 	return d
-
-@bottle.route('/action/update_profile')	
+	
+@bottle.route('/action/update_profile_detail')	
 def url_update_profile():
 	u = ctrl_profile.get(session.get().user_id)
 	id = bottle.request.params.key
@@ -323,8 +341,7 @@ def get_file(path):
 
 @bottle.route('/my_images/<path:path>')
 def get_profile_file(path):
-	u = user_profile()
-	u.id = session.get().user_id
+	u = user_profile(session.get().user_id)
 	return bottle.static_file(u.normal_photo_url,"")
 
 @bottle.post('/action/upload_profile_photo')

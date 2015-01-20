@@ -83,7 +83,14 @@ QUnit.test("html2Escape",function(assert){
 	assert.equal(a,escape2Html(html2Escape(a)));
 });
 
-
+QUnit.test("trim_str",function(assert){
+	expect(5);
+	assert.equal(trim_str("12345678901234567890",1),"1");
+	assert.equal(trim_str("12345678901234567890",10),"1234567890");
+	assert.equal(trim_str("123456789",10),"123456789");
+	assert.equal(trim_str("123456789",10000),"123456789");
+	assert.equal(trim_str("123456789",0),"");
+});
 
 
 

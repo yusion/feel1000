@@ -37,7 +37,7 @@ class session_data:
 	@property
 	def profile(self):
 		if not self._profile:
-			self._profile = web_profile.ctrl_profile.get(self.user_id)
+			self._profile = web_profile.ctrl_profile._read(self.user_id)
 		return self._profile
 
 g_session_data = {} 
@@ -109,14 +109,19 @@ def visit(sex):
 	global g_session_data
 	g_session_data[user.session_id] = user
 	return user
-		
-def get(id = None):
+
+def try_get(id = None):
 	global g_session_data
 	if not id:
 		id = utility.get_session_id()
 	if id in g_session_data:
 		return g_session_data[id]
-	return None
+	return None		
+		
+def get(id = None):
+	s = try_get(id)
+	utility.check(s,401)
+	return s
 	
 def set(session_id,data):
 	''' for test only '''

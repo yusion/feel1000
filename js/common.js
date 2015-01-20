@@ -449,7 +449,7 @@ function create_img_div(left,top,width,height)
           }
         });
         
-        container.find(".tagItem, .divTagNew, .divSelTags .link_show").remove(); //因为可能重复初始化
+        container.find(".tagItem, .divTagNew, .divSelTags, .link_show").remove(); //因为可能重复初始化
         var selContainer = $("<div class='divSelTags in_block'></div>");
         container.append(selContainer);
 
@@ -1188,5 +1188,13 @@ $(document).ready(function(e){
   get_browser_info();
   $("#returnTop").returntop();
 });
+
+//保证最大字符串长度小于len 
+function trim_str(str,len){
+  if (str.length>len) {
+    return str.substr(0,len)
+  }
+  return str;
+}
 
 

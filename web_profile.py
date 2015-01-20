@@ -168,7 +168,6 @@ class user_profile:
 				t += (x + "=?,")
 			sql = "UPDATE u_tags SET " + t[:-1]
 			sql += " WHERE userID=%d"%self.user_id
-		print(sql,vals)
 		c.execute(sql, vals)
 		db.commit()
 
@@ -202,7 +201,7 @@ class user_profile:
 	
 class ctrl_profile:
 	@staticmethod
-	def get(user_id):
+	def _read(user_id):
 		user = user_profile(user_id)
 		sql = """SELECT * FROM u_user as u LEFT JOIN u_profile as u1 ON u.ID=u1.ID WHERE u.ID=""" + str(user_id)
 		c = utility.get_cursor()
@@ -266,14 +265,13 @@ class ctrl_profile:
 @bottle.view('my_space')	
 def url_show_space():
 	s = session.get()
-	utility.check(s,401)
 	d = session.get_dist() 
 	d.update(s.profile.get_dict())
 	d["scores"] = s.profile.scores
 	d["tags"] = s.profile.tags
 	d["my"] = True 
 	d["age"] = s.age
-	d["desc"] = s.desc
+	d["desc"] = s.profile.desc 
 	utility.get_tags_table(d,s.sex)
 	utility.get_score_table(d,s.sex)
 	d["friend"] = utility.get_template_file("views/friend.tpl",{})
@@ -281,18 +279,29 @@ def url_show_space():
 
 @bottle.route('/action/update_profile')	
 def url_update_desc():
-	u = ctrl_profile.get(session.get().user_id)
-	tags = bottle.request.params.tags #list 
-	scores = bottle.request.params.scores #dict 
-	desc = bottle.request.params.desc 
-	u.save_tags(tags,scores,desc)
-	return json.dumps({"result":"success"})		
+	u = session.get().profile
+	tags_val = bottle.request.params.tags #list
+	tags = None
+	if tags_val:
+		tags = tags_val.split(" ")
+	
+	scores_id = bottle.request.params.scores_id
+	scores_val = bottle.request.params.scores_val
+	scores = None
+	if scores_id and scores_val:
+		scores = {}
+		for id,val in zip(scores_id.split(" "),scores_val.split(" ")):
+			scores[id] = val
+		
+	desc = bottle.request.params.desc #string
+	u.save_tags(tags,scores,desc) 
+	return json.dumps({"result":"true"})		
 
 @bottle.route('/ta_request')	
 @bottle.view('ta_request')	
 def url_show_ta_request():
 	d = session.get_dist()
-	u = ctrl_profile.get(session.get().user_id)
+	u = session.get().profile
 	d["photo_url"] = u.photo_url
 	d["normal_photo_url"] = u.normal_photo_url
 	d.update(u.get_dict())
@@ -308,13 +317,12 @@ def url_show_record():
 	d = session.get_dist()
 	utility.update_c_table(d,"c_record")
 	return d
-
 		
 @bottle.route('/profile')	
 @bottle.view('profile')	
 def url_show_profile():
 	d = session.get_dist()
-	u = ctrl_profile.get(session.get().user_id)
+	u = session.get().profile
 	d["photo_url"] = u.photo_url
 	d["normal_photo_url"] = u.normal_photo_url
 	d.update(u.get_dict())
@@ -326,7 +334,7 @@ def url_show_profile():
 	
 @bottle.route('/action/update_profile_detail')	
 def url_update_profile():
-	u = ctrl_profile.get(session.get().user_id)
+	u = session.get().profile
 	id = bottle.request.params.key
 	v = bottle.request.params.value
 	ret = u.update(id,v)
@@ -346,7 +354,7 @@ def get_profile_file(path):
 
 @bottle.post('/action/upload_profile_photo')
 def url_upload():
-	user = ctrl_profile.get(session.get().user_id)
+	user = session.get().profile
 	upload = bottle.request.files.get('Filedata')
 	mem = io.BytesIO()
 	upload.save(mem)
@@ -357,7 +365,7 @@ def url_upload():
 
 @bottle.post('/action/upload_id_cerf')
 def url_upload_id_cerf():
-	user = ctrl_profile.get(session.get().user_id)
+	user = session.get().profile
 	upload = bottle.request.files.get('qqfile')
 	mem = io.BytesIO()
 	upload.save(mem)
@@ -370,4 +378,20 @@ def url_upload_id_cerf():
 if __name__ == '__main__':
 	utility.run_tests("test_user_profile.py")
 	
-#TODO: Age和AgeBegin改成BirdthdayYear
+#############################	web unit test	###########################
+@bottle.route('/test/get_my_profile')	
+def url_get_profile():
+	u = session.get().profile
+	return json.dumps(u.__dict__)
+
+
+		
+
+
+
+
+
+
+
+
+

@@ -100,14 +100,14 @@ def url_index2():
 		
 	elif bottle.request.forms.session:
 		#注册用户访问 
-		s = session.get(bottle.request.forms.session) 
+		s = session.try_get(bottle.request.forms.session) 
 		if bottle.request.forms.save:
 			save = True
 	else:
 		#从保存cookies的index页面中直接redirect过来的情况   
 		session_id = utility.get_session_id()
 		if session_id != "-1":
-			s = session.get(session_id) 
+			s = session.try_get(session_id) 
 
 	if not s:
 		bottle.redirect("/")

@@ -166,6 +166,18 @@
 		});
 	}
 	
+	function get_score_val(){
+		var ids = "";
+		var vals = "";
+		$(".div_raty").each(function(){
+			ids += $(this).attr("typeID").toString() + " ";
+			vals += $(this).attr("star").toString() + " ";
+		});
+		ids = ids.trim2();
+		vals = vals.trim2();
+		return {"id":ids,"val":vals};
+	}
+	
 	$(document).ready(function(e){
 		init_raty(true);
 		var isFirst = true;
@@ -197,28 +209,63 @@
 		set_background_img("res/personal_bg.jpg",$("#my_space_head"));
 	});
 	
-	function click_edit(item){
+	function click_edit(is_save){
+		var item = $("#text_edit");
 		if ("True" == item.attr("edit_mode")) {
-			item.attr("edit_mode","False");
+			//取消编译模式  
+			item.attr("edit_mode","False");		
+			if (is_save){
+				$("#text_desc").text($("#desc").val());
+			}
+			else{
+				$("#input_tagSelector").val($("#input_tagSelector").attr("old"));
+				$(".div_raty").each(function(){
+					$(this).attr("star",$(this).attr("old"));
+				});
+			}
 			$("#tagSelector").tag_selector({edit_mode:false});
-			$("#desc").hide();
+			$("#desc").hide();					
+			$("#text_desc").show();
 			$("#head_save_button").hide();
 			item.text("编辑资料");
 			init_raty(true);
 		}
-		else
+		else   					
 		{
+			//保存旧的值，用于取消恢复 
+			$("#input_tagSelector").attr("old",$("#input_tagSelector").val());
+			$("#desc").val($("#text_desc").text());
+			$(".div_raty").each(function(){
+				$(this).attr("old",$(this).attr("star"));
+			});
+			
+			//进入编译模式  
 			item.attr("edit_mode","True");
 			$("#tagSelector").tag_selector({edit_mode:true});
 			$("#desc").show();
+			$("#text_desc").hide();
 			$("#head_save_button").show();
 			item.text("取消编辑");
 			init_raty(false);
 		}
 	}
-	
-	function save_edit(){
 		
+	function save_edit(){
+		var score = get_score_val();
+		$.getJSON("action/update_profile", 
+			{desc: trim_str($("#desc").val(),100), 
+			tags: trim_str($("#input_tagSelector").val(),100),
+			scores_id: score.id,
+			scores_val: score.val},
+			function(json){
+				$("#result").val(json.result);
+				if (json.result == "true") {
+					click_edit(true);
+				}
+				else{
+					alert("保存用户信息失败");
+				}
+			},"json");
 	}
 </script>	
 <!-- div_space_readonly代表别人访问时的只读属性
@@ -228,7 +275,6 @@
      <div class="col-md-8 col-md-offset-2" >
 	<div class="row">
 		<div class="col-md-4">
-			<!-- div style="background:url('/res/border6.gif') repeat-x;width:224px;height:25px;float:right"></div -->
 			<div class="div_img_profile small text-center">
 				<img class="img_profile_lg" src="{{photo_url}}"></img>
 				<i class="icon-heart"></i><span class="text_like_num">221</span>喜欢&nbsp;&nbsp;|
@@ -239,8 +285,8 @@
 		</div>
 		<div class="col-md-5">
 			<img src="/res/border3.gif" style="clear: both"></img><BR>
-			<h4 class="in_block"><strong>{{nickname}}</strong></h4>
-			<h5 id="text_edit" class="in_block icon-edit readonly_hide" style="float: right;vertical-align: top;cursor:pointer" edit_mode="False" onclick="click_edit($(this))">
+			<h4 id="text_nickname" class="in_block"><strong>{{nickname}}</strong></h4>
+			<h5 id="text_edit" class="in_block icon-edit readonly_hide" style="float: right;vertical-align: top;cursor:pointer" edit_mode="False" onclick="click_edit(false);">
 				编辑资料
 			</h5>
 			<BR>
@@ -263,19 +309,20 @@
 %				for s in c_score:
 				<div style="margin-bottom: 5px;width:100%">
 					<span>{{s[1]}}：</span>
-					<div id="div_star_{{s[0]}}" class="in_block div_raty" textList="{{s[2]}}" star="{{scores[str(s[0])]}}"></div>
+					<div id="div_star_{{s[0]}}" typeID="{{s[0]}}" class="in_block div_raty" textList="{{s[2]}}" star="{{scores[str(s[0])]}}"></div>
 					<span class="small1" style="margin-left: -15px"></span><BR/>
 				</div>
 %				end				
 			</div>
 			<BR>
-			<div>
-				<span class="in_block" style="margin-bottom: 5px">描述：</span>
-				<textarea id="desc" class="form-control limit_l" maxlength="100" rows="3" cols="10" placeholder="自我描述">{{desc}}</textarea>
+			<div class="in_block" style="width:100%">
+				<span class="in_block" style="margin-bottom: 5px;vertical-align: top">描述：</span>
+				<span id="text_desc" class="in_block" style="word-wrap:break-word;width:80%">{{desc}}</span>
+				<textarea id="desc" style="margin-bottom: 8px;" class="form-control limit_l" maxlength="100" rows="3" cols="10" placeholder="自我描述"></textarea>
 			</div>
-			<div id="tagSelector" style="margin-bottom: 8px">
+			<div id="tagSelector" style="margin-bottom: 8px;">
 				<span class="in_block" style="margin-bottom: 5px">标签：</span>
-				<input id="input_tagSelector" type="hidden" ></input>
+				<input id="input_tagSelector" type="hidden" value="{{' '.join(tags)}}"></input>
 				<ul>
 %					for t in c_tags:
 					<li value="{{t[0]}}">{{t[1]}}</li>
@@ -283,8 +330,8 @@
 				</ul>
 			</div>			
 			<div id="head_save_button" class="readonly_hide text-center" style="margin-top: 10px;display: none">
-				<button class="green_btn" style="margin-right: 20px"><i class="icon-ok-2">保存</i></button>
-				<button class="gray_btn" onclick="click_edit($('#text_edit'));"><i class="icon-remove-2"> 取消</i></button>	
+				<button class="green_btn" style="margin-right: 20px" onclick="save_edit();"><i class="icon-ok-2">保存</i></button>
+				<button class="gray_btn" onclick="click_edit(false);"><i class="icon-remove-2"> 取消</i></button>	
 			</div> 
 			<div class="div_btn edit_hide" style="margin-top: 10px">
 					<button class="btn btn-primary btn_send_msg">
@@ -360,6 +407,185 @@
 		{{!friend}}
 	</div>
 </div>
+     
+
+
+%if is_test:
+<script type="text/javascript">
+     function get_tags(){
+	s = $(".divSelTags").children(".tagItem");
+	var ret = new Array();
+	for (var i=0;i<s.length;i++) {
+		ret.push(html2Escape(s.eq(i).text()));
+	}
+	return ret;
+     }
+	
+     QUnit.module("my_space");
+     var p;
+     QUnit.asyncTest("get_data",function(assert){
+	$.getJSON("/test/get_my_profile",null,
+		function(json){
+			//console.log(json);
+			p = json;
+			QUnit.start();
+			assert.ok(1);
+		});	
+     });
+      
+     QUnit.test("init",function(assert){
+	expect(13);
+	assert.ok(!$("#desc").visible());
+	assert.ok($("#text_desc").visible());
+	assert.ok(!$("#head_save_button").visible());
+	
+	assert.equal($("#text_edit").text().trim2(),"编辑资料");
+	assert.equal($("#text_nickname").text().trim2(),p.nickname);
+	var star = $(".div_raty");
+	assert.equal(4,star.length);
+	for(var i=0;i<4;i++)
+	{
+		assert.equal(star.eq(i).attr("star"),p.scores[(i+1).toString()].toString());
+	}
+	assert.equal($("#text_desc").text(),p.desc);
+	assert.equal($("#input_tagSelector").val().split(" ").join(),p.tags.join());
+	assert.equal(get_tags().join(),p.tags.join());
+     });
+     
+     QUnit.test("get_score_val",function(assert){
+	expect(2);
+	var r = get_score_val();
+	assert.equal(r.id,"1 2 3 4");
+	var dd = "";
+	for(var i=0;i<4;i++)
+	{
+		dd += p.scores[(i+1).toString()];
+		if (i != 3) {
+			dd += " ";
+		}
+	}
+	assert.equal(r.val,dd);
+     });
+      
+     QUnit.test("cancelEdit",function(assert){
+	expect(15);	
+	$("#text_edit").click();
+	assert.equal($("#text_edit").text().trim2(),"取消编辑");
+	assert.ok($("#desc").visible());
+	assert.ok(!$("#text_desc").visible());
+	assert.equal($("#desc").val(),p.desc);
+	assert.ok($("#head_save_button").visible());
+	
+	$("#text_desc").val("Wrong,Wrong");
+	$("#input_tagSelector").val("Wrong1 Wrong2");
+	$("#div_star_1").attr("star","1");
+	$("#div_star_2").attr("star","2");
+	$("#div_star_3").attr("star","3");
+	$("#div_star_4").attr("star","4");
+	
+	$("#text_edit").click();
+	assert.equal($("#text_edit").text().trim2(),"编辑资料");
+	assert.ok(!$("#desc").visible());
+	assert.ok($("#text_desc").visible());
+	assert.equal($("#text_desc").text(),p.desc);
+	assert.ok(!$("#head_save_button").visible());
+	var star = $(".div_raty");
+	for(var i=0;i<4;i++)
+	{
+		assert.equal(star.eq(i).attr("star"),p.scores[(i+1).toString()].toString());
+	}
+	assert.equal($("#input_tagSelector").val().split(" ").join(),p.tags.join());	
+     });
+     
+     QUnit.test("cancelEdit2",function(assert){
+	expect(10);	
+	$("#text_edit").click();
+	assert.equal($("#text_edit").text().trim2(),"取消编辑");
+	assert.ok($("#desc").visible());
+	assert.ok(!$("#text_desc").visible());
+	assert.equal($("#desc").val(),p.desc);
+	assert.ok($("#head_save_button").visible());
+	
+	$("#text_desc").val("Wrong,Wrong");
+	$("#input_tagSelector").val("Wrong1 Wrong2");
+	$("#div_star_1").attr("star","1");
+	$("#div_star_2").attr("star","2");
+	$("#div_star_3").attr("star","3");
+	$("#div_star_4").attr("star","4");
+	
+	$("#head_save_button").children().eq(1).click();
+	assert.equal($("#text_edit").text().trim2(),"编辑资料");
+	assert.ok(!$("#desc").visible());
+	assert.ok($("#text_desc").visible());
+	assert.equal($("#text_desc").text(),p.desc);
+	assert.ok(!$("#head_save_button").visible());
+     });
+     
+      QUnit.asyncTest("edit1",function(assert){
+	expect(9);	
+	$("#text_edit").click();
+	$("#desc").val(p.desc + "<BR>1'\"");
+	$("#input_tagSelector").val("玉树 神舟路 有房一族");
+	$("#div_star_1").attr("star","5");
+	$("#div_star_2").attr("star","4");
+	$("#div_star_3").attr("star","3");
+	$("#div_star_4").attr("star","2");
+	
+	$("#head_save_button").children().eq(0).click();
+	setTimeout(function() {
+		assert.equal($("#text_edit").text().trim2(),"编辑资料");
+		assert.ok(!$("#desc").visible());
+		assert.ok($("#text_desc").visible());
+		
+		assert.equal($("#text_desc").text(),p.desc + "<BR>1'\"");
+		var star = $(".div_raty");
+		assert.equal(star.eq(0).attr("star"),"5");
+		assert.equal(star.eq(1).attr("star"),"4");
+		assert.equal(star.eq(2).attr("star"),"3");
+		assert.equal(star.eq(3).attr("star"),"2");
+		
+		assert.ok(!$("#head_save_button").visible());
+		
+		QUnit.start();
+	}, 500);
+     });
+      
+      QUnit.asyncTest("restore",function(assert){
+	expect(9);	
+	$("#text_edit").click();
+	$("#desc").val(p.desc);
+	var t = "";
+	for (var i=0;i<p.tags.length;i++){
+		t+=p.tags[i] + " ";
+	}
+	$("#input_tagSelector").val(t.trim2());
+	$("#div_star_1").attr("star",p.scores["1"]);
+	$("#div_star_2").attr("star",p.scores["2"]);
+	$("#div_star_3").attr("star",p.scores["3"]);
+	$("#div_star_4").attr("star",p.scores["4"]);
+	
+	$("#head_save_button").children().eq(0).click();
+	setTimeout(function() {
+		assert.equal($("#text_edit").text().trim2(),"编辑资料");
+		assert.ok(!$("#desc").visible());
+		assert.ok($("#text_desc").visible());
+		
+		assert.equal($("#text_desc").text(),p.desc);
+		var star = $(".div_raty");
+		assert.equal(star.eq(0).attr("star"),p.scores["1"].toString());
+		assert.equal(star.eq(1).attr("star"),p.scores["2"].toString());
+		assert.equal(star.eq(2).attr("star"),p.scores["3"].toString());
+		assert.equal(star.eq(3).attr("star"),p.scores["4"].toString());
+		
+		assert.ok(!$("#head_save_button").visible());
+		
+		QUnit.start();
+	}, 500);
+     });
+     
+</script>
+%end     
+
      
 {{!page_foot}}	    
 </body>

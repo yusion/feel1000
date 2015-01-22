@@ -78,13 +78,13 @@ def test_user_age():
 
 def set_attri(u,key,value1,value2):
 	assert u.update(key,str(value1))
-	u2 = ctrl_profile.get(u.id)
+	u2 = ctrl_profile._read(u.id)
 	assert getattr(u2,key) == value1
 	assert getattr(u2,key) == getattr(u,key)
 	assert u.get_dict()[key] == value1
 	
 	assert u.update(key,str(value2))
-	u2 = ctrl_profile.get(u.id)
+	u2 = ctrl_profile._read(u.id)
 	assert getattr(u2,key) == value2
 	assert getattr(u2,key) == getattr(u,key)
 	assert u.get_dict()[key] == value2
@@ -95,7 +95,7 @@ def test_update():
 	test_user_manager.clear_test_user()
 	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male,35)
 	utility.set_session_id(s.session_id)
-	u = ctrl_profile.get(s.user_id)
+	u = ctrl_profile._read(s.user_id)
 	assert s.age == 35
 	assert not u.update("none",1)
 	assert not u.update("none","abc")
@@ -113,7 +113,7 @@ def test_update():
 	set_attri(u,"degree",1,2)
 	set_attri(u,"school","company 在英文单词中一般的意思是","company 在ssss英文单词中一般的sss意思是")
 	assert u.update("income","")
-	u2 = ctrl_profile.get(u.id)
+	u2 = ctrl_profile._read(u.id)
 	assert getattr(u2,"income") == -1
 	test_user_manager.clear_test_user()
 	
@@ -123,7 +123,7 @@ def test_get_user():
 	assert s
 	utility.set_session_id(s.session_id)
 	
-	u = ctrl_profile.get(s.user_id)
+	u = ctrl_profile._read(s.user_id)
 	assert u
 	assert u.nickname == "ycattest"
 	assert u.id == s.user_id
@@ -134,7 +134,7 @@ def test_get_user():
 def test_set_photo_url():
 	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male,35)
 	utility.set_session_id(s.session_id)
-	u = ctrl_profile.get(s.user_id)
+	u = ctrl_profile._read(s.user_id)
 	assert u.hasphoto == 0
 	u.update("hasphoto",1)
 	assert u.hasphoto == 1
@@ -206,7 +206,7 @@ def check_img(p,name,result):
 def test_score():
 	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male,35)
 	utility.set_session_id(s.session_id)
-	u = ctrl_profile.get(s.user_id)
+	u = ctrl_profile._read(s.user_id)
 	c = {"1":"0","2":"0","3":"0","4":"0"}
 	utility.assert_dict(c,u.scores)
 	
@@ -235,7 +235,7 @@ def test_score():
 def test_save_desc():
 	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male,35)
 	utility.set_session_id(s.session_id)
-	u = ctrl_profile.get(s.user_id)
+	u = ctrl_profile._read(s.user_id)
 	
 	for i in range(4):
 		v = """
@@ -261,7 +261,7 @@ def test_save_desc():
 def test_save_tags():
 	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male,35)
 	utility.set_session_id(s.session_id)
-	u = ctrl_profile.get(s.user_id)
+	u = ctrl_profile._read(s.user_id)
 	t = ["聪明通威的","长腿欧巴","运动健将","风趣幽默"]
 	oo = "长腿欧巴@@聪明通威的@@运动健将@@风趣幽默"	
 	u.save_tags(t,None,None)
@@ -296,13 +296,13 @@ def test_save_tags():
 def test_save_tags2():
 	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male,35)
 	utility.set_session_id(s.session_id)
-	u = ctrl_profile.get(s.user_id)
+	u = ctrl_profile._read(s.user_id)
 	t = ["聪明通威的","长腿欧巴","运动健将","风趣幽默"]
 	c = {"1":"0","2":"0","3":"0","4":"0"}
 	d = "lalalala"
 	u.save_tags(t,None,d)
 	
-	u2 = ctrl_profile.get(s.user_id)
+	u2 = ctrl_profile._read(s.user_id)
 	assert u2.desc == d
 	assert u.desc == d
 	
@@ -315,7 +315,7 @@ def test_save_tags2():
 	d = "asgfasfgw532534sd"
 	c = {"1":"5","2":"4","3":"2","4":"2"}
 	u.save_tags(t,c,d)
-	u2 = ctrl_profile.get(s.user_id)
+	u2 = ctrl_profile._read(s.user_id)
 	assert u2.desc == d
 	assert u.desc == d
 	
@@ -331,7 +331,7 @@ def test_save_tags2():
 	d = "asgfasfgw532534sd"
 	c = {"1":"5","2":"4","3":"3","4":"2"}
 	u.save_tags(None,c,d)
-	u2 = ctrl_profile.get(s.user_id)
+	u2 = ctrl_profile._read(s.user_id)
 	assert u2.desc == d
 	assert u.desc == d
 	

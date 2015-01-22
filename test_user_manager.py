@@ -96,7 +96,7 @@ def test_login():
 	assert 1 == len(session.g_session_data)
 	
 	session.clear();
-	
+
 	clear_test_user()
 		 
 		

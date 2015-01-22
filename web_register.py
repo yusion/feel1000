@@ -8,7 +8,6 @@ import utility
 import sqlite3
 import traceback
 import sys,os,bottle,datetime
-from bottle import route, template,install,view,request,get,post,SimpleTemplate
 
 sex_type = utility.enum(Male=1,Female=0)
 
@@ -41,12 +40,12 @@ class ctrl_user_manager:
 		r = utility.get_cursor().execute(sql,(nick,))
 		return r.fetchone()[0] > 0
 		
-@route('/agreement')	
-@view('agreement')	
+@bottle.route('/agreement')	
+@bottle.view('agreement')	
 def url_show_agreement():
 	return session.get_dist2()
 
-@route('/action/register')	
+@bottle.route('/action/register')	
 def url_register():
 	ret = ctrl_user_manager.register(bottle.request.params["nick"],
 		bottle.request.params["pass"],
@@ -57,14 +56,14 @@ def url_register():
 	else:
 		return json.dumps({"result":"false","msg":"注册失败"})	
 
-@route('/action/is_repeat_nickname')	
+@bottle.route('/action/is_repeat_nickname')	
 def url_is_repeat_nickname():
 	return str(not ctrl_user_manager.is_repeat("nickName",bottle.request.params["nickname"])).lower()	
 
 
 #############################	web unit test	###########################
 
-@route('/test/check_user')	
+@bottle.route('/test/check_user')	
 def url_test_check_user():
 	sql = "SELECT COUNT(*) FROM u_user WHERE nickname='%s' and password='%s' and sex=%d and birthdayYear=%d" %	(bottle.request.params["nick"],
 		utility.md5("pwd"+bottle.request.params["pass"]),int(bottle.request.params["sex"])
@@ -78,7 +77,7 @@ def clear_test_user2():
 	db = utility.get_db()
 	c = db.cursor()
 	
-	tables = ["r_log","u_tags"]
+	tables = ["r_log","u_tags","u_record"]
 	for t in tables:
 		c.execute("""DELETE FROM """ +t+""" WHERE userID IN
 			(
@@ -94,7 +93,7 @@ def clear_test_user2():
 		)""")
 	db.commit()
 	
-@route('/test/del_user')	
+@bottle.route('/test/del_user')	
 def url_test_del_user():
 	clear_test_user2()
 

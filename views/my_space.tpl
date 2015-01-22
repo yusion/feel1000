@@ -285,18 +285,20 @@
 		</div>
 		<div class="col-md-5">
 			<img src="/res/border3.gif" style="clear: both"></img><BR>
-			<h4 id="text_nickname" class="in_block"><strong>{{nickname}}</strong></h4>
-			<h5 id="text_edit" class="in_block icon-edit readonly_hide" style="float: right;vertical-align: top;cursor:pointer" edit_mode="False" onclick="click_edit(false);">
-				编辑资料
-			</h5>
+			<div class="in_block" style="width:80%">
+				<h4 id="text_nickname" class="in_block"><strong>{{nickname}}</strong></h4>
+				<h5 id="text_edit" class="in_block icon-edit readonly_hide" style="float: right;vertical-align: top;cursor:pointer" edit_mode="False" onclick="click_edit(false);">
+					编辑资料
+				</h5>
+			</div>
 			<BR>
 %if not my:				
 			<p class="text_profile_info1 in_block">
 				<strong>{{city}} | </strong><strong>{{age}}岁 | {{height}}cm | {{weight}}kg</strong>
 			</p>
 			<div style="margin-left: 20px" class="in_block">
-				<i class="icon-iphone" title="手机认证******79001"></i>&nbsp;<i class="icon-nameplate" title="身份认证"></i>&nbsp;
-				<i class="icon-camera" title="相片认证"></i>&nbsp;<i class="icon-car" title="有车认证"></i>&nbsp;
+				<i class="icon-nameplate" title="身份认证"></i>&nbsp;
+				<i class="icon-car" title="公司认证"></i>&nbsp;
 				<i class="icon-temple-christianity-church" title="有房认证"></i>
 			</div>
 			<p>
@@ -383,9 +385,9 @@
 				<div class="collapse navbar-collapse clearfix " id="space-navbar-collapse" style="padding-left: 0px">
 				   <ul class="nav navbar-nav"> 
 				      <li><a href="#" data="album2" class="text-center"><i class="icon-envelope" style="color:orange"></i><span>我的动态</span></a></li>
-				      <li id="first_nav_tag"><a href="#" data="profile" class="text-center"><i class="icon-user" style="color:limegreen"></i><span>我的资料</span></a></li>
+				      <li><a href="#" data="profile" class="text-center"><i class="icon-user" style="color:limegreen"></i><span>我的资料</span></a></li>
 				      <li><a href="#" data="certif" class="text-center"><i class="icon-certificate"  style="color:goldenrod"></i><span>我的认证</span></a></li>
-				      <li><a href="#" data="record"><i  class="icon-book-open" class="text-center" style="color:orchid"></i><span>个人喜好</span></a></li>
+				      <li id="first_nav_tag"><a href="#" data="record"><i  class="icon-book-open" class="text-center" style="color:orchid"></i><span>个人喜好</span></a></li>
 				      <li><a href="#" data="ta_request"><i class="icon-star" class="text-center" style="color:deepskyblue"></i><span>我的要求</span></a></li>
 				   </ul>
 				</div>

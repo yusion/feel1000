@@ -10,6 +10,15 @@ function assert(value,msg) {
   }
 }
 
+function object_length(o){
+  var ret = 0
+  for (i in o) {
+    ret++;
+  }
+  return ret;
+}
+
+
 //是否为单元测试 
 var g_test = false;
 function set_test(val){

@@ -28,13 +28,13 @@
      </div>
      <div class="col-md-3 col-md-pull-1">
 	<div style="float: right;color:white;vertical-align: middle">
-		<img src="{{photo_url}}" style="width:30px;heigth:auto" class="in_block"></img>
+		<img id="img_profile" src="{{photo_url}}" style="width:30px;heigth:auto" class="in_block"></img>
 		<div id="div_visit" class="in_block">
 			<a href="/index?register"  style="color:white;margin-right: 10px">注册</a>
 			<a href="/index?login"  style="color:white">登陆</a>
 		</div>
 		<div id="div_user_menu" class="dropdown dropdown-hover in_block">
-			<button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" style="color:white">
+			<button id="btn_name" type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" style="color:white">
 				{{name}}
 			   <span class="caret"></span>
 			</button>
@@ -97,5 +97,48 @@
 #div_user_menu ul{
 	min-width: 100px;
 }
-</style>	
+</style>
+
+%if is_test:
+<script type="text/javascript">
+     QUnit.module("page_head");
+     var p;
+     if (is_visit()) {
+	QUnit.test("visit_data",function(assert){
+		assert.ok($("#div_visit").visible());
+		assert.ok(!$("#li_my_space").visible());
+		assert.ok(!$("#div_user_menu").visible());
+		
+		var u = $("#img_profile").attr("src");
+		if (u == "/res/boy.jpg") {
+			assert.equal($("#btn_name").text().trim2(),"神秘的帅哥");
+		}
+		else if(u == "/res/girl.jpg"){
+			assert.equal($("#btn_name").text().trim2(),"神秘的美女");
+		}
+	});	
+     }
+     else
+     {
+	QUnit.asyncTest("get_data",function(assert){
+		expect(5);
+		$.getJSON("/test/get_my_profile",null,
+			function(json){ 
+				assert.ok(!$("#div_visit").visible());
+				assert.ok($("#li_my_space").visible());
+				assert.ok($("#div_user_menu").visible());
+				assert.equal($("#btn_name").text().trim2(),json.nickname);
+				if (json.hasphoto) {
+					assert.equal($("#img_profile").attr("src"),json.photo_url);
+				}
+				else
+				{
+					assert.equal($("#img_profile").attr("src"),"res/unknownprofile.jpg");
+				}
+				QUnit.start();
+			});	
+        });
+     }
+</script>
+%end     
 <!-- this is page head end -->

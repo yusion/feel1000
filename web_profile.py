@@ -310,14 +310,7 @@ def url_show_ta_request():
 	utility.update_c_table(d,"c_degree",u.degree)
 	utility.update_c_table(d,"c_career",u.career)
 	return d
-
-@bottle.route('/record')	
-@bottle.view('record')	
-def url_show_record():
-	d = session.get_dist()
-	utility.update_c_table(d,"c_record")
-	return d
-		
+	
 @bottle.route('/profile')	
 @bottle.view('profile')	
 def url_show_profile():

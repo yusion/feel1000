@@ -1,0 +1,22 @@
+1. bottle的参数读取中文问题
+	读取参数名为vals的值时，中文能正常的方法为：
+	a. bottle.request.params.vals
+	b. bottle.request.params.getunicode(key,encoding="utf-8")
+
+ 	不正常的方法为:
+	a. bottle.request.params[vals]
+
+2. web传来的数据为utf-8的
+
+3. 数据库规范
+	c代表系统固定的表
+	r代表系统产生的数据
+	u代表用户数据表
+	数据库的表名采用小写+下划线
+	数据库列名采用camel写法
+
+4. js规范
+	采用camel写法
+
+5. py规范
+	采用camel写法

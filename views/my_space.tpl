@@ -526,7 +526,7 @@
       QUnit.asyncTest("edit1",function(assert){
 	expect(9);	
 	$("#text_edit").click();
-	$("#desc").val(p.desc + "<BR>1'\"");
+	$("#desc").val(p.desc +"姚"+ "<BR>1'\"");
 	$("#input_tagSelector").val("玉树 神舟路 有房一族");
 	$("#div_star_1").attr("star","5");
 	$("#div_star_2").attr("star","4");
@@ -539,7 +539,7 @@
 		assert.ok(!$("#desc").visible());
 		assert.ok($("#text_desc").visible());
 		
-		assert.equal($("#text_desc").text(),p.desc + "<BR>1'\"");
+		assert.equal($("#text_desc").text(),p.desc +"姚"+ "<BR>1'\"");
 		var star = $(".div_raty");
 		assert.equal(star.eq(0).attr("star"),"5");
 		assert.equal(star.eq(1).attr("star"),"4");

@@ -185,6 +185,8 @@ def assert_array_noorder(a1,a2):
     s2.sort()
     assert s1 == s2
         
+def get_param(key):
+    return bottle.request.params.getunicode(key,encoding="utf-8")
 
 
 #############################	unit test	###########################

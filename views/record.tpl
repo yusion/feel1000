@@ -153,7 +153,7 @@
 		var a={};
 		for (var i =0;i<$(".div_record").length;i++) {
 			var id = "#record_"+(1+i).toString();
-			$(id).val($(id).val()+id);
+			$(id).val($(id).val()+"姚"+id);
 			a[id] = $(id).val();
 		}
 		$("#record_1").blur();

@@ -53,9 +53,9 @@ def url_show_record():
 	return d
 
 @bottle.route('/action/save_record')	
-def url_register():
-	ids = bottle.request.params["ids"].split("@@")
-	vals = bottle.request.params["vals"].split("@@")
+def url_register(): 
+	ids =  bottle.request.params.ids.split("@@")
+	vals = bottle.request.params.vals.split("@@")
 	r = {}
 	for i,v in zip(ids,vals):
 		r[int(i)] = v

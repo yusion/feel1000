@@ -22,15 +22,20 @@ class ctrl_record:
 		db = utility.get_db()
 		c = db.cursor()
 		data = ctrl_record.read(user_id)
+		changed = False
 		for id in record_map:
 			if not ctrl_record._is_right_id(id):
 				continue
+			changed = True
 			if id in data:
 				c.execute("UPDATE u_record SET recordValue=? WHERE userID=? AND recordID=?",
 					  (record_map[id],user_id,id))
 			else:
 				c.execute("INSERT INTO u_record(userID,recordID,recordValue)VALUES(?,?,?)",
 					  (user_id,id,record_map[id]))
+		if not changed:
+			return
+		utility.write_log(user_id,"更改喜好信息",1,False)
 		db.commit()
 		
 	@staticmethod
@@ -53,14 +58,18 @@ def url_show_record():
 	return d
 
 @bottle.route('/action/save_record')	
-def url_register(): 
-	ids =  bottle.request.params.ids.split("@@")
-	vals = bottle.request.params.vals.split("@@")
-	r = {}
-	for i,v in zip(ids,vals):
-		r[int(i)] = v
-	ctrl_record.save(session.get().user_id,r);	
-	return json.dumps({"result":"true"});
+def url_register():
+	try:
+		ids =  bottle.request.params.ids.split("@@")
+		vals = bottle.request.params.vals.split("@@")
+		r = {}
+		for i,v in zip(ids,vals):
+			r[int(i)] = v
+		ctrl_record.save(session.get().user_id,r);	
+		return json.dumps({"result":"true"});
+	except Exception as error:
+		utility.write_log(-1,"更改喜好信息失败"+ str(error),0)
+		return json.dumps({"result":"false"});
 
 #############################	web unit test	###########################
 @bottle.route('/test/get_record')
@@ -92,7 +101,8 @@ def test_read():
 	m={}
 	for i in range(1,5):
 		m[i] = "this is a test ~~~~~~~~~" + str(i)
-	ctrl_record.save(test_id,m)	
+	ctrl_record.save(test_id,m)
+	utility.check_log(test_id,"更改喜好信息",1)
 	r = ctrl_record.read(test_id)
 	utility.assert_dict(r,m)
 	
@@ -100,7 +110,8 @@ def test_read():
 	for i in range(1,20):
 		m[i] = "this is a test'1\"22ds ~~~~~~~~~" + str(i)
 	assert 19 == len(m)
-	ctrl_record.save(test_id,m)	
+	ctrl_record.save(test_id,m)
+	utility.check_log(test_id,"更改喜好信息",1)
 	r = ctrl_record.read(test_id)
 	utility.assert_dict(r,m)
 	

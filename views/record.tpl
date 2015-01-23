@@ -76,10 +76,7 @@
 		
 		
 		$("#form_record input").blur(function(){
-			var v = $(this).val();
-			if (v.length>=20) {
-				$(this).val(v.substr(0,20));
-			}
+			trim_input($(this));
 			update_mark();
 		});
 	});

@@ -5,59 +5,7 @@ import web_register,session
 import test_user_manager
 from web_profile import *
 from PIL import Image
-	
-def test_get_log_desc():
-	c = profile_columns.get("height")
-	assert "修改身高信息，从<span class='strong'>168厘米</span>改为<span class='strong'>180厘米</span>" == user_profile.get_log_desc(c,168,180)
-	c = profile_columns.get("weight")
-	assert "设置体重信息为<span class='strong'>50公斤</span>" == user_profile.get_log_desc(c,-1,50)
-	
-	c = profile_columns.get("degree")
-	assert "设置学历信息为<span class='strong'>本科</span>" == user_profile.get_log_desc(c,-1,2)
-	assert "修改学历信息，从<span class='strong'>硕士</span>改为<span class='strong'>本科</span>" == user_profile.get_log_desc(c,3,2)
-	
-	c = profile_columns.get("HasPhoto")
-	assert "修改了头像信息" == user_profile.get_log_desc(c,0,1)
-	assert "修改了头像信息" == user_profile.get_log_desc(c,1,1)
-	
-	c = profile_columns.get("city")
-	assert "修改城市信息，从<span class='strong'>太原</span>改为<span class='strong'>常州</span>" == user_profile.get_log_desc(c,601,1104)
-
-def test_profile_columns():
-	assert None == profile_columns.get("citywrong")
-	
-	c = profile_columns.get("city")
-	assert c.column == "City"
-	assert c.columnName == "城市"
-	assert profile_column_type.Changable == c.type
-	assert c.get_value_desc(601) == "太原"
-	assert c.get_value_desc(1104) == "常州"
-	
-	c = profile_columns.get("Email")
-	assert c.column == "Email"
-	assert c.columnName == "电子邮箱"
-	assert profile_column_type.Changable == c.type
-	assert c.get_value_desc("113595@qq.com") == "113595@qq.com"
-	
-	c = profile_columns.get("Realname")
-	assert c.column == "RealName"
-	assert c.columnName == "真实姓名"
-	assert profile_column_type.ChangeOnce == c.type
-	
-	c = profile_columns.get("Star")
-	assert c.get_value_desc(1) == "白羊座 03.21─04.20"
-	assert c.get_value_desc(5) == "狮子座 07.23─08.22"
-	assert c.get_value_desc(-1) == ""
-	
-	c = profile_columns.get("income")
-	assert c.get_value_desc(2) == "2k-5k"
-	assert c.get_value_desc(5) == "5k-10k"
-	assert c.get_value_desc(-1) == ""
-	
-	c = profile_columns.get("degree")
-	assert c.get_value_desc(2) == "本科"
-	assert c.get_value_desc(-1) == ""
-	
+	 
 def test_user_age():
 	test_user_manager.clear_test_user()
 	now = datetime.datetime(2014,5,27,12,50,43)
@@ -77,28 +25,33 @@ def test_user_age():
 	utility.set_now(None)
 
 def set_attri(u,key,value1,value2):
-	assert u.update(key,str(value1))
+	dd = {}
+	dd[key] = str(value1)
+	assert u.save_profile(dd)
 	u2 = ctrl_profile._read(u.id)
 	assert getattr(u2,key) == value1
 	assert getattr(u2,key) == getattr(u,key)
 	assert u.get_dict()[key] == value1
 	
-	assert u.update(key,str(value2))
+	dd[key] = str(value2)
+	assert u.save_profile(dd)
 	u2 = ctrl_profile._read(u.id)
 	assert getattr(u2,key) == value2
 	assert getattr(u2,key) == getattr(u,key)
 	assert u.get_dict()[key] == value2
 	if key == "age":
 		assert u.agebegin == utility.now().year
+	log = "修改： %s:`%s`->`%s`, " % (str(key),str(value1),str(value2))
+	utility.check_log(u.user_id,log,1)	
 
-def test_update():
+def test_update_single():
 	test_user_manager.clear_test_user()
 	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male,35)
 	utility.set_session_id(s.session_id)
 	u = ctrl_profile._read(s.user_id)
 	assert s.age == 35
-	assert not u.update("none",1)
-	assert not u.update("none","abc")
+	assert not u.save_profile({"none":1})
+	assert not u.save_profile({"none":"abc"})
 	
 	set_attri(u,"height",168,180)
 	set_attri(u,"weight",50,80)
@@ -106,15 +59,53 @@ def test_update():
 	set_attri(u,"email","13597556","3135478797456")
 	set_attri(u,"address","13597556","31354787'9<7>456")
 	
-	set_attri(u,"career","IT工程师","不知道'9<7>456")
+	set_attri(u,"career",2,3)
 	set_attri(u,"campany","13597556","company 在英文单词中一般的意思是：")
 	set_attri(u,"income",1,22200)
 		
 	set_attri(u,"degree",1,2)
 	set_attri(u,"school","company 在英文单词中一般的意思是","company 在ssss英文单词中一般的sss意思是")
-	assert u.update("income","")
+	assert u.save_profile({"income":""})
 	u2 = ctrl_profile._read(u.id)
 	assert getattr(u2,"income") == -1
+	test_user_manager.clear_test_user()
+	
+def test_update():
+	test_user_manager.clear_test_user()
+	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male,35)
+	utility.set_session_id(s.session_id)
+	u = ctrl_profile._read(s.user_id)
+	assert hasattr(u,"city")
+	d = {}
+	d["realName"] = "ycat姚"
+	d["Address"] = "ycat桃园西路"
+	d["Income"] = "2"
+	d["Height"] = 168
+	d["Weight"] = 50
+	d["Email"] = "ycat@gqq.com"
+	d["City"] = "广州"
+	d["Star"] = "3"
+	d["Career"] = "2"
+	d["Campany"] = "lfasdlfd通信公司"
+	d["Degree"] = ""
+	d["School"] = "暨南大学数据系统"
+	u.save_profile(d)
+	u2 = ctrl_profile._read(s.user_id)
+	for uu in (u,u2):
+		assert uu.realname == "ycat姚"
+		assert uu.address == "ycat桃园西路"
+		assert uu.income == 2
+		assert uu.height == 168
+		assert uu.weight == 50
+		assert uu.email == "ycat@gqq.com"
+		assert uu.city ==  "广州"
+		assert uu.star == 3
+		assert uu.career == 2
+		assert uu.campany == "lfasdlfd通信公司"
+		assert uu.degree == -1
+		assert uu.school == "暨南大学数据系统"
+	log = "修改： Campany:`None`->`lfasdlfd通信公司`, City:`None`->`广州`, School:`None`->`暨南大学数据系统`, Degree:`-1`->`-1`, Star:`-1`->`3`, realName:`None`->`ycat姚`, Weight:`-1`->`50`, Career:`-1`->`2`, Address:`None`->`ycat桃园西路`, Height:`-1`->`168`, Income:`-1`->`2`, Email:`None`->`ycat@gqq.com`, "
+	utility.check_log(u.user_id,log,1)	
 	test_user_manager.clear_test_user()
 	
 def test_get_user():
@@ -136,7 +127,7 @@ def test_set_photo_url():
 	utility.set_session_id(s.session_id)
 	u = ctrl_profile._read(s.user_id)
 	assert u.hasphoto == 0
-	u.update("hasphoto",1)
+	u.save_profile({"hasphoto":1})
 	assert u.hasphoto == 1
 	test_user_manager.clear_test_user()
 
@@ -255,8 +246,7 @@ def test_save_desc():
 		assert len(rr) == 1
 		assert rr[0][0] == v
 		utility.check_log(u.user_id,"修改描述`"+v+"`",1)
-	
-	#test_user_manager.clear_test_user()
+	test_user_manager.clear_test_user()
 
 def test_save_tags():
 	s = web_register.ctrl_user_manager.register("ycattest","123test",web_register.sex_type.Male,35)

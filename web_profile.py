@@ -6,54 +6,7 @@ import sys,os,io,datetime
 import utility,json
 import bottle,session
 from PIL import Image
-
-profile_column_type = utility.enum(Readonly=0,ChangeOnce=1,Changable=2)
-
-class profile_column_info:
-	def __init__(self):
-		self.column = ""
-		self.columnName = ""
-		self.type = profile_column_type.Readonly
-		self.unit = ""
-		self.descTable = ""
 	
-	def get_value_desc(self,value):
-		if value == -1:
-			return ""
-		if self.descTable == "":
-			return value
-		rr = utility.get_c_table(self.descTable)
-		for r in rr:
-			if r[0] == value:
-				return r[1]
-		return "未知"
-	
-class profile_columns:
-	columns = {}
-	
-	@staticmethod
-	def get(key):
-		if len(profile_columns.columns) == 0:
-			c = utility.get_cursor()
-			rs = c.execute("SELECT profileColumn,profileColumnName,profileColumnType,Unit,descTable"
-				       +" FROM c_profile_column").fetchall()
-			for r in rs:
-				info = profile_column_info()
-				info.column = r[0]
-				info.columnName = r[1]
-				info.type = r[2]
-				info.unit = ""
-				if r[3] != None:
-					info.unit = r[3]
-				info.descTable = ""
-				if r[4] != None:
-					info.descTable = r[4]
-				profile_columns.columns[info.column.lower()] = info
-		lowKey = key.lower()
-		if lowKey in profile_columns.columns:
-			return profile_columns.columns[lowKey]
-		return None
-
 class user_profile:
 	def __init__(self,id):
 		self.user_id = id
@@ -96,27 +49,13 @@ class user_profile:
 			return self.normal_photo_url
 		else:
 			return "res/unknownprofile.jpg"
-	
-	@staticmethod	
-	def __get_value_desc(column,value):
-		return "<span class='strong'>" + str(column.get_value_desc(value)) + column.unit + "</span>"
-	
-	@staticmethod	
-	def get_log_desc(column,oldValue,newValue):
-		if column.column == "HasPhoto":
-			return "修改了" + column.columnName + "信息"
-		
-		if oldValue == "" or oldValue == -1 or oldValue == None:
-			return "设置" + column.columnName + "信息为" + user_profile.__get_value_desc(column,newValue)
-		else:
-			return "修改" + column.columnName + "信息，从" + user_profile.__get_value_desc(column,oldValue) + "改为" + user_profile.__get_value_desc(column,newValue)
 
 	def get_dict(self):
 		d = {}
 		for k in self.__dict__:
 			v = self.__dict__[k] 
 			if v == None or v == -1:
-				d[k] = "未知"
+				d[k] = ""
 			else:
 				d[k] = v
 		return d
@@ -171,31 +110,38 @@ class user_profile:
 		c.execute(sql, vals)
 		db.commit()
 
-	def update(self,key,value):
-		lowKey = key.lower()
-		column = profile_columns.get(lowKey)
-		if column == None:
-			return False
-		assert hasattr(self,key)
-		if getattr(self,key) == value:
-			return True
+	def save_profile(self,valMap):
+		log = "修改： "
+		sql = "UPDATE u_profile SET EditDate=?"
+		now = utility.now_str()
+		sqlValue = [now,]
+		changed = False
+		for k in valMap:
+			k2 = k.lower()
+			if not hasattr(self,k2):
+				continue
+			changed = True
+			value = valMap[k]
+			old = self.__dict__[k2]
+			if isinstance(old,int):
+				if value == "":
+					value = -1
+				setattr(self,k2,int(value))
+			else:
+				setattr(self,k2,str(value))
+			log += k+":`" + str(old) + "`->`" + str(value) +"`, "
+			sql += ",%s=? " % k
+			sqlValue.append(value)
 		
-		#TODO未完成 
-		if column.type == profile_column_type.Readonly:
+		if not changed:
 			return False
-		oldValue = self.__dict__[key]
-		if isinstance(oldValue,int):
-			if value == "":
-				value = -1
-			setattr(self,key,int(value))
-		else:
-			setattr(self,key,str(value))
 		
 		db = utility.get_db()
 		c = db.cursor()
-		now = utility.now_str()
-		c.execute("UPDATE u_profile SET %s=?,EditDate=? WHERE ID=?"%key,(value,now,self.user_id))
-		utility.write_log(self.user_id,user_profile.get_log_desc(column,oldValue,value),1,False)
+		sql += " WHERE ID=?"
+		sqlValue.append(self.user_id)
+		c.execute(sql,sqlValue)
+		utility.write_log(self.user_id,log,1,False)
 		db.commit()
 		return True
 	
@@ -218,7 +164,7 @@ class ctrl_profile:
 	@staticmethod
 	def handle_profile_img(fp,user):
 		assert isinstance(user,user_profile)
-		user.update("hasphoto",1)
+		user.save_profile({"hasphoto":1})
 		img = Image.open(fp)
 		img = ctrl_profile._rotate_img(img)
 		img.thumbnail((1024,768))
@@ -279,38 +225,28 @@ def url_show_space():
 
 @bottle.route('/action/update_profile')	
 def url_update_desc():
-	u = session.get().profile
-	tags_val = bottle.request.params.tags #list
-	tags = None
-	if tags_val:
-		tags = tags_val.split(" ")
-	
-	scores_id = bottle.request.params.scores_id
-	scores_val = bottle.request.params.scores_val
-	scores = None
-	if scores_id and scores_val:
-		scores = {}
-		for id,val in zip(scores_id.split(" "),scores_val.split(" ")):
-			scores[id] = val
+	try:
+		u = session.get().profile
+		tags_val = bottle.request.params.tags #list
+		tags = None
+		if tags_val:
+			tags = tags_val.split(" ")
 		
-	desc = bottle.request.params.desc #string
-	u.save_tags(tags,scores,desc) 
-	return json.dumps({"result":"true"})		
+		scores_id = bottle.request.params.scores_id
+		scores_val = bottle.request.params.scores_val
+		scores = None
+		if scores_id and scores_val:
+			scores = {}
+			for id,val in zip(scores_id.split(" "),scores_val.split(" ")):
+				scores[id] = val
+			
+		desc = bottle.request.params.desc #string
+		u.save_tags(tags,scores,desc) 
+		return json.dumps({"result":"true"})
+	except:
+		utility.write_log(-1,"更新用户信息失败",0)
+	return json.dumps({"result":"false"})
 
-@bottle.route('/ta_request')	
-@bottle.view('ta_request')	
-def url_show_ta_request():
-	d = session.get_dist()
-	u = session.get().profile
-	d["photo_url"] = u.photo_url
-	d["normal_photo_url"] = u.normal_photo_url
-	d.update(u.get_dict())
-	utility.update_c_table(d,"c_income",u.income)
-	utility.update_c_table(d,"c_star",u.star)
-	utility.update_c_table(d,"c_degree",u.degree)
-	utility.update_c_table(d,"c_career",u.career)
-	return d
-	
 @bottle.route('/profile')	
 @bottle.view('profile')	
 def url_show_profile():
@@ -327,15 +263,35 @@ def url_show_profile():
 	
 @bottle.route('/action/update_profile_detail')	
 def url_update_profile():
-	u = session.get().profile
-	id = bottle.request.params.key
-	v = bottle.request.params.value
-	ret = u.update(id,v)
-	if ret:
-		return json.dumps({"result":"success","id":id})	
-	else:
-		return json.dumps({"result":"failed","id":id})	
+	try:
+		u = session.get().profile
+		ids = bottle.request.params.ids.split("@@")
+		vals = bottle.request.params.vals.split("@@")
+		print(ids,vals)
+		dd = {}
+		for i,v in zip(ids,vals):
+			dd[i] = v
+			
+		if u.save_profile(dd):
+			return json.dumps({"result":"true"})
+	except Exception as error:
+		utility.write_log(-1,"更新用户详细信息失败" + str(error),0)
+	return json.dumps({"result":"false"})
 
+@bottle.route('/ta_request')	
+@bottle.view('ta_request')	
+def url_show_ta_request():
+	d = session.get_dist()
+	u = session.get().profile
+	d["photo_url"] = u.photo_url
+	d["normal_photo_url"] = u.normal_photo_url
+	d.update(u.get_dict())
+	utility.update_c_table(d,"c_income",u.income)
+	utility.update_c_table(d,"c_star",u.star)
+	utility.update_c_table(d,"c_degree",u.degree)
+	utility.update_c_table(d,"c_career",u.career)
+	return d
+	
 @bottle.route('/user_images/<path:path>')	
 def get_file(path):
 	return bottle.static_file(path,"./user_images")
@@ -374,8 +330,7 @@ if __name__ == '__main__':
 #############################	web unit test	###########################
 @bottle.route('/test/get_my_profile')	
 def url_get_profile():
-	u = session.get().profile
-	return json.dumps(u.__dict__)
+	return json.dumps(session.get().profile.__dict__)
 
 
 		

@@ -353,9 +353,9 @@ def run_tests(file):
 		print(os.path.dirname(__file__))
 
 	if not os.path.isabs(file):
-		pytest.main("-v -x " + file)				
+		pytest.main("-vv -x " + file)				
 	else:
-		pytest.main("-v -x " + os.path.basename(file))
+		pytest.main("-vv -x " + os.path.basename(file))
 	
 def run_all_tests():
 	set_is_test(True)

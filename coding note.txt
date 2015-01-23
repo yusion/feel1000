@@ -20,3 +20,6 @@
 
 5. py规范
 	采用camel写法
+
+6. sqlite操作的转义方法
+	cursor.execute("select * from id=? and ip=?",(id,ip))

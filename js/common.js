@@ -107,6 +107,9 @@ if(!String.prototype.trim2){
         },
         set_focus: function(){
           $(this).focus().select();  
+        },
+        tagName : function(){
+          return $(this).get(0).tagName;
         }
     })
 })(jQuery);
@@ -1190,6 +1193,25 @@ function init_common()
     $(".checkbox_ctrl").checkbox_ctrl();
     $(".radio_ctrl").radio_ctrl();
     placeholder_for_ie();
+}
+
+//把有limit_s,limit_m,limit_l限制的input的value进行截断 
+function trim_input(items){
+  var c = ["limit_s","limit_m","limit_l"];
+  var ll = [10,20,100];
+  items.each(function(){
+    for(var i=0;i<c.length;i++){
+      if ($(this).hasClass(c[i])) {
+         var len = ll[i];
+        if ($(this).hasAttr("max_len")) {
+          len = parseInt($(this).attr("max_len"));
+        }
+        if ($(this).val().length>len) {
+          $(this).val($(this).val().substr(0,len));
+        }
+      }
+    }
+  });
 }
 
 $(document).ready(function(e){
